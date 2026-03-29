@@ -12,7 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { TimePicker } from '@/components/TimePicker';
-import { colors, fontSize, spacing, habitIcons } from '@/constants/theme';
+import { colors, fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
 
 export default function EditHabitScreen() {
   const router = useRouter();
@@ -24,7 +24,7 @@ export default function EditHabitScreen() {
   const [name, setName] = useState(habit?.name ?? '');
   const [selectedIcon, setSelectedIcon] = useState(habit?.icon ?? habitIcons[0]);
   const [selectedColor, setSelectedColor] = useState(
-    habit?.color ?? colors.habitColors[0]
+    habit?.color ?? habitColors[0]
   );
   const [reminderTime, setReminderTime] = useState<string | null>(
     habit?.reminderTime ?? null
@@ -134,7 +134,7 @@ export default function EditHabitScreen() {
         <View style={styles.section}>
           <Text style={styles.label}>색상</Text>
           <View style={styles.colorGrid}>
-            {colors.habitColors.map((color) => (
+            {habitColors.map((color) => (
               <Pressable
                 key={color}
                 style={[
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   save: {
     fontSize: fontSize.md,
     fontWeight: '600',
-    color: colors.habitColors[0],
+    color: habitColors[0],
   },
   saveDisabled: {
     opacity: 0.4,

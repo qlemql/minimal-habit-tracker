@@ -1,17 +1,21 @@
+import { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { HabitCard } from '@/components/HabitCard';
 import { WeeklyCalendar } from '@/components/WeeklyCalendar';
+import { CelebrationOverlay } from '@/components/CelebrationOverlay';
 import { calculateStreak } from '@/utils/streak';
 import { getToday } from '@/utils/date';
-import { colors, fontSize, spacing } from '@/constants/theme';
+import { useThemeStore } from '@/store/themeStore';
+import { fontSize, spacing } from '@/constants/theme';
 
 export default function HomeScreen() {
   const router = useRouter();
   const { habits, logs, toggleHabit, isHabitCompleted, canAddHabit } =
     useHabitStore();
+  const colors = useThemeStore((s) => s.getColors());
   const today = getToday();
   const activeHabits = habits
     .sort((a, b) => a.order - b.order);
@@ -20,12 +24,31 @@ export default function HomeScreen() {
     activeHabits.length > 0 &&
     activeHabits.every((h) => isHabitCompleted(h.id, today));
 
+  const [showCelebration, setShowCelebration] = useState(false);
+  const prevAllCompleted = useRef(false);
+
+  useEffect(() => {
+    if (allCompleted && !prevAllCompleted.current) {
+      setShowCelebration(true);
+    }
+    prevAllCompleted.current = allCompleted;
+  }, [allCompleted]);
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+      <CelebrationOverlay
+        visible={showCelebration}
+        onDone={() => setShowCelebration(false)}
+      />
       <View style={styles.header}>
-        <Text style={styles.title}>오늘의 습관</Text>
+        <View style={styles.headerRow}>
+          <Text style={[styles.title, { color: colors.textPrimary }]}>오늘의 습관</Text>
+          <Pressable onPress={() => router.push('/settings')}>
+            <Text style={[styles.settingsIcon, { color: colors.textMuted }]}>⚙</Text>
+          </Pressable>
+        </View>
         {allCompleted && activeHabits.length > 0 && (
-          <Text style={styles.allDone}>모두 완료! 🎉</Text>
+          <Text style={[styles.allDone, { color: colors.success }]}>모두 완료! 🎉</Text>
         )}
       </View>
 
@@ -33,8 +56,8 @@ export default function HomeScreen() {
         {activeHabits.length === 0 ? (
           <View style={styles.emptyState}>
             <Text style={styles.emptyIcon}>✨</Text>
-            <Text style={styles.emptyTitle}>습관을 추가해보세요</Text>
-            <Text style={styles.emptySubtitle}>
+            <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>습관을 추가해보세요</Text>
+            <Text style={[styles.emptySubtitle, { color: colors.textMuted }]}>
               딱 3개만 골라서 집중하세요
             </Text>
           </View>
@@ -62,10 +85,10 @@ export default function HomeScreen() {
       {canAddHabit() && (
         <View style={styles.footer}>
           <Pressable
-            style={styles.addButton}
+            style={[styles.addButton, { backgroundColor: colors.surface, borderColor: colors.surfaceLight }]}
             onPress={() => router.push('/add')}
           >
-            <Text style={styles.addButtonText}>+ 습관 추가</Text>
+            <Text style={[styles.addButtonText, { color: colors.textSecondary }]}>+ 습관 추가</Text>
           </Pressable>
         </View>
       )}
@@ -76,21 +99,26 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
   },
   header: {
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,
     paddingBottom: spacing.lg,
   },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  settingsIcon: {
+    fontSize: 22,
+  },
   title: {
     fontSize: fontSize.xl,
     fontWeight: '700',
-    color: colors.textPrimary,
   },
   allDone: {
     fontSize: fontSize.sm,
-    color: colors.success,
     marginTop: spacing.xs,
   },
   content: {
@@ -112,29 +140,24 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: fontSize.lg,
     fontWeight: '600',
-    color: colors.textPrimary,
     marginBottom: spacing.xs,
   },
   emptySubtitle: {
     fontSize: fontSize.sm,
-    color: colors.textMuted,
   },
   footer: {
     paddingHorizontal: spacing.lg,
     paddingBottom: spacing.lg,
   },
   addButton: {
-    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: spacing.md,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: colors.surfaceLight,
     borderStyle: 'dashed',
   },
   addButtonText: {
     fontSize: fontSize.md,
-    color: colors.textSecondary,
     fontWeight: '500',
   },
 });

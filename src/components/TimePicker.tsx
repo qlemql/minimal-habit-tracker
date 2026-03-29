@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, Text, Pressable, StyleSheet, Modal, ScrollView } from 'react-native';
-import { colors, fontSize, spacing } from '@/constants/theme';
+import { colors, fontSize, spacing, habitColors } from '@/constants/theme';
 
 interface TimePickerProps {
   value: string | null; // HH:mm 또는 null
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   modalDone: {
     fontSize: fontSize.md,
     fontWeight: '600',
-    color: colors.habitColors[0],
+    color: habitColors[0],
   },
   pickerRow: {
     flexDirection: 'row',
@@ -187,14 +187,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   pickerItemSelected: {
-    backgroundColor: colors.habitColors[0] + '30',
+    backgroundColor: habitColors[0] + '30',
   },
   pickerText: {
     fontSize: fontSize.sm,
     color: colors.textSecondary,
   },
   pickerTextSelected: {
-    color: colors.habitColors[0],
+    color: habitColors[0],
     fontWeight: '600',
   },
   clearButton: {

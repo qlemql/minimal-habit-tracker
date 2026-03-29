@@ -1,5 +1,15 @@
+import { useEffect } from 'react';
 import { Pressable, View, Text, StyleSheet } from 'react-native';
-import { colors, fontSize, spacing } from '@/constants/theme';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+import * as Haptics from 'expo-haptics';
+import { useThemeStore } from '@/store/themeStore';
+import { fontSize, spacing } from '@/constants/theme';
 
 interface HabitCardProps {
   name: string;
@@ -20,19 +30,56 @@ export function HabitCard({
   onToggle,
   onEdit,
 }: HabitCardProps) {
+  const colors = useThemeStore((s) => s.getColors());
+  const scale = useSharedValue(1);
+  const checkScale = useSharedValue(completed ? 1 : 0);
+
+  useEffect(() => {
+    checkScale.value = withSpring(completed ? 1 : 0, {
+      damping: 12,
+      stiffness: 200,
+    });
+  }, [completed]);
+
+  const handleToggle = () => {
+    scale.value = withSequence(
+      withTiming(0.95, { duration: 80 }),
+      withSpring(1, { damping: 10, stiffness: 300 })
+    );
+
+    if (!completed) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    } else {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    }
+
+    onToggle();
+  };
+
+  const cardAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  const checkAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: checkScale.value }],
+    opacity: checkScale.value,
+  }));
+
   return (
-    <View
+    <Animated.View
       style={[
         styles.card,
+        { backgroundColor: colors.surface },
         completed && { borderColor: color, borderWidth: 1.5 },
+        cardAnimStyle,
       ]}
     >
-      <Pressable style={styles.left} onPress={onToggle}>
+      <Pressable style={styles.left} onPress={handleToggle}>
         <View style={[styles.iconContainer, { backgroundColor: color + '20' }]}>
           <Text style={styles.icon}>{icon}</Text>
         </View>
         <View style={styles.info}>
-          <Text style={[styles.name, completed && styles.nameCompleted]}>
+          <Text style={[styles.name, { color: colors.textPrimary }, completed && styles.nameCompleted]}>
             {name}
           </Text>
           {streak > 0 && (
@@ -43,7 +90,7 @@ export function HabitCard({
         </View>
       </Pressable>
       <View style={styles.right}>
-        <Pressable onPress={onToggle} style={styles.checkboxTouchArea}>
+        <Pressable onPress={handleToggle} style={styles.checkboxTouchArea}>
           <View
             style={[
               styles.checkbox,
@@ -52,16 +99,18 @@ export function HabitCard({
                 : { borderColor: colors.textMuted, borderWidth: 2 },
             ]}
           >
-            {completed && <Text style={styles.checkmark}>✓</Text>}
+            <Animated.Text style={[styles.checkmark, checkAnimStyle]}>
+              ✓
+            </Animated.Text>
           </View>
         </Pressable>
         {onEdit && (
           <Pressable onPress={onEdit} style={styles.editButton}>
-            <Text style={styles.editIcon}>›</Text>
+            <Text style={[styles.editIcon, { color: colors.textMuted }]}>›</Text>
           </Pressable>
         )}
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
@@ -70,7 +119,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: spacing.md,
     marginBottom: spacing.sm,
@@ -99,7 +147,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: fontSize.md,
     fontWeight: '600',
-    color: colors.textPrimary,
   },
   nameCompleted: {
     opacity: 0.6,
@@ -133,6 +180,5 @@ const styles = StyleSheet.create({
   },
   editIcon: {
     fontSize: fontSize.xl,
-    color: colors.textMuted,
   },
 });

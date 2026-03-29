@@ -13,7 +13,7 @@ import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { TimePicker } from '@/components/TimePicker';
 import { scheduleHabitReminder } from '@/utils/notifications';
-import { colors, fontSize, spacing, habitIcons } from '@/constants/theme';
+import { colors, fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
 
 export default function AddHabitScreen() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function AddHabitScreen() {
 
   const [name, setName] = useState('');
   const [selectedIcon, setSelectedIcon] = useState<string>(habitIcons[0]);
-  const [selectedColor, setSelectedColor] = useState<string>(colors.habitColors[0]);
+  const [selectedColor, setSelectedColor] = useState<string>(habitColors[0]);
   const [reminderTime, setReminderTime] = useState<string | null>(null);
 
   const handleSave = async () => {
@@ -116,7 +116,7 @@ export default function AddHabitScreen() {
         <View style={styles.section}>
           <Text style={styles.label}>색상</Text>
           <View style={styles.colorGrid}>
-            {colors.habitColors.map((color) => (
+            {habitColors.map((color) => (
               <Pressable
                 key={color}
                 style={[
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   save: {
     fontSize: fontSize.md,
     fontWeight: '600',
-    color: colors.habitColors[0],
+    color: habitColors[0],
   },
   saveDisabled: {
     opacity: 0.4,

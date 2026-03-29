@@ -1,12 +1,37 @@
-import { Stack } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet } from 'react-native';
-import { colors } from '@/constants/theme';
+import { View, StyleSheet, Appearance } from 'react-native';
+import { useThemeStore } from '@/store/themeStore';
+import { useOnboardingStore } from '@/store/onboardingStore';
 
 export default function RootLayout() {
+  const colors = useThemeStore((s) => s.getColors());
+  const mode = useThemeStore((s) => s.mode);
+  const isDark = mode === 'dark' || (mode === 'system' && Appearance.getColorScheme() !== 'light');
+  const onboardingCompleted = useOnboardingStore((s) => s.completed);
+  const router = useRouter();
+  const segments = useSegments();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    // Zustand persist가 로드될 때까지 잠시 대기
+    const timer = setTimeout(() => setReady(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
+    const inOnboarding = segments[0] === 'onboarding';
+
+    if (!onboardingCompleted && !inOnboarding) {
+      router.replace('/onboarding');
+    }
+  }, [ready, onboardingCompleted, segments]);
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
       <Stack
         screenOptions={{
           headerShown: false,
@@ -21,6 +46,5 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
   },
 });
