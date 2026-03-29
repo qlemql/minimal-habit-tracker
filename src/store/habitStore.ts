@@ -5,7 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Habit, HabitLog } from '@/types/habit';
 import { getToday } from '@/utils/date';
 import { scheduleHabitReminder, cancelHabitReminder } from '@/utils/notifications';
-import { useProStore } from './proStore';
+// Pro 기능은 v1.1에서 활성화
+// import { useProStore } from './proStore';
 
 const MAX_FREE_HABITS = 3;
 
@@ -123,7 +124,6 @@ export const useHabitStore = create<HabitStore>()(
       },
 
       canAddHabit: () => {
-        if (useProStore.getState().isPro) return true;
         return get().habits.length < MAX_FREE_HABITS;
       },
     }),

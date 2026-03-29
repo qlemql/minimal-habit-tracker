@@ -1,11 +1,8 @@
-import { useState } from 'react';
-import { View, Text, Pressable, StyleSheet, Alert } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useThemeStore } from '@/store/themeStore';
-import { useProStore } from '@/store/proStore';
-import { purchasePro, restorePurchases } from '@/utils/purchases';
-import { fontSize, spacing, habitColors } from '@/constants/theme';
+import { fontSize, spacing } from '@/constants/theme';
 
 type ThemeOption = 'dark' | 'light' | 'system';
 
@@ -20,28 +17,6 @@ export default function SettingsScreen() {
   const colors = useThemeStore((s) => s.getColors());
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
-  const isPro = useProStore((s) => s.isPro);
-  const [purchasing, setPurchasing] = useState(false);
-
-  const handlePurchase = async () => {
-    setPurchasing(true);
-    const success = await purchasePro();
-    setPurchasing(false);
-    if (success) {
-      Alert.alert('감사합니다!', 'Pro 기능이 활성화되었습니다.');
-    }
-  };
-
-  const handleRestore = async () => {
-    setPurchasing(true);
-    const success = await restorePurchases();
-    setPurchasing(false);
-    if (success) {
-      Alert.alert('복원 완료', 'Pro 기능이 복원되었습니다.');
-    } else {
-      Alert.alert('복원 실패', '구매 내역을 찾을 수 없습니다.');
-    }
-  };
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
@@ -54,56 +29,6 @@ export default function SettingsScreen() {
       </View>
 
       <View style={styles.content}>
-        {/* Pro */}
-        {!isPro && (
-          <>
-            <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
-              Pro
-            </Text>
-            <View style={[styles.proCard, { backgroundColor: colors.surface }]}>
-              <Text style={[styles.proTitle, { color: colors.textPrimary }]}>
-                Pro로 업그레이드
-              </Text>
-              <Text style={[styles.proDesc, { color: colors.textSecondary }]}>
-                무제한 습관 · 상세 통계
-              </Text>
-              <Pressable
-                style={[styles.proButton, { backgroundColor: habitColors[0] }]}
-                onPress={handlePurchase}
-                disabled={purchasing}
-              >
-                <Text style={styles.proButtonText}>
-                  {purchasing ? '처리 중...' : '₩6,500 1회 결제'}
-                </Text>
-              </Pressable>
-              <Pressable onPress={handleRestore} disabled={purchasing}>
-                <Text style={[styles.restoreText, { color: colors.textMuted }]}>
-                  구매 복원
-                </Text>
-              </Pressable>
-            </View>
-          </>
-        )}
-
-        {isPro && (
-          <>
-            <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
-              Pro
-            </Text>
-            <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
-              <Pressable
-                style={styles.option}
-                onPress={() => router.push('/stats')}
-              >
-                <Text style={[styles.optionText, { color: colors.textPrimary }]}>
-                  📊 통계
-                </Text>
-                <Text style={[styles.optionArrow, { color: colors.textMuted }]}>›</Text>
-              </Pressable>
-            </View>
-          </>
-        )}
-
         {/* 테마 */}
         <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
           테마
@@ -128,6 +53,13 @@ export default function SettingsScreen() {
               )}
             </Pressable>
           ))}
+        </View>
+
+        {/* 버전 정보 */}
+        <View style={styles.versionSection}>
+          <Text style={[styles.versionText, { color: colors.textMuted }]}>
+            v1.0.0
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -162,37 +94,6 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
     marginTop: spacing.md,
   },
-  proCard: {
-    borderRadius: 16,
-    padding: spacing.lg,
-    alignItems: 'center',
-  },
-  proTitle: {
-    fontSize: fontSize.lg,
-    fontWeight: '700',
-    marginBottom: spacing.xs,
-  },
-  proDesc: {
-    fontSize: fontSize.sm,
-    marginBottom: spacing.lg,
-  },
-  proButton: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.xl,
-    borderRadius: 12,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: spacing.sm,
-  },
-  proButtonText: {
-    color: '#FFFFFF',
-    fontSize: fontSize.md,
-    fontWeight: '600',
-  },
-  restoreText: {
-    fontSize: fontSize.sm,
-    paddingVertical: spacing.sm,
-  },
   optionGroup: {
     borderRadius: 12,
     overflow: 'hidden',
@@ -206,11 +107,15 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: fontSize.md,
   },
-  optionArrow: {
-    fontSize: fontSize.lg,
-  },
   check: {
     fontSize: fontSize.md,
     color: '#4A90D9',
+  },
+  versionSection: {
+    marginTop: spacing.xxl,
+    alignItems: 'center',
+  },
+  versionText: {
+    fontSize: fontSize.xs,
   },
 });
