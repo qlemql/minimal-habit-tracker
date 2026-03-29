@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { View, StyleSheet, Appearance } from 'react-native';
 import { useThemeStore } from '@/store/themeStore';
 import { useOnboardingStore } from '@/store/onboardingStore';
+import { initializePurchases, checkProStatus } from '@/utils/purchases';
 
 export default function RootLayout() {
   const colors = useThemeStore((s) => s.getColors());
@@ -15,9 +16,12 @@ export default function RootLayout() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Zustand persist가 로드될 때까지 잠시 대기
-    const timer = setTimeout(() => setReady(true), 100);
-    return () => clearTimeout(timer);
+    const init = async () => {
+      await initializePurchases();
+      await checkProStatus();
+      setReady(true);
+    };
+    init();
   }, []);
 
   useEffect(() => {
