@@ -38,7 +38,13 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: colors.background },
           animation: 'slide_from_right',
         }}
-      />
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen name="onboarding" options={{ animation: 'fade' }} />
+        <Stack.Screen name="add" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="edit" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="settings" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
+      </Stack>
     </View>
   );
 }

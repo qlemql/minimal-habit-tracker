@@ -11,13 +11,15 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
+import { useThemeStore } from '@/store/themeStore';
 import { TimePicker } from '@/components/TimePicker';
-import { colors, fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
+import { fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
 
 export default function EditHabitScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { habits, updateHabit, deleteHabit } = useHabitStore();
+  const colors = useThemeStore((s) => s.getColors());
 
   const habit = habits.find((h) => h.id === id);
 
@@ -66,13 +68,13 @@ export default function EditHabitScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()}>
-          <Text style={styles.cancel}>취소</Text>
+        <Pressable onPress={() => router.back()} hitSlop={12} accessibilityLabel="취소" accessibilityRole="button">
+          <Text style={[styles.cancel, { color: colors.textSecondary }]}>취소</Text>
         </Pressable>
-        <Text style={styles.headerTitle}>습관 수정</Text>
-        <Pressable onPress={handleSave}>
+        <Text style={[styles.headerTitle, { color: colors.textPrimary }]}>습관 수정</Text>
+        <Pressable onPress={handleSave} hitSlop={12} accessibilityLabel="저장" accessibilityRole="button">
           <Text style={[styles.save, !name.trim() && styles.saveDisabled]}>
             저장
           </Text>
@@ -80,26 +82,21 @@ export default function EditHabitScreen() {
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* 미리보기 */}
         <View style={styles.preview}>
           <View
-            style={[
-              styles.previewIcon,
-              { backgroundColor: selectedColor + '20' },
-            ]}
+            style={[styles.previewIcon, { backgroundColor: selectedColor + '20' }]}
           >
             <Text style={styles.previewIconText}>{selectedIcon}</Text>
           </View>
-          <Text style={styles.previewName}>
+          <Text style={[styles.previewName, { color: colors.textPrimary }]}>
             {name.trim() || '습관 이름'}
           </Text>
         </View>
 
-        {/* 이름 입력 */}
         <View style={styles.section}>
-          <Text style={styles.label}>이름</Text>
+          <Text style={[styles.label, { color: colors.textSecondary }]}>이름</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { backgroundColor: colors.surface, color: colors.textPrimary }]}
             value={name}
             onChangeText={setName}
             placeholder="예: 물 2L 마시기"
@@ -108,21 +105,20 @@ export default function EditHabitScreen() {
           />
         </View>
 
-        {/* 아이콘 선택 */}
         <View style={styles.section}>
-          <Text style={styles.label}>아이콘</Text>
+          <Text style={[styles.label, { color: colors.textSecondary }]}>아이콘</Text>
           <View style={styles.grid}>
             {habitIcons.map((icon) => (
               <Pressable
                 key={icon}
                 style={[
                   styles.gridItem,
-                  selectedIcon === icon && {
-                    borderColor: selectedColor,
-                    borderWidth: 2,
-                  },
+                  { backgroundColor: colors.surface },
+                  selectedIcon === icon && { borderColor: selectedColor, borderWidth: 2 },
                 ]}
                 onPress={() => setSelectedIcon(icon)}
+                accessibilityLabel={`아이콘 ${icon}`}
+                accessibilityRole="button"
               >
                 <Text style={styles.gridIcon}>{icon}</Text>
               </Pressable>
@@ -130,9 +126,8 @@ export default function EditHabitScreen() {
           </View>
         </View>
 
-        {/* 색상 선택 */}
         <View style={styles.section}>
-          <Text style={styles.label}>색상</Text>
+          <Text style={[styles.label, { color: colors.textSecondary }]}>색상</Text>
           <View style={styles.colorGrid}>
             {habitColors.map((color) => (
               <Pressable
@@ -140,23 +135,23 @@ export default function EditHabitScreen() {
                 style={[
                   styles.colorItem,
                   { backgroundColor: color },
-                  selectedColor === color && styles.colorSelected,
+                  selectedColor === color && { borderColor: colors.textPrimary },
                 ]}
                 onPress={() => setSelectedColor(color)}
+                accessibilityLabel={`색상 ${color}`}
+                accessibilityRole="button"
               />
             ))}
           </View>
         </View>
 
-        {/* 알림 설정 */}
         <View style={styles.section}>
-          <Text style={styles.label}>알림</Text>
+          <Text style={[styles.label, { color: colors.textSecondary }]}>알림</Text>
           <TimePicker value={reminderTime} onChange={setReminderTime} />
         </View>
 
-        {/* 삭제 */}
-        <Pressable style={styles.deleteButton} onPress={handleDelete}>
-          <Text style={styles.deleteText}>습관 삭제</Text>
+        <Pressable style={styles.deleteButton} onPress={handleDelete} accessibilityLabel="습관 삭제" accessibilityRole="button">
+          <Text style={[styles.deleteText, { color: colors.danger }]}>습관 삭제</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>
@@ -164,116 +159,25 @@ export default function EditHabitScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-  },
-  cancel: {
-    fontSize: fontSize.md,
-    color: colors.textSecondary,
-  },
-  headerTitle: {
-    fontSize: fontSize.md,
-    fontWeight: '600',
-    color: colors.textPrimary,
-  },
-  save: {
-    fontSize: fontSize.md,
-    fontWeight: '600',
-    color: habitColors[0],
-  },
-  saveDisabled: {
-    opacity: 0.4,
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: spacing.lg,
-  },
-  preview: {
-    alignItems: 'center',
-    paddingVertical: spacing.xl,
-  },
-  previewIcon: {
-    width: 80,
-    height: 80,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: spacing.md,
-  },
-  previewIconText: {
-    fontSize: 40,
-  },
-  previewName: {
-    fontSize: fontSize.lg,
-    fontWeight: '600',
-    color: colors.textPrimary,
-  },
-  section: {
-    marginBottom: spacing.lg,
-  },
-  label: {
-    fontSize: fontSize.sm,
-    fontWeight: '500',
-    color: colors.textSecondary,
-    marginBottom: spacing.sm,
-  },
-  input: {
-    backgroundColor: colors.surface,
-    borderRadius: 12,
-    padding: spacing.md,
-    fontSize: fontSize.md,
-    color: colors.textPrimary,
-  },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: spacing.sm,
-  },
-  gridItem: {
-    width: 52,
-    height: 52,
-    borderRadius: 14,
-    backgroundColor: colors.surface,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  gridIcon: {
-    fontSize: 24,
-  },
-  colorGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: spacing.sm,
-  },
-  colorItem: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    borderWidth: 3,
-    borderColor: 'transparent',
-  },
-  colorSelected: {
-    borderColor: colors.textPrimary,
-  },
-  deleteButton: {
-    marginTop: spacing.lg,
-    marginBottom: spacing.xxl,
-    padding: spacing.md,
-    alignItems: 'center',
-  },
-  deleteText: {
-    fontSize: fontSize.md,
-    color: colors.danger,
-    fontWeight: '500',
-  },
+  container: { flex: 1 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: spacing.lg, paddingVertical: spacing.md },
+  cancel: { fontSize: fontSize.md },
+  headerTitle: { fontSize: fontSize.md, fontWeight: '600' },
+  save: { fontSize: fontSize.md, fontWeight: '600', color: habitColors[0] },
+  saveDisabled: { opacity: 0.4 },
+  content: { flex: 1, paddingHorizontal: spacing.lg },
+  preview: { alignItems: 'center', paddingVertical: spacing.xl },
+  previewIcon: { width: 80, height: 80, borderRadius: 24, justifyContent: 'center', alignItems: 'center', marginBottom: spacing.md },
+  previewIconText: { fontSize: 40 },
+  previewName: { fontSize: fontSize.lg, fontWeight: '600' },
+  section: { marginBottom: spacing.lg },
+  label: { fontSize: fontSize.sm, fontWeight: '500', marginBottom: spacing.sm },
+  input: { borderRadius: 12, padding: spacing.md, fontSize: fontSize.md },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  gridItem: { width: 52, height: 52, borderRadius: 14, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: 'transparent' },
+  gridIcon: { fontSize: 24 },
+  colorGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  colorItem: { width: 44, height: 44, borderRadius: 22, borderWidth: 3, borderColor: 'transparent' },
+  deleteButton: { marginTop: spacing.lg, marginBottom: spacing.xxl, padding: spacing.md, alignItems: 'center' },
+  deleteText: { fontSize: fontSize.md, fontWeight: '500' },
 });

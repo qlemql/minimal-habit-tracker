@@ -6,6 +6,7 @@ import { useHabitStore } from '@/store/habitStore';
 import { HabitCard } from '@/components/HabitCard';
 import { WeeklyCalendar } from '@/components/WeeklyCalendar';
 import { CelebrationOverlay } from '@/components/CelebrationOverlay';
+import { DayDetailSheet } from '@/components/DayDetailSheet';
 import { calculateStreak } from '@/utils/streak';
 import { getToday } from '@/utils/date';
 import { useThemeStore } from '@/store/themeStore';
@@ -25,6 +26,7 @@ export default function HomeScreen() {
     activeHabits.every((h) => isHabitCompleted(h.id, today));
 
   const [showCelebration, setShowCelebration] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const prevAllCompleted = useRef(false);
 
   useEffect(() => {
@@ -78,7 +80,7 @@ export default function HomeScreen() {
                 }
               />
             ))}
-            <WeeklyCalendar />
+            <WeeklyCalendar onDatePress={setSelectedDate} />
           </View>
         )}
       </View>
@@ -94,6 +96,7 @@ export default function HomeScreen() {
         </View>
       )}
     </SafeAreaView>
+      <DayDetailSheet date={selectedDate} onClose={() => setSelectedDate(null)} />
     </View>
   );
 }
@@ -128,7 +131,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
   },
   habitList: {
-    gap: spacing.xs,
+    gap: spacing.sm,
   },
   emptyState: {
     flex: 1,

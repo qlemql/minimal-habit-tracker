@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 16,
     padding: spacing.md,
-    marginBottom: spacing.sm,
     borderWidth: 1.5,
     borderColor: 'transparent',
   },
