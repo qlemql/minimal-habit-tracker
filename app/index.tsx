@@ -27,9 +27,11 @@ export default function HomeScreen() {
 
   const [showCelebration, setShowCelebration] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const prevAllCompleted = useRef(false);
+  // 앱 시작 시 이미 완료 상태면 오버레이를 띄우지 않기 위해 초기값을 allCompleted로 설정
+  const prevAllCompleted = useRef(allCompleted);
 
   useEffect(() => {
+    // false → true 전환 시에만 축하 (체크 해제 후 다시 완료했을 때)
     if (allCompleted && !prevAllCompleted.current) {
       setShowCelebration(true);
     }
