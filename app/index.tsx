@@ -56,7 +56,7 @@ export default function HomeScreen() {
           <View>
             <Text style={[styles.title, { color: colors.textPrimary }]}>오늘의 습관</Text>
             <Text style={[styles.dateText, { color: colors.textMuted }]}>
-              {new Date().toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' })}
+              {new Date(today + 'T00:00:00').toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' })}
             </Text>
           </View>
           <Pressable onPress={() => router.push('/settings')} hitSlop={12} accessibilityLabel="설정" accessibilityRole="button">

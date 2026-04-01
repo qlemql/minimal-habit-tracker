@@ -44,7 +44,10 @@ function ConfettiPiece({ index, visible }: ConfettiPieceProps) {
   useEffect(() => {
     if (visible) {
       translateX.value = startX;
-      opacity.value = withDelay(delay, withTiming(1, { duration: 100 }));
+      opacity.value = withDelay(delay, withSequence(
+        withTiming(1, { duration: 100 }),
+        withDelay(1300, withTiming(0, { duration: 400 }))
+      ));
       translateY.value = withDelay(
         delay,
         withTiming(SCREEN_H * 0.6 + Math.random() * 200, { duration: 1500 + Math.random() * 800 })
@@ -53,7 +56,6 @@ function ConfettiPiece({ index, visible }: ConfettiPieceProps) {
         delay,
         withTiming(360 + Math.random() * 720, { duration: 2000 })
       );
-      opacity.value = withDelay(1400 + delay, withTiming(0, { duration: 400 }));
     } else {
       translateY.value = -50;
       opacity.value = 0;

@@ -13,6 +13,7 @@ export type ThemeColors = {
   textPrimary: string;
   textSecondary: string;
   textMuted: string;
+  accent: string;
   success: string;
   inactive: string;
   danger: string;

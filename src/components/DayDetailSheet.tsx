@@ -1,4 +1,5 @@
 import { View, Text, Pressable, StyleSheet, Modal } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
 import { DAY_LABELS, getToday } from '@/utils/date';
@@ -36,7 +37,11 @@ export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
               <Pressable
                 key={habit.id}
                 style={[styles.row, completed && { borderColor: habit.color, borderWidth: 1 }]}
-                onPress={() => isEditable && toggleHabit(habit.id, date)}
+                onPress={() => {
+                  if (!isEditable) return;
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  toggleHabit(habit.id, date);
+                }}
                 disabled={!isEditable}
                 accessibilityLabel={`${habit.name} ${completed ? '완료 취소' : '완료 체크'}`}
                 accessibilityRole="checkbox"
