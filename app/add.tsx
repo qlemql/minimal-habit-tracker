@@ -7,13 +7,15 @@ import {
   ScrollView,
   StyleSheet,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
 import { TimePicker } from '@/components/TimePicker';
-import { scheduleHabitReminder } from '@/utils/notifications';
 import { fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
 
 export default function AddHabitScreen() {
@@ -40,7 +42,6 @@ export default function AddHabitScreen() {
     }
 
     if (reminderTime) {
-      await scheduleHabitReminder(newId, trimmed, reminderTime);
       await useHabitStore.getState().updateHabit(newId, { reminderTime });
     }
 
@@ -50,18 +51,19 @@ export default function AddHabitScreen() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} hitSlop={12}>
+        <Pressable onPress={() => router.back()} hitSlop={12} accessibilityLabel="취소" accessibilityRole="button">
           <Text style={[styles.cancel, { color: colors.textSecondary }]}>취소</Text>
         </Pressable>
         <Text style={[styles.headerTitle, { color: colors.textPrimary }]}>습관 추가</Text>
-        <Pressable onPress={handleSave} hitSlop={12}>
+        <Pressable onPress={handleSave} hitSlop={12} accessibilityLabel="저장" accessibilityRole="button">
           <Text style={[styles.save, !name.trim() && styles.saveDisabled]}>
             저장
           </Text>
         </Pressable>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled">
         <View style={styles.preview}>
           <View
             style={[
@@ -86,6 +88,8 @@ export default function AddHabitScreen() {
             placeholderTextColor={colors.textMuted}
             maxLength={30}
             autoFocus
+            returnKeyType="done"
+            onSubmitEditing={() => Keyboard.dismiss()}
           />
         </View>
 
@@ -137,6 +141,7 @@ export default function AddHabitScreen() {
           <TimePicker value={reminderTime} onChange={setReminderTime} />
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

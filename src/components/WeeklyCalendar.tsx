@@ -31,9 +31,13 @@ export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
   // 주 라벨 (예: "3월 24일 ~ 30일")
   const firstDate = new Date(weekDates[0] + 'T00:00:00');
   const lastDate = new Date(weekDates[6] + 'T00:00:00');
+  const firstMonth = firstDate.getMonth() + 1;
+  const lastMonth = lastDate.getMonth() + 1;
   const weekLabel = isCurrentWeek
     ? '이번 주'
-    : `${firstDate.getMonth() + 1}월 ${firstDate.getDate()}일 ~ ${lastDate.getDate()}일`;
+    : firstMonth === lastMonth
+      ? `${firstMonth}월 ${firstDate.getDate()}일 ~ ${lastDate.getDate()}일`
+      : `${firstMonth}월 ${firstDate.getDate()}일 ~ ${lastMonth}월 ${lastDate.getDate()}일`;
 
   // 스와이프 제스처
   const swipeGesture = Gesture.Pan()

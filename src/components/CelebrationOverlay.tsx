@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo } from 'react';
 import { StyleSheet, Text, Pressable, View, Dimensions } from 'react-native';
 import Animated, {
   useSharedValue,

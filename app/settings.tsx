@@ -21,7 +21,7 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()}>
+        <Pressable onPress={() => router.back()} hitSlop={12} accessibilityLabel="뒤로" accessibilityRole="button">
           <Text style={[styles.back, { color: colors.textSecondary }]}>← 뒤로</Text>
         </Pressable>
         <Text style={[styles.title, { color: colors.textPrimary }]}>설정</Text>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
@@ -45,17 +45,24 @@ export default function HomeScreen() {
       <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
         <View style={styles.headerRow}>
-          <Text style={[styles.title, { color: colors.textPrimary }]}>오늘의 습관</Text>
-          <Pressable onPress={() => router.push('/settings')}>
+          <View>
+            <Text style={[styles.title, { color: colors.textPrimary }]}>오늘의 습관</Text>
+            <Text style={[styles.dateText, { color: colors.textMuted }]}>
+              {new Date().toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' })}
+            </Text>
+          </View>
+          <Pressable onPress={() => router.push('/settings')} hitSlop={12} accessibilityLabel="설정" accessibilityRole="button">
             <Text style={[styles.settingsIcon, { color: colors.textMuted }]}>⚙</Text>
           </Pressable>
         </View>
-        {allCompleted && activeHabits.length > 0 && (
-          <Text style={[styles.allDone, { color: colors.success }]}>모두 완료! 🎉</Text>
+        {totalCount > 0 && (
+          <Text style={[styles.progress, { color: allCompleted ? colors.success : colors.textSecondary }]}>
+            {allCompleted ? '모두 완료! 🎉' : `${completedCount}/${totalCount} 완료`}
+          </Text>
         )}
       </View>
 
-      <View style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {activeHabits.length === 0 ? (
           <View style={styles.emptyState}>
             <Text style={styles.emptyIcon}>✨</Text>
@@ -83,7 +90,7 @@ export default function HomeScreen() {
             <WeeklyCalendar onDatePress={setSelectedDate} />
           </View>
         )}
-      </View>
+      </ScrollView>
 
       {canAddHabit() && (
         <View style={styles.footer}>
@@ -126,9 +133,13 @@ const styles = StyleSheet.create({
     fontSize: fontSize.xl,
     fontWeight: '700',
   },
-  allDone: {
+  dateText: {
+    fontSize: fontSize.xs,
+    marginTop: 2,
+  },
+  progress: {
     fontSize: fontSize.sm,
-    marginTop: spacing.xs,
+    marginTop: spacing.sm,
   },
   content: {
     flex: 1,

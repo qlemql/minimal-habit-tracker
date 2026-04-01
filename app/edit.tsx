@@ -7,6 +7,9 @@ import {
   ScrollView,
   StyleSheet,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
@@ -81,7 +84,8 @@ export default function EditHabitScreen() {
         </Pressable>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled">
         <View style={styles.preview}>
           <View
             style={[styles.previewIcon, { backgroundColor: selectedColor + '20' }]}
@@ -102,6 +106,8 @@ export default function EditHabitScreen() {
             placeholder="예: 물 2L 마시기"
             placeholderTextColor={colors.textMuted}
             maxLength={30}
+            returnKeyType="done"
+            onSubmitEditing={() => Keyboard.dismiss()}
           />
         </View>
 
@@ -154,6 +160,7 @@ export default function EditHabitScreen() {
           <Text style={[styles.deleteText, { color: colors.danger }]}>습관 삭제</Text>
         </Pressable>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
