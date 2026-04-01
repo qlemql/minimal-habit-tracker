@@ -96,8 +96,8 @@ export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
               <Pressable
                 key={date}
                 style={styles.dayColumn}
-                onPress={() => !isFuture && onDatePress?.(date)}
-                disabled={isFuture}
+                onPress={() => !isFuture && isCurrentWeek && onDatePress?.(date)}
+                disabled={isFuture || !isCurrentWeek}
                 accessibilityLabel={`${DAY_LABELS[index]}요일 ${parseInt(date.split('-')[2], 10)}일${allDone ? ' 모두 완료' : ''}`}
                 accessibilityRole="button"
               >
