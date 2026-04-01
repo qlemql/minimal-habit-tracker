@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, StyleSheet, Appearance } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useThemeStore } from '@/store/themeStore';
 import { useOnboardingStore } from '@/store/onboardingStore';
 
@@ -30,7 +31,7 @@ export default function RootLayout() {
   }, [ready, onboardingCompleted, segments]);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <GestureHandlerRootView style={[styles.container, { backgroundColor: colors.background }]}>
       <StatusBar style={isDark ? 'light' : 'dark'} />
       <Stack
         screenOptions={{
@@ -45,7 +46,7 @@ export default function RootLayout() {
         <Stack.Screen name="edit" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
         <Stack.Screen name="settings" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
       </Stack>
-    </View>
+    </GestureHandlerRootView>
   );
 }
 
