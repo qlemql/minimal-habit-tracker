@@ -1,7 +1,14 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { v4 as uuidv4 } from 'uuid';
+// 네이티브 의존성 없는 UUID 생성
+function generateId(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 import { Habit, HabitLog } from '@/types/habit';
 import { getToday } from '@/utils/date';
 import { scheduleHabitReminder, cancelHabitReminder } from '@/utils/notifications';
@@ -38,7 +45,7 @@ export const useHabitStore = create<HabitStore>()(
         if (!get().canAddHabit()) return null;
 
         const now = new Date().toISOString();
-        const id = uuidv4();
+        const id = generateId();
         const newHabit: Habit = {
           id,
           name,
@@ -103,7 +110,7 @@ export const useHabitStore = create<HabitStore>()(
           }));
         } else {
           const newLog: HabitLog = {
-            id: uuidv4(),
+            id: generateId(),
             habitId,
             date: targetDate,
             completed: true,

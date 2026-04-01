@@ -35,11 +35,12 @@ export default function HomeScreen() {
   }, [allCompleted]);
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       <CelebrationOverlay
         visible={showCelebration}
         onDone={() => setShowCelebration(false)}
       />
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
         <View style={styles.headerRow}>
           <Text style={[styles.title, { color: colors.textPrimary }]}>오늘의 습관</Text>
@@ -93,6 +94,7 @@ export default function HomeScreen() {
         </View>
       )}
     </SafeAreaView>
+    </View>
   );
 }
 
