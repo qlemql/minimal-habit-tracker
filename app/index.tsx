@@ -27,16 +27,18 @@ export default function HomeScreen() {
 
   const [showCelebration, setShowCelebration] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  // 앱 시작 시 이미 완료 상태면 오버레이를 띄우지 않기 위해 초기값을 allCompleted로 설정
-  const prevAllCompleted = useRef(allCompleted);
+
+  const completedCount = activeHabits.filter((h) => isHabitCompleted(h.id, today)).length;
+  const totalCount = activeHabits.length;
+  const prevCompletedCount = useRef(completedCount);
 
   useEffect(() => {
-    // false → true 전환 시에만 축하 (체크 해제 후 다시 완료했을 때)
-    if (allCompleted && !prevAllCompleted.current) {
+    // 마지막 습관을 체크하는 순간 (N-1 → N) 축하
+    if (totalCount > 0 && completedCount === totalCount && prevCompletedCount.current === totalCount - 1) {
       setShowCelebration(true);
     }
-    prevAllCompleted.current = allCompleted;
-  }, [allCompleted]);
+    prevCompletedCount.current = completedCount;
+  }, [completedCount, totalCount]);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
