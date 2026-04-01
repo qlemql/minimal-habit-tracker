@@ -122,6 +122,7 @@ export default function OnboardingScreen() {
                 placeholderTextColor={colors.textMuted}
                 onSubmitEditing={addCustom}
                 returnKeyType="done"
+                maxLength={30}
               />
               {customName.trim() && selected.length < 3 && (
                 <Pressable onPress={addCustom}>

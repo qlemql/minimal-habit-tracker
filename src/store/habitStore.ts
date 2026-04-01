@@ -92,6 +92,8 @@ export const useHabitStore = create<HabitStore>()(
 
       toggleHabit: (habitId, date) => {
         const targetDate = date ?? getToday();
+        // 오늘만 수정 가능 — 과거/미래 날짜 조작 방지
+        if (targetDate !== getToday()) return;
         const existing = get().logs.find(
           (l) => l.habitId === habitId && l.date === targetDate
         );
@@ -136,6 +138,7 @@ export const useHabitStore = create<HabitStore>()(
     }),
     {
       name: 'habit-store',
+      version: 1,
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet, Modal } from 'react-native';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
-import { DAY_LABELS } from '@/utils/date';
+import { DAY_LABELS, getToday } from '@/utils/date';
 import { fontSize, spacing } from '@/constants/theme';
 
 interface DayDetailSheetProps {
@@ -15,6 +15,7 @@ export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
 
   if (!date) return null;
 
+  const isEditable = date === getToday();
   const dateObj = new Date(date + 'T00:00:00');
   const dayIndex = dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1;
   const dayLabel = DAY_LABELS[dayIndex];
@@ -35,7 +36,8 @@ export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
               <Pressable
                 key={habit.id}
                 style={[styles.row, completed && { borderColor: habit.color, borderWidth: 1 }]}
-                onPress={() => toggleHabit(habit.id, date)}
+                onPress={() => isEditable && toggleHabit(habit.id, date)}
+                disabled={!isEditable}
                 accessibilityLabel={`${habit.name} ${completed ? '완료 취소' : '완료 체크'}`}
                 accessibilityRole="checkbox"
               >

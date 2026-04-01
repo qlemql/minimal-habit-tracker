@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, AppState } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
@@ -17,7 +17,15 @@ export default function HomeScreen() {
   const { habits, logs, toggleHabit, isHabitCompleted, canAddHabit } =
     useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
-  const today = getToday();
+  const [today, setToday] = useState(getToday());
+
+  // 앱이 포그라운드로 돌아올 때 날짜 갱신
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') setToday(getToday());
+    });
+    return () => sub.remove();
+  }, []);
   const activeHabits = habits
     .sort((a, b) => a.order - b.order);
 

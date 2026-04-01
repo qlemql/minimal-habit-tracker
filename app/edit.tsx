@@ -15,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
+import { calculateStreak } from '@/utils/streak';
 import { TimePicker } from '@/components/TimePicker';
 import { fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
 
@@ -57,7 +58,13 @@ export default function EditHabitScreen() {
   };
 
   const handleDelete = () => {
-    Alert.alert('습관 삭제', `"${habit.name}"을(를) 삭제하시겠어요?`, [
+    const { logs } = useHabitStore.getState();
+    const streak = calculateStreak(habit.id, logs);
+    const logCount = logs.filter((l) => l.habitId === habit.id && l.completed).length;
+    const warning = logCount > 0
+      ? `${logCount}일간의 기록${streak > 0 ? `과 ${streak}일 연속 스트릭` : ''}이 함께 삭제됩니다.`
+      : '';
+    Alert.alert('습관 삭제', `"${habit.name}"을(를) 삭제하시겠어요?${warning ? '\n' + warning : ''}`, [
       { text: '취소', style: 'cancel' },
       {
         text: '삭제',
