@@ -42,10 +42,6 @@ export default function HomeScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <CelebrationOverlay
-        visible={showCelebration}
-        onDone={() => setShowCelebration(false)}
-      />
       <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
         <View style={styles.headerRow}>
@@ -101,6 +97,10 @@ export default function HomeScreen() {
       )}
     </SafeAreaView>
       <DayDetailSheet date={selectedDate} onClose={() => setSelectedDate(null)} />
+      <CelebrationOverlay
+        visible={showCelebration}
+        onDone={() => setShowCelebration(false)}
+      />
     </View>
   );
 }

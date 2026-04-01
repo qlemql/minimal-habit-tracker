@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { StyleSheet, Text, Pressable, View, Dimensions } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -135,12 +135,10 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
   return (
     <Pressable style={StyleSheet.absoluteFill} onPress={onDone}>
       <Animated.View style={[styles.container, bgStyle]}>
-        {/* 컨페티 */}
         {Array.from({ length: CONFETTI_COUNT }).map((_, i) => (
           <ConfettiPiece key={i} index={i} visible={visible} />
         ))}
 
-        {/* 메인 콘텐츠 */}
         <Animated.View style={[styles.content, contentStyle]}>
           <Text style={styles.emoji}>🎉</Text>
           <Text style={styles.text}>{message}</Text>
