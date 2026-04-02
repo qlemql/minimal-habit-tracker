@@ -2,6 +2,10 @@
 
 > 딱 3개만 집중하세요. 적게 추적할수록 더 잘 지킵니다.
 
+<p align="center">
+  <img src="assets/screenshots/main-screen.png" width="300" alt="메인 화면" />
+</p>
+
 ---
 
 ## 왜 만들었나요?
