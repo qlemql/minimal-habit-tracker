@@ -17,6 +17,7 @@ export const useOnboardingStore = create<OnboardingStore>()(
       name: 'onboarding-store',
       version: 1,
       storage: createJSONStorage(() => AsyncStorage),
+      migrate: (persisted, version) => persisted as any,
     }
   )
 );

@@ -140,6 +140,7 @@ export const useHabitStore = create<HabitStore>()(
       name: 'habit-store',
       version: 1,
       storage: createJSONStorage(() => AsyncStorage),
+      migrate: (persisted, version) => persisted as any,
     }
   )
 );
