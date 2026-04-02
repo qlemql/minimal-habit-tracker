@@ -26,14 +26,7 @@
       "package": "com.qlemql.minimalhabittracker"
     },
     "plugins": [
-      "expo-router",
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/icon.png",
-          "color": "#0D0D0D"
-        }
-      ]
+      "expo-router"
     ],
     "extra": {
       "eas": {
