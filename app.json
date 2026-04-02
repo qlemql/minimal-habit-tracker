@@ -37,8 +37,10 @@
     ],
     "extra": {
       "eas": {
-        "projectId": ""
-      }
-    }
+        "projectId": "132e673c-2e4b-410b-a486-6e2ba9d4d0df"
+      },
+      "router": {}
+    },
+    "owner": "daniel_hyun"
   }
 }
