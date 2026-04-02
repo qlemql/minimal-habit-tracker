@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 interface OnboardingStore {
   completed: boolean;
   setCompleted: () => void;
+  resetOnboarding: () => void;
 }
 
 export const useOnboardingStore = create<OnboardingStore>()(
@@ -12,6 +13,7 @@ export const useOnboardingStore = create<OnboardingStore>()(
     (set) => ({
       completed: false,
       setCompleted: () => set({ completed: true }),
+      resetOnboarding: () => set({ completed: false }),
     }),
     {
       name: 'onboarding-store',

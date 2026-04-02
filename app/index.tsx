@@ -1,16 +1,34 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, AppState } from 'react-native';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, AppState, LayoutChangeEvent } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import Animated, {
+  FadeInDown,
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  interpolateColor,
+} from 'react-native-reanimated';
 import { useHabitStore } from '@/store/habitStore';
 import { HabitCard } from '@/components/HabitCard';
 import { WeeklyCalendar } from '@/components/WeeklyCalendar';
 import { CelebrationOverlay } from '@/components/CelebrationOverlay';
 import { DayDetailSheet } from '@/components/DayDetailSheet';
-import { calculateStreak } from '@/utils/streak';
+import { calculateFlow } from '@/utils/streak';
 import { getToday } from '@/utils/date';
 import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing } from '@/constants/theme';
+
+function getGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour < 5) return '아직 새벽이에요';
+  if (hour < 9) return '좋은 아침이에요';
+  if (hour < 12) return '오전도 화이팅';
+  if (hour < 14) return '점심 잘 챙겨요';
+  if (hour < 18) return '오후도 힘내요';
+  if (hour < 21) return '저녁이에요';
+  return '오늘 하루도 수고했어요';
+}
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -18,16 +36,19 @@ export default function HomeScreen() {
     useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
   const [today, setToday] = useState(getToday());
+  const greeting = useMemo(() => getGreeting(), [today]);
 
-  // 앱이 포그라운드로 돌아올 때 날짜 갱신
   useEffect(() => {
     const sub = AppState.addEventListener('change', (state) => {
       if (state === 'active') setToday(getToday());
     });
     return () => sub.remove();
   }, []);
-  const activeHabits = habits
-    .sort((a, b) => a.order - b.order);
+
+  const activeHabits = useMemo(
+    () => [...habits].sort((a, b) => a.order - b.order),
+    [habits]
+  );
 
   const allCompleted =
     activeHabits.length > 0 &&
@@ -40,13 +61,56 @@ export default function HomeScreen() {
   const totalCount = activeHabits.length;
   const prevCompletedCount = useRef(completedCount);
 
+  // Animated progress bar (pixel-based for Reanimated compatibility)
+  const [barWidth, setBarWidth] = useState(0);
+  const progressWidth = useSharedValue(0);
+  const barColorProgress = useSharedValue(0);
+
+  const onBarLayout = useCallback((e: LayoutChangeEvent) => {
+    setBarWidth(e.nativeEvent.layout.width);
+  }, []);
+
   useEffect(() => {
-    // 마지막 습관을 체크하는 순간 (N-1 → N) 축하
+    const target = totalCount > 0 ? (completedCount / totalCount) * barWidth : 0;
+    progressWidth.value = withTiming(target, { duration: 400 });
+  }, [completedCount, totalCount, barWidth, progressWidth]);
+
+  useEffect(() => {
+    barColorProgress.value = withTiming(allCompleted ? 1 : 0, { duration: 400 });
+  }, [allCompleted, barColorProgress]);
+
+  const progressBarStyle = useAnimatedStyle(() => ({
+    width: progressWidth.value,
+    backgroundColor: interpolateColor(
+      barColorProgress.value,
+      [0, 1],
+      [colors.accent, colors.success]
+    ),
+  }));
+
+  useEffect(() => {
     if (totalCount > 0 && completedCount === totalCount && prevCompletedCount.current === totalCount - 1) {
       setShowCelebration(true);
     }
     prevCompletedCount.current = completedCount;
   }, [completedCount, totalCount]);
+
+  // Flow 결과 메모이제이션 (렌더당 1회만 계산)
+  const flowResults = useMemo(() => {
+    const map = new Map<string, import('@/utils/streak').FlowResult>();
+    activeHabits.forEach((h) => {
+      map.set(h.id, calculateFlow(h.id, logs, today));
+    });
+    return map;
+  }, [activeHabits, logs, today]);
+
+  const hasBreathingHabit = useMemo(
+    () => Array.from(flowResults.values()).some((f) => f.isBreathingToday),
+    [flowResults]
+  );
+
+  const handleCloseCelebration = useCallback(() => setShowCelebration(false), []);
+  const handleCloseDetail = useCallback(() => setSelectedDate(null), []);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -54,67 +118,115 @@ export default function HomeScreen() {
       <View style={styles.header}>
         <View style={styles.headerRow}>
           <View>
-            <Text style={[styles.title, { color: colors.textPrimary }]}>오늘의 습관</Text>
-            <Text style={[styles.dateText, { color: colors.textMuted }]}>
+            <Text style={[styles.greeting, { color: colors.textSecondary }]}>{greeting}</Text>
+            <Text style={[styles.dateText, { color: colors.textPrimary }]}>
               {new Date(today + 'T00:00:00').toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' })}
             </Text>
           </View>
-          <Pressable onPress={() => router.push('/settings')} hitSlop={12} accessibilityLabel="설정" accessibilityRole="button">
-            <Text style={[styles.settingsIcon, { color: colors.textMuted }]}>⚙</Text>
+          <Pressable
+            onPress={() => router.push('/settings')}
+            hitSlop={12}
+            accessibilityLabel="설정"
+            accessibilityRole="button"
+            style={({ pressed }) => [
+              styles.settingsButton,
+              { backgroundColor: colors.surface },
+              pressed && { opacity: 0.7, transform: [{ scale: 0.95 }] },
+            ]}
+          >
+            <Text style={styles.settingsIcon}>⚙️</Text>
           </Pressable>
         </View>
         {totalCount > 0 && (
-          <Text style={[styles.progress, { color: allCompleted ? colors.success : colors.textSecondary }]}>
-            {allCompleted ? '모두 완료! 🎉' : `${completedCount}/${totalCount} 완료`}
-          </Text>
+          <View style={styles.progressRow}>
+            <View
+              style={[styles.progressBarBg, { backgroundColor: colors.inactive }]}
+              onLayout={onBarLayout}
+            >
+              <Animated.View
+                style={[
+                  styles.progressBarFill,
+                  progressBarStyle,
+                ]}
+              />
+            </View>
+            <Text style={[styles.progress, { color: allCompleted ? colors.success : colors.textSecondary }]}>
+              {allCompleted ? '모두 완료! 🎉' : `${completedCount}/${totalCount}`}
+            </Text>
+          </View>
         )}
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        {activeHabits.length > 0 && hasBreathingHabit && (
+          <Animated.View entering={FadeInDown.duration(400)} style={[styles.breathingBanner, { backgroundColor: colors.surface }]}>
+            <Text style={[styles.breathingText, { color: colors.textSecondary }]}>
+              쉬어가는 중이에요, 오늘 다시 이어가요
+            </Text>
+          </Animated.View>
+        )}
         {activeHabits.length === 0 ? (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>✨</Text>
-            <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>습관을 추가해보세요</Text>
+            <View style={[styles.emptyIconCircle, { backgroundColor: colors.surface }]}>
+              <Text style={styles.emptyIcon}>✨</Text>
+            </View>
+            <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>아직 습관이 없어요</Text>
             <Text style={[styles.emptySubtitle, { color: colors.textMuted }]}>
-              딱 3개만 골라서 집중하세요
+              딱 3개만 골라서 시작해보세요
             </Text>
           </View>
         ) : (
           <View style={styles.habitList}>
-            {activeHabits.map((habit) => (
-              <HabitCard
-                key={habit.id}
-                name={habit.name}
-                icon={habit.icon}
-                color={habit.color}
-                completed={isHabitCompleted(habit.id, today)}
-                streak={calculateStreak(habit.id, logs)}
-                onToggle={() => toggleHabit(habit.id)}
-                onEdit={() =>
-                  router.push({ pathname: '/edit', params: { id: habit.id } })
-                }
-              />
+            {activeHabits.map((habit, index) => (
+              <Animated.View key={habit.id} entering={FadeInDown.delay(index * 60).duration(400)}>
+                <HabitCard
+                  name={habit.name}
+                  icon={habit.icon}
+                  color={habit.color}
+                  completed={isHabitCompleted(habit.id, today)}
+                  flow={flowResults.get(habit.id) ?? { currentFlowDays: 0, currentFlowStartDate: today, isBreathingToday: false, longestFlow: 0, status: 'new' as const }}
+                  completionIndex={completedCount}
+                  totalHabits={totalCount}
+                  onToggle={() => toggleHabit(habit.id)}
+                  onEdit={() =>
+                    router.push({ pathname: '/edit', params: { id: habit.id } })
+                  }
+                />
+              </Animated.View>
             ))}
-            <WeeklyCalendar onDatePress={setSelectedDate} />
+            <View style={{ marginTop: spacing.xs }}>
+              <WeeklyCalendar onDatePress={setSelectedDate} />
+            </View>
           </View>
         )}
       </ScrollView>
 
-      {canAddHabit() && (
-        <View style={styles.footer}>
+      <View style={styles.footer}>
+        {canAddHabit() ? (
           <Pressable
-            style={[styles.addButton, { backgroundColor: colors.surface, borderColor: colors.surfaceLight }]}
+            style={({ pressed }) => [
+              styles.addButton,
+              { backgroundColor: colors.surface },
+              pressed && { opacity: 0.7, transform: [{ scale: 0.97 }] },
+            ]}
             onPress={() => router.push('/add')}
           >
-            <Text style={[styles.addButtonText, { color: colors.textSecondary }]}>+ 습관 추가</Text>
+            <Text style={[styles.addIcon, { color: colors.accent }]}>+</Text>
+            <Text style={[styles.addButtonText, { color: colors.textSecondary }]}>습관 추가</Text>
           </Pressable>
-        </View>
-      )}
+        ) : totalCount > 0 ? (
+          <View style={styles.maxHintContainer}>
+            <Text style={[styles.maxHint, { color: colors.textMuted }]}>
+              3개면 충분해요
+            </Text>
+          </View>
+        ) : null}
+      </View>
     </SafeAreaView>
-      <DayDetailSheet date={selectedDate} onClose={() => setSelectedDate(null)} />
+      <DayDetailSheet date={selectedDate} onClose={handleCloseDetail} />
       <CelebrationOverlay
         visible={showCelebration}
-        onDone={() => setShowCelebration(false)}
+        onDone={handleCloseCelebration}
       />
     </View>
   );
@@ -134,36 +246,70 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  settingsIcon: {
-    fontSize: 22,
+  settingsButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  title: {
+  settingsIcon: {
+    fontSize: 18,
+  },
+  greeting: {
+    fontSize: fontSize.sm,
+    fontWeight: '500',
+    marginBottom: 2,
+  },
+  dateText: {
     fontSize: fontSize.xl,
     fontWeight: '700',
   },
-  dateText: {
-    fontSize: fontSize.xs,
-    marginTop: 2,
+  progressRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: spacing.md,
+    gap: spacing.sm,
+  },
+  progressBarBg: {
+    flex: 1,
+    height: 6,
+    borderRadius: 3,
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    borderRadius: 3,
   },
   progress: {
-    fontSize: fontSize.sm,
-    marginTop: spacing.sm,
+    fontSize: fontSize.xs,
+    fontWeight: '600',
+    minWidth: 50,
+    textAlign: 'right',
   },
   content: {
     flex: 1,
     paddingHorizontal: spacing.lg,
   },
   habitList: {
-    gap: spacing.sm,
+    gap: spacing.sm + 2,
   },
   emptyState: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 100,
+    paddingBottom: 60,
+  },
+  emptyIconCircle: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: spacing.lg,
   },
   emptyIcon: {
-    fontSize: 48,
-    marginBottom: spacing.md,
+    fontSize: 36,
   },
   emptyTitle: {
     fontSize: fontSize.lg,
@@ -181,11 +327,33 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: spacing.md,
     alignItems: 'center',
-    borderWidth: 1,
-    borderStyle: 'dashed',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: spacing.xs,
+  },
+  addIcon: {
+    fontSize: 20,
+    fontWeight: '600',
   },
   addButtonText: {
     fontSize: fontSize.md,
     fontWeight: '500',
+  },
+  maxHintContainer: {
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+  },
+  maxHint: {
+    fontSize: fontSize.xs,
+  },
+  breathingBanner: {
+    paddingVertical: spacing.sm + 2,
+    paddingHorizontal: spacing.md,
+    borderRadius: 12,
+    marginBottom: spacing.sm + 2,
+    alignItems: 'center',
+  },
+  breathingText: {
+    fontSize: fontSize.sm,
   },
 });

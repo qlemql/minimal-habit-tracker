@@ -1,23 +1,23 @@
 export const darkColors = {
   background: '#0D0D0D',
-  surface: '#1A1A1A',
-  surfaceLight: '#262626',
+  surface: '#161616',
+  surfaceLight: '#232323',
   textPrimary: '#FFFFFF',
   textSecondary: '#999999',
   textMuted: '#666666',
   accent: '#4A90D9',
   success: '#51CF66',
-  inactive: '#333333',
+  inactive: '#2A2A2A',
   danger: '#FF6B6B',
 } as const;
 
 export const lightColors = {
   background: '#F5F5F5',
   surface: '#FFFFFF',
-  surfaceLight: '#E8E8E8',
+  surfaceLight: '#EBEBEB',
   textPrimary: '#1A1A1A',
   textSecondary: '#666666',
-  textMuted: '#999999',
+  textMuted: '#757575',
   accent: '#3A7BC8',
   success: '#40A850',
   inactive: '#D9D9D9',

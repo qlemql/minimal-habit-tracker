@@ -1,22 +1,31 @@
 import { useEffect } from 'react';
 import { Pressable, View, Text, StyleSheet } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   withSequence,
   withTiming,
+  interpolateColor,
+  interpolate,
+  runOnJS,
+  FadeInUp,
+  FadeOutUp,
 } from 'react-native-reanimated';
-import * as Haptics from 'expo-haptics';
+import { hapticImpact, hapticNotification, ImpactFeedbackStyle, NotificationFeedbackType } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing } from '@/constants/theme';
+import type { FlowResult } from '@/utils/streak';
 
 interface HabitCardProps {
   name: string;
   icon: string;
   color: string;
   completed: boolean;
-  streak: number;
+  flow: FlowResult;
+  completionIndex?: number;
+  totalHabits?: number;
   onToggle: () => void;
   onEdit?: () => void;
 }
@@ -26,38 +35,88 @@ export function HabitCard({
   icon,
   color,
   completed,
-  streak,
+  flow,
+  completionIndex = 0,
+  totalHabits = 1,
   onToggle,
   onEdit,
 }: HabitCardProps) {
   const colors = useThemeStore((s) => s.getColors());
   const scale = useSharedValue(1);
   const checkScale = useSharedValue(completed ? 1 : 0);
+  const fillProgress = useSharedValue(completed ? 1 : 0);
+  const cardBg = useSharedValue(completed ? 1 : 0);
 
   useEffect(() => {
-    checkScale.value = withSpring(completed ? 1 : 0, {
-      damping: 12,
-      stiffness: 200,
-    });
+    if (completed) {
+      checkScale.value = withSpring(1, { damping: 12, stiffness: 200 });
+      fillProgress.value = withTiming(1, { duration: 200 });
+      cardBg.value = withTiming(1, { duration: 300 });
+    } else {
+      checkScale.value = withTiming(0, { duration: 100 });
+      fillProgress.value = withTiming(0, { duration: 100 });
+      cardBg.value = withTiming(0, { duration: 150 });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completed]);
 
   const handleToggle = () => {
-    scale.value = withSequence(
-      withTiming(0.95, { duration: 80 }),
-      withSpring(1, { damping: 10, stiffness: 300 })
-    );
-
     if (!completed) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      scale.value = withSequence(
+        withTiming(0.95, { duration: 80 }),
+        withSpring(1, { damping: 10, stiffness: 300 })
+      );
+      if (completionIndex >= totalHabits - 1) {
+        hapticNotification(NotificationFeedbackType.Success);
+      } else if (completionIndex >= totalHabits - 2) {
+        hapticImpact(ImpactFeedbackStyle.Heavy);
+      } else {
+        hapticImpact(ImpactFeedbackStyle.Medium);
+      }
     } else {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      scale.value = withSequence(
+        withTiming(0.98, { duration: 80 }),
+        withTiming(1, { duration: 120 })
+      );
+      hapticImpact(ImpactFeedbackStyle.Light);
     }
-
     onToggle();
   };
 
+  // Long-press to edit (shortcut)
+  const longPressGesture = Gesture.LongPress()
+    .minDuration(500)
+    .onBegin(() => {
+      scale.value = withTiming(0.97, { duration: 200 });
+    })
+    .onEnd(() => {
+      if (onEdit) {
+        runOnJS(hapticImpact)(ImpactFeedbackStyle.Heavy);
+        runOnJS(onEdit)();
+      }
+    })
+    .onFinalize(() => {
+      scale.value = withSpring(1, { damping: 15, stiffness: 200 });
+    });
+
+  const tapGesture = Gesture.Tap().onEnd(() => {
+    runOnJS(handleToggle)();
+  });
+
+  const composedGesture = Gesture.Exclusive(longPressGesture, tapGesture);
+
   const cardAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
+    backgroundColor: interpolateColor(
+      cardBg.value,
+      [0, 1],
+      [colors.surface, color + '10']
+    ),
+    borderColor: interpolateColor(
+      cardBg.value,
+      [0, 1],
+      ['transparent', color + '40']
+    ),
   }));
 
   const checkAnimStyle = useAnimatedStyle(() => ({
@@ -65,52 +124,68 @@ export function HabitCard({
     opacity: checkScale.value,
   }));
 
+  const checkboxAnimStyle = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      fillProgress.value,
+      [0, 1],
+      ['transparent', color]
+    ),
+    borderWidth: interpolate(fillProgress.value, [0, 1], [2, 0]),
+    borderColor: interpolateColor(
+      fillProgress.value,
+      [0, 1],
+      [colors.inactive, color]
+    ),
+  }));
+
+  const iconBgStyle = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      cardBg.value,
+      [0, 1],
+      [color + '20', color + '30']
+    ),
+  }));
+
   return (
-    <Animated.View
-      style={[
-        styles.card,
-        { backgroundColor: colors.surface },
-        completed && { borderColor: color, borderWidth: 1.5 },
-        cardAnimStyle,
-      ]}
-    >
-      <Pressable style={styles.left} onPress={handleToggle}>
-        <View style={[styles.iconContainer, { backgroundColor: color + '20' }]}>
-          <Text style={styles.icon}>{icon}</Text>
-        </View>
-        <View style={styles.info}>
-          <Text style={[styles.name, { color: colors.textPrimary }, completed && styles.nameCompleted]}>
-            {name}
-          </Text>
-          {streak > 0 && (
-            <Text style={[styles.streak, { color }]}>
-              🔥 {streak}일 연속
+    <GestureDetector gesture={composedGesture}>
+      <Animated.View
+        style={[styles.card, cardAnimStyle]}
+        accessibilityLabel={`${name} ${completed ? '완료됨' : '미완료'}${flow.currentFlowDays > 1 ? ` 흐름 ${flow.currentFlowDays}일째` : ''}`}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: completed }}
+        accessibilityHint="탭하여 체크, 길게 눌러 수정"
+      >
+        <View style={styles.left}>
+          <Animated.View style={[styles.iconContainer, iconBgStyle]}>
+            <Text style={styles.icon}>{icon}</Text>
+          </Animated.View>
+          <View style={styles.info}>
+            <Text
+              style={[styles.name, { color: colors.textPrimary }]}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {name}
             </Text>
-          )}
-        </View>
-      </Pressable>
-      <View style={styles.right}>
-        <Pressable onPress={handleToggle} style={styles.checkboxTouchArea}>
-          <View
-            style={[
-              styles.checkbox,
-              completed
-                ? { backgroundColor: color }
-                : { borderColor: colors.textMuted, borderWidth: 2 },
-            ]}
-          >
-            <Animated.Text style={[styles.checkmark, checkAnimStyle]}>
-              ✓
-            </Animated.Text>
+            {flow.currentFlowDays > 1 && (
+              <Animated.Text
+                key={flow.currentFlowDays}
+                entering={FadeInUp.duration(200)}
+                exiting={FadeOutUp.duration(150)}
+                style={[styles.flowText, { color }]}
+              >
+                {flow.isBreathingToday ? '◌ ' : ''}흐름 {flow.currentFlowDays}일째
+              </Animated.Text>
+            )}
           </View>
-        </Pressable>
-        {onEdit && (
-          <Pressable onPress={onEdit} style={styles.editButton}>
-            <Text style={[styles.editIcon, { color: colors.textMuted }]}>›</Text>
-          </Pressable>
-        )}
-      </View>
-    </Animated.View>
+        </View>
+        <Animated.View style={[styles.checkbox, checkboxAnimStyle]}>
+          <Animated.Text style={[styles.checkmark, checkAnimStyle]}>
+            ✓
+          </Animated.Text>
+        </Animated.View>
+      </Animated.View>
+    </GestureDetector>
   );
 }
 
@@ -128,6 +203,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+    marginRight: spacing.sm,
   },
   iconContainer: {
     width: 48,
@@ -136,9 +212,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  icon: {
-    fontSize: 24,
-  },
+  icon: { fontSize: 24 },
   info: {
     marginLeft: spacing.md,
     flex: 1,
@@ -147,37 +221,20 @@ const styles = StyleSheet.create({
     fontSize: fontSize.md,
     fontWeight: '600',
   },
-  nameCompleted: {
-    opacity: 0.6,
-  },
-  streak: {
+  flowText: {
     fontSize: fontSize.xs,
     marginTop: 2,
   },
-  right: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
-  checkboxTouchArea: {
-    padding: spacing.xs,
-  },
   checkbox: {
-    width: 32,
-    height: 32,
+    width: 30,
+    height: 30,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   checkmark: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '700',
-  },
-  editButton: {
-    padding: spacing.xs,
-  },
-  editIcon: {
-    fontSize: fontSize.xl,
   },
 });

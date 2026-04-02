@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { hapticImpact, hapticNotification, ImpactFeedbackStyle, NotificationFeedbackType } from '@/utils/haptics';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
 import { TimePicker } from '@/components/TimePicker';
@@ -45,18 +46,25 @@ export default function AddHabitScreen() {
       await useHabitStore.getState().updateHabit(newId, { reminderTime });
     }
 
+    hapticNotification(NotificationFeedbackType.Success);
     router.back();
   };
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} hitSlop={12} accessibilityLabel="취소" accessibilityRole="button">
+        <Pressable
+          onPress={() => { hapticImpact(ImpactFeedbackStyle.Light); router.back(); }}
+          hitSlop={12}
+          accessibilityLabel="취소"
+          accessibilityRole="button"
+          style={({ pressed }) => pressed && { opacity: 0.6 }}
+        >
           <Text style={[styles.cancel, { color: colors.textSecondary }]}>취소</Text>
         </Pressable>
         <Text style={[styles.headerTitle, { color: colors.textPrimary }]}>습관 추가</Text>
         <Pressable onPress={handleSave} hitSlop={12} accessibilityLabel="저장" accessibilityRole="button">
-          <Text style={[styles.save, !name.trim() && styles.saveDisabled]}>
+          <Text style={[styles.save, { color: colors.accent }, !name.trim() && styles.saveDisabled]}>
             저장
           </Text>
         </Pressable>
@@ -64,7 +72,7 @@ export default function AddHabitScreen() {
 
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled">
-        <View style={styles.preview}>
+        <View style={[styles.preview, { backgroundColor: colors.surface, borderRadius: 20 }]}>
           <View
             style={[
               styles.previewIcon,
@@ -73,13 +81,17 @@ export default function AddHabitScreen() {
           >
             <Text style={styles.previewIconText}>{selectedIcon}</Text>
           </View>
-          <Text style={[styles.previewName, { color: colors.textPrimary }]}>
+          <Text
+            style={[styles.previewName, { color: colors.textPrimary }]}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
             {name.trim() || '습관 이름'}
           </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textSecondary }]}>이름</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>이름</Text>
           <TextInput
             style={[styles.input, { backgroundColor: colors.surface, color: colors.textPrimary }]}
             value={name}
@@ -94,7 +106,7 @@ export default function AddHabitScreen() {
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textSecondary }]}>아이콘</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>아이콘</Text>
           <View style={styles.grid}>
             {habitIcons.map((icon) => (
               <Pressable
@@ -105,9 +117,13 @@ export default function AddHabitScreen() {
                   selectedIcon === icon && {
                     borderColor: selectedColor,
                     borderWidth: 2,
+                    backgroundColor: selectedColor + '15',
                   },
                 ]}
-                onPress={() => setSelectedIcon(icon)}
+                onPress={() => {
+                  hapticImpact(ImpactFeedbackStyle.Light);
+                  setSelectedIcon(icon);
+                }}
                 accessibilityLabel={`아이콘 ${icon}`}
                 accessibilityRole="button"
               >
@@ -118,7 +134,7 @@ export default function AddHabitScreen() {
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textSecondary }]}>색상</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>색상</Text>
           <View style={styles.colorGrid}>
             {habitColors.map((color) => (
               <Pressable
@@ -126,9 +142,15 @@ export default function AddHabitScreen() {
                 style={[
                   styles.colorItem,
                   { backgroundColor: color },
-                  selectedColor === color && { borderColor: colors.textPrimary },
+                  selectedColor === color && {
+                    borderColor: colors.textPrimary,
+                    transform: [{ scale: 1.15 }],
+                  },
                 ]}
-                onPress={() => setSelectedColor(color)}
+                onPress={() => {
+                  hapticImpact(ImpactFeedbackStyle.Light);
+                  setSelectedColor(color);
+                }}
                 accessibilityLabel={`색상 ${color}`}
                 accessibilityRole="button"
               />
@@ -137,7 +159,7 @@ export default function AddHabitScreen() {
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textSecondary }]}>알림</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>알림</Text>
           <TimePicker value={reminderTime} onChange={setReminderTime} />
         </View>
       </ScrollView>
@@ -167,7 +189,6 @@ const styles = StyleSheet.create({
   save: {
     fontSize: fontSize.md,
     fontWeight: '600',
-    color: habitColors[0],
   },
   saveDisabled: {
     opacity: 0.4,
@@ -179,6 +200,7 @@ const styles = StyleSheet.create({
   preview: {
     alignItems: 'center',
     paddingVertical: spacing.xl,
+    marginBottom: spacing.md,
   },
   previewIcon: {
     width: 80,
@@ -199,12 +221,15 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
   label: {
-    fontSize: fontSize.sm,
-    fontWeight: '500',
+    fontSize: fontSize.xs,
+    fontWeight: '600',
     marginBottom: spacing.sm,
+    marginLeft: spacing.xs,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
   input: {
-    borderRadius: 12,
+    borderRadius: 14,
     padding: spacing.md,
     fontSize: fontSize.md,
   },
@@ -228,12 +253,12 @@ const styles = StyleSheet.create({
   colorGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: spacing.md,
   },
   colorItem: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     borderWidth: 3,
     borderColor: 'transparent',
   },

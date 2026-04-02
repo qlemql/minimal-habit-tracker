@@ -28,7 +28,7 @@ export default function RootLayout() {
     if (!onboardingCompleted && !inOnboarding) {
       router.replace('/onboarding');
     }
-  }, [ready, onboardingCompleted, segments]);
+  }, [ready, onboardingCompleted, segments, router]);
 
   return (
     <GestureHandlerRootView style={[styles.container, { backgroundColor: colors.background }]}>

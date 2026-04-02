@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react';
-import { StyleSheet, Text, Pressable, View, Dimensions } from 'react-native';
+import { useEffect, useMemo, useCallback } from 'react';
+import { StyleSheet, Text, Pressable, Dimensions } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -9,57 +9,64 @@ import Animated, {
   withSpring,
   runOnJS,
 } from 'react-native-reanimated';
-import * as Haptics from 'expo-haptics';
+import { NotificationFeedbackType } from 'expo-haptics';
+import { hapticNotification } from '@/utils/haptics';
 
 const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get('window');
 
 const MESSAGES = [
-  '완벽한 하루!',
-  '대단해요!',
-  '꾸준함이 힘이에요',
   '오늘도 해냈어요!',
-  '멋져요!',
-  '습관이 되고 있어요',
+  '완벽한 하루 ✨',
+  '꾸준함이 만드는 변화',
+  '작은 실천, 큰 차이',
+  '오늘의 흐름 완성!',
+  '내일도 이어가요',
 ];
 
 const CONFETTI_COLORS = ['#4A90D9', '#7B68EE', '#FF6B6B', '#51CF66', '#FFD43B', '#FF922B', '#DA77F2', '#20C997'];
 const CONFETTI_COUNT = 30;
 
+const CONFETTI_CONFIG = Array.from({ length: CONFETTI_COUNT }, (_, i) => ({
+  color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+  startX: (Math.random() - 0.5) * SCREEN_W,
+  size: 6 + Math.random() * 8,
+  delay: Math.random() * 400,
+  fallDistance: SCREEN_H * 0.6 + Math.random() * 200,
+  fallDuration: 1500 + Math.random() * 800,
+  rotateDeg: 360 + Math.random() * 720,
+}));
+
 interface ConfettiPieceProps {
-  index: number;
+  config: typeof CONFETTI_CONFIG[number];
   visible: boolean;
 }
 
-function ConfettiPiece({ index, visible }: ConfettiPieceProps) {
+function ConfettiPiece({ config, visible }: ConfettiPieceProps) {
   const translateY = useSharedValue(-50);
   const translateX = useSharedValue(0);
   const rotate = useSharedValue(0);
   const opacity = useSharedValue(0);
 
-  const color = CONFETTI_COLORS[index % CONFETTI_COLORS.length];
-  const startX = (Math.random() - 0.5) * SCREEN_W;
-  const size = 6 + Math.random() * 8;
-  const delay = Math.random() * 400;
-
   useEffect(() => {
     if (visible) {
-      translateX.value = startX;
-      opacity.value = withDelay(delay, withSequence(
+      translateX.value = config.startX;
+      opacity.value = withDelay(config.delay, withSequence(
         withTiming(1, { duration: 100 }),
         withDelay(1300, withTiming(0, { duration: 400 }))
       ));
       translateY.value = withDelay(
-        delay,
-        withTiming(SCREEN_H * 0.6 + Math.random() * 200, { duration: 1500 + Math.random() * 800 })
+        config.delay,
+        withTiming(config.fallDistance, { duration: config.fallDuration })
       );
       rotate.value = withDelay(
-        delay,
-        withTiming(360 + Math.random() * 720, { duration: 2000 })
+        config.delay,
+        withTiming(config.rotateDeg, { duration: 2000 })
       );
     } else {
       translateY.value = -50;
       opacity.value = 0;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
   const style = useAnimatedStyle(() => ({
@@ -78,9 +85,9 @@ function ConfettiPiece({ index, visible }: ConfettiPieceProps) {
           position: 'absolute',
           top: 0,
           left: SCREEN_W / 2,
-          width: size,
-          height: size * 1.5,
-          backgroundColor: color,
+          width: config.size,
+          height: config.size * 1.5,
+          backgroundColor: config.color,
           borderRadius: 2,
         },
         style,
@@ -103,14 +110,20 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
     [visible]
   );
 
+  const handleDone = useCallback(() => {
+    onDone();
+  }, [onDone]);
+
   useEffect(() => {
     if (visible) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      hapticNotification(NotificationFeedbackType.Success);
 
       bgOpacity.value = withSequence(
         withTiming(1, { duration: 200 }),
-        withDelay(1800, withTiming(0, { duration: 400 }, () => {
-          runOnJS(onDone)();
+        withDelay(2800, withTiming(0, { duration: 400 }, (finished) => {
+          if (finished) {
+            runOnJS(handleDone)();
+          }
         }))
       );
 
@@ -122,6 +135,7 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
       scale.value = 0;
       bgOpacity.value = 0;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
   const bgStyle = useAnimatedStyle(() => ({
@@ -137,8 +151,8 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
   return (
     <Pressable style={StyleSheet.absoluteFill} onPress={onDone}>
       <Animated.View style={[styles.container, bgStyle]}>
-        {Array.from({ length: CONFETTI_COUNT }).map((_, i) => (
-          <ConfettiPiece key={i} index={i} visible={visible} />
+        {CONFETTI_CONFIG.map((config, i) => (
+          <ConfettiPiece key={i} config={config} visible={visible} />
         ))}
 
         <Animated.View style={[styles.content, contentStyle]}>

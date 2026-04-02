@@ -15,7 +15,9 @@ export const useProStore = create<ProStore>()(
     }),
     {
       name: 'pro-store',
+      version: 1,
       storage: createJSONStorage(() => AsyncStorage),
+      migrate: (persisted) => persisted as any,
     }
   )
 );

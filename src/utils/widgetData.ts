@@ -1,6 +1,6 @@
 import { useHabitStore } from '@/store/habitStore';
 import { getToday } from './date';
-import { calculateStreak } from './streak';
+import { calculateFlow } from './streak';
 
 // 위젯에 전달할 데이터 구조
 export interface WidgetHabit {
@@ -9,7 +9,7 @@ export interface WidgetHabit {
   icon: string;
   color: string;
   completed: boolean;
-  streak: number;
+  flowDays: number;
 }
 
 // 위젯용 데이터 생성 (SharedDefaults를 통해 위젯과 공유)
@@ -17,7 +17,7 @@ export function getWidgetData(): WidgetHabit[] {
   const { habits, logs, isHabitCompleted } = useHabitStore.getState();
   const today = getToday();
 
-  return habits
+  return [...habits]
     .sort((a, b) => a.order - b.order)
     .slice(0, 3)
     .map((habit) => ({
@@ -26,6 +26,6 @@ export function getWidgetData(): WidgetHabit[] {
       icon: habit.icon,
       color: habit.color,
       completed: isHabitCompleted(habit.id, today),
-      streak: calculateStreak(habit.id, logs),
+      flowDays: calculateFlow(habit.id, logs, today).currentFlowDays,
     }));
 }
