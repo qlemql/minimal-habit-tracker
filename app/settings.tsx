@@ -11,6 +11,8 @@ import { REWARD_TIERS } from '@/constants/rewards';
 import { fontSize, spacing } from '@/constants/theme';
 
 const FEEDBACK_EMAIL = 'taehyun_fe@naver.com';
+const PRIVACY_POLICY_URL = 'https://qlemql.github.io/minimal-habit-tracker/privacy-policy.html';
+const TERMS_OF_SERVICE_URL = 'https://qlemql.github.io/minimal-habit-tracker/terms-of-service.html';
 
 type ThemeOption = 'dark' | 'cream' | 'system';
 
@@ -43,6 +45,16 @@ export default function SettingsScreen() {
 
   const handleGuide = () => {
     router.push({ pathname: '/onboarding', params: { guideOnly: '1' } });
+  };
+
+  const handleOpenUrl = async (url: string) => {
+    hapticImpact(ImpactFeedbackStyle.Light);
+    const canOpen = await Linking.canOpenURL(url);
+    if (canOpen) {
+      Linking.openURL(url);
+    } else {
+      Alert.alert('열 수 없음', '링크를 열 수 없습니다.');
+    }
   };
 
   return (
@@ -167,6 +179,40 @@ export default function SettingsScreen() {
           >
             <Text style={styles.optionIcon}>💬</Text>
             <Text style={[styles.optionText, { color: colors.textPrimary }]}>피드백 보내기</Text>
+            <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
+          </Pressable>
+        </View>
+
+        {/* 법적 정보 */}
+        <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
+          법적 정보
+        </Text>
+        <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.option,
+              { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.surfaceLight },
+              pressed && { opacity: 0.6 },
+            ]}
+            onPress={() => handleOpenUrl(PRIVACY_POLICY_URL)}
+            accessibilityLabel="개인정보처리방침"
+            accessibilityRole="link"
+          >
+            <Text style={styles.optionIcon}>🔒</Text>
+            <Text style={[styles.optionText, { color: colors.textPrimary }]}>개인정보처리방침</Text>
+            <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.option,
+              pressed && { opacity: 0.6 },
+            ]}
+            onPress={() => handleOpenUrl(TERMS_OF_SERVICE_URL)}
+            accessibilityLabel="이용약관"
+            accessibilityRole="link"
+          >
+            <Text style={styles.optionIcon}>📄</Text>
+            <Text style={[styles.optionText, { color: colors.textPrimary }]}>이용약관</Text>
             <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
           </Pressable>
         </View>
