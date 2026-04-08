@@ -1,5 +1,5 @@
 """
-Minimal Habit Tracker — App Icon Generator
+싹 - 습관 트래커 — App Icon Generator
 미니멀 체크마크 + "3" 컨셉
 배경: 다크(#0D0D0D), 둥근 체크마크 3개
 """

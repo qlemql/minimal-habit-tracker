@@ -4,7 +4,7 @@
 
 | 항목 | 내용 |
 |------|------|
-| 프로젝트명 | Minimal Habit Tracker |
+| 프로젝트명 | 싹 - 습관 트래커 |
 | 카테고리 | 건강/습관 트래커 |
 | 플랫폼 | 모바일 앱 (React Native / Expo) |
 | 레퍼런스 | Streaks, Habitify, Atoms |

@@ -17,6 +17,9 @@ import { DayDetailSheet } from '@/components/DayDetailSheet';
 import { calculateFlow } from '@/utils/streak';
 import { getToday } from '@/utils/date';
 import { useThemeStore } from '@/store/themeStore';
+import { useRewardStore } from '@/store/rewardStore';
+import { UnlockToast } from '@/components/UnlockToast';
+import { syncWidgetData } from '@/utils/widgetData';
 import { fontSize, spacing } from '@/constants/theme';
 
 function getGreeting(): string {
@@ -40,7 +43,10 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const sub = AppState.addEventListener('change', (state) => {
-      if (state === 'active') setToday(getToday());
+      if (state === 'active') {
+        setToday(getToday());
+        syncWidgetData();
+      }
     });
     return () => sub.remove();
   }, []);
@@ -93,6 +99,7 @@ export default function HomeScreen() {
       setShowCelebration(true);
     }
     prevCompletedCount.current = completedCount;
+    syncWidgetData();
   }, [completedCount, totalCount]);
 
   // Flow 결과 메모이제이션 (렌더당 1회만 계산)
@@ -108,6 +115,14 @@ export default function HomeScreen() {
     () => Array.from(flowResults.values()).some((f) => f.isBreathingToday),
     [flowResults]
   );
+
+  // 해금 체크: 모든 습관 중 최대 흐름 일수 기준
+  const checkUnlocks = useRewardStore((s) => s.checkUnlocks);
+  useEffect(() => {
+    if (flowResults.size === 0) return;
+    const maxFlow = Math.max(...Array.from(flowResults.values()).map((f) => f.longestFlow));
+    if (maxFlow > 0) checkUnlocks(maxFlow);
+  }, [flowResults, checkUnlocks]);
 
   const handleCloseCelebration = useCallback(() => setShowCelebration(false), []);
   const handleCloseDetail = useCallback(() => setSelectedDate(null), []);
@@ -166,15 +181,15 @@ export default function HomeScreen() {
           </Animated.View>
         )}
         {activeHabits.length === 0 ? (
-          <View style={styles.emptyState}>
+          <Animated.View entering={FadeInDown.duration(400)} style={styles.emptyState}>
             <View style={[styles.emptyIconCircle, { backgroundColor: colors.surface }]}>
               <Text style={styles.emptyIcon}>✨</Text>
             </View>
             <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>아직 습관이 없어요</Text>
             <Text style={[styles.emptySubtitle, { color: colors.textMuted }]}>
-              딱 3개만 골라서 시작해보세요
+              작은 시작이 큰 변화를 만들어요
             </Text>
-          </View>
+          </Animated.View>
         ) : (
           <View style={styles.habitList}>
             {activeHabits.map((habit, index) => (
@@ -228,6 +243,7 @@ export default function HomeScreen() {
         visible={showCelebration}
         onDone={handleCloseCelebration}
       />
+      <UnlockToast />
     </View>
   );
 }

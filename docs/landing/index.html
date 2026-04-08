@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>싹 - 습관 트래커 · 작은 습관이 자라는 곳</title>
+  <meta name="description" content="습관은 3개면 충분해요. 작은 습관이 자라는 곳. 5초면 끝나는 미니멀 습관 트래커.">
+  <meta property="og:title" content="싹 - 습관 트래커">
+  <meta property="og:description" content="작은 습관이 자라는 곳. 많으면 지치고, 적으면 지켜져요.">
+  <meta property="og:type" content="website">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface-light: #232323;
+      --text: #FFFFFF;
+      --text-secondary: #999999;
+      --text-muted: #666666;
+      --accent: #4A90D9;
+      --success: #51CF66;
+      --blue: #63A3EB;
+      --purple: #9678D3;
+      --green: #48D182;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    .hero-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+      font-weight: 700;
+    }
+
+    .dot-blue { background: var(--blue); }
+    .dot-purple { background: var(--purple); }
+    .dot-green { background: var(--green); }
+
+    .hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 400px;
+      margin: 0 auto 40px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .cta-button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .cta-sub {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Features */
+    .features {
+      padding: 60px 0;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .feature-card .icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Flow section */
+    .flow-section {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .flow-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .flow-section .subtitle {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .flow-visual {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .flow-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .flow-dot.rest {
+      background: transparent;
+      border: 2px dashed var(--text-muted);
+    }
+
+    .flow-legend {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .flow-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .flow-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .flow-card p strong {
+      color: var(--text);
+    }
+
+    /* Gamification */
+    .gamification {
+      padding: 60px 0;
+    }
+
+    .gamification h2 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .gamification .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .tier-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .tier-item {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .tier-days {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 50px;
+    }
+
+    .tier-desc {
+      flex: 1;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .tier-preview {
+      display: flex;
+      gap: 4px;
+      font-size: 18px;
+    }
+
+    .tier-color {
+      width: 18px;
+      height: 18px;
+      border-radius: 9px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid var(--surface-light);
+    }
+
+    .footer p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 60px 0 40px; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-icon">
+        <div class="dot dot-blue">✓</div>
+        <div class="dot dot-purple">✓</div>
+        <div class="dot dot-green">✓</div>
+      </div>
+      <h1>딱 3개만 집중하세요</h1>
+      <p>많으면 지치고, 적으면 지켜져요.<br>5초면 끝나는 미니멀 습관 트래커.</p>
+      <a href="https://expo.dev/accounts/daniel_hyun/projects/minimal-habit-tracker/builds/18495ca6-29e3-4eaa-885f-30bd9077aa63" class="cta-button">
+        📥 Android APK 다운로드
+      </a>
+      <p class="cta-sub">iOS 준비 중</p>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <h2>핵심 기능</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon">3️⃣</div>
+          <h3>딱 3개 습관</h3>
+          <p>의도적 제약. 진짜 중요한 것만 남겨요.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">👆</div>
+          <h3>원탭 체크</h3>
+          <p>앱 열고 탭 한 번. 5초면 충분해요.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🌊</div>
+          <h3>이어가기</h3>
+          <p>하루 빠져도 흐름이 끊기지 않아요.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📅</div>
+          <h3>주간 캘린더</h3>
+          <p>이번 주 달성 현황을 한눈에.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🎉</div>
+          <h3>축하 애니메이션</h3>
+          <p>오늘의 습관을 모두 완료하면 축하해요.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🌙</div>
+          <h3>다크 모드</h3>
+          <p>기본 다크. 라이트/시스템 모드도 지원.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flow -->
+    <section class="flow-section">
+      <h2>이어가기 — 하루 쉬어도 괜찮아요</h2>
+      <p class="subtitle">다른 앱은 하루 빠지면 스트릭이 0이 됩니다. 여기선 아니에요.</p>
+      <div class="flow-visual">
+        <div class="flow-dot"></div>
+        <div class="flow-dot"></div>
+        <div class="flow-dot rest"></div>
+        <div class="flow-dot"></div>
+        <div class="flow-dot"></div>
+        <div class="flow-dot"></div>
+      </div>
+      <p class="flow-legend">● = 완료 &nbsp;&nbsp; ◌ = 쉼표 (흐름 유지)</p>
+      <div class="flow-card">
+        <p>하루 빠짐 = <strong>쉼표</strong> (흐름 이어짐)</p>
+        <p>이틀 연속 빠짐 = <strong>새로운 시작</strong></p>
+      </div>
+    </section>
+
+    <!-- Gamification -->
+    <section class="gamification">
+      <h2>꾸준히 하면 보상이 와요</h2>
+      <p class="subtitle">흐름을 이어가면 새로운 아이콘과 색상이 해금돼요</p>
+      <div class="tier-list">
+        <div class="tier-item">
+          <span class="tier-days">7일</span>
+          <span class="tier-desc">새로운 색상 2개</span>
+          <div class="tier-preview">
+            <div class="tier-color" style="background: #FF5C93;"></div>
+            <div class="tier-color" style="background: #00B4D8;"></div>
+          </div>
+        </div>
+        <div class="tier-item">
+          <span class="tier-days">14일</span>
+          <span class="tier-desc">새로운 아이콘 4개</span>
+          <div class="tier-preview">🎵🧠🌿☕</div>
+        </div>
+        <div class="tier-item">
+          <span class="tier-days">30일</span>
+          <span class="tier-desc">프리미엄 색상 3개</span>
+          <div class="tier-preview">
+            <div class="tier-color" style="background: #E8A838;"></div>
+            <div class="tier-color" style="background: #8B5CF6;"></div>
+            <div class="tier-color" style="background: #06D6A0;"></div>
+          </div>
+        </div>
+        <div class="tier-item">
+          <span class="tier-days">50일</span>
+          <span class="tier-desc">프리미엄 아이콘 4개</span>
+          <div class="tier-preview">🔥⭐🌙💎</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>모든 데이터는 기기에만 저장됩니다. 서버 없음. 계정 없음.</p>
+      <p><a href="https://qlemql.github.io/privacy-policy/minimal-habit-tracker/">개인정보처리방침</a></p>
+      <p>피드백: <a href="mailto:taehyun_fe@naver.com">taehyun_fe@naver.com</a></p>
+      <p class="tagline">많으면 지치고, 적으면 지켜져요.</p>
+    </footer>
+  </div>
+</body>
+</html>

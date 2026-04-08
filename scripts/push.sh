@@ -1,5 +1,5 @@
 #!/bin/bash
-# Minimal Habit Tracker - Safe push script
+# 싹 - 습관 트래커 - Safe push script
 # Switches to qlemql, pushes, then switches back to work account
 
 set -e

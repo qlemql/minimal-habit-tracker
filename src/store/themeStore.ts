@@ -2,9 +2,9 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Appearance } from 'react-native';
-import { darkColors, lightColors } from '@/constants/theme';
+import { darkColors, creamColors } from '@/constants/theme';
 
-type ThemeMode = 'dark' | 'light' | 'system';
+type ThemeMode = 'dark' | 'cream' | 'system';
 
 export type ThemeColors = {
   background: string;
@@ -28,23 +28,28 @@ interface ThemeStore {
 export const useThemeStore = create<ThemeStore>()(
   persist(
     (set, get) => ({
-      mode: 'dark',
+      mode: 'cream',
 
       setMode: (mode) => set({ mode }),
 
       getColors: () => {
         const { mode } = get();
         if (mode === 'system') {
-          return Appearance.getColorScheme() === 'light' ? lightColors : darkColors;
+          return Appearance.getColorScheme() === 'dark' ? darkColors : creamColors;
         }
-        return mode === 'light' ? lightColors : darkColors;
+        return mode === 'dark' ? darkColors : creamColors;
       },
     }),
     {
       name: 'theme-store',
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => AsyncStorage),
-      migrate: (persisted, version) => persisted as any,
+      migrate: (persisted: any, version: number) => {
+        if (version === 1 && persisted?.state?.mode === 'light') {
+          persisted.state.mode = 'cream';
+        }
+        return persisted;
+      },
     }
   )
 );

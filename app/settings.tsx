@@ -5,16 +5,18 @@ import * as Clipboard from 'expo-clipboard';
 import { hapticImpact, ImpactFeedbackStyle } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import { useHabitStore } from '@/store/habitStore';
+import { useRewardStore } from '@/store/rewardStore';
+import { REWARD_TIERS } from '@/constants/rewards';
 // onboardingStore no longer needed for guide
 import { fontSize, spacing } from '@/constants/theme';
 
 const FEEDBACK_EMAIL = 'taehyun_fe@naver.com';
 
-type ThemeOption = 'dark' | 'light' | 'system';
+type ThemeOption = 'dark' | 'cream' | 'system';
 
 const THEME_OPTIONS: { value: ThemeOption; label: string; icon: string }[] = [
+  { value: 'cream', label: '크림', icon: '🌿' },
   { value: 'dark', label: '다크', icon: '🌙' },
-  { value: 'light', label: '라이트', icon: '☀️' },
   { value: 'system', label: '시스템', icon: '📱' },
 ];
 
@@ -25,11 +27,14 @@ export default function SettingsScreen() {
   const setMode = useThemeStore((s) => s.setMode);
   const { habits, logs } = useHabitStore();
   const totalLogs = logs.filter((l) => l.completed).length;
+  const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
+  const nextTier = REWARD_TIERS.find((t) => t.flowDays > maxFlowEver);
+  const unlockedCount = REWARD_TIERS.filter((t) => t.flowDays <= maxFlowEver).length;
 
   const handleFeedback = async () => {
     const canOpen = await Linking.canOpenURL(`mailto:${FEEDBACK_EMAIL}`);
     if (canOpen) {
-      Linking.openURL(`mailto:${FEEDBACK_EMAIL}?subject=Minimal Habit Tracker 피드백`);
+      Linking.openURL(`mailto:${FEEDBACK_EMAIL}?subject=싹 - 습관 트래커 피드백`);
     } else {
       await Clipboard.setStringAsync(FEEDBACK_EMAIL);
       Alert.alert('이메일 복사됨', `${FEEDBACK_EMAIL}\n클립보드에 복사되었습니다.`);
@@ -72,7 +77,33 @@ export default function SettingsScreen() {
             <Text style={[styles.statNumber, { color: colors.success }]}>{totalLogs}</Text>
             <Text style={[styles.statLabel, { color: colors.textMuted }]}>총 달성</Text>
           </View>
+          <View style={[styles.statDivider, { backgroundColor: colors.surfaceLight }]} />
+          <View style={styles.statItem}>
+            <Text style={[styles.statNumber, { color: '#DA77F2' }]}>{unlockedCount}/{REWARD_TIERS.length}</Text>
+            <Text style={[styles.statLabel, { color: colors.textMuted }]}>해금</Text>
+          </View>
         </View>
+        {nextTier && (
+          <View style={[styles.nextTierCard, { backgroundColor: colors.surface }]}>
+            <Text style={[styles.nextTierLabel, { color: colors.textSecondary }]}>
+              다음 해금: {nextTier.label}
+            </Text>
+            <View style={[styles.tierProgressBg, { backgroundColor: colors.inactive }]}>
+              <View
+                style={[
+                  styles.tierProgressFill,
+                  {
+                    backgroundColor: colors.accent,
+                    width: `${Math.min(100, (maxFlowEver / nextTier.flowDays) * 100)}%`,
+                  },
+                ]}
+              />
+            </View>
+            <Text style={[styles.nextTierDesc, { color: colors.textMuted }]}>
+              {nextTier.description} — 흐름 {maxFlowEver}/{nextTier.flowDays}일
+            </Text>
+          </View>
+        )}
 
         {/* 테마 */}
         <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
@@ -143,7 +174,7 @@ export default function SettingsScreen() {
         {/* 버전 정보 */}
         <View style={styles.versionSection}>
           <Text style={[styles.versionText, { color: colors.textMuted }]}>
-            Minimal Habit Tracker v1.0.0
+            싹 - 습관 트래커 v1.0.0
           </Text>
         </View>
       </View>
@@ -245,6 +276,29 @@ const styles = StyleSheet.create({
   chevron: {
     fontSize: 20,
     fontWeight: '500',
+  },
+  nextTierCard: {
+    borderRadius: 14,
+    padding: spacing.md,
+    marginBottom: spacing.lg,
+  },
+  nextTierLabel: {
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    marginBottom: spacing.sm,
+  },
+  tierProgressBg: {
+    height: 6,
+    borderRadius: 3,
+    overflow: 'hidden',
+    marginBottom: spacing.xs,
+  },
+  tierProgressFill: {
+    height: '100%',
+    borderRadius: 3,
+  },
+  nextTierDesc: {
+    fontSize: fontSize.xs,
   },
   versionSection: {
     marginTop: spacing.xxl,

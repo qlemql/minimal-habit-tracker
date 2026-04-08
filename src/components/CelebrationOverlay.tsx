@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { NotificationFeedbackType } from 'expo-haptics';
 import { hapticNotification } from '@/utils/haptics';
+import { useThemeStore } from '@/store/themeStore';
 
 const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get('window');
 
@@ -102,6 +103,7 @@ interface CelebrationOverlayProps {
 }
 
 export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps) {
+  const colors = useThemeStore((s) => s.getColors());
   const scale = useSharedValue(0);
   const bgOpacity = useSharedValue(0);
 
@@ -150,14 +152,14 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
 
   return (
     <Pressable style={StyleSheet.absoluteFill} onPress={onDone}>
-      <Animated.View style={[styles.container, bgStyle]}>
+      <Animated.View style={[styles.container, { backgroundColor: `${colors.background}E6` }, bgStyle]}>
         {CONFETTI_CONFIG.map((config, i) => (
           <ConfettiPiece key={i} config={config} visible={visible} />
         ))}
 
         <Animated.View style={[styles.content, contentStyle]}>
           <Text style={styles.emoji}>🎉</Text>
-          <Text style={styles.text}>{message}</Text>
+          <Text style={[styles.text, { color: colors.textPrimary }]}>{message}</Text>
         </Animated.View>
       </Animated.View>
     </Pressable>
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.6)',
+    backgroundColor: 'transparent',
     zIndex: 10,
     overflow: 'hidden',
   },
@@ -187,6 +189,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: undefined,
   },
 });
