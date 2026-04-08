@@ -16,15 +16,24 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { hapticImpact, hapticNotification, ImpactFeedbackStyle, NotificationFeedbackType } from '@/utils/haptics';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
+import { syncWidgetData } from '@/utils/widgetData';
+import { useRewardStore } from '@/store/rewardStore';
 import { calculateFlow } from '@/utils/streak';
 import { TimePicker } from '@/components/TimePicker';
-import { fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
+import { fontSize, spacing, habitIcons, habitColors, unlockableIcons, unlockableColors } from '@/constants/theme';
+import { getUnlockedItems, getRequiredFlowDays } from '@/constants/rewards';
 
 export default function EditHabitScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { habits, updateHabit, deleteHabit } = useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
+
+  const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
+  const unlocked = getUnlockedItems(maxFlowEver);
+
+  const allIcons = [...habitIcons, ...unlockableIcons];
+  const allColors = [...habitColors, ...unlockableColors];
 
   const habit = habits.find((h) => h.id === id);
 
@@ -56,6 +65,7 @@ export default function EditHabitScreen() {
       reminderTime,
     });
     hapticNotification(NotificationFeedbackType.Success);
+    await syncWidgetData();
     router.back();
   };
 
@@ -71,8 +81,9 @@ export default function EditHabitScreen() {
       {
         text: '삭제',
         style: 'destructive',
-        onPress: () => {
+        onPress: async () => {
           deleteHabit(habit.id);
+          await syncWidgetData();
           router.back();
         },
       },
@@ -133,53 +144,74 @@ export default function EditHabitScreen() {
         <View style={styles.section}>
           <Text style={[styles.label, { color: colors.textMuted }]}>아이콘</Text>
           <View style={styles.grid}>
-            {habitIcons.map((icon) => (
-              <Pressable
-                key={icon}
-                style={[
-                  styles.gridItem,
-                  { backgroundColor: colors.surface },
-                  selectedIcon === icon && {
-                    borderColor: selectedColor,
-                    borderWidth: 2,
-                    backgroundColor: selectedColor + '15',
-                  },
-                ]}
-                onPress={() => {
-                  hapticImpact(ImpactFeedbackStyle.Light);
-                  setSelectedIcon(icon);
-                }}
-                accessibilityLabel={`아이콘 ${icon}`}
-                accessibilityRole="button"
-              >
-                <Text style={styles.gridIcon}>{icon}</Text>
-              </Pressable>
-            ))}
+            {allIcons.map((icon) => {
+              const requiredDays = getRequiredFlowDays(icon, 'icon');
+              const isLocked = requiredDays > 0 && !unlocked.icons.includes(icon);
+              return (
+                <Pressable
+                  key={icon}
+                  style={[
+                    styles.gridItem,
+                    { backgroundColor: colors.surface },
+                    selectedIcon === icon && !isLocked && {
+                      borderColor: selectedColor,
+                      borderWidth: 2,
+                      backgroundColor: selectedColor + '15',
+                    },
+                    isLocked && { opacity: 0.4 },
+                  ]}
+                  onPress={() => {
+                    if (isLocked) {
+                      Alert.alert('잠김', `흐름 ${requiredDays}일 달성 시 해금돼요`);
+                      return;
+                    }
+                    hapticImpact(ImpactFeedbackStyle.Light);
+                    setSelectedIcon(icon);
+                  }}
+                  accessibilityLabel={isLocked ? `잠긴 아이콘 (흐름 ${requiredDays}일 필요)` : `아이콘 ${icon}`}
+                  accessibilityRole="button"
+                >
+                  <Text style={[styles.gridIcon, isLocked && { opacity: 0.3 }]}>{icon}</Text>
+                  {isLocked && <Text style={styles.lockBadge}>🔒</Text>}
+                </Pressable>
+              );
+            })}
           </View>
         </View>
 
         <View style={styles.section}>
           <Text style={[styles.label, { color: colors.textMuted }]}>색상</Text>
           <View style={styles.colorGrid}>
-            {habitColors.map((color) => (
-              <Pressable
-                key={color}
-                style={[
-                  styles.colorItem,
-                  { backgroundColor: color },
-                  selectedColor === color && {
-                    borderColor: colors.textPrimary,
-                    transform: [{ scale: 1.15 }],
-                  },
-                ]}
-                onPress={() => {
-                  hapticImpact(ImpactFeedbackStyle.Light);
-                  setSelectedColor(color);
-                }}
-                accessibilityLabel={`색상 ${color}`}
-                accessibilityRole="button"
-              />
-            ))}
+            {allColors.map((color) => {
+              const requiredDays = getRequiredFlowDays(color, 'color');
+              const isLocked = requiredDays > 0 && !unlocked.colors.includes(color);
+              return (
+                <Pressable
+                  key={color}
+                  style={[
+                    styles.colorItem,
+                    { backgroundColor: isLocked ? colors.inactive : color },
+                    selectedColor === color && !isLocked && {
+                      borderColor: colors.textPrimary,
+                      transform: [{ scale: 1.15 }],
+                    },
+                    isLocked && { opacity: 0.5 },
+                  ]}
+                  onPress={() => {
+                    if (isLocked) {
+                      Alert.alert('잠김', `흐름 ${requiredDays}일 달성 시 해금돼요`);
+                      return;
+                    }
+                    hapticImpact(ImpactFeedbackStyle.Light);
+                    setSelectedColor(color);
+                  }}
+                  accessibilityLabel={isLocked ? `잠긴 색상 (흐름 ${requiredDays}일 필요)` : `색상 ${color}`}
+                  accessibilityRole="button"
+                >
+                  {isLocked && <Text style={styles.lockBadge}>🔒</Text>}
+                </Pressable>
+              );
+            })}
           </View>
         </View>
 
@@ -259,6 +291,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 3,
     borderColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  lockBadge: {
+    position: 'absolute',
+    right: 2,
+    bottom: 2,
+    fontSize: 10,
   },
   deleteButton: {
     marginTop: spacing.sm,

@@ -141,6 +141,17 @@ export const useHabitStore = create<HabitStore>()(
       version: 1,
       storage: createJSONStorage(() => AsyncStorage),
       migrate: (persisted, version) => persisted as any,
+      onRehydrateStorage: () => {
+        return () => {
+          // 스토어 복원 완료 후 위젯 데이터 동기화
+          try {
+            const { syncWidgetData } = require('@/utils/widgetData');
+            syncWidgetData();
+          } catch (e) {
+            console.warn('[Widget] Hydration sync failed:', e);
+          }
+        };
+      },
     }
   )
 );
