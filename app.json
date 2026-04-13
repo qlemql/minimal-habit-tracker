@@ -21,6 +21,9 @@
         "com.apple.security.application-groups": [
           "group.com.qlemql.minimalhabittracker"
         ]
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -51,7 +54,24 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "132e673c-2e4b-410b-a486-6e2ba9d4d0df"
+        "projectId": "132e673c-2e4b-410b-a486-6e2ba9d4d0df",
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "bundleIdentifier": "com.qlemql.minimalhabittracker.widget",
+                  "targetName": "HabitWidget",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.qlemql.minimalhabittracker"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
       },
       "router": {}
     },

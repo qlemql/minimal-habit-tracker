@@ -11,8 +11,8 @@ import { REWARD_TIERS } from '@/constants/rewards';
 import { fontSize, spacing } from '@/constants/theme';
 
 const FEEDBACK_EMAIL = 'taehyun_fe@naver.com';
-const PRIVACY_POLICY_URL = 'https://qlemql.github.io/minimal-habit-tracker/privacy-policy.html';
-const TERMS_OF_SERVICE_URL = 'https://qlemql.github.io/minimal-habit-tracker/terms-of-service.html';
+const PRIVACY_POLICY_URL = 'https://ssak-habit-tracker.pages.dev/privacy-policy.html';
+const TERMS_OF_SERVICE_URL = 'https://ssak-habit-tracker.pages.dev/terms-of-service.html';
 
 type ThemeOption = 'dark' | 'cream' | 'system';
 
