@@ -130,7 +130,7 @@ struct HabitWidgetSmallView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("오늘의 습관")
                     .font(.system(size: 12, weight: .semibold))
@@ -149,14 +149,17 @@ struct HabitWidgetSmallView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {
-                ForEach(entry.habits) { habit in
-                    HabitRowView(habit: habit)
+                VStack(spacing: 8) {
+                    ForEach(entry.habits) { habit in
+                        HabitRowView(habit: habit)
+                    }
                 }
             }
 
             Spacer(minLength: 0)
         }
-        .padding(4)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 4)
     }
 }
 
@@ -172,7 +175,7 @@ struct HabitWidgetMediumView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("오늘의 습관")
@@ -212,14 +215,17 @@ struct HabitWidgetMediumView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {
-                ForEach(entry.habits) { habit in
-                    HabitRowView(habit: habit)
+                VStack(spacing: 10) {
+                    ForEach(entry.habits) { habit in
+                        HabitRowView(habit: habit)
+                    }
                 }
             }
 
             Spacer(minLength: 0)
         }
-        .padding(4)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
     }
 }
 
