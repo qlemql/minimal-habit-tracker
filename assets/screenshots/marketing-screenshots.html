@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>싹 - App Store 스크린샷</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #f0f0f0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; padding: 40px; }
+
+.screenshots { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+
+/* 각 스크린샷 프레임: iPhone 6.7" 비율 (1290x2796 → 430x932 @1/3) */
+.frame {
+  width: 430px;
+  height: 932px;
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* 상단 마케팅 영역 */
+.marketing {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px 20px;
+}
+.marketing h2 {
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.marketing p {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* 앱 화면 영역 */
+.app-screen {
+  margin: 0 20px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  height: 680px;
+}
+.app-inner {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ============ 크림 테마 색상 ============ */
+:root {
+  --bg: #FFF8F0;
+  --surface: #FFFFFF;
+  --surface-light: #FFF1E6;
+  --text-primary: #2D2016;
+  --text-secondary: #8C7B6B;
+  --text-muted: #B5A899;
+  --accent: #5B8C6A;
+  --success: #4CAF50;
+  --inactive: #EDE5DA;
+}
+
+/* ============ 앱 UI 컴포넌트 ============ */
+
+/* 상태바 */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.status-icons { display: flex; gap: 6px; align-items: center; font-size: 13px; }
+
+/* 헤더 */
+.app-header {
+  padding: 4px 24px 16px;
+}
+.app-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.greeting {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.date {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+.settings-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--surface);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* 프로그레스 바 */
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.progress-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: var(--inactive);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.progress-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 36px;
+  text-align: right;
+}
+
+/* 습관 카드 */
+.habit-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 16px;
+  margin: 0 24px 10px;
+  gap: 14px;
+}
+.habit-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.habit-info {
+  flex: 1;
+}
+.habit-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.habit-flow {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+.habit-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.habit-check.checked::after {
+  content: '✓';
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+}
+.habit-check.unchecked {
+  border: 2.5px solid var(--inactive);
+  background: transparent;
+}
+
+/* 주간 캘린더 */
+.weekly-cal {
+  margin: 16px 24px;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 16px;
+}
+.weekly-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.weekly-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.weekly-arrow {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+.weekly-days {
+  display: flex;
+  justify-content: space-between;
+}
+.day-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+.day-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.day-num {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.day-num.today {
+  background: var(--accent);
+  color: white;
+}
+.day-dots {
+  display: flex;
+  gap: 3px;
+  height: 8px;
+}
+.day-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* 하단 */
+.bottom-text {
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* 축하 오버레이 */
+.celebrate-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,248,240,0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.celebrate-emoji { font-size: 64px; margin-bottom: 16px; }
+.celebrate-title { font-size: 24px; font-weight: 800; color: var(--text-primary); margin-bottom: 8px; }
+.celebrate-sub { font-size: 15px; color: var(--text-secondary); }
+
+/* 컨페티 */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+/* 설정 화면 */
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+.settings-back {
+  width: 36px;
+  height: 36px;
+  background: var(--surface);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.settings-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stats-card {
+  display: flex;
+  margin: 8px 24px 16px;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+}
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+.stat-num {
+  font-size: 28px;
+  font-weight: 700;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.stat-divider {
+  width: 1px;
+  background: var(--surface-light);
+  margin: 4px 0;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 16px 28px 8px;
+}
+.option-group {
+  margin: 0 24px;
+  background: var(--surface);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.option-row {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 10px;
+  border-bottom: 0.5px solid var(--surface-light);
+}
+.option-row:last-child { border-bottom: none; }
+.option-icon { font-size: 18px; }
+.option-text { flex: 1; font-size: 16px; color: var(--text-primary); }
+.option-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--accent);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.option-chevron { font-size: 18px; color: var(--text-muted); }
+
+/* 습관 추가 화면 */
+.add-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+.add-cancel { font-size: 16px; color: var(--text-secondary); }
+.add-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+.add-save { font-size: 16px; font-weight: 600; color: var(--accent); }
+
+.add-preview {
+  text-align: center;
+  padding: 28px;
+  margin: 0 24px;
+  background: var(--surface);
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.add-preview-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 12px;
+}
+.add-preview-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.add-section {
+  margin: 0 24px 20px;
+}
+.add-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  margin-left: 4px;
+}
+.add-input {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.icon-item {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+.icon-item.selected {
+  border: 2.5px solid var(--accent);
+  background: rgba(91,140,106,0.08);
+}
+.icon-item.locked {
+  opacity: 0.35;
+  position: relative;
+}
+.icon-item.locked::after {
+  content: '🔒';
+  font-size: 10px;
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+}
+
+.color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.color-item {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  border: 3px solid transparent;
+}
+.color-item.selected {
+  border-color: var(--text-primary);
+  transform: scale(1.15);
+}
+
+/* 위젯 모형 */
+.widget-mock {
+  margin: 0 24px;
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.widget-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.widget-progress {
+  font-size: 11px;
+  font-weight: 700;
+}
+.widget-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+.widget-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.widget-circle.checked { color: white; font-weight: 700; }
+.widget-circle.unchecked { font-size: 12px; }
+.widget-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+}
+.widget-name.completed {
+  font-weight: 600;
+}
+.widget-flow {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 홈 화면 모형 */
+.homescreen {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 16px;
+  padding: 20px 24px;
+}
+.hs-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.hs-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.hs-label {
+  font-size: 11px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* 번호 라벨 */
+.screen-num {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 20;
+}
+</style>
+</head>
+<body>
+
+<div class="screenshots">
+
+<!-- ==================== 1. 메인 화면 ==================== -->
+<div class="frame" style="background: #FFF8F0;">
+  <div class="screen-num">1</div>
+  <div class="marketing">
+    <h2 style="color: #2D2016;">딱 3개만,<br>습관을 심어보세요</h2>
+    <p style="color: #8C7B6B;">작은 습관이 자라는 곳</p>
+  </div>
+  <div class="app-screen" style="background: var(--bg);">
+    <div class="app-inner">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+          <span>📶</span> <span>🔋</span>
+        </div>
+      </div>
+      <div class="app-header">
+        <div class="app-header-row">
+          <div>
+            <div class="greeting">좋은 아침이에요</div>
+            <div class="date">4월 15일 화요일</div>
+          </div>
+          <div class="settings-btn">⚙️</div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 66%; background: var(--accent);"></div>
+          </div>
+          <div class="progress-text">2/3</div>
+        </div>
+      </div>
+
+      <!-- 습관 카드 -->
+      <div class="habit-card" style="background: rgba(74,144,217,0.08);">
+        <div class="habit-icon-circle" style="background: rgba(74,144,217,0.15);">💧</div>
+        <div class="habit-info">
+          <div class="habit-name">물 2L 마시기</div>
+          <div class="habit-flow" style="color: #4A90D9;">흐름 5일째</div>
+        </div>
+        <div class="habit-check checked" style="background: #4A90D9;"></div>
+      </div>
+
+      <div class="habit-card" style="background: rgba(255,107,107,0.08);">
+        <div class="habit-icon-circle" style="background: rgba(255,107,107,0.15);">🏃</div>
+        <div class="habit-info">
+          <div class="habit-name">30분 운동</div>
+          <div class="habit-flow" style="color: #FF6B6B;">흐름 3일째</div>
+        </div>
+        <div class="habit-check checked" style="background: #FF6B6B;"></div>
+      </div>
+
+      <div class="habit-card" style="background: var(--surface);">
+        <div class="habit-icon-circle" style="background: rgba(123,104,238,0.15);">📖</div>
+        <div class="habit-info">
+          <div class="habit-name">독서 30분</div>
+          <div class="habit-flow" style="color: #7B68EE;">흐름 7일째</div>
+        </div>
+        <div class="habit-check unchecked"></div>
+      </div>
+
+      <!-- 주간 캘린더 -->
+      <div class="weekly-cal">
+        <div class="weekly-header">
+          <span class="weekly-arrow">‹</span>
+          <span class="weekly-title">이번 주</span>
+          <span class="weekly-arrow">›</span>
+        </div>
+        <div class="weekly-days">
+          <div class="day-col"><span class="day-label">월</span><span class="day-num">14</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">화</span><span class="day-num today">15</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span></div></div>
+          <div class="day-col"><span class="day-label">수</span><span class="day-num">16</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">목</span><span class="day-num">17</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">금</span><span class="day-num">18</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">토</span><span class="day-num">19</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">일</span><span class="day-num">20</span><div class="day-dots"></div></div>
+        </div>
+      </div>
+      <div class="bottom-text">3개면 충분해요</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 2. 원탭 체크 ==================== -->
+<div class="frame" style="background: linear-gradient(180deg, #E8F5E9 0%, #FFF8F0 50%);">
+  <div class="screen-num">2</div>
+  <div class="marketing">
+    <h2 style="color: #2D2016;">탭 한 번이면 끝</h2>
+    <p style="color: #8C7B6B;">5초면 오늘의 습관 완료</p>
+  </div>
+  <div class="app-screen" style="background: var(--bg);">
+    <div class="app-inner">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+      <div class="app-header">
+        <div class="app-header-row">
+          <div><div class="greeting">좋은 아침이에요</div><div class="date">4월 15일 화요일</div></div>
+          <div class="settings-btn">⚙️</div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: var(--success);"></div></div>
+          <div class="progress-text" style="color: var(--success);">모두 완료! 🎉</div>
+        </div>
+      </div>
+
+      <div class="habit-card" style="background: rgba(74,144,217,0.08);">
+        <div class="habit-icon-circle" style="background: rgba(74,144,217,0.15);">💧</div>
+        <div class="habit-info"><div class="habit-name">물 2L 마시기</div><div class="habit-flow" style="color:#4A90D9;">흐름 5일째</div></div>
+        <div class="habit-check checked" style="background:#4A90D9;"></div>
+      </div>
+      <div class="habit-card" style="background: rgba(255,107,107,0.08);">
+        <div class="habit-icon-circle" style="background: rgba(255,107,107,0.15);">🏃</div>
+        <div class="habit-info"><div class="habit-name">30분 운동</div><div class="habit-flow" style="color:#FF6B6B;">흐름 3일째</div></div>
+        <div class="habit-check checked" style="background:#FF6B6B;"></div>
+      </div>
+      <div class="habit-card" style="background: rgba(123,104,238,0.08); border: 2px solid #7B68EE; transform: scale(1.02);">
+        <div class="habit-icon-circle" style="background: rgba(123,104,238,0.15);">📖</div>
+        <div class="habit-info"><div class="habit-name">독서 30분</div><div class="habit-flow" style="color:#7B68EE;">흐름 8일째</div></div>
+        <div class="habit-check checked" style="background:#7B68EE;"></div>
+      </div>
+
+      <div class="weekly-cal">
+        <div class="weekly-header"><span class="weekly-arrow">‹</span><span class="weekly-title">이번 주</span><span class="weekly-arrow">›</span></div>
+        <div class="weekly-days">
+          <div class="day-col"><span class="day-label">월</span><span class="day-num">14</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">화</span><span class="day-num today">15</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">수</span><span class="day-num">16</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">목</span><span class="day-num">17</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">금</span><span class="day-num">18</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">토</span><span class="day-num">19</span><div class="day-dots"></div></div>
+          <div class="day-col"><span class="day-label">일</span><span class="day-num">20</span><div class="day-dots"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 3. 이어가기 ==================== -->
+<div class="frame" style="background: #FFF8F0;">
+  <div class="screen-num">3</div>
+  <div class="marketing">
+    <h2 style="color: #2D2016;">하루 쉬어도<br>괜찮아요</h2>
+    <p style="color: #8C7B6B;">흐름은 계속 이어져요</p>
+  </div>
+  <div class="app-screen" style="background: var(--bg);">
+    <div class="app-inner">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+      <div class="app-header">
+        <div class="app-header-row">
+          <div><div class="greeting">오후도 힘내요</div><div class="date">4월 15일 화요일</div></div>
+          <div class="settings-btn">⚙️</div>
+        </div>
+      </div>
+
+      <div style="margin: 0 24px 12px; padding: 12px 16px; background: var(--surface); border-radius: 12px; text-align: center;">
+        <span style="font-size: 14px; color: var(--text-secondary);">쉬어가는 중이에요, 오늘 다시 이어가요</span>
+      </div>
+
+      <div class="habit-card" style="background: var(--surface);">
+        <div class="habit-icon-circle" style="background: rgba(74,144,217,0.15);">💧</div>
+        <div class="habit-info"><div class="habit-name">물 2L 마시기</div><div class="habit-flow" style="color:#4A90D9;">흐름 12일째</div></div>
+        <div class="habit-check unchecked"></div>
+      </div>
+      <div class="habit-card" style="background: var(--surface);">
+        <div class="habit-icon-circle" style="background: rgba(255,107,107,0.15);">🏃</div>
+        <div class="habit-info"><div class="habit-name">30분 운동</div><div class="habit-flow" style="color:#FF6B6B;">흐름 8일째</div></div>
+        <div class="habit-check unchecked"></div>
+      </div>
+      <div class="habit-card" style="background: var(--surface);">
+        <div class="habit-icon-circle" style="background: rgba(123,104,238,0.15);">📖</div>
+        <div class="habit-info"><div class="habit-name">독서 30분</div><div class="habit-flow" style="color:#7B68EE;">흐름 15일째</div></div>
+        <div class="habit-check unchecked"></div>
+      </div>
+
+      <div class="weekly-cal">
+        <div class="weekly-header"><span class="weekly-arrow">‹</span><span class="weekly-title">이번 주</span><span class="weekly-arrow">›</span></div>
+        <div class="weekly-days">
+          <div class="day-col"><span class="day-label">월</span><span class="day-num">7</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">화</span><span class="day-num">8</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">수</span><span class="day-num">9</span><div class="day-dots" style="opacity:0.3;"><span class="day-dot" style="background:#ccc; border: 1px dashed #aaa; background: transparent;"></span></div></div>
+          <div class="day-col"><span class="day-label">목</span><span class="day-num">10</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">금</span><span class="day-num">11</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#FF6B6B;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">토</span><span class="day-num">12</span><div class="day-dots"><span class="day-dot" style="background:#4A90D9;"></span><span class="day-dot" style="background:#7B68EE;"></span></div></div>
+          <div class="day-col"><span class="day-label">일</span><span class="day-num today">13</span><div class="day-dots"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 4. 축하 ==================== -->
+<div class="frame" style="background: linear-gradient(180deg, #FFF8F0 0%, #E8F5E9 100%);">
+  <div class="screen-num">4</div>
+  <div class="marketing">
+    <h2 style="color: #2D2016;">오늘의 습관,<br>모두 자랐어요!</h2>
+    <p style="color: #8C7B6B;">매일의 작은 성취를 축하해요</p>
+  </div>
+  <div class="app-screen" style="background: var(--bg); position: relative;">
+    <div class="app-inner" style="filter: blur(1px); opacity: 0.4;">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+      <div class="app-header">
+        <div class="app-header-row"><div><div class="greeting">저녁이에요</div><div class="date">4월 15일 화요일</div></div><div class="settings-btn">⚙️</div></div>
+      </div>
+      <div class="habit-card" style="background: rgba(74,144,217,0.08);"><div class="habit-icon-circle" style="background:rgba(74,144,217,0.15);">💧</div><div class="habit-info"><div class="habit-name">물 2L 마시기</div></div><div class="habit-check checked" style="background:#4A90D9;"></div></div>
+      <div class="habit-card" style="background: rgba(255,107,107,0.08);"><div class="habit-icon-circle" style="background:rgba(255,107,107,0.15);">🏃</div><div class="habit-info"><div class="habit-name">30분 운동</div></div><div class="habit-check checked" style="background:#FF6B6B;"></div></div>
+      <div class="habit-card" style="background: rgba(123,104,238,0.08);"><div class="habit-icon-circle" style="background:rgba(123,104,238,0.15);">📖</div><div class="habit-info"><div class="habit-name">독서 30분</div></div><div class="habit-check checked" style="background:#7B68EE;"></div></div>
+    </div>
+    <!-- 컨페티 -->
+    <div class="confetti" style="top:8%;left:15%;background:#4A90D9;transform:rotate(25deg);width:12px;height:12px;"></div>
+    <div class="confetti" style="top:12%;left:75%;background:#FF6B6B;transform:rotate(-15deg);width:8px;height:14px;"></div>
+    <div class="confetti" style="top:20%;left:30%;background:#FFD43B;transform:rotate(45deg);width:10px;height:10px;"></div>
+    <div class="confetti" style="top:6%;left:55%;background:#7B68EE;transform:rotate(-30deg);width:14px;height:8px;"></div>
+    <div class="confetti" style="top:25%;left:65%;background:#51CF66;transform:rotate(60deg);width:8px;height:12px;"></div>
+    <div class="confetti" style="top:15%;left:45%;background:#FF922B;transform:rotate(10deg);width:12px;height:8px;"></div>
+    <div class="confetti" style="top:30%;left:20%;background:#DA77F2;transform:rotate(-45deg);width:10px;height:10px;"></div>
+    <div class="confetti" style="top:10%;left:85%;background:#20C997;transform:rotate(35deg);width:8px;height:14px;"></div>
+    <div class="celebrate-overlay">
+      <div class="celebrate-emoji">🎉</div>
+      <div class="celebrate-title">오늘도 해냈어요!</div>
+      <div class="celebrate-sub">꾸준함이 만드는 변화</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 5. 습관 추가 (해금) ==================== -->
+<div class="frame" style="background: #FFF8F0;">
+  <div class="screen-num">5</div>
+  <div class="marketing">
+    <h2 style="color: #2D2016;">꾸준히 키우면<br>보상이 와요</h2>
+    <p style="color: #8C7B6B;">새로운 아이콘과 색상을 해금하세요</p>
+  </div>
+  <div class="app-screen" style="background: var(--bg);">
+    <div class="app-inner">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+      <div class="add-header">
+        <span class="add-cancel">취소</span>
+        <span class="add-title">습관 추가</span>
+        <span class="add-save">저장</span>
+      </div>
+
+      <div class="add-preview">
+        <div class="add-preview-icon" style="background: rgba(91,140,106,0.12);">🌿</div>
+        <div class="add-preview-name">명상 10분</div>
+      </div>
+
+      <div class="add-section">
+        <div class="add-label">아이콘</div>
+        <div class="icon-grid">
+          <div class="icon-item">💧</div>
+          <div class="icon-item">🏃</div>
+          <div class="icon-item">📖</div>
+          <div class="icon-item">🧘</div>
+          <div class="icon-item">💪</div>
+          <div class="icon-item">🍎</div>
+          <div class="icon-item">😴</div>
+          <div class="icon-item">✍️</div>
+          <div class="icon-item">🎯</div>
+          <div class="icon-item">🧹</div>
+          <div class="icon-item">💊</div>
+          <div class="icon-item selected">🌿</div>
+          <div class="icon-item locked">🎵</div>
+          <div class="icon-item locked">🧠</div>
+          <div class="icon-item locked">☕</div>
+          <div class="icon-item locked">🔥</div>
+          <div class="icon-item locked">⭐</div>
+          <div class="icon-item locked">🌙</div>
+          <div class="icon-item locked">💎</div>
+        </div>
+      </div>
+
+      <div class="add-section">
+        <div class="add-label">색상</div>
+        <div class="color-grid">
+          <div class="color-item" style="background:#4A90D9;"></div>
+          <div class="color-item" style="background:#7B68EE;"></div>
+          <div class="color-item" style="background:#FF6B6B;"></div>
+          <div class="color-item selected" style="background:#51CF66;"></div>
+          <div class="color-item" style="background:#FFD43B;"></div>
+          <div class="color-item" style="background:#FF922B;"></div>
+          <div class="color-item" style="background:#DA77F2;"></div>
+          <div class="color-item" style="background:#20C997;"></div>
+          <div class="color-item" style="background:#ccc; opacity:0.4;"></div>
+          <div class="color-item" style="background:#ccc; opacity:0.4;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 6. 위젯 + 설정 ==================== -->
+<div class="frame" style="background: #FFF8F0;">
+  <div class="screen-num">6</div>
+  <div class="marketing">
+    <h2 style="color: #2D2016;">위젯으로<br>홈 화면에서 바로</h2>
+    <p style="color: #8C7B6B;">크림 테마 & 다크 모드 지원</p>
+  </div>
+  <div class="app-screen" style="background: var(--bg);">
+    <div class="app-inner">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+
+      <!-- 위젯 -->
+      <div style="padding: 8px 24px;">
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;">홈 화면 위젯</div>
+      </div>
+      <div class="widget-mock">
+        <div class="widget-header">
+          <span class="widget-title">오늘의 습관</span>
+          <span class="widget-progress" style="color: var(--accent);">2/3</span>
+        </div>
+        <div class="widget-row">
+          <div class="widget-circle checked" style="background: #4A90D9;">✓</div>
+          <div class="widget-name completed" style="color: #4A90D9;">물 2L 마시기</div>
+          <div class="widget-flow" style="color: #4A90D9;">5일</div>
+        </div>
+        <div class="widget-row">
+          <div class="widget-circle checked" style="background: #FF6B6B;">✓</div>
+          <div class="widget-name completed" style="color: #FF6B6B;">30분 운동</div>
+          <div class="widget-flow" style="color: #FF6B6B;">3일</div>
+        </div>
+        <div class="widget-row">
+          <div class="widget-circle unchecked" style="background: rgba(123,104,238,0.15);">📖</div>
+          <div class="widget-name" style="color: var(--text-primary);">독서 30분</div>
+          <div class="widget-flow" style="color: var(--text-secondary);">7일</div>
+        </div>
+      </div>
+
+      <!-- 설정 미리보기 -->
+      <div style="padding: 20px 24px 0;">
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;">테마 설정</div>
+      </div>
+      <div class="option-group">
+        <div class="option-row">
+          <span class="option-icon">🌿</span>
+          <span class="option-text">크림</span>
+          <span class="option-check">✓</span>
+        </div>
+        <div class="option-row">
+          <span class="option-icon">🌙</span>
+          <span class="option-text">다크</span>
+        </div>
+        <div class="option-row">
+          <span class="option-icon">📱</span>
+          <span class="option-text">시스템</span>
+        </div>
+      </div>
+
+      <!-- 법적 정보 -->
+      <div style="padding: 20px 24px 0;">
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;">법적 정보</div>
+      </div>
+      <div class="option-group">
+        <div class="option-row">
+          <span class="option-icon">🔒</span>
+          <span class="option-text">개인정보처리방침</span>
+          <span class="option-chevron">›</span>
+        </div>
+        <div class="option-row">
+          <span class="option-icon">📄</span>
+          <span class="option-text">이용약관</span>
+          <span class="option-chevron">›</span>
+        </div>
+      </div>
+
+      <div class="bottom-text">싹 - 습관 트래커 v1.0.0</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>싹 - 빌드 & 배포 여정</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #FFF8F0;
+      color: #2D2016;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 32px; text-align: center; margin-bottom: 4px; }
+    .subtitle { text-align: center; color: #8C7B6B; margin-bottom: 48px; font-size: 16px; }
+
+    /* Phase Header */
+    .phase {
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 40px 0 20px;
+    }
+    .phase-1 { background: #5B8C6A; }
+    .phase-2 { background: #4A90D9; }
+    .phase-3 { background: #E8A838; }
+    .phase-4 { background: #7B68EE; }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #EDE5DA;
+      border-radius: 2px;
+    }
+
+    /* Step */
+    .step {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      left: -27px;
+      top: 18px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #5B8C6A;
+      border: 3px solid #FFF8F0;
+    }
+    .step-box {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(45,32,22,0.06);
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      color: #8C7B6B;
+      font-size: 15px;
+    }
+    .step-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .badge-success { background: #E8F5E9; color: #2E7D32; }
+
+    /* Error */
+    .error {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .error::before {
+      content: '';
+      position: absolute;
+      left: -27px;
+      top: 18px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #D94040;
+      border: 3px solid #FFF8F0;
+    }
+    .error-box {
+      background: #fff;
+      border-left: 4px solid #D94040;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(45,32,22,0.06);
+    }
+    .error-label {
+      color: #D94040;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .error-msg {
+      font-size: 15px;
+      color: #8B3030;
+      margin: 6px 0 14px;
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 13px;
+      background: #FFF5F5;
+      padding: 10px 14px;
+      border-radius: 8px;
+      word-break: break-all;
+    }
+    .fix-label {
+      color: #5B8C6A;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .fix-msg {
+      font-size: 15px;
+      color: #3D6B4A;
+      margin-top: 6px;
+    }
+
+    /* Summary Table */
+    .summary-header {
+      background: #2D2016;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 48px 0 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(45,32,22,0.06);
+    }
+    th {
+      background: #FFF1E6;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 14px;
+      color: #2D2016;
+    }
+    td {
+      padding: 12px 16px;
+      font-size: 14px;
+      border-top: 1px solid #FFF1E6;
+      background: #fff;
+    }
+    td:first-child { color: #D94040; font-weight: 600; }
+    td:nth-child(2) { color: #8C7B6B; }
+    td:nth-child(3) { color: #5B8C6A; font-weight: 500; }
+
+    /* Status */
+    .status-box {
+      background: #fff;
+      border: 3px solid #5B8C6A;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 32px;
+      text-align: center;
+    }
+    .status-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .status-flow {
+      color: #5B8C6A;
+      font-size: 15px;
+    }
+    .timeline-bar {
+      margin-top: 32px;
+      padding: 16px 20px;
+      background: #FFF1E6;
+      border-radius: 12px;
+      text-align: center;
+      color: #8C7B6B;
+      font-size: 14px;
+    }
+    .timeline-bar span {
+      color: #2D2016;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>싹 - 습관 트래커</h1>
+    <p class="subtitle">빌드 & 배포 여정 — 만난 에러와 해결 과정</p>
+
+    <!-- Phase 1 -->
+    <div class="phase phase-1">Phase 1: 위젯 데이터 동기화</div>
+    <div class="timeline">
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">1. 위젯이 빈 화면</div>
+          <div class="step-desc">앱에는 습관이 있지만 위젯에서 "습관을 등록해주세요" 표시. 앱 ↔ 위젯 간 데이터가 전달되지 않는 상태.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">2. syncWidgetData() 호출 누락 발견</div>
+          <div class="step-desc">add.tsx, edit.tsx에서 습관 추가/수정/삭제 후 위젯 동기화를 호출하지 않음.</div>
+          <span class="step-badge badge-success">syncWidgetData() 추가</span>
+        </div>
+      </div>
+
+      <div class="error">
+        <div class="error-box">
+          <div class="error-label">Error #1</div>
+          <div class="error-msg">Module exists: false — SharedDefaultsModule not found. NativeModules에서 모듈을 찾을 수 없음</div>
+          <div class="fix-label">Fix</div>
+          <div class="fix-msg">New Architecture(newArchEnabled: true)에서 구식 NativeModules 브릿지가 작동하지 않음. <strong>Expo Modules API</strong>로 전환하여 SharedDefaultsModule 재작성.</div>
+        </div>
+      </div>
+
+      <div class="error">
+        <div class="error-box">
+          <div class="error-label">Error #2</div>
+          <div class="error-msg">Expo autolinking이 모듈을 인식하지만 Pod가 설치되지 않음. ExpoModulesProvider에 모듈 미등록.</div>
+          <div class="fix-label">Fix</div>
+          <div class="fix-msg"><strong>.podspec 파일과 package.json 누락</strong>이 원인. 두 파일 생성 + Config Plugin(withSharedDefaults.js)으로 Podfile에 자동 추가.</div>
+        </div>
+      </div>
+
+      <div class="error">
+        <div class="error-box">
+          <div class="error-label">Error #3</div>
+          <div class="error-msg">CocoaPods could not find compatible versions — required a higher minimum deployment target</div>
+          <div class="fix-label">Fix</div>
+          <div class="fix-msg">Podfile의 최소 대상이 15.1인데 podspec이 16.0을 요구. <strong>podspec의 platform을 ios 15.1로 변경</strong>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-box" style="border: 2px solid #5B8C6A;">
+          <div class="step-title">위젯 데이터 동기화 완료!</div>
+          <div class="step-desc">ExpoModulesProvider에 SharedDefaultsModule 등록 확인. 앱에서 습관 추가/체크 시 위젯에 즉시 반영.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase phase-2">Phase 2: 브랜딩 전면 개편</div>
+    <div class="timeline">
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">3. 앱 아이콘 리디자인</div>
+          <div class="step-desc">한국 시장 리서치 → 컨셉 6종 제작 → PM 피드백 반영 → "세 잎 새싹" 확정. 뾰족한 잎 형태 + 크림 배경 + 체크마크.</div>
+        </div>
+      </div>
+
+      <div class="error">
+        <div class="error-box">
+          <div class="error-label">Error #4</div>
+          <div class="error-msg">스플래시 이미지가 아이콘과 다르게 보임. 뾰족한 잎이 둥글둥글하게 변형됨.</div>
+          <div class="fix-label">Fix</div>
+          <div class="fix-msg">Expo의 @expo/image-utils가 prebuild 시 이미지를 재처리하며 형태 변형. <strong>스플래시 전용 이미지를 별도 제작</strong> (투명 배경 + 뾰족한 잎).</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">4. 크림 테마 도입</div>
+          <div class="step-desc">기본 테마를 dark → cream으로 변경. 배경 #FFF8F0, 세이지 그린 액센트 #5B8C6A, 브라운 톤 텍스트. 위젯/축하 오버레이/빈 상태도 테마 대응.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">5. 네이밍 통일</div>
+          <div class="step-desc">Minimal Habit Tracker → 싹 - 습관 트래커. 앱 내부, README, CLAUDE.md, 스토어 메타데이터, 랜딩 페이지, 개인정보처리방침 등 전체 파일 교체.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase phase-3">Phase 3: 스토어 출시 준비</div>
+    <div class="timeline">
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">6. 법적 문서 작성</div>
+          <div class="step-desc">개인정보처리방침 + 이용약관 HTML 작성. 설정 화면에 "법적 정보" 섹션 추가 (외부 링크).</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">7. Cloudflare Pages 배포</div>
+          <div class="step-desc">ssak-habit-tracker.pages.dev에 법적 문서 호스팅. 무료 HTTPS, 로그인 없이 공개 접근 가능.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">8. Android 권한 정리</div>
+          <div class="step-desc">POST_NOTIFICATIONS, SCHEDULE_EXACT_ALARM만 허용. 카메라/위치/마이크/파일 접근 명시적 차단(blockedPermissions).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase phase-4">Phase 4: EAS Build</div>
+    <div class="timeline">
+      <div class="step">
+        <div class="step-box">
+          <div class="step-title">9. Apple Developer 가입</div>
+          <div class="step-desc">$99 결제 → 48시간 대기 → 활성화 완료.</div>
+        </div>
+      </div>
+
+      <div class="error">
+        <div class="error-box">
+          <div class="error-label">Error #5</div>
+          <div class="error-msg">Authentication with Apple Developer Portal failed! An unexpected error occurred.</div>
+          <div class="fix-label">Fix</div>
+          <div class="fix-msg">계정 활성화 직후 Apple 시스템 전파 지연. <strong>시간 경과 후 재시도</strong>하여 인증 성공.</div>
+        </div>
+      </div>
+
+      <div class="error">
+        <div class="error-box">
+          <div class="error-label">Error #6</div>
+          <div class="error-msg">기기 등록 시 "보안 지연" 발생. 1시간 대기 필요.</div>
+          <div class="fix-label">Fix</div>
+          <div class="fix-msg">Apple 보안 정책에 의한 대기. <strong>1시간 후 기기 등록 완료</strong>.</div>
+        </div>
+      </div>
+
+      <div class="error">
+        <div class="error-box">
+          <div class="error-label">Error #7</div>
+          <div class="error-msg">Build failed: Provisioning profile "*[expo] com.qlemql.minimalhabittracker.widget AdHoc" doesn't support the group.com.qlemql.minimalhabittracker App Group.</div>
+          <div class="fix-label">Fix</div>
+          <div class="fix-msg">위젯 프로비저닝 프로파일에 App Group 권한이 누락됨. <strong>Apple Developer Portal에서 App Group 등록 → 위젯 App ID에 연결 → 기존 프로파일 삭제 후 재생성</strong>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-box" style="border: 2px solid #4A90D9;">
+          <div class="step-title">10. 빌드 재시도 (현재)</div>
+          <div class="step-desc">새 프로비저닝 프로파일로 EAS Build 진행 중. 성공 시 실기기 테스트 → App Store 제출.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-header">에러 요약 (총 7건)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>에러</th>
+          <th>원인</th>
+          <th>해결</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NativeModules 미인식</td>
+          <td>New Architecture 호환</td>
+          <td>Expo Modules API 전환</td>
+        </tr>
+        <tr>
+          <td>podspec 누락</td>
+          <td>autolinking 실패</td>
+          <td>podspec + config plugin 생성</td>
+        </tr>
+        <tr>
+          <td>deployment target 불일치</td>
+          <td>Pod 설치 거부</td>
+          <td>15.1로 통일</td>
+        </tr>
+        <tr>
+          <td>스플래시 이미지 변형</td>
+          <td>prebuild 이미지 재처리</td>
+          <td>전용 이미지 별도 제작</td>
+        </tr>
+        <tr>
+          <td>Apple 인증 실패</td>
+          <td>계정 전파 지연</td>
+          <td>시간 경과 후 재시도</td>
+        </tr>
+        <tr>
+          <td>보안 지연 1시간</td>
+          <td>Apple 보안 정책</td>
+          <td>대기</td>
+        </tr>
+        <tr>
+          <td>App Group 프로파일 누락</td>
+          <td>위젯 권한 미등록</td>
+          <td>Portal 등록 + 프로파일 재생성</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Status -->
+    <div class="status-box">
+      <div class="status-title">현재 상태</div>
+      <div class="status-flow">EAS Build 진행 중 → 성공 시 실기기 테스트 → App Store 제출</div>
+    </div>
+
+    <div class="timeline-bar">
+      <span>4/3</span> 위젯 수정 → <span>4/6</span> 브랜딩 → <span>4/8</span> 스토어 준비 → <span>4/13</span> 빌드 시작 → <span>4/14</span> 빌드 재시도
+    </div>
+  </div>
+</body>
+</html>
