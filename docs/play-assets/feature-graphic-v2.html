@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>싹 - Play Store 피처 그래픽 (1024x500)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1024px;
+    height: 500px;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .banner {
+    width: 1024px;
+    height: 500px;
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFF1E6 55%, #F5E6D3 100%);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 왼쪽 텍스트 영역 */
+  .text-area {
+    flex: 1;
+    padding: 0 64px;
+    z-index: 2;
+  }
+
+  .brand {
+    font-size: 20px;
+    font-weight: 700;
+    color: #5B8C6A;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-size: 62px;
+    font-weight: 900;
+    color: #2D2016;
+    line-height: 1.1;
+    margin-bottom: 22px;
+    letter-spacing: -1.5px;
+  }
+
+  h1 .accent { color: #5B8C6A; }
+
+  .tagline {
+    font-size: 22px;
+    color: #5D4E42;
+    line-height: 1.5;
+    font-weight: 500;
+    max-width: 480px;
+  }
+
+  /* 오른쪽 아이콘 영역 */
+  .visual {
+    width: 440px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+  }
+
+  .icon-wrap {
+    width: 340px;
+    height: 340px;
+    border-radius: 80px;
+    overflow: hidden;
+    box-shadow:
+      0 30px 60px rgba(91, 140, 106, 0.25),
+      0 12px 30px rgba(45, 32, 22, 0.1);
+    background: #FFF1E6;
+  }
+
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* 배경 장식 — 아이콘 뒤 은은한 원 */
+  .glow {
+    position: absolute;
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(91, 140, 106, 0.12) 0%, transparent 70%);
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="text-area">
+    <div class="brand">싹 · SSAK</div>
+    <h1>딱 <span class="accent">3개</span>만,<br>작은 습관이 자라는 곳</h1>
+    <div class="tagline">5초면 끝. 하루 쉬어도 흐름은 이어져요.</div>
+  </div>
+
+  <div class="visual">
+    <div class="glow"></div>
+    <div class="icon-wrap">
+      <img src="../../assets/icon.png" alt="싹 앱 아이콘">
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>싹 - Play Store 피처 그래픽 (1024x500)</title>
+<title>싹 - Play Store 피처 그래픽</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,14 +16,23 @@
   .banner {
     width: 1024px;
     height: 500px;
-    background: linear-gradient(135deg, #FFF8F0 0%, #FFF1E6 55%, #F5E6D3 100%);
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFF1E6 60%, #F5E6D3 100%);
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
   }
 
-  /* 왼쪽 텍스트 영역 */
+  /* 배경 장식: 새싹 패턴 */
+  .deco {
+    position: absolute;
+    opacity: 0.08;
+    font-size: 200px;
+  }
+  .deco.d1 { top: -40px; right: 40px; transform: rotate(15deg); }
+  .deco.d2 { bottom: -60px; left: 380px; transform: rotate(-10deg); font-size: 160px; }
+
+  /* 왼쪽: 텍스트 영역 */
   .text-area {
     flex: 1;
     padding: 0 64px;
@@ -32,22 +41,24 @@
 
   .brand {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     color: #5B8C6A;
-    letter-spacing: 3px;
-    margin-bottom: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
   }
 
   h1 {
-    font-size: 62px;
+    font-size: 64px;
     font-weight: 900;
     color: #2D2016;
     line-height: 1.1;
-    margin-bottom: 22px;
-    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
   }
 
-  h1 .accent { color: #5B8C6A; }
+  h1 .accent {
+    color: #5B8C6A;
+  }
 
   .tagline {
     font-size: 22px;
@@ -57,47 +68,68 @@
     max-width: 480px;
   }
 
-  /* 오른쪽 아이콘 영역 */
+  /* 오른쪽: 아이콘/목업 영역 */
   .visual {
-    width: 440px;
+    width: 420px;
     height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     z-index: 2;
+  }
+
+  .icon-circle {
+    width: 280px;
+    height: 280px;
+    background: #FFFFFF;
+    border-radius: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 30px 60px rgba(91, 140, 106, 0.2),
+                0 10px 30px rgba(45, 32, 22, 0.08);
     position: relative;
   }
 
-  .icon-wrap {
-    width: 340px;
-    height: 340px;
-    border-radius: 80px;
-    overflow: hidden;
-    box-shadow:
-      0 30px 60px rgba(91, 140, 106, 0.25),
-      0 12px 30px rgba(45, 32, 22, 0.1);
-    background: #FFF1E6;
+  /* 새싹 아이콘 (SVG) */
+  .sprout {
+    width: 180px;
+    height: 180px;
   }
 
-  .icon-wrap img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  /* 배경 장식 — 아이콘 뒤 은은한 원 */
-  .glow {
+  /* 3개 체크 도트 */
+  .dots {
     position: absolute;
-    width: 460px;
-    height: 460px;
+    bottom: 60px;
+    display: flex;
+    gap: 18px;
+    z-index: 3;
+  }
+  .dot {
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(91, 140, 106, 0.12) 0%, transparent 70%);
-    z-index: 1;
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(45, 32, 22, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #5B8C6A;
+    font-weight: 700;
+  }
+  .dot.filled {
+    background: #5B8C6A;
+    color: #FFFFFF;
   }
 </style>
 </head>
 <body>
 <div class="banner">
+  <div class="deco d1">🌱</div>
+  <div class="deco d2">🌿</div>
+
   <div class="text-area">
     <div class="brand">싹 · SSAK</div>
     <h1>딱 <span class="accent">3개</span>만,<br>작은 습관이 자라는 곳</h1>
@@ -105,9 +137,24 @@
   </div>
 
   <div class="visual">
-    <div class="glow"></div>
-    <div class="icon-wrap">
-      <img src="../../assets/icon.png" alt="싹 앱 아이콘">
+    <div class="icon-circle">
+      <svg class="sprout" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- 줄기 -->
+        <path d="M 50 85 L 50 55" stroke="#5B8C6A" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <!-- 왼쪽 잎 -->
+        <path d="M 50 60 Q 30 55 25 40 Q 40 42 50 55" fill="#7BAF8C" opacity="0.95"/>
+        <!-- 오른쪽 잎 -->
+        <path d="M 50 55 Q 70 48 75 32 Q 58 35 50 52" fill="#5B8C6A"/>
+        <!-- 중앙 새싹 잎 -->
+        <path d="M 50 50 Q 45 30 50 20 Q 55 30 50 50" fill="#4A7557"/>
+        <!-- 체크마크 -->
+        <path d="M 44 72 L 49 77 L 58 67" stroke="#2D2016" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="dots">
+      <div class="dot filled">✓</div>
+      <div class="dot filled">✓</div>
+      <div class="dot">○</div>
     </div>
   </div>
 </div>

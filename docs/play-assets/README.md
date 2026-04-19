@@ -6,8 +6,12 @@ Google Play Console에 업로드할 이미지 에셋을 관리하는 폴더.
 
 ### 1. 피처 그래픽 (1024×500, 필수)
 
+버전:
+- `feature-graphic.html` — **v1**. SVG로 새싹 아이콘을 임의로 그린 버전. 실제 앱 아이콘과 디자인이 다름 (참고용 보관)
+- `feature-graphic-v2.html` — **v2 (권장)**. `assets/icon.png` 실제 아이콘을 그대로 임베드. 브랜드 일관성 확보
+
 **방법 A — Chrome 수동 캡처 (가장 빠름, 1분)**
-1. Chrome에서 `feature-graphic.html` 열기
+1. Chrome에서 `feature-graphic-v2.html` 열기
 2. F12 → Device Toolbar(Ctrl+Shift+M) → "Responsive" 선택
 3. 크기 입력: **1024 × 500**
 4. DeviceMode 메뉴(⋮) → **Capture screenshot**
