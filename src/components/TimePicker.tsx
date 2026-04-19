@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { View, Text, Pressable, StyleSheet, Modal, ScrollView } from 'react-native';
 import { hapticImpact, hapticSelection, ImpactFeedbackStyle } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
@@ -7,6 +7,10 @@ import { fontSize, spacing } from '@/constants/theme';
 interface TimePickerProps {
   value: string | null;
   onChange: (time: string | null) => void;
+  /** 커스텀 트리거 렌더. 지정 시 기본 트리거 대신 사용 */
+  renderTrigger?: (opts: { value: string | null; open: () => void }) => ReactNode;
+  /** 시간 제거("알림 끄기") 버튼 노출 여부 (기본 true) */
+  allowClear?: boolean;
 }
 
 const HOURS = Array.from({ length: 24 }, (_, i) =>
@@ -14,7 +18,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) =>
 );
 const MINUTES = ['00', '15', '30', '45'];
 
-export function TimePicker({ value, onChange }: TimePickerProps) {
+export function TimePicker({ value, onChange, renderTrigger, allowClear = true }: TimePickerProps) {
   const colors = useThemeStore((s) => s.getColors());
   const [visible, setVisible] = useState(false);
   const [selectedHour, setSelectedHour] = useState(
@@ -23,6 +27,8 @@ export function TimePicker({ value, onChange }: TimePickerProps) {
   const [selectedMinute, setSelectedMinute] = useState(
     value ? value.split(':')[1] : '00'
   );
+
+  const open = () => setVisible(true);
 
   const handleConfirm = () => {
     hapticImpact(ImpactFeedbackStyle.Light);
@@ -38,22 +44,26 @@ export function TimePicker({ value, onChange }: TimePickerProps) {
 
   return (
     <>
-      <Pressable
-        style={({ pressed }) => [
-          styles.trigger,
-          { backgroundColor: colors.surface },
-          pressed && { opacity: 0.7 },
-        ]}
-        onPress={() => setVisible(true)}
-        accessibilityLabel={value ? `알림 시간 ${value}` : '알림 설정'}
-        accessibilityRole="button"
-      >
-        <Text style={styles.triggerIcon}>{value ? '🔔' : '🔕'}</Text>
-        <Text style={[styles.triggerText, { color: value ? colors.textPrimary : colors.textMuted }]}>
-          {value ? `매일 ${value}` : '알림 없음'}
-        </Text>
-        <Text style={[styles.triggerArrow, { color: colors.textMuted }]}>›</Text>
-      </Pressable>
+      {renderTrigger ? (
+        renderTrigger({ value, open })
+      ) : (
+        <Pressable
+          style={({ pressed }) => [
+            styles.trigger,
+            { backgroundColor: colors.surface },
+            pressed && { opacity: 0.7 },
+          ]}
+          onPress={open}
+          accessibilityLabel={value ? `알림 시간 ${value}` : '알림 설정'}
+          accessibilityRole="button"
+        >
+          <Text style={styles.triggerIcon}>{value ? '🔔' : '🔕'}</Text>
+          <Text style={[styles.triggerText, { color: value ? colors.textPrimary : colors.textMuted }]}>
+            {value ? `매일 ${value}` : '알림 없음'}
+          </Text>
+          <Text style={[styles.triggerArrow, { color: colors.textMuted }]}>›</Text>
+        </Pressable>
+      )}
 
       <Modal visible={visible} transparent animationType="slide">
         <Pressable style={styles.overlay} onPress={() => setVisible(false)}>
@@ -122,7 +132,7 @@ export function TimePicker({ value, onChange }: TimePickerProps) {
               </View>
             </View>
 
-            {value && (
+            {value && allowClear && (
               <Pressable
                 style={[styles.clearButton, { backgroundColor: colors.danger + '15' }]}
                 onPress={handleClear}

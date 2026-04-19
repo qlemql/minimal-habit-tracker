@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>싹 — 온보딩 4단계 와이어프레임 (v1.0.1)</title>
+<style>
+  :root {
+    --bg: #FFF8F0;
+    --surface: #FFFFFF;
+    --surface-light: #FFF1E6;
+    --text-primary: #2D2016;
+    --text-secondary: #8C7B6B;
+    --text-muted: #B5A899;
+    --accent: #5B8C6A;
+    --success: #4CAF50;
+    --inactive: #EDE5DA;
+    --danger: #D94040;
+    --habit-blue: #4A90D9;
+    --habit-green: #51CF66;
+    --habit-red: #FF6B6B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: linear-gradient(180deg, #F5EDE0 0%, #E8DCC8 100%);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    color: #333;
+  }
+
+  .page-header {
+    max-width: 1400px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2D2016;
+    margin-bottom: 8px;
+  }
+
+  .page-sub {
+    font-size: 16px;
+    color: #8C7B6B;
+    margin-bottom: 8px;
+  }
+
+  .page-meta {
+    font-size: 13px;
+    color: #B5A899;
+  }
+
+  .flow-section {
+    max-width: 1400px;
+    margin: 0 auto 60px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2D2016;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: #8C7B6B;
+    margin-bottom: 24px;
+  }
+
+  .badge-new {
+    background: #5B8C6A;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .phones-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* iPhone frame */
+  .phone {
+    width: 300px;
+    height: 620px;
+    background: #1a1a1a;
+    border-radius: 44px;
+    padding: 10px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    flex-shrink: 0;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 28px;
+    background: #1a1a1a;
+    border-radius: 20px;
+    z-index: 100;
+  }
+
+  .step-label {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #2D2016;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .step-label.new {
+    background: #5B8C6A;
+    color: white;
+  }
+
+  /* Screen content */
+  .screen {
+    padding: 60px 24px 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* === Step 1 — Welcome === */
+  .welcome {
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+  }
+  .emoji-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 10px rgba(91,140,106,0.08);
+  }
+  .welcome-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .welcome-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+  }
+
+  /* === Step 2 — Habit select === */
+  .step-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    margin-top: 8px;
+  }
+  .counter-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .counter-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--inactive);
+  }
+  .counter-dot.filled { background: var(--accent); }
+  .counter-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-left: 6px;
+  }
+
+  .preset-list {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .preset-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: var(--surface);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    gap: 12px;
+  }
+  .preset-item.selected {
+    border-color: var(--habit-blue);
+    background: rgba(74,144,217,0.06);
+  }
+  .preset-item.selected-green { border-color: var(--habit-green); background: rgba(81,207,102,0.06); }
+  .preset-item.selected-red { border-color: var(--habit-red); background: rgba(255,107,107,0.06); }
+
+  .preset-icon-bg {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: rgba(74,144,217,0.15);
+  }
+  .green-bg { background: rgba(81,207,102,0.15); }
+  .red-bg { background: rgba(255,107,107,0.15); }
+
+  .preset-name {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .checkbox {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--inactive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: white;
+    font-weight: 700;
+  }
+  .checkbox.on { background: var(--habit-blue); border-color: var(--habit-blue); }
+  .checkbox.on-green { background: var(--habit-green); border-color: var(--habit-green); }
+  .checkbox.on-red { background: var(--habit-red); border-color: var(--habit-red); }
+
+  /* === Primary button === */
+  .primary-btn {
+    background: var(--accent);
+    color: white;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .text-link {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 12px;
+    margin-bottom: 2px;
+    text-decoration: underline;
+  }
+
+  /* === Step 3 — Alarm === */
+  .alarm-hero {
+    text-align: center;
+    padding: 20px 0 24px;
+  }
+  .alarm-emoji-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--surface-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+  .alarm-subemoji {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    background: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .alarm-copy {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .alarm-copy-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--inactive);
+    margin: 4px 0 14px;
+  }
+
+  .alarm-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .alarm-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: var(--surface);
+    border-radius: 12px;
+    gap: 10px;
+  }
+  .alarm-name {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .alarm-time-chip {
+    background: var(--surface-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Time picker (bottom sheet) */
+  .picker-screen {
+    padding: 0;
+    background: rgba(0,0,0,0.4);
+    align-items: stretch;
+    justify-content: flex-end;
+  }
+  .picker-sheet {
+    background: var(--bg);
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .picker-close {
+    align-self: flex-end;
+    font-size: 20px;
+    color: var(--text-muted);
+    padding: 4px 0 8px;
+  }
+  .picker-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .picker-wheel {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 0;
+    font-size: 18px;
+    position: relative;
+  }
+  .picker-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+  }
+  .picker-col > div { padding: 4px 0; }
+  .picker-col > div.selected {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+  .picker-highlight {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 32px;
+    transform: translateY(-50%);
+    background: var(--surface-light);
+    border-radius: 8px;
+    z-index: -1;
+  }
+
+  /* System alert */
+  .sys-alert-screen {
+    background: rgba(0,0,0,0.4);
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .sys-alert {
+    background: rgba(245,245,245,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 14px;
+    width: 80%;
+    text-align: center;
+    overflow: hidden;
+  }
+  .sys-alert-body {
+    padding: 18px 16px 14px;
+  }
+  .sys-alert-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 6px;
+  }
+  .sys-alert-desc {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.4;
+  }
+  .sys-alert-actions {
+    display: flex;
+    border-top: 0.5px solid #ccc;
+  }
+  .sys-alert-btn {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    color: #007AFF;
+  }
+  .sys-alert-btn.primary { font-weight: 700; border-left: 0.5px solid #ccc; }
+
+  /* Step 3-4: Skip confirmation */
+  .skip-screen {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+  }
+  .skip-emoji-wrap {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--surface-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    margin-bottom: 24px;
+  }
+  .skip-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .skip-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  /* === Step 4 — Guide === */
+  .guide-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .guide-highlight {
+    background: rgba(91,140,106,0.08);
+    border: 1px solid rgba(91,140,106,0.2);
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+  }
+  .gh-emoji { font-size: 26px; margin-bottom: 6px; }
+  .gh-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .gh-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px; }
+  .gh-flow { color: var(--accent); font-size: 14px; font-weight: 600; letter-spacing: 2px; }
+  .gh-flow-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  .guide-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: var(--surface);
+    border-radius: 12px;
+    gap: 12px;
+  }
+  .gc-emoji {
+    width: 40px;
+    text-align: center;
+    font-size: 20px;
+  }
+  .gc-body { flex: 1; }
+  .gc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .gc-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  /* Arrow */
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    color: #8C7B6B;
+    align-self: center;
+  }
+
+  /* Notes section */
+  .notes {
+    max-width: 900px;
+    margin: 40px auto 0;
+    background: rgba(255,255,255,0.7);
+    border-radius: 16px;
+    padding: 24px 28px;
+    backdrop-filter: blur(10px);
+  }
+  .notes h3 {
+    font-size: 16px;
+    color: #2D2016;
+    margin-bottom: 12px;
+  }
+  .notes ul { margin-left: 18px; }
+  .notes li {
+    font-size: 13px;
+    color: #5a4a3a;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .phones-row { gap: 40px; }
+    .flow-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">싹 — 온보딩 4단계 와이어프레임</div>
+  <div class="page-sub">v1.0.1 / FB-001 대응 — 알람 설정 단계 신규 추가</div>
+  <div class="page-meta">2026-04-19 · 크림 테마 (#FFF8F0) + 세이지 그린 accent (#5B8C6A)</div>
+</div>
+
+<!-- ============ Main flow (4 steps) ============ -->
+<div class="flow-section">
+  <div class="section-title">메인 흐름 (4 steps)</div>
+  <div class="section-sub">환영 → 습관 선택 → 알람 설정 (신규) → 사용 가이드</div>
+
+  <div class="phones-row">
+
+    <!-- Step 1 -->
+    <div class="phone">
+      <div class="step-label">Step 1 · 환영</div>
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen welcome">
+          <div class="emoji-circle">✨</div>
+          <div class="welcome-title">딱 3개만<br>집중해보세요</div>
+          <div class="welcome-sub">많으면 지치고, 적으면 지켜져요</div>
+          <div class="primary-btn" style="width:100%">시작하기</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <!-- Step 2 -->
+    <div class="phone">
+      <div class="step-label">Step 2 · 습관 선택</div>
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="step-title">어떤 습관을<br>만들어볼까요?</div>
+          <div class="counter-row">
+            <div class="counter-dot filled"></div>
+            <div class="counter-dot filled"></div>
+            <div class="counter-dot filled"></div>
+            <div class="counter-text">3/3개 선택됨</div>
+          </div>
+          <div class="preset-list">
+            <div class="preset-item selected">
+              <div class="preset-icon-bg">💧</div>
+              <div class="preset-name">물 2L 마시기</div>
+              <div class="checkbox on">✓</div>
+            </div>
+            <div class="preset-item selected-red">
+              <div class="preset-icon-bg red-bg">🏃</div>
+              <div class="preset-name">30분 운동</div>
+              <div class="checkbox on-red">✓</div>
+            </div>
+            <div class="preset-item selected-green">
+              <div class="preset-icon-bg green-bg">📖</div>
+              <div class="preset-name">독서 30분</div>
+              <div class="checkbox on-green">✓</div>
+            </div>
+            <div class="preset-item">
+              <div class="preset-icon-bg" style="background:rgba(140,123,107,0.15)">🧘</div>
+              <div class="preset-name" style="color:var(--text-muted)">명상 10분</div>
+              <div class="checkbox"></div>
+            </div>
+          </div>
+          <div class="primary-btn">다음</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <!-- Step 3 -->
+    <div class="phone">
+      <div class="step-label new">Step 3 · 알람 (신규)</div>
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="alarm-hero">
+            <div class="alarm-emoji-wrap">
+              🌱
+              <div class="alarm-subemoji">⏰</div>
+            </div>
+            <div class="alarm-copy">씨앗이 자라려면<br>매일 같은 시간 물을 줘야 해요</div>
+            <div class="alarm-copy-sub">알람이 그 시간을<br>대신 기억해드릴게요.</div>
+          </div>
+          <div class="divider"></div>
+          <div class="alarm-list">
+            <div class="alarm-item">
+              <div class="preset-icon-bg">💧</div>
+              <div class="alarm-name">물 2L 마시기</div>
+              <div class="alarm-time-chip">⏰ 15:00</div>
+            </div>
+            <div class="alarm-item">
+              <div class="preset-icon-bg red-bg">🏃</div>
+              <div class="alarm-name">30분 운동</div>
+              <div class="alarm-time-chip">⏰ 19:00</div>
+            </div>
+            <div class="alarm-item">
+              <div class="preset-icon-bg green-bg">📖</div>
+              <div class="alarm-name">독서 30분</div>
+              <div class="alarm-time-chip">⏰ 22:00</div>
+            </div>
+          </div>
+          <div class="text-link">건너뛰기</div>
+          <div class="primary-btn">알람 설정</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <!-- Step 4 -->
+    <div class="phone">
+      <div class="step-label">Step 4 · 사용 가이드</div>
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="step-title">이렇게 사용해요</div>
+          <div class="guide-list">
+            <div class="guide-highlight">
+              <div class="gh-emoji">🌊</div>
+              <div class="gh-title">하루 쉬어도 괜찮아요</div>
+              <div class="gh-desc">하루 빠져도 흐름은 이어져요.<br>이틀 연속 빠지면 새로운 시작.</div>
+              <div class="gh-flow">● ● ◌ ● ● ●</div>
+              <div class="gh-flow-label">◌ = 쉼표 (흐름 유지)</div>
+            </div>
+            <div class="guide-card">
+              <div class="gc-emoji">👆</div>
+              <div class="gc-body">
+                <div class="gc-title">탭으로 체크</div>
+                <div class="gc-desc">습관 카드 탭 → 오늘 완료</div>
+              </div>
+            </div>
+            <div class="guide-card">
+              <div class="gc-emoji">✏️</div>
+              <div class="gc-body">
+                <div class="gc-title">길게 눌러 수정</div>
+                <div class="gc-desc">이름 · 아이콘 · 알림 변경</div>
+              </div>
+            </div>
+          </div>
+          <div class="primary-btn">3개로 시작하기</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ Step 3 detail variations ============ -->
+<div class="flow-section">
+  <div class="section-title">Step 3 세부 상태 <span class="badge-new">DETAIL</span></div>
+  <div class="section-sub">시간 피커 · 권한 요청 · 건너뛰기 동선</div>
+
+  <div class="phones-row">
+
+    <!-- 3-B: Time picker bottom sheet -->
+    <div class="phone">
+      <div class="step-label">3-B · 시간 피커</div>
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen picker-screen">
+          <div class="picker-sheet">
+            <div class="picker-close">✕</div>
+            <div class="picker-title">💧 물 2L 마시기 알람</div>
+            <div class="divider"></div>
+            <div class="picker-wheel">
+              <div class="picker-highlight"></div>
+              <div class="picker-col">
+                <div>오전</div>
+                <div class="selected">오후</div>
+                <div style="opacity:0"></div>
+              </div>
+              <div class="picker-col">
+                <div>2</div>
+                <div class="selected">3</div>
+                <div>4</div>
+              </div>
+              <div class="picker-col">
+                <div>55</div>
+                <div class="selected">00</div>
+                <div>05</div>
+              </div>
+            </div>
+            <div class="primary-btn" style="margin-top:20px">확인</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-C: iOS permission alert -->
+    <div class="phone">
+      <div class="step-label">3-C · 권한 요청</div>
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen sys-alert-screen">
+          <div class="sys-alert">
+            <div class="sys-alert-body">
+              <div class="sys-alert-title">"싹"이(가) 알림을 보내고<br>싶어 합니다</div>
+              <div class="sys-alert-desc">경고, 사운드 및 아이콘 배지가<br>포함될 수 있습니다</div>
+            </div>
+            <div class="sys-alert-actions">
+              <div class="sys-alert-btn">허용 안 함</div>
+              <div class="sys-alert-btn primary">허용</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-D: Skip confirmation -->
+    <div class="phone">
+      <div class="step-label">3-D · 건너뛰기 안내</div>
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen skip-screen">
+          <div class="skip-emoji-wrap">🔕</div>
+          <div class="skip-title">알람은 언제든<br>설정에서 켤 수 있어요</div>
+          <div class="skip-sub">습관 카드를 길게 누르면<br>개별 알람도 바꿀 수 있어요</div>
+          <div class="primary-btn" style="width:80%">확인</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Notes -->
+<div class="notes">
+  <h3>구현 메모</h3>
+  <ul>
+    <li><strong>테마 색상</strong>: cream 모드 그대로 (`creamColors` in <code>src/constants/theme.ts</code>) — 신규 색상 추가 없음</li>
+    <li><strong>카피 확정</strong>: "씨앗이 자라려면 매일 같은 시간 물을 줘야 해요 / 알람이 그 시간을 대신 기억해드릴게요."</li>
+    <li><strong>기본값 시간 프리셋</strong>: 물 → 15:00 · 운동 → 19:00 · 독서 → 22:00 · 명상 → 07:00 · 비타민 → 09:00 · 일기 → 22:30 · 기본 → 21:00</li>
+    <li><strong>건너뛰기</strong>: 텍스트 링크 (작게), 비난 멘트 없음, 이후 Step 4로 진행</li>
+    <li><strong>신규 파일 예정</strong>: <code>src/utils/defaultReminderTime.ts</code> (습관명 → 기본 시간 매칭)</li>
+    <li><strong>기존 스타일 재사용</strong>: <code>primaryButton</code>, <code>presetItem</code>, <code>guideCard</code> 등 — 신규 styles 최소화</li>
+    <li><strong>로드맵 외 배제</strong>: 건너뛴 유저 재안내 배너 (P2 로그만), 잠금화면 위젯 (v2.0+)</li>
+  </ul>
+</div>
+
+</body>
+</html>

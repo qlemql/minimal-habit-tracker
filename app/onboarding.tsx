@@ -14,23 +14,28 @@ import { useHabitStore } from '@/store/habitStore';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
+import { TimePicker } from '@/components/TimePicker';
+import { getDefaultReminderTime } from '@/utils/defaultReminderTime';
 
 interface HabitDraft {
   id: string;
   name: string;
   icon: string;
   color: string;
+  reminderTime: string | null;
   isCustom?: boolean;
 }
 
-const PRESETS: HabitDraft[] = [
-  { id: 'p1', name: '물 2L 마시기', icon: '💧', color: habitColors[0] },
-  { id: 'p2', name: '30분 운동', icon: '🏃', color: habitColors[2] },
-  { id: 'p3', name: '독서 30분', icon: '📖', color: habitColors[1] },
-  { id: 'p4', name: '명상 10분', icon: '🧘', color: habitColors[3] },
+const PRESETS: Omit<HabitDraft, 'reminderTime'>[] = [
+  { id: 'p1', name: '물 마시기', icon: '💧', color: habitColors[0] },
+  { id: 'p2', name: '운동하기', icon: '🏃', color: habitColors[2] },
+  { id: 'p3', name: '독서하기', icon: '📖', color: habitColors[1] },
+  { id: 'p4', name: '명상하기', icon: '🧘', color: habitColors[3] },
   { id: 'p5', name: '비타민 먹기', icon: '💊', color: habitColors[5] },
   { id: 'p6', name: '일기 쓰기', icon: '✍️', color: habitColors[4] },
 ];
+
+const GUIDE_STEP = 3;
 
 function AnimatedCounterDot({ filled, accentColor, inactiveColor }: { filled: boolean; accentColor: string; inactiveColor: string }) {
   return (
@@ -62,33 +67,38 @@ export default function OnboardingScreen() {
   const router = useRouter();
   const { guideOnly } = useLocalSearchParams<{ guideOnly?: string }>();
   const isGuideOnly = guideOnly === '1';
-  const { addHabit } = useHabitStore();
+  const { addHabit, updateHabit } = useHabitStore();
   const { setCompleted } = useOnboardingStore();
   const colors = useThemeStore((s) => s.getColors());
 
-  const [step, setStep] = useState(isGuideOnly ? 2 : 0);
+  const [step, setStep] = useState(isGuideOnly ? GUIDE_STEP : 0);
   const [selected, setSelected] = useState<HabitDraft[]>([]);
   const [customName, setCustomName] = useState('');
   const scrollRef = useRef<ScrollView>(null);
 
-  const toggleItem = (item: HabitDraft) => {
+  const toggleItem = (item: Omit<HabitDraft, 'reminderTime'>) => {
     hapticImpact(ImpactFeedbackStyle.Light);
     const exists = selected.find((s) => s.id === item.id);
     if (exists) {
       setSelected(selected.filter((s) => s.id !== item.id));
     } else if (selected.length < 3) {
-      setSelected([...selected, item]);
+      setSelected([
+        ...selected,
+        { ...item, reminderTime: getDefaultReminderTime(item.name) },
+      ]);
     }
   };
 
   const addCustom = () => {
     if (customName.trim() && selected.length < 3) {
       hapticImpact(ImpactFeedbackStyle.Light);
+      const name = customName.trim();
       const newItem: HabitDraft = {
         id: `custom_${Date.now()}`,
-        name: customName.trim(),
+        name,
         icon: habitIcons[(selected.length + 6) % habitIcons.length],
         color: habitColors[(selected.length + 3) % habitColors.length],
+        reminderTime: getDefaultReminderTime(name),
         isCustom: true,
       };
       setSelected([...selected, newItem]);
@@ -98,14 +108,43 @@ export default function OnboardingScreen() {
     }
   };
 
-  const handleFinish = () => {
+  const updateReminderTime = (id: string, time: string | null) => {
+    setSelected((prev) =>
+      prev.map((h) => (h.id === id ? { ...h, reminderTime: time } : h))
+    );
+  };
+
+  const skipAlarm = () => {
+    hapticImpact(ImpactFeedbackStyle.Light);
+    setSelected((prev) => prev.map((h) => ({ ...h, reminderTime: null })));
+    setStep(GUIDE_STEP);
+  };
+
+  const confirmAlarm = () => {
+    hapticImpact(ImpactFeedbackStyle.Light);
+    setStep(GUIDE_STEP);
+  };
+
+  const handleFinish = async () => {
     hapticNotification(NotificationFeedbackType.Success);
-    selected.forEach((h) => addHabit(h.name, h.icon, h.color));
+
+    const pairs: { id: string; reminderTime: string | null }[] = [];
+    for (const h of selected) {
+      const id = addHabit(h.name, h.icon, h.color);
+      if (id) pairs.push({ id, reminderTime: h.reminderTime });
+    }
+
+    // 알림 시간이 있는 습관만 예약 (skip 시 모두 null 처리됨)
+    await Promise.all(
+      pairs
+        .filter((p) => p.reminderTime)
+        .map((p) => updateHabit(p.id, { reminderTime: p.reminderTime }))
+    );
+
     setCompleted();
     router.replace('/');
   };
 
-  // 프리셋과 커스텀 합쳐서 표시할 항목들
   const customItems = selected.filter((s) => s.isCustom);
 
   return (
@@ -195,7 +234,6 @@ export default function OnboardingScreen() {
               );
             })}
 
-            {/* 직접 추가한 습관들 (프리셋과 동일한 카드 형태) */}
             {customItems.map((item) => (
               <Animated.View key={item.id} entering={FadeInDown.duration(300)} exiting={FadeOut.duration(150)}>
                 <Pressable
@@ -224,7 +262,6 @@ export default function OnboardingScreen() {
               </Animated.View>
             ))}
 
-            {/* 직접 입력 */}
             {selected.length < 3 && (
               <View style={[styles.customInput, { backgroundColor: colors.surface }]}>
                 <TextInput
@@ -274,6 +311,98 @@ export default function OnboardingScreen() {
       {step === 2 && (
         <Animated.View
           entering={SlideInRight.duration(300)}
+          style={styles.alarmStep}
+        >
+          <View style={styles.alarmHero}>
+            <View style={[styles.alarmHeroCircle, { backgroundColor: colors.surfaceLight }]}>
+              <Text style={styles.alarmHeroEmoji}>🌱</Text>
+              <View style={[styles.alarmHeroBadge, { backgroundColor: colors.surface }]}>
+                <Text style={styles.alarmHeroBadgeText}>⏰</Text>
+              </View>
+            </View>
+            <Text style={[styles.alarmHeroTitle, { color: colors.textPrimary }]}>
+              씨앗이 자라려면{'\n'}매일 같은 시간 물을 줘야 해요
+            </Text>
+            <Text style={[styles.alarmHeroSub, { color: colors.textSecondary }]}>
+              알람이 그 시간을 대신 기억해드릴게요.
+            </Text>
+          </View>
+
+          <View style={[styles.alarmDivider, { backgroundColor: colors.inactive }]} />
+
+          <Text style={[styles.alarmHint, { color: colors.textMuted }]}>
+            시간을 탭하면 바꿀 수 있어요
+          </Text>
+
+          <ScrollView style={styles.alarmList} showsVerticalScrollIndicator={false}>
+            {selected.map((habit) => (
+              <View
+                key={habit.id}
+                style={[styles.alarmRow, { backgroundColor: colors.surface }]}
+              >
+                <View style={[styles.presetIconBg, { backgroundColor: habit.color + '20' }]}>
+                  <Text style={styles.presetIcon}>{habit.icon}</Text>
+                </View>
+                <Text style={[styles.alarmRowName, { color: colors.textPrimary }]}>
+                  {habit.name}
+                </Text>
+                <TimePicker
+                  value={habit.reminderTime}
+                  onChange={(t) => updateReminderTime(habit.id, t)}
+                  renderTrigger={({ value, open }) => (
+                    <Pressable
+                      onPress={open}
+                      style={({ pressed }) => [
+                        styles.alarmChip,
+                        {
+                          backgroundColor: value
+                            ? colors.accent + '18'
+                            : colors.surfaceLight,
+                        },
+                        pressed && { opacity: 0.7 },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.alarmChipText,
+                          { color: value ? colors.accent : colors.textMuted },
+                        ]}
+                      >
+                        {value ? `⏰ ${value}` : '🔕 없음'}
+                      </Text>
+                    </Pressable>
+                  )}
+                />
+              </View>
+            ))}
+          </ScrollView>
+
+          <Pressable onPress={skipAlarm} style={styles.skipLink} hitSlop={12}>
+            <Text style={[styles.skipLinkText, { color: colors.textSecondary }]}>
+              건너뛰기
+            </Text>
+          </Pressable>
+
+          <Pressable
+            style={({ pressed }) => [
+              styles.primaryButton,
+              { backgroundColor: colors.accent },
+              pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
+            ]}
+            onPress={confirmAlarm}
+          >
+            <Text style={styles.primaryButtonText}>
+              {selected.some((h) => h.reminderTime)
+                ? '이 시간으로 알람 켜기'
+                : '알람 없이 시작하기'}
+            </Text>
+          </Pressable>
+        </Animated.View>
+      )}
+
+      {step === GUIDE_STEP && (
+        <Animated.View
+          entering={SlideInRight.duration(300)}
           style={styles.guideStep}
         >
           <Text style={[styles.stepTitle, { color: colors.textPrimary }]}>
@@ -281,7 +410,6 @@ export default function OnboardingScreen() {
           </Text>
 
           <View style={styles.guideList}>
-            {/* 이어가기 — 가장 중요한 차별점, 강조 카드 */}
             <View style={[styles.guideCardHighlight, { backgroundColor: colors.accent + '15', borderColor: colors.accent + '30' }]}>
               <Text style={styles.guideHighlightEmoji}>🌊</Text>
               <Text style={[styles.guideHighlightTitle, { color: colors.textPrimary }]}>
@@ -450,6 +578,94 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   customTextInput: { flex: 1, fontSize: fontSize.md },
+  alarmStep: {
+    flex: 1,
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.lg,
+  },
+  alarmHero: {
+    alignItems: 'center',
+    paddingVertical: spacing.md,
+  },
+  alarmHeroCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: spacing.md,
+    position: 'relative',
+  },
+  alarmHeroEmoji: { fontSize: 36 },
+  alarmHeroBadge: {
+    position: 'absolute',
+    bottom: -4,
+    right: -4,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  alarmHeroBadgeText: { fontSize: 16 },
+  alarmHeroTitle: {
+    fontSize: fontSize.lg,
+    fontWeight: '700',
+    textAlign: 'center',
+    lineHeight: 26,
+    marginBottom: spacing.xs,
+  },
+  alarmHeroSub: {
+    fontSize: fontSize.sm,
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  alarmDivider: {
+    height: 1,
+    marginVertical: spacing.md,
+  },
+  alarmHint: {
+    fontSize: fontSize.xs,
+    textAlign: 'center',
+    marginBottom: spacing.sm,
+  },
+  alarmList: { flex: 1 },
+  alarmRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: spacing.md,
+    borderRadius: 14,
+    marginBottom: spacing.sm,
+  },
+  alarmRowName: {
+    flex: 1,
+    fontSize: fontSize.md,
+    fontWeight: '500',
+    marginLeft: spacing.md,
+  },
+  alarmChip: {
+    paddingHorizontal: spacing.sm + 2,
+    paddingVertical: 6,
+    borderRadius: 10,
+  },
+  alarmChipText: {
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+  },
+  skipLink: {
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+    marginBottom: spacing.xs,
+  },
+  skipLinkText: {
+    fontSize: fontSize.sm,
+    textDecorationLine: 'underline',
+  },
   guideStep: {
     flex: 1,
     paddingHorizontal: spacing.lg,
