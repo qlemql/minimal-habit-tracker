@@ -2,7 +2,19 @@
 
 Google Play Console에 업로드할 이미지 에셋을 관리하는 폴더.
 
-## 생성 방법
+## 자동 생성 (권장)
+
+```bash
+npm run capture-play-assets
+```
+
+한 번에 생성됨:
+- `feature-graphic.png` (1024×500)
+- `screenshots/0X_*.png` (1080×2160, 1:2 비율)
+
+내부적으로 Puppeteer + sharp 사용. HTML 템플릿 수정 시 다시 실행하면 PNG 재생성.
+
+## 수동 생성 방법
 
 ### 1. 피처 그래픽 (1024×500, 필수)
 
