@@ -1,0 +1,37 @@
+# Play Store Assets
+
+Google Play Console에 업로드할 이미지 에셋을 관리하는 폴더.
+
+## 생성 방법
+
+### 1. 피처 그래픽 (1024×500, 필수)
+
+**방법 A — Chrome 수동 캡처 (가장 빠름, 1분)**
+1. Chrome에서 `feature-graphic.html` 열기
+2. F12 → Device Toolbar(Ctrl+Shift+M) → "Responsive" 선택
+3. 크기 입력: **1024 × 500**
+4. DeviceMode 메뉴(⋮) → **Capture screenshot**
+5. 다운로드된 PNG를 `feature-graphic.png`로 저장
+
+**방법 B — Puppeteer 자동 캡처**
+```bash
+npx puppeteer --version  # 미설치 시: npm i -D puppeteer
+```
+(전용 스크립트는 요청 시 추가)
+
+### 2. 앱 아이콘 (512×512, 필수)
+
+`assets/icon.png` (1024×1024 예상) 을 512×512로 리사이즈:
+- [Squoosh](https://squoosh.app/) 에 드래그 → Resize → 512×512 → Export PNG
+
+### 3. 스크린샷 (1080×1920, 2~8장)
+
+`docs/play-assets/screenshots-spec.md` 참조.
+
+## 업로드 전 체크리스트
+
+- [ ] 피처 그래픽: 정확히 1024×500 PNG
+- [ ] 아이콘: 정확히 512×512 PNG, 알파 채널 없음
+- [ ] 스크린샷: 최소 2장, 짧은 변:긴 변 비율 ≤ 2:1
+- [ ] 모든 이미지에 앱 외부 브랜딩(Apple, iOS 로고 등) 없음
+- [ ] 가격·"무료" 등 프로모션 문구 없음 (Play Store 정책)
