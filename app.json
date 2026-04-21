@@ -24,7 +24,9 @@
         ]
       },
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleDevelopmentRegion": "ko",
+        "CFBundleLocalizations": ["ko"]
       }
     },
     "android": {
