@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback } from 'react';
-import { StyleSheet, Text, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, Text, Pressable, View } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -12,105 +12,43 @@ import Animated, {
 import { NotificationFeedbackType } from 'expo-haptics';
 import { hapticNotification } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
-
-const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get('window');
+import {
+  getCurrentStage,
+  getDaysUntilNextStage,
+  getNextStage,
+  shouldShowProximityHint,
+} from '@/constants/growth';
+import { fontSize, spacing } from '@/constants/theme';
 
 const MESSAGES = [
-  '오늘도 해냈어요!',
-  '완벽한 하루 ✨',
-  '꾸준함이 만드는 변화',
-  '작은 실천, 큰 차이',
-  '오늘의 흐름 완성!',
-  '내일도 이어가요',
-];
-
-const CONFETTI_COLORS = ['#4A90D9', '#7B68EE', '#FF6B6B', '#51CF66', '#FFD43B', '#FF922B', '#DA77F2', '#20C997'];
-const CONFETTI_COUNT = 30;
-
-const CONFETTI_CONFIG = Array.from({ length: CONFETTI_COUNT }, (_, i) => ({
-  color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
-  startX: (Math.random() - 0.5) * SCREEN_W,
-  size: 6 + Math.random() * 8,
-  delay: Math.random() * 400,
-  fallDistance: SCREEN_H * 0.6 + Math.random() * 200,
-  fallDuration: 1500 + Math.random() * 800,
-  rotateDeg: 360 + Math.random() * 720,
-}));
-
-interface ConfettiPieceProps {
-  config: typeof CONFETTI_CONFIG[number];
-  visible: boolean;
-}
-
-function ConfettiPiece({ config, visible }: ConfettiPieceProps) {
-  const translateY = useSharedValue(-50);
-  const translateX = useSharedValue(0);
-  const rotate = useSharedValue(0);
-  const opacity = useSharedValue(0);
-
-  useEffect(() => {
-    if (visible) {
-      translateX.value = config.startX;
-      opacity.value = withDelay(config.delay, withSequence(
-        withTiming(1, { duration: 100 }),
-        withDelay(1300, withTiming(0, { duration: 400 }))
-      ));
-      translateY.value = withDelay(
-        config.delay,
-        withTiming(config.fallDistance, { duration: config.fallDuration })
-      );
-      rotate.value = withDelay(
-        config.delay,
-        withTiming(config.rotateDeg, { duration: 2000 })
-      );
-    } else {
-      translateY.value = -50;
-      opacity.value = 0;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible]);
-
-  const style = useAnimatedStyle(() => ({
-    transform: [
-      { translateX: translateX.value },
-      { translateY: translateY.value },
-      { rotate: `${rotate.value}deg` },
-    ],
-    opacity: opacity.value,
-  }));
-
-  return (
-    <Animated.View
-      style={[
-        {
-          position: 'absolute',
-          top: 0,
-          left: SCREEN_W / 2,
-          width: config.size,
-          height: config.size * 1.5,
-          backgroundColor: config.color,
-          borderRadius: 2,
-        },
-        style,
-      ]}
-    />
-  );
-}
+  '오늘도 잘 자랐어요',
+  '꾸준함이 자라요',
+  '흐름이 이어졌어요',
+  '물 한 모금 줬어요',
+] as const;
 
 interface CelebrationOverlayProps {
   visible: boolean;
+  currentMaxFlow: number;
   onDone: () => void;
 }
 
-export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps) {
+export function CelebrationOverlay({ visible, currentMaxFlow, onDone }: CelebrationOverlayProps) {
   const colors = useThemeStore((s) => s.getColors());
-  const scale = useSharedValue(0);
-  const bgOpacity = useSharedValue(0);
+
+  const stage = useMemo(() => getCurrentStage(currentMaxFlow), [currentMaxFlow]);
+  const nextStage = useMemo(() => getNextStage(currentMaxFlow), [currentMaxFlow]);
+  const daysToNext = useMemo(() => getDaysUntilNextStage(currentMaxFlow), [currentMaxFlow]);
+  const showHint = useMemo(() => shouldShowProximityHint(currentMaxFlow), [currentMaxFlow]);
 
   const message = useMemo(
     () => MESSAGES[Math.floor(Math.random() * MESSAGES.length)],
     [visible]
   );
+
+  const scale = useSharedValue(0);
+  const bgOpacity = useSharedValue(0);
+  const hintOpacity = useSharedValue(0);
 
   const handleDone = useCallback(() => {
     onDone();
@@ -121,8 +59,8 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
       hapticNotification(NotificationFeedbackType.Success);
 
       bgOpacity.value = withSequence(
-        withTiming(1, { duration: 200 }),
-        withDelay(2800, withTiming(0, { duration: 400 }, (finished) => {
+        withTiming(1, { duration: 220 }),
+        withDelay(1500, withTiming(0, { duration: 380 }, (finished) => {
           if (finished) {
             runOnJS(handleDone)();
           }
@@ -130,12 +68,18 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
       );
 
       scale.value = withSequence(
-        withSpring(1.1, { damping: 8, stiffness: 200 }),
+        withSpring(1.15, { damping: 9, stiffness: 180 }),
         withSpring(1, { damping: 12, stiffness: 200 })
+      );
+
+      hintOpacity.value = withDelay(
+        500,
+        withTiming(1, { duration: 400 })
       );
     } else {
       scale.value = 0;
       bgOpacity.value = 0;
+      hintOpacity.value = 0;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
@@ -148,19 +92,29 @@ export function CelebrationOverlay({ visible, onDone }: CelebrationOverlayProps)
     transform: [{ scale: scale.value }],
   }));
 
+  const hintStyle = useAnimatedStyle(() => ({
+    opacity: hintOpacity.value,
+  }));
+
   if (!visible) return null;
 
   return (
     <Pressable style={StyleSheet.absoluteFill} onPress={onDone}>
-      <Animated.View style={[styles.container, { backgroundColor: `${colors.background}E6` }, bgStyle]}>
-        {CONFETTI_CONFIG.map((config, i) => (
-          <ConfettiPiece key={i} config={config} visible={visible} />
-        ))}
-
+      <Animated.View style={[styles.container, { backgroundColor: `${colors.background}F2` }, bgStyle]}>
         <Animated.View style={[styles.content, contentStyle]}>
-          <Text style={styles.emoji}>🎉</Text>
+          <Text style={styles.emoji}>{stage.emoji}</Text>
           <Text style={[styles.text, { color: colors.textPrimary }]}>{message}</Text>
+          <Text style={[styles.stageLabel, { color: colors.accent }]}>{stage.label}</Text>
         </Animated.View>
+
+        {showHint && nextStage && daysToNext !== null && (
+          <Animated.View style={[styles.hintContainer, hintStyle]}>
+            <View style={[styles.hintDivider, { backgroundColor: colors.inactive }]} />
+            <Text style={[styles.hintText, { color: colors.textSecondary }]}>
+              다음 성장까지 {daysToNext}일 {nextStage.emoji}
+            </Text>
+          </Animated.View>
+        )}
       </Animated.View>
     </Pressable>
   );
@@ -175,20 +129,37 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent',
     zIndex: 10,
-    overflow: 'hidden',
   },
   content: {
     alignItems: 'center',
   },
   emoji: {
-    fontSize: 72,
-    marginBottom: 16,
+    fontSize: 96,
+    marginBottom: spacing.md,
   },
   text: {
-    fontSize: 28,
+    fontSize: fontSize.xl,
     fontWeight: '700',
-    color: undefined,
+  },
+  stageLabel: {
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    marginTop: spacing.xs,
+    letterSpacing: 1,
+  },
+  hintContainer: {
+    position: 'absolute',
+    bottom: 80,
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  hintDivider: {
+    width: 32,
+    height: 1,
+  },
+  hintText: {
+    fontSize: fontSize.sm,
+    fontWeight: '500',
   },
 });

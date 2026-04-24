@@ -1,15 +1,21 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { useRewardStore } from '@/store/rewardStore';
 import { useThemeStore } from '@/store/themeStore';
 import { hapticNotification, NotificationFeedbackType } from '@/utils/haptics';
 import { fontSize, spacing } from '@/constants/theme';
+import { getCurrentStage } from '@/constants/growth';
 
 export function UnlockToast() {
   const pendingUnlock = useRewardStore((s) => s.pendingUnlock);
   const dismissUnlock = useRewardStore((s) => s.dismissUnlock);
   const colors = useThemeStore((s) => s.getColors());
+
+  const stage = useMemo(
+    () => (pendingUnlock ? getCurrentStage(pendingUnlock.flowDays) : null),
+    [pendingUnlock]
+  );
 
   useEffect(() => {
     if (pendingUnlock) {
@@ -21,31 +27,30 @@ export function UnlockToast() {
     dismissUnlock();
   }, [dismissUnlock]);
 
-  // 자동 dismiss (5초)
   useEffect(() => {
     if (!pendingUnlock) return;
     const timer = setTimeout(handleDismiss, 5000);
     return () => clearTimeout(timer);
   }, [pendingUnlock, handleDismiss]);
 
-  if (!pendingUnlock) return null;
-
-  const previewItems = [
-    ...(pendingUnlock.icons ?? []),
-    ...(pendingUnlock.colors ?? []).map((c) => `●`),
-  ].slice(0, 4);
+  if (!pendingUnlock || !stage) return null;
 
   return (
     <Animated.View
       entering={FadeInDown.duration(400).springify()}
       exiting={FadeOutDown.duration(300)}
-      style={[styles.container, { backgroundColor: colors.surface }]}
+      style={[
+        styles.container,
+        { backgroundColor: colors.surface, borderColor: colors.accent },
+      ]}
     >
       <Pressable onPress={handleDismiss} style={styles.inner}>
-        <Text style={styles.emoji}>🎉</Text>
+        <View style={[styles.stageBadge, { backgroundColor: `${colors.accent}1A` }]}>
+          <Text style={styles.stageEmoji}>{stage.emoji}</Text>
+        </View>
         <View style={styles.textArea}>
-          <Text style={[styles.title, { color: colors.textPrimary }]}>
-            {pendingUnlock.label} 달성!
+          <Text style={[styles.stageLabel, { color: colors.accent }]}>
+            {stage.label}으로 자랐어요
           </Text>
           <Text style={[styles.description, { color: colors.textSecondary }]}>
             {pendingUnlock.description}
@@ -74,9 +79,10 @@ const styles = StyleSheet.create({
     left: spacing.lg,
     right: spacing.lg,
     borderRadius: 16,
+    borderWidth: 1.5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.15,
     shadowRadius: 12,
     elevation: 8,
   },
@@ -84,15 +90,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: spacing.md,
-    gap: spacing.sm,
+    gap: spacing.sm + 2,
   },
-  emoji: {
+  stageBadge: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  stageEmoji: {
     fontSize: 28,
   },
   textArea: {
     flex: 1,
   },
-  title: {
+  stageLabel: {
     fontSize: fontSize.md,
     fontWeight: '700',
   },

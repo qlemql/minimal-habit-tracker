@@ -118,11 +118,13 @@ export default function HomeScreen() {
 
   // 해금 체크: 모든 습관 중 최대 흐름 일수 기준
   const checkUnlocks = useRewardStore((s) => s.checkUnlocks);
+  const currentMaxFlow = useMemo(() => {
+    if (flowResults.size === 0) return 0;
+    return Math.max(...Array.from(flowResults.values()).map((f) => f.longestFlow));
+  }, [flowResults]);
   useEffect(() => {
-    if (flowResults.size === 0) return;
-    const maxFlow = Math.max(...Array.from(flowResults.values()).map((f) => f.longestFlow));
-    if (maxFlow > 0) checkUnlocks(maxFlow);
-  }, [flowResults, checkUnlocks]);
+    if (currentMaxFlow > 0) checkUnlocks(currentMaxFlow);
+  }, [currentMaxFlow, checkUnlocks]);
 
   const handleCloseCelebration = useCallback(() => setShowCelebration(false), []);
   const handleCloseDetail = useCallback(() => setSelectedDate(null), []);
@@ -241,6 +243,7 @@ export default function HomeScreen() {
       <DayDetailSheet date={selectedDate} onClose={handleCloseDetail} />
       <CelebrationOverlay
         visible={showCelebration}
+        currentMaxFlow={currentMaxFlow}
         onDone={handleCloseCelebration}
       />
       <UnlockToast />
