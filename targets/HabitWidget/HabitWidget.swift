@@ -47,9 +47,9 @@ struct HabitProvider: TimelineProvider {
 
     private var sampleHabits: [WidgetHabit] {
         [
-            WidgetHabit(id: "1", name: "물 2L 마시기", icon: "💧", color: "#4A90D9", completed: true, flowDays: 5),
-            WidgetHabit(id: "2", name: "30분 운동", icon: "🏃", color: "#FF6B6B", completed: false, flowDays: 3),
-            WidgetHabit(id: "3", name: "독서 30분", icon: "📖", color: "#7B68EE", completed: false, flowDays: 7),
+            WidgetHabit(id: "1", name: "물 마시기", icon: "💧", color: "#4A90D9", completed: true, flowDays: 5),
+            WidgetHabit(id: "2", name: "운동하기", icon: "🏃", color: "#FF6B6B", completed: false, flowDays: 3),
+            WidgetHabit(id: "3", name: "독서하기", icon: "📖", color: "#7B68EE", completed: false, flowDays: 7),
         ]
     }
 }
@@ -90,11 +90,11 @@ struct HabitRowView: View {
     let habit: WidgetHabit
 
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(alignment: .center, spacing: 8) {
             ZStack {
                 Circle()
                     .fill(habit.completed ? Color(hex: habit.color) : Color(hex: habit.color).opacity(0.15))
-                    .frame(width: 28, height: 28)
+                    .frame(width: 26, height: 26)
 
                 if habit.completed {
                     Image(systemName: "checkmark")
@@ -102,23 +102,28 @@ struct HabitRowView: View {
                         .foregroundColor(.white)
                 } else {
                     Text(habit.icon)
-                        .font(.system(size: 14))
+                        .font(.system(size: 13))
                 }
             }
+            .frame(width: 26, height: 26)
 
             Text(habit.name)
                 .font(.system(size: 13, weight: habit.completed ? .semibold : .regular))
                 .foregroundColor(habit.completed ? Color(hex: habit.color) : CreamTheme.textPrimary)
                 .lineLimit(1)
+                .truncationMode(.tail)
 
-            Spacer()
+            Spacer(minLength: 4)
 
             if habit.flowDays > 0 {
                 Text("\(habit.flowDays)일")
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(Color(hex: habit.color))
+                    .lineLimit(1)
+                    .fixedSize()
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -129,16 +134,23 @@ struct HabitWidgetSmallView: View {
         entry.habits.filter { $0.completed }.count
     }
 
+    var allCompleted: Bool {
+        !entry.habits.isEmpty && completedCount == entry.habits.count
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .center, spacing: 4) {
                 Text("오늘의 습관")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(CreamTheme.textSecondary)
-                Spacer()
+                    .lineLimit(1)
+                Spacer(minLength: 4)
                 Text("\(completedCount)/\(entry.habits.count)")
                     .font(.system(size: 11, weight: .bold))
-                    .foregroundColor(completedCount == entry.habits.count ? CreamTheme.accent : CreamTheme.textSecondary)
+                    .foregroundColor(allCompleted ? CreamTheme.accent : CreamTheme.textSecondary)
+                    .lineLimit(1)
+                    .fixedSize()
             }
 
             if entry.habits.isEmpty {
@@ -149,17 +161,14 @@ struct HabitWidgetSmallView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {
-                VStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 6) {
                     ForEach(entry.habits) { habit in
                         HabitRowView(habit: habit)
                     }
                 }
+                Spacer(minLength: 0)
             }
-
-            Spacer(minLength: 0)
         }
-        .padding(.horizontal, 6)
-        .padding(.vertical, 4)
     }
 }
 
@@ -175,19 +184,21 @@ struct HabitWidgetMediumView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .center, spacing: 8) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("오늘의 습관")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(CreamTheme.textSecondary)
+                        .lineLimit(1)
                     if allCompleted {
                         Text("모두 완료! 🎉")
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(CreamTheme.accent)
+                            .lineLimit(1)
                     }
                 }
-                Spacer()
+                Spacer(minLength: 4)
 
                 ZStack {
                     Circle()
@@ -205,6 +216,7 @@ struct HabitWidgetMediumView: View {
                         .font(.system(size: 9, weight: .bold))
                         .foregroundColor(CreamTheme.textSecondary)
                 }
+                .frame(width: 32, height: 32)
             }
 
             if entry.habits.isEmpty {
@@ -215,17 +227,14 @@ struct HabitWidgetMediumView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {
-                VStack(spacing: 10) {
+                VStack(alignment: .leading, spacing: 8) {
                     ForEach(entry.habits) { habit in
                         HabitRowView(habit: habit)
                     }
                 }
+                Spacer(minLength: 0)
             }
-
-            Spacer(minLength: 0)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 6)
     }
 }
 
