@@ -16,6 +16,7 @@ import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing, habitIcons, habitColors } from '@/constants/theme';
 import { TimePicker } from '@/components/TimePicker';
 import { getDefaultReminderTime } from '@/utils/defaultReminderTime';
+import { GROWTH_STAGES } from '@/constants/growth';
 
 interface HabitDraft {
   id: string;
@@ -35,7 +36,8 @@ const PRESETS: Omit<HabitDraft, 'reminderTime'>[] = [
   { id: 'p6', name: '일기 쓰기', icon: '✍️', color: habitColors[4] },
 ];
 
-const GUIDE_STEP = 3;
+const GROWTH_STEP = 3;
+const GUIDE_STEP = 4;
 
 function AnimatedCounterDot({ filled, accentColor, inactiveColor }: { filled: boolean; accentColor: string; inactiveColor: string }) {
   return (
@@ -117,12 +119,12 @@ export default function OnboardingScreen() {
   const skipAlarm = () => {
     hapticImpact(ImpactFeedbackStyle.Light);
     setSelected((prev) => prev.map((h) => ({ ...h, reminderTime: null })));
-    setStep(GUIDE_STEP);
+    setStep(GROWTH_STEP);
   };
 
   const confirmAlarm = () => {
     hapticImpact(ImpactFeedbackStyle.Light);
-    setStep(GUIDE_STEP);
+    setStep(GROWTH_STEP);
   };
 
   const handleFinish = async () => {
@@ -400,6 +402,56 @@ export default function OnboardingScreen() {
         </Animated.View>
       )}
 
+      {step === GROWTH_STEP && (
+        <Animated.View
+          entering={SlideInRight.duration(300)}
+          style={styles.growthStep}
+        >
+          <Text style={[styles.stepTitle, { color: colors.textPrimary }]}>
+            꾸준할수록 자라요
+          </Text>
+          <Text style={[styles.growthSubtitle, { color: colors.textSecondary }]}>
+            매일 한 탭이면 충분해요.{'\n'}흐름이 이어지면 싹이 자라요.
+          </Text>
+
+          <View style={styles.growthStrip}>
+            {GROWTH_STAGES.map((stage, i) => (
+              <View key={stage.id} style={styles.growthCell}>
+                <Text style={styles.growthEmoji}>{stage.emoji}</Text>
+                <Text style={[styles.growthLabel, { color: colors.textPrimary }]}>
+                  {stage.label}
+                </Text>
+                <Text style={[styles.growthDays, { color: colors.textMuted }]}>
+                  {i === 0 ? '시작' : `${stage.threshold}일`}
+                </Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={[styles.growthNote, { backgroundColor: colors.surface }]}>
+            <Text style={[styles.growthNoteText, { color: colors.textSecondary }]}>
+              단계가 오르면 새 색상과 아이콘이 함께 자라요
+            </Text>
+          </View>
+
+          <View style={styles.growthSpacer} />
+
+          <Pressable
+            style={({ pressed }) => [
+              styles.primaryButton,
+              { backgroundColor: colors.accent },
+              pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
+            ]}
+            onPress={() => {
+              hapticImpact(ImpactFeedbackStyle.Light);
+              setStep(GUIDE_STEP);
+            }}
+          >
+            <Text style={styles.primaryButtonText}>다음</Text>
+          </Pressable>
+        </Animated.View>
+      )}
+
       {step === GUIDE_STEP && (
         <Animated.View
           entering={SlideInRight.duration(300)}
@@ -666,6 +718,51 @@ const styles = StyleSheet.create({
     fontSize: fontSize.sm,
     textDecorationLine: 'underline',
   },
+  growthStep: {
+    flex: 1,
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.xl,
+  },
+  growthSubtitle: {
+    fontSize: fontSize.sm,
+    lineHeight: 22,
+    marginTop: spacing.xs,
+    marginBottom: spacing.xl,
+  },
+  growthStrip: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    paddingVertical: spacing.lg,
+  },
+  growthCell: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  growthEmoji: {
+    fontSize: 28,
+    marginBottom: spacing.xs,
+  },
+  growthLabel: {
+    fontSize: fontSize.xs,
+    fontWeight: '600',
+    marginBottom: 2,
+  },
+  growthDays: {
+    fontSize: 10,
+  },
+  growthNote: {
+    padding: spacing.md,
+    borderRadius: 14,
+    marginTop: spacing.lg,
+    alignItems: 'center',
+  },
+  growthNoteText: {
+    fontSize: fontSize.sm,
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  growthSpacer: { flex: 1 },
   guideStep: {
     flex: 1,
     paddingHorizontal: spacing.lg,

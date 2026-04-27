@@ -17,6 +17,7 @@ import { hapticImpact, hapticNotification, ImpactFeedbackStyle, NotificationFeed
 import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing } from '@/constants/theme';
 import type { FlowResult } from '@/utils/streak';
+import { getCurrentStage, GROWTH_STAGES } from '@/constants/growth';
 
 interface HabitCardProps {
   name: string;
@@ -146,11 +147,15 @@ export function HabitCard({
     ),
   }));
 
+  const stage = getCurrentStage(flow.longestFlow);
+  const showStage = flow.longestFlow >= GROWTH_STAGES[1].threshold;
+  const showFlow = flow.currentFlowDays > 1;
+
   return (
     <GestureDetector gesture={composedGesture}>
       <Animated.View
         style={[styles.card, cardAnimStyle]}
-        accessibilityLabel={`${name} ${completed ? '완료됨' : '미완료'}${flow.currentFlowDays > 1 ? ` 흐름 ${flow.currentFlowDays}일째` : ''}`}
+        accessibilityLabel={`${name} ${completed ? '완료됨' : '미완료'}${showStage ? ` ${stage.label} 단계` : ''}${showFlow ? ` 흐름 ${flow.currentFlowDays}일째` : ''}`}
         accessibilityRole="checkbox"
         accessibilityState={{ checked: completed }}
         accessibilityHint="탭하여 체크, 길게 눌러 수정"
@@ -167,14 +172,16 @@ export function HabitCard({
             >
               {name}
             </Text>
-            {flow.currentFlowDays > 1 && (
+            {(showStage || showFlow) && (
               <Animated.Text
-                key={flow.currentFlowDays}
+                key={`${stage.id}-${flow.currentFlowDays}`}
                 entering={FadeInUp.duration(200)}
                 exiting={FadeOutUp.duration(150)}
                 style={[styles.flowText, { color }]}
               >
-                {flow.isBreathingToday ? '◌ ' : ''}흐름 {flow.currentFlowDays}일째
+                {showStage && `${stage.emoji} ${stage.label}`}
+                {showStage && showFlow && '  ·  '}
+                {showFlow && `${flow.isBreathingToday ? '◌ ' : ''}흐름 ${flow.currentFlowDays}일째`}
               </Animated.Text>
             )}
           </View>
