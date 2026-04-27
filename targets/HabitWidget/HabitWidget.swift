@@ -238,6 +238,83 @@ struct HabitWidgetMediumView: View {
     }
 }
 
+// MARK: - Lock Screen Accessory Views (iOS 16+)
+
+@available(iOS 16.0, *)
+struct HabitWidgetAccessoryCircularView: View {
+    let entry: HabitEntry
+
+    var completed: Int { entry.habits.filter { $0.completed }.count }
+    var total: Int { entry.habits.count }
+    var progress: Double {
+        guard total > 0 else { return 0 }
+        return Double(completed) / Double(total)
+    }
+
+    var body: some View {
+        Gauge(value: progress) {
+            Text("습관")
+        } currentValueLabel: {
+            Text("\(completed)/\(total)")
+                .font(.system(size: 12, weight: .bold))
+        }
+        .gaugeStyle(.accessoryCircular)
+    }
+}
+
+@available(iOS 16.0, *)
+struct HabitWidgetAccessoryRectangularView: View {
+    let entry: HabitEntry
+
+    var completed: Int { entry.habits.filter { $0.completed }.count }
+    var total: Int { entry.habits.count }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("오늘의 습관")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(.secondary)
+
+            if total == 0 {
+                Text("앱에서 추가해주세요")
+                    .font(.system(size: 12))
+            } else {
+                HStack(spacing: 8) {
+                    HStack(spacing: 4) {
+                        ForEach(entry.habits.prefix(3)) { habit in
+                            Image(systemName: habit.completed ? "checkmark.circle.fill" : "circle")
+                                .font(.system(size: 14))
+                        }
+                    }
+                    Spacer(minLength: 4)
+                    Text("\(completed)/\(total)")
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(1)
+                        .fixedSize()
+                }
+            }
+        }
+    }
+}
+
+@available(iOS 16.0, *)
+struct HabitWidgetAccessoryInlineView: View {
+    let entry: HabitEntry
+
+    var completed: Int { entry.habits.filter { $0.completed }.count }
+    var total: Int { entry.habits.count }
+
+    var body: some View {
+        if total == 0 {
+            Text("싹 — 습관 없음")
+        } else if completed == total {
+            Label("싹 \(completed)/\(total) 모두 완료", systemImage: "checkmark.seal.fill")
+        } else {
+            Label("싹 오늘 \(completed)/\(total)", systemImage: "leaf.fill")
+        }
+    }
+}
+
 // MARK: - Widget Entry View
 
 struct HabitWidgetEntryView: View {
@@ -248,9 +325,34 @@ struct HabitWidgetEntryView: View {
         switch family {
         case .systemSmall:
             HabitWidgetSmallView(entry: entry)
+        case .systemMedium:
+            HabitWidgetMediumView(entry: entry)
+        default:
+            if #available(iOS 16.0, *) {
+                accessoryView
+            } else {
+                HabitWidgetMediumView(entry: entry)
+            }
+        }
+    }
+
+    @available(iOS 16.0, *)
+    @ViewBuilder
+    private var accessoryView: some View {
+        #if os(iOS)
+        switch family {
+        case .accessoryCircular:
+            HabitWidgetAccessoryCircularView(entry: entry)
+        case .accessoryRectangular:
+            HabitWidgetAccessoryRectangularView(entry: entry)
+        case .accessoryInline:
+            HabitWidgetAccessoryInlineView(entry: entry)
         default:
             HabitWidgetMediumView(entry: entry)
         }
+        #else
+        HabitWidgetMediumView(entry: entry)
+        #endif
     }
 }
 
@@ -266,19 +368,64 @@ struct HabitWidgetBundle: WidgetBundle {
 struct HabitWidget: Widget {
     let kind: String = "HabitWidget"
 
+    private var families: [WidgetFamily] {
+        var f: [WidgetFamily] = [.systemSmall, .systemMedium]
+        #if os(iOS)
+        if #available(iOS 16.0, *) {
+            f.append(.accessoryCircular)
+            f.append(.accessoryRectangular)
+            f.append(.accessoryInline)
+        }
+        #endif
+        return f
+    }
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: HabitProvider()) { entry in
-            if #available(iOS 17.0, *) {
-                HabitWidgetEntryView(entry: entry)
-                    .containerBackground(CreamTheme.background, for: .widget)
-            } else {
-                HabitWidgetEntryView(entry: entry)
-                    .padding()
-                    .background()
-            }
+            HabitWidgetContainer { HabitWidgetEntryView(entry: entry) }
         }
         .configurationDisplayName("오늘의 습관")
         .description("습관 달성 현황을 한눈에 확인하세요")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies(families)
+    }
+}
+
+// Family-aware background: 시스템 위젯엔 크림 톤, 잠금화면 위젯엔 투명
+struct HabitWidgetContainer<Content: View>: View {
+    @Environment(\.widgetFamily) var family
+    let content: () -> Content
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    private var isAccessory: Bool {
+        #if os(iOS)
+        if #available(iOS 16.0, *) {
+            return family == .accessoryCircular || family == .accessoryRectangular || family == .accessoryInline
+        }
+        #endif
+        return false
+    }
+
+    var body: some View {
+        if #available(iOS 17.0, *) {
+            content()
+                .containerBackground(for: .widget) {
+                    if isAccessory {
+                        Color.clear
+                    } else {
+                        CreamTheme.background
+                    }
+                }
+        } else {
+            if isAccessory {
+                content()
+            } else {
+                content()
+                    .padding()
+                    .background(CreamTheme.background)
+            }
+        }
     }
 }
