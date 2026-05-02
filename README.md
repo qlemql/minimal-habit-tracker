@@ -1,14 +1,11 @@
 # Ssak — Minimal Habit Tracker
 
+**English** · [한국어](README.ko.md)
+
 > Just 3 habits. 5 seconds. Miss a day? Your flow continues.  
 > *Less is more. Less is kept.*
 
-📱 **[Download (Android APK)](https://expo.dev/accounts/daniel_hyun/projects/minimal-habit-tracker/builds/18495ca6-29e3-4eaa-885f-30bd9077aa63)** · iOS coming soon  
-🇰🇷 **[한국어 README](README.ko.md)**
-
-<p align="center">
-  <img src="assets/screenshots/main-screen.png" width="300" alt="Main screen" />
-</p>
+📱 Available on the App Store and Google Play
 
 ---
 
@@ -26,7 +23,7 @@ Behavioral research is consistent: people who try to build many habits at once b
 
 ### 2. Forgiving streaks ("Flow")
 
-Standard streak logic resets the counter to 0 the day you miss. The psychological effect is well documented: one missed day cascades into giving up entirely.
+Standard streak logic resets the counter to zero the day you miss. The psychological effect is well documented: one missed day cascades into giving up entirely.
 
 In Ssak, missing one day is a **pause inside the flow**. Two consecutive misses start a new flow. This matches what behavioral research actually says about habit formation — single gaps barely affect long-term outcomes, but the punishment of resetting is severe enough to kill the habit anyway.
 
@@ -77,7 +74,7 @@ In Ssak, missing one day is a **pause inside the flow**. Two consecutive misses 
 | 1.0.3 | 2026-04-28 | Lock-screen widgets (3 styles) |
 | 1.0.2 | 2026-04-27 | Sprout growth stages, brand-aligned celebration |
 | 1.0.1 | 2026-04-19 | Onboarding alarm setup, simplified habit presets |
-| 1.0.0 | 2026-04-12 | Public launch on Google Play |
+| 1.0.0 | 2026-04-12 | Public launch |
 
 ## Stack
 
