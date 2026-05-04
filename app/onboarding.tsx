@@ -36,8 +36,7 @@ const PRESETS: Omit<HabitDraft, 'reminderTime'>[] = [
   { id: 'p6', name: '일기 쓰기', icon: '✍️', color: habitColors[4] },
 ];
 
-const GROWTH_STEP = 3;
-const GUIDE_STEP = 4;
+const GUIDE_STEP = 3;
 
 function AnimatedCounterDot({ filled, accentColor, inactiveColor }: { filled: boolean; accentColor: string; inactiveColor: string }) {
   return (
@@ -119,12 +118,12 @@ export default function OnboardingScreen() {
   const skipAlarm = () => {
     hapticImpact(ImpactFeedbackStyle.Light);
     setSelected((prev) => prev.map((h) => ({ ...h, reminderTime: null })));
-    setStep(GROWTH_STEP);
+    setStep(GUIDE_STEP);
   };
 
   const confirmAlarm = () => {
     hapticImpact(ImpactFeedbackStyle.Light);
-    setStep(GROWTH_STEP);
+    setStep(GUIDE_STEP);
   };
 
   const handleFinish = async () => {
@@ -402,56 +401,6 @@ export default function OnboardingScreen() {
         </Animated.View>
       )}
 
-      {step === GROWTH_STEP && (
-        <Animated.View
-          entering={SlideInRight.duration(300)}
-          style={styles.growthStep}
-        >
-          <Text style={[styles.stepTitle, { color: colors.textPrimary }]}>
-            꾸준할수록 자라요
-          </Text>
-          <Text style={[styles.growthSubtitle, { color: colors.textSecondary }]}>
-            매일 한 탭이면 충분해요.{'\n'}흐름이 이어지면 싹이 자라요.
-          </Text>
-
-          <View style={styles.growthStrip}>
-            {GROWTH_STAGES.map((stage, i) => (
-              <View key={stage.id} style={styles.growthCell}>
-                <Text style={styles.growthEmoji}>{stage.emoji}</Text>
-                <Text style={[styles.growthLabel, { color: colors.textPrimary }]}>
-                  {stage.label}
-                </Text>
-                <Text style={[styles.growthDays, { color: colors.textMuted }]}>
-                  {i === 0 ? '시작' : `${stage.threshold}일`}
-                </Text>
-              </View>
-            ))}
-          </View>
-
-          <View style={[styles.growthNote, { backgroundColor: colors.surface }]}>
-            <Text style={[styles.growthNoteText, { color: colors.textSecondary }]}>
-              단계가 오르면 새 색상과 아이콘이 함께 자라요
-            </Text>
-          </View>
-
-          <View style={styles.growthSpacer} />
-
-          <Pressable
-            style={({ pressed }) => [
-              styles.primaryButton,
-              { backgroundColor: colors.accent },
-              pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
-            ]}
-            onPress={() => {
-              hapticImpact(ImpactFeedbackStyle.Light);
-              setStep(GUIDE_STEP);
-            }}
-          >
-            <Text style={styles.primaryButtonText}>다음</Text>
-          </Pressable>
-        </Animated.View>
-      )}
-
       {step === GUIDE_STEP && (
         <Animated.View
           entering={SlideInRight.duration(300)}
@@ -461,7 +410,24 @@ export default function OnboardingScreen() {
             이렇게 사용해요
           </Text>
 
-          <View style={styles.guideList}>
+          <ScrollView style={styles.guideList} showsVerticalScrollIndicator={false}>
+            <View style={[styles.guideCardHighlight, { backgroundColor: colors.accent + '15', borderColor: colors.accent + '30' }]}>
+              <Text style={[styles.guideHighlightTitle, { color: colors.textPrimary, marginBottom: spacing.xs }]}>
+                꾸준할수록 자라요
+              </Text>
+              <Text style={[styles.guideHighlightDesc, { color: colors.textSecondary, marginBottom: spacing.md }]}>
+                매일 한 탭이 단계가 되어 자라요
+              </Text>
+              <View style={styles.growthStrip}>
+                {GROWTH_STAGES.map((stage) => (
+                  <View key={stage.id} style={styles.growthCell}>
+                    <Text style={styles.growthEmoji}>{stage.emoji}</Text>
+                    <Text style={[styles.growthLabel, { color: colors.textPrimary }]}>{stage.label}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+
             <View style={[styles.guideCardHighlight, { backgroundColor: colors.accent + '15', borderColor: colors.accent + '30' }]}>
               <Text style={styles.guideHighlightEmoji}>🌊</Text>
               <Text style={[styles.guideHighlightTitle, { color: colors.textPrimary }]}>
@@ -496,7 +462,7 @@ export default function OnboardingScreen() {
               </View>
             </View>
 
-            <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
+            <View style={[styles.guideCard, { backgroundColor: colors.surface, marginBottom: spacing.md }]}>
               <Text style={styles.guideEmoji}>📅</Text>
               <View style={styles.guideTextWrap}>
                 <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>스와이프로 주간 이동</Text>
@@ -505,7 +471,7 @@ export default function OnboardingScreen() {
                 </Text>
               </View>
             </View>
-          </View>
+          </ScrollView>
 
           <Pressable
             style={({ pressed }) => [
@@ -718,51 +684,24 @@ const styles = StyleSheet.create({
     fontSize: fontSize.sm,
     textDecorationLine: 'underline',
   },
-  growthStep: {
-    flex: 1,
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.xl,
-  },
-  growthSubtitle: {
-    fontSize: fontSize.sm,
-    lineHeight: 22,
-    marginTop: spacing.xs,
-    marginBottom: spacing.xl,
-  },
   growthStrip: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    paddingVertical: spacing.lg,
+    width: '100%',
   },
   growthCell: {
     flex: 1,
     alignItems: 'center',
   },
   growthEmoji: {
-    fontSize: 28,
-    marginBottom: spacing.xs,
-  },
-  growthLabel: {
-    fontSize: fontSize.xs,
-    fontWeight: '600',
+    fontSize: 24,
     marginBottom: 2,
   },
-  growthDays: {
+  growthLabel: {
     fontSize: 10,
+    fontWeight: '600',
   },
-  growthNote: {
-    padding: spacing.md,
-    borderRadius: 14,
-    marginTop: spacing.lg,
-    alignItems: 'center',
-  },
-  growthNoteText: {
-    fontSize: fontSize.sm,
-    textAlign: 'center',
-    lineHeight: 20,
-  },
-  growthSpacer: { flex: 1 },
   guideStep: {
     flex: 1,
     paddingHorizontal: spacing.lg,
