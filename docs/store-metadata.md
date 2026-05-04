@@ -161,7 +161,7 @@ habit,tracker,routine,self-care,motivation,daily,checklist,growth,minimal,simple
 
 ## 버전별 업데이트 소개 (What's New)
 
-### v1.0.3 (2026-04-28)
+### v1.0.3 (2026-05-04)
 ```
 잠금 화면에서도 만나요.
 
@@ -170,15 +170,16 @@ habit,tracker,routine,self-care,motivation,daily,checklist,growth,minimal,simple
   - 진행률 링 (작은 동그라미)
   - 도트 + 카운트 (가로형)
 
-• 잠금 풀지 않고 오늘의 습관 현황 확인
-  잠깐 화면만 켜도 충분해요.
+• 시작하기가 더 쉬워졌어요
+  성장 안내와 사용 가이드를 한 화면에 합쳐
+  4단계로 정리했습니다.
 
 작은 한 탭, 잠깐의 확인만으로 오늘이 자라요.
 ```
 
 **릴리즈 설정**
 - 출시 방식: 승인 후 자동 출시
-- 변경 범위: iOS 위젯 익스텐션 추가 (앱 본체 동작 변화 없음)
+- 변경 범위: 잠금 화면 위젯 익스텐션 추가 + 온보딩 단계 통합
 
 ### v1.0.2 (2026-04-27)
 ```
