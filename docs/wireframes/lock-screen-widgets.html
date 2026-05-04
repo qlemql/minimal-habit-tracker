@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>잠금 화면 위젯 와이어프레임 — 싹</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', sans-serif;
+    background: #2D2016;
+    color: #FFF8F0;
+    padding: 40px 20px;
+    line-height: 1.5;
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #FFF8F0;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #B5A899;
+    margin-bottom: 40px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .scene {
+    background: linear-gradient(180deg, #1a1a1a 0%, #2a1f1a 100%);
+    border-radius: 32px;
+    padding: 24px 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .scene-label {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5B8C6A;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .phone-frame {
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1410 100%);
+    border-radius: 40px;
+    border: 8px solid #2a2a2a;
+    padding: 32px 20px 60px;
+    min-height: 480px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 3px;
+  }
+  .lock-date {
+    color: #ccc;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 4px;
+  }
+  .inline-slot {
+    text-align: center;
+    color: #f0f0f0;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    min-height: 18px;
+    opacity: 0.85;
+  }
+  .lock-time {
+    color: #fff;
+    font-size: 64px;
+    font-weight: 200;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+  }
+  .below-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    min-height: 56px;
+  }
+  /* Circular widget */
+  .circular {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    position: relative;
+  }
+  .circular-progress {
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    background: conic-gradient(rgba(255,255,255,0.9) 0% 33%, transparent 33% 100%);
+    -webkit-mask: radial-gradient(circle, transparent 22px, black 24px);
+    mask: radial-gradient(circle, transparent 22px, black 24px);
+  }
+  .circular-num {
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 1;
+  }
+  .circular-label {
+    font-size: 8px;
+    color: rgba(255,255,255,0.7);
+    z-index: 1;
+    margin-top: -1px;
+  }
+  /* Rectangular widget */
+  .rectangular {
+    width: 170px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.04);
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+  }
+  .rect-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 3px;
+  }
+  .rect-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .rect-dots {
+    display: flex;
+    gap: 4px;
+  }
+  .rect-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .rect-dot.done {
+    background: rgba(255,255,255,0.9);
+    border-color: rgba(255,255,255,0.9);
+  }
+  .rect-progress {
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: auto;
+  }
+  /* Empty placeholder slot */
+  .placeholder {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    border: 1.5px dashed rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.25);
+    font-size: 10px;
+  }
+  .annotation {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: rgba(91, 140, 106, 0.12);
+    border-left: 3px solid #5B8C6A;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #E8E0D0;
+  }
+  .annotation strong {
+    color: #FFF8F0;
+  }
+  .key {
+    margin-top: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+  }
+  .key h2 {
+    font-size: 14px;
+    color: #5B8C6A;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .key-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px;
+    font-size: 12px;
+    color: #B5A899;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .key-row strong {
+    color: #FFF8F0;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 11px;
+    color: #8C7B6B;
+  }
+</style>
+</head>
+<body>
+  <h1>잠금 화면 위젯 — 3종 와이어프레임</h1>
+  <p class="subtitle">iOS 16+ 잠금 화면. 시스템이 자동으로 흑백 처리. 색상 의존 X</p>
+
+  <div class="grid">
+
+    <!-- Scene 1: Circular -->
+    <div class="scene">
+      <div class="scene-label">accessoryCircular (원형)</div>
+      <div class="phone-frame">
+        <div class="lock-date">4월 27일 화요일</div>
+        <div class="inline-slot"></div>
+        <div class="lock-time">9:41</div>
+        <div class="below-time">
+          <div class="placeholder">+</div>
+          <div class="circular">
+            <div class="circular-progress"></div>
+            <div class="circular-num">1/3</div>
+            <div class="circular-label">습관</div>
+          </div>
+          <div class="placeholder">+</div>
+          <div class="placeholder">+</div>
+        </div>
+      </div>
+      <div class="annotation">
+        <strong>한 번에 보임</strong> — 진행률 링 + <code>1/3</code> 숫자.<br>
+        4개 슬롯 중 1개 차지. 가장 컴팩트하고 정보 밀도 최적.
+      </div>
+    </div>
+
+    <!-- Scene 2: Rectangular -->
+    <div class="scene">
+      <div class="scene-label">accessoryRectangular (가로)</div>
+      <div class="phone-frame">
+        <div class="lock-date">4월 27일 화요일</div>
+        <div class="inline-slot"></div>
+        <div class="lock-time">9:41</div>
+        <div class="below-time">
+          <div class="rectangular">
+            <div class="rect-label">오늘의 습관</div>
+            <div class="rect-row">
+              <div class="rect-dots">
+                <div class="rect-dot done"></div>
+                <div class="rect-dot"></div>
+                <div class="rect-dot"></div>
+              </div>
+              <div class="rect-progress">1/3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <strong>3개 도트 한눈에</strong> — 어떤 게 됐고 안 됐는지 바로 파악.<br>
+        2개 슬롯 차지. 글자 + 시각 균형이 좋음. 추천.
+      </div>
+    </div>
+
+    <!-- Scene 3: Inline -->
+    <div class="scene">
+      <div class="scene-label">accessoryInline (한 줄)</div>
+      <div class="phone-frame">
+        <div class="lock-date">4월 27일 화요일</div>
+        <div class="inline-slot">🌱 오늘 1/3</div>
+        <div class="lock-time">9:41</div>
+        <div class="below-time">
+          <div class="placeholder">+</div>
+          <div class="placeholder">+</div>
+          <div class="placeholder">+</div>
+          <div class="placeholder">+</div>
+        </div>
+      </div>
+      <div class="annotation">
+        <strong>시계 위 한 줄</strong> — 위젯 슬롯 안 쓰고 텍스트만.<br>
+        가장 가벼움. 잠금 풀기 직전 0.5초 인식.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="key">
+    <h2>설계 원칙</h2>
+    <div class="key-row"><strong>색상</strong><span>iOS 시스템이 자동 흑백/투명 처리. 브랜드 색 의존 안 함.</span></div>
+    <div class="key-row"><strong>데이터</strong><span>기존 위젯과 동일 SharedDefaults. 추가 데이터 인프라 불필요.</span></div>
+    <div class="key-row"><strong>타이밍</strong><span>홈 위젯과 같은 15분 갱신 정책.</span></div>
+    <div class="key-row"><strong>탭 동작</strong><span>탭하면 앱 실행 (deeplink 없음, 메인 화면).</span></div>
+    <div class="key-row"><strong>제약</strong><span>이모지(🌱) 노출은 시스템 폰트 기준이라 모노크롬에서 흐릿할 수 있음 — 텍스트 우선.</span></div>
+  </div>
+
+  <div class="footer">
+    싹 - 습관 트래커 · 잠금 화면 위젯 v1.0.3 후보 · 2026-04-27
+  </div>
+</body>
+</html>

@@ -693,35 +693,31 @@ body {
 </style>
 </head>
 <body>
-<div class="screenshots"><div class="frame" style="background: linear-gradient(180deg, #FFF8F0 0%, #E8F5E9 100%);">
+<div class="screenshots"><div class="frame" style="background: linear-gradient(180deg, #FFF8F0 0%, #E8F1E5 100%);">
   <div class="screen-num">4</div>
   <div class="marketing">
-    <h2 style="color: #2D2016;">오늘의 습관,<br>모두 자랐어요!</h2>
-    <p style="color: #8C7B6B;">매일의 작은 성취를 축하해요</p>
+    <h2 style="color: #2D2016;">오늘도 잘<br>자랐어요</h2>
+    <p style="color: #8C7B6B;">매일의 체크가 싹으로 자라요</p>
   </div>
   <div class="app-screen" style="background: var(--bg); position: relative;">
-    <div class="app-inner" style="filter: blur(1px); opacity: 0.4;">
-      <div class="status-bar"><span>9:41</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
-      <div class="app-header">
-        <div class="app-header-row"><div><div class="greeting">저녁이에요</div><div class="date">4월 15일 화요일</div></div><div class="settings-btn">⚙️</div></div>
+    <!-- 메인 축하 컨텐츠 -->
+    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 60px;">
+      <!-- 큰 emoji -->
+      <div style="font-size: 280px; line-height: 1; margin-bottom: 56px;">🌿</div>
+      <!-- 타이틀 -->
+      <div style="font-size: 80px; font-weight: 800; color: #2D2016; text-align: center; margin-bottom: 28px; line-height: 1.2;">오늘도 잘 자랐어요</div>
+      <!-- 단계 chip -->
+      <div style="background: #5B8C6A; color: white; padding: 16px 48px; border-radius: 999px; font-size: 42px; font-weight: 700; letter-spacing: 2px; margin-bottom: 96px;">떡잎</div>
+
+      <!-- progress strip (숫자 없음, 현재만 강조) -->
+      <div style="display: flex; gap: 22px; align-items: center;">
+        <div style="opacity: 0.3; font-size: 56px;">🌰</div>
+        <div style="opacity: 0.3; font-size: 56px;">🌱</div>
+        <div style="font-size: 88px;">🌿</div>
+        <div style="opacity: 0.3; font-size: 56px;">🎋</div>
+        <div style="opacity: 0.3; font-size: 56px;">🌷</div>
+        <div style="opacity: 0.3; font-size: 56px;">🌸</div>
       </div>
-      <div class="habit-card" style="background: rgba(74,144,217,0.08);"><div class="habit-icon-circle" style="background:rgba(74,144,217,0.15);">💧</div><div class="habit-info"><div class="habit-name">물 2L 마시기</div></div><div class="habit-check checked" style="background:#4A90D9;"></div></div>
-      <div class="habit-card" style="background: rgba(255,107,107,0.08);"><div class="habit-icon-circle" style="background:rgba(255,107,107,0.15);">🏃</div><div class="habit-info"><div class="habit-name">30분 운동</div></div><div class="habit-check checked" style="background:#FF6B6B;"></div></div>
-      <div class="habit-card" style="background: rgba(123,104,238,0.08);"><div class="habit-icon-circle" style="background:rgba(123,104,238,0.15);">📖</div><div class="habit-info"><div class="habit-name">독서 30분</div></div><div class="habit-check checked" style="background:#7B68EE;"></div></div>
-    </div>
-    <!-- 컨페티 -->
-    <div class="confetti" style="top:8%;left:15%;background:#4A90D9;transform:rotate(25deg);width:12px;height:12px;"></div>
-    <div class="confetti" style="top:12%;left:75%;background:#FF6B6B;transform:rotate(-15deg);width:8px;height:14px;"></div>
-    <div class="confetti" style="top:20%;left:30%;background:#FFD43B;transform:rotate(45deg);width:10px;height:10px;"></div>
-    <div class="confetti" style="top:6%;left:55%;background:#7B68EE;transform:rotate(-30deg);width:14px;height:8px;"></div>
-    <div class="confetti" style="top:25%;left:65%;background:#51CF66;transform:rotate(60deg);width:8px;height:12px;"></div>
-    <div class="confetti" style="top:15%;left:45%;background:#FF922B;transform:rotate(10deg);width:12px;height:8px;"></div>
-    <div class="confetti" style="top:30%;left:20%;background:#DA77F2;transform:rotate(-45deg);width:10px;height:10px;"></div>
-    <div class="confetti" style="top:10%;left:85%;background:#20C997;transform:rotate(35deg);width:8px;height:14px;"></div>
-    <div class="celebrate-overlay">
-      <div class="celebrate-emoji">🎉</div>
-      <div class="celebrate-title">오늘도 해냈어요!</div>
-      <div class="celebrate-sub">꾸준함이 만드는 변화</div>
     </div>
   </div>
 </div></div>
