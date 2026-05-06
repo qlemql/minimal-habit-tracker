@@ -3,8 +3,15 @@ import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, StyleSheet, Appearance } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import * as Notifications from 'expo-notifications';
 import { useThemeStore } from '@/store/themeStore';
 import { useOnboardingStore } from '@/store/onboardingStore';
+import { useHabitStore } from '@/store/habitStore';
+import {
+  setupNotificationCategories,
+  HABIT_TOGGLE_ACTION,
+} from '@/utils/notifications';
+import { syncWidgetData } from '@/utils/widgetData';
 
 export default function RootLayout() {
   const colors = useThemeStore((s) => s.getColors());
@@ -19,6 +26,41 @@ export default function RootLayout() {
     // Zustand persist 로드 대기
     const timer = setTimeout(() => setReady(true), 100);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // 카테고리 등록은 알림이 도착하기 전에 끝나야 함 — 앱 시작 시 한 번
+    setupNotificationCategories().catch(() => {});
+
+    // 잠금화면/알림센터에서 "완료" 버튼 또는 알림 탭 → 처리
+    const sub = Notifications.addNotificationResponseReceivedListener(
+      (response) => {
+        const habitId = response.notification.request.content.data?.habitId as
+          | string
+          | undefined;
+        if (!habitId) return;
+        // 액션 버튼 "완료"만 토글 — 알림 본문 탭은 앱 진입(기본 동작)
+        if (response.actionIdentifier === HABIT_TOGGLE_ACTION) {
+          useHabitStore.getState().toggleHabit(habitId);
+          syncWidgetData().catch(() => {});
+        }
+      }
+    );
+
+    // 콜드 스타트: 앱 종료 상태에서 액션을 눌렀을 경우 큐된 응답 처리
+    Notifications.getLastNotificationResponseAsync().then((response) => {
+      if (!response) return;
+      const habitId = response.notification.request.content.data?.habitId as
+        | string
+        | undefined;
+      if (!habitId) return;
+      if (response.actionIdentifier === HABIT_TOGGLE_ACTION) {
+        useHabitStore.getState().toggleHabit(habitId);
+        syncWidgetData().catch(() => {});
+      }
+    });
+
+    return () => sub.remove();
   }, []);
 
   useEffect(() => {

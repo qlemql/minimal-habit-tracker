@@ -1,11 +1,11 @@
 import { useHabitStore } from '@/store/habitStore';
 import { getToday } from './date';
 import { calculateFlow } from './streak';
-import { setSharedDefault } from './sharedDefaults';
+import { Platform } from 'react-native';
+import { setSharedDefault, getSharedDefault } from './sharedDefaults';
 
 const WIDGET_DATA_KEY = 'widgetHabits';
 
-// 위젯에 전달할 데이터 구조
 export interface WidgetHabit {
   id: string;
   name: string;
@@ -15,7 +15,6 @@ export interface WidgetHabit {
   flowDays: number;
 }
 
-// 위젯용 데이터 생성
 export function getWidgetData(): WidgetHabit[] {
   const { habits, logs, isHabitCompleted } = useHabitStore.getState();
   const today = getToday();
@@ -33,8 +32,31 @@ export function getWidgetData(): WidgetHabit[] {
     }));
 }
 
-// 위젯 데이터를 App Group UserDefaults에 동기화
 export async function syncWidgetData(): Promise<void> {
   const data = getWidgetData();
   await setSharedDefault(WIDGET_DATA_KEY, JSON.stringify(data));
+}
+
+/**
+ * Android 위젯의 tap-to-check 큐를 처리
+ * 앱 포그라운드 전환 시 호출 — 큐의 habitId들에 대해 toggleHabit 수행 후 큐 비움
+ */
+export async function processPendingWidgetToggles(): Promise<void> {
+  if (Platform.OS !== 'android') return;
+  const raw = await getSharedDefault('widgetPendingToggles');
+  if (!raw) return;
+  try {
+    const queue = JSON.parse(raw) as string[];
+    if (!Array.isArray(queue) || queue.length === 0) return;
+    const { toggleHabit } = useHabitStore.getState();
+    for (const habitId of queue) {
+      toggleHabit(habitId);
+    }
+    // 큐 비우기
+    await setSharedDefault('widgetPendingToggles', JSON.stringify([]));
+    // 변경된 store 상태로 위젯 재동기화
+    await syncWidgetData();
+  } catch (e) {
+    console.warn('[Widget] process pending failed:', e);
+  }
 }

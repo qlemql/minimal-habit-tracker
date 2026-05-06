@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 
 let SharedDefaultsModule: any = null;
 
-if (Platform.OS === 'ios') {
+if (Platform.OS === 'ios' || Platform.OS === 'android') {
   try {
     const { requireNativeModule } = require('expo-modules-core');
     SharedDefaultsModule = requireNativeModule('SharedDefaultsModule');

@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Linking, Alert } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Linking, Alert, Switch, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
@@ -6,6 +6,8 @@ import { hapticImpact, ImpactFeedbackStyle } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import { useHabitStore } from '@/store/habitStore';
 import { useRewardStore } from '@/store/rewardStore';
+import { useSettingsStore } from '@/store/settingsStore';
+import { rescheduleAllReminders } from '@/utils/notifications';
 import { REWARD_TIERS } from '@/constants/rewards';
 // onboardingStore no longer needed for guide
 import { fontSize, spacing } from '@/constants/theme';
@@ -32,6 +34,19 @@ export default function SettingsScreen() {
   const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
   const nextTier = REWARD_TIERS.find((t) => t.flowDays > maxFlowEver);
   const unlockedCount = REWARD_TIERS.filter((t) => t.flowDays <= maxFlowEver).length;
+  const lockScreenActionEnabled = useSettingsStore((s) => s.lockScreenActionEnabled);
+  const setLockScreenActionEnabled = useSettingsStore((s) => s.setLockScreenActionEnabled);
+
+  const handleToggleLockScreenAction = async (value: boolean) => {
+    hapticImpact(ImpactFeedbackStyle.Light);
+    setLockScreenActionEnabled(value);
+    // 기존 예약 알림에 categoryIdentifier 적용/해제 위해 재등록
+    try {
+      await rescheduleAllReminders();
+    } catch {
+      // 실패해도 토글 상태는 유지 — 다음 알림 등록 시 자동 반영됨
+    }
+  };
 
   const handleFeedback = async () => {
     const canOpen = await Linking.canOpenURL(`mailto:${FEEDBACK_EMAIL}`);
@@ -151,6 +166,31 @@ export default function SettingsScreen() {
               )}
             </Pressable>
           ))}
+        </View>
+
+        {/* 알림 */}
+        <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
+          알림
+        </Text>
+        <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
+          <View style={styles.option}>
+            <Text style={styles.optionIcon}>🔔</Text>
+            <View style={styles.optionTextWrap}>
+              <Text style={[styles.optionTitle, { color: colors.textPrimary }]}>
+                잠금화면에서 체크
+              </Text>
+              <Text style={[styles.optionHint, { color: colors.textMuted }]}>
+                알림에 완료 버튼이 표시돼요
+              </Text>
+            </View>
+            <Switch
+              value={lockScreenActionEnabled}
+              onValueChange={handleToggleLockScreenAction}
+              trackColor={{ false: colors.inactive, true: colors.accent }}
+              thumbColor={Platform.OS === 'android' ? '#FFFFFF' : undefined}
+              ios_backgroundColor={colors.inactive}
+            />
+          </View>
         </View>
 
         {/* 일반 */}
@@ -306,6 +346,16 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: fontSize.md,
     flex: 1,
+  },
+  optionTextWrap: {
+    flex: 1,
+  },
+  optionTitle: {
+    fontSize: fontSize.md,
+  },
+  optionHint: {
+    fontSize: fontSize.xs,
+    marginTop: 2,
   },
   checkCircle: {
     width: 22,

@@ -53,7 +53,8 @@
     "plugins": [
       "expo-router",
       "@bacons/apple-targets",
-      "./plugins/withSharedDefaults"
+      "./plugins/withSharedDefaults",
+      "./plugins/withAndroidWidget"
     ],
     "extra": {
       "eas": {

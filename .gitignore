@@ -42,3 +42,11 @@ yarn-error.*
 node_modules/
 dist/
 .expo/
+
+# expo module build artifacts
+modules/*/android/build/
+modules/*/android/.cxx/
+modules/*/ios/build/
+
+# Claude Code local state
+.claude/

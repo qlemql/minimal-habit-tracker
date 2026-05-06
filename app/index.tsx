@@ -19,7 +19,7 @@ import { getToday } from '@/utils/date';
 import { useThemeStore } from '@/store/themeStore';
 import { useRewardStore } from '@/store/rewardStore';
 import { UnlockToast } from '@/components/UnlockToast';
-import { syncWidgetData } from '@/utils/widgetData';
+import { syncWidgetData, processPendingWidgetToggles } from '@/utils/widgetData';
 import { fontSize, spacing } from '@/constants/theme';
 
 function getGreeting(): string {
@@ -42,10 +42,12 @@ export default function HomeScreen() {
   const greeting = useMemo(() => getGreeting(), [today]);
 
   useEffect(() => {
+    // 첫 마운트 시에도 위젯 큐 처리 (콜드 스타트)
+    processPendingWidgetToggles();
     const sub = AppState.addEventListener('change', (state) => {
       if (state === 'active') {
         setToday(getToday());
-        syncWidgetData();
+        processPendingWidgetToggles().then(() => syncWidgetData());
       }
     });
     return () => sub.remove();
