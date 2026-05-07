@@ -8,6 +8,7 @@ const path = require('path');
 
 const WIDGET_PROVIDER_NAME = 'com.qlemql.minimalhabittracker.widget.HabitWidgetProvider';
 const WIDGET_ACTION_TOGGLE = 'com.qlemql.minimalhabittracker.widget.ACTION_TOGGLE';
+const WIDGET_ACTION_MIDNIGHT = 'com.qlemql.minimalhabittracker.widget.ACTION_MIDNIGHT_REFRESH';
 const WIDGET_RECEIVER_EXTRA_NAME = 'com.qlemql.minimalhabittracker.widget.HabitWidgetReceiver';
 
 /**
@@ -31,6 +32,7 @@ function withWidgetManifest(config) {
             action: [
               { $: { 'android:name': 'android.appwidget.action.APPWIDGET_UPDATE' } },
               { $: { 'android:name': WIDGET_ACTION_TOGGLE } },
+              { $: { 'android:name': WIDGET_ACTION_MIDNIGHT } },
             ],
           },
         ],

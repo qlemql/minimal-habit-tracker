@@ -8,8 +8,56 @@ struct WidgetHabit: Codable, Identifiable {
     let name: String
     let icon: String
     let color: String
-    let completed: Bool
-    let flowDays: Int
+    // 최근 90일간 완료 날짜 목록 (YYYY-MM-DD). 위젯이 "오늘"을 자체 판정.
+    let completedDates: [String]
+}
+
+// MARK: - Date helpers (위젯 자체 판정)
+
+enum WidgetDate {
+    static let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        f.calendar = Calendar(identifier: .gregorian)
+        f.timeZone = TimeZone.current
+        f.locale = Locale(identifier: "en_US_POSIX")
+        return f
+    }()
+
+    static func todayKey(_ now: Date = Date()) -> String {
+        return formatter.string(from: now)
+    }
+}
+
+extension WidgetHabit {
+    /// 오늘 체크 여부 — 위젯 렌더 시점의 시스템 날짜로 판정
+    func isCompletedToday(now: Date = Date()) -> Bool {
+        return completedDates.contains(WidgetDate.todayKey(now))
+    }
+
+    /// 현재 흐름 일수 — streak.ts의 calculateFlow 포팅
+    /// 오늘부터 거꾸로 탐색, 실제 수행한 날만 카운트, 2일 연속 미완료 시 끊김
+    func currentFlowDays(now: Date = Date()) -> Int {
+        let completedSet = Set(completedDates)
+        var flowDays = 0
+        var consecutiveMisses = 0
+        let calendar = Calendar(identifier: .gregorian)
+        var checkDate = calendar.startOfDay(for: now)
+
+        for _ in 0..<365 {
+            let dateStr = WidgetDate.formatter.string(from: checkDate)
+            if completedSet.contains(dateStr) {
+                flowDays += 1
+                consecutiveMisses = 0
+            } else {
+                consecutiveMisses += 1
+                if consecutiveMisses >= 2 { break }
+            }
+            guard let prev = calendar.date(byAdding: .day, value: -1, to: checkDate) else { break }
+            checkDate = prev
+        }
+        return flowDays
+    }
 }
 
 // MARK: - Timeline Provider
@@ -29,10 +77,14 @@ struct HabitProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<HabitEntry>) -> Void) {
         let habits = loadHabits()
-        let entry = HabitEntry(date: Date(), habits: habits)
+        let now = Date()
+        let entry = HabitEntry(date: now, habits: habits)
 
-        let nextUpdate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+        // 자정에 자동 reload — 다음 timeline에서 시스템 날짜가 새 날로 바뀌어 있음
+        // → completedDates에 오늘 날짜가 없으니 자연스럽게 "미완료"로 표시됨
+        let calendar = Calendar(identifier: .gregorian)
+        let tomorrow = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: now)!)
+        let timeline = Timeline(entries: [entry], policy: .after(tomorrow))
         completion(timeline)
     }
 
@@ -46,10 +98,18 @@ struct HabitProvider: TimelineProvider {
     }
 
     private var sampleHabits: [WidgetHabit] {
-        [
-            WidgetHabit(id: "1", name: "물 마시기", icon: "💧", color: "#4A90D9", completed: true, flowDays: 5),
-            WidgetHabit(id: "2", name: "운동하기", icon: "🏃", color: "#FF6B6B", completed: false, flowDays: 3),
-            WidgetHabit(id: "3", name: "독서하기", icon: "📖", color: "#7B68EE", completed: false, flowDays: 7),
+        let today = WidgetDate.todayKey()
+        let calendar = Calendar(identifier: .gregorian)
+        let yesterday = WidgetDate.formatter.string(
+            from: calendar.date(byAdding: .day, value: -1, to: Date())!
+        )
+        return [
+            WidgetHabit(id: "1", name: "물 마시기", icon: "💧", color: "#4A90D9",
+                        completedDates: [yesterday, today]),
+            WidgetHabit(id: "2", name: "운동하기", icon: "🏃", color: "#FF6B6B",
+                        completedDates: [yesterday]),
+            WidgetHabit(id: "3", name: "독서하기", icon: "📖", color: "#7B68EE",
+                        completedDates: []),
         ]
     }
 }
@@ -90,13 +150,16 @@ struct HabitRowView: View {
     let habit: WidgetHabit
 
     var body: some View {
+        let completed = habit.isCompletedToday()
+        let flowDays = habit.currentFlowDays()
+
         HStack(alignment: .center, spacing: 8) {
             ZStack {
                 Circle()
-                    .fill(habit.completed ? Color(hex: habit.color) : Color(hex: habit.color).opacity(0.15))
+                    .fill(completed ? Color(hex: habit.color) : Color(hex: habit.color).opacity(0.15))
                     .frame(width: 26, height: 26)
 
-                if habit.completed {
+                if completed {
                     Image(systemName: "checkmark")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(.white)
@@ -108,15 +171,15 @@ struct HabitRowView: View {
             .frame(width: 26, height: 26)
 
             Text(habit.name)
-                .font(.system(size: 13, weight: habit.completed ? .semibold : .regular))
-                .foregroundColor(habit.completed ? Color(hex: habit.color) : CreamTheme.textPrimary)
+                .font(.system(size: 13, weight: completed ? .semibold : .regular))
+                .foregroundColor(completed ? Color(hex: habit.color) : CreamTheme.textPrimary)
                 .lineLimit(1)
                 .truncationMode(.tail)
 
             Spacer(minLength: 4)
 
-            if habit.flowDays > 0 {
-                Text("\(habit.flowDays)일")
+            if flowDays > 0 {
+                Text("\(flowDays)일")
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(Color(hex: habit.color))
                     .lineLimit(1)
@@ -131,7 +194,7 @@ struct HabitWidgetSmallView: View {
     let entry: HabitEntry
 
     var completedCount: Int {
-        entry.habits.filter { $0.completed }.count
+        entry.habits.filter { $0.isCompletedToday() }.count
     }
 
     var allCompleted: Bool {
@@ -176,7 +239,7 @@ struct HabitWidgetMediumView: View {
     let entry: HabitEntry
 
     var completedCount: Int {
-        entry.habits.filter { $0.completed }.count
+        entry.habits.filter { $0.isCompletedToday() }.count
     }
 
     var allCompleted: Bool {
@@ -244,7 +307,7 @@ struct HabitWidgetMediumView: View {
 struct HabitWidgetAccessoryCircularView: View {
     let entry: HabitEntry
 
-    var completed: Int { entry.habits.filter { $0.completed }.count }
+    var completed: Int { entry.habits.filter { $0.isCompletedToday() }.count }
     var total: Int { entry.habits.count }
     var progress: Double {
         guard total > 0 else { return 0 }
@@ -266,7 +329,7 @@ struct HabitWidgetAccessoryCircularView: View {
 struct HabitWidgetAccessoryRectangularView: View {
     let entry: HabitEntry
 
-    var completed: Int { entry.habits.filter { $0.completed }.count }
+    var completed: Int { entry.habits.filter { $0.isCompletedToday() }.count }
     var total: Int { entry.habits.count }
 
     var body: some View {
@@ -282,7 +345,7 @@ struct HabitWidgetAccessoryRectangularView: View {
                 HStack(spacing: 8) {
                     HStack(spacing: 4) {
                         ForEach(entry.habits.prefix(3)) { habit in
-                            Image(systemName: habit.completed ? "checkmark.circle.fill" : "circle")
+                            Image(systemName: habit.isCompletedToday() ? "checkmark.circle.fill" : "circle")
                                 .font(.system(size: 14))
                         }
                     }
@@ -301,7 +364,7 @@ struct HabitWidgetAccessoryRectangularView: View {
 struct HabitWidgetAccessoryInlineView: View {
     let entry: HabitEntry
 
-    var completed: Int { entry.habits.filter { $0.completed }.count }
+    var completed: Int { entry.habits.filter { $0.isCompletedToday() }.count }
     var total: Int { entry.habits.count }
 
     var body: some View {

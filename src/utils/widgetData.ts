@@ -1,23 +1,29 @@
 import { useHabitStore } from '@/store/habitStore';
-import { getToday } from './date';
-import { calculateFlow } from './streak';
+import { formatDate } from './date';
 import { Platform } from 'react-native';
 import { setSharedDefault, getSharedDefault } from './sharedDefaults';
 
 const WIDGET_DATA_KEY = 'widgetHabits';
+
+// 위젯이 "오늘"을 자체 판정하기 위해 보내주는 최근 완료 날짜 윈도우.
+// 90일이면 90일 흐름까지 정확히 재계산 가능 + 페이로드 크기 ~1KB/습관.
+const HISTORY_WINDOW_DAYS = 90;
 
 export interface WidgetHabit {
   id: string;
   name: string;
   icon: string;
   color: string;
-  completed: boolean;
-  flowDays: number;
+  // 최근 HISTORY_WINDOW_DAYS 일간 완료한 날짜들 (YYYY-MM-DD, 오름차순).
+  // 위젯 측이 Date()로 오늘을 직접 구해서 contains/flow 재계산.
+  completedDates: string[];
 }
 
 export function getWidgetData(): WidgetHabit[] {
-  const { habits, logs, isHabitCompleted } = useHabitStore.getState();
-  const today = getToday();
+  const { habits, logs } = useHabitStore.getState();
+  const cutoffDate = new Date();
+  cutoffDate.setDate(cutoffDate.getDate() - HISTORY_WINDOW_DAYS);
+  const cutoff = formatDate(cutoffDate);
 
   return [...habits]
     .sort((a, b) => a.order - b.order)
@@ -27,8 +33,15 @@ export function getWidgetData(): WidgetHabit[] {
       name: habit.name,
       icon: habit.icon,
       color: habit.color,
-      completed: isHabitCompleted(habit.id, today),
-      flowDays: calculateFlow(habit.id, logs, today).currentFlowDays,
+      completedDates: logs
+        .filter(
+          (l) =>
+            l.habitId === habit.id &&
+            l.completed &&
+            l.date >= cutoff // YYYY-MM-DD 문자열 비교 = 사전식 = 시간순
+        )
+        .map((l) => l.date)
+        .sort(),
     }));
 }
 
