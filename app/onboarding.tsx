@@ -9,6 +9,7 @@ import Animated, {
   FadeInDown,
   FadeOut,
 } from 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 import { hapticImpact, hapticNotification, ImpactFeedbackStyle, NotificationFeedbackType } from '@/utils/haptics';
 import { useHabitStore } from '@/store/habitStore';
 import { useOnboardingStore } from '@/store/onboardingStore';
@@ -27,13 +28,20 @@ interface HabitDraft {
   isCustom?: boolean;
 }
 
-const PRESETS: Omit<HabitDraft, 'reminderTime'>[] = [
-  { id: 'p1', name: '물 마시기', icon: '💧', color: habitColors[0] },
-  { id: 'p2', name: '운동하기', icon: '🏃', color: habitColors[2] },
-  { id: 'p3', name: '독서하기', icon: '📖', color: habitColors[1] },
-  { id: 'p4', name: '명상하기', icon: '🧘', color: habitColors[3] },
-  { id: 'p5', name: '비타민 먹기', icon: '💊', color: habitColors[5] },
-  { id: 'p6', name: '일기 쓰기', icon: '✍️', color: habitColors[4] },
+interface PresetSpec {
+  id: string;
+  nameKey: string;
+  icon: string;
+  color: string;
+}
+
+const PRESETS: PresetSpec[] = [
+  { id: 'p1', nameKey: 'onboarding.preset.water', icon: '💧', color: habitColors[0] },
+  { id: 'p2', nameKey: 'onboarding.preset.exercise', icon: '🏃', color: habitColors[2] },
+  { id: 'p3', nameKey: 'onboarding.preset.reading', icon: '📖', color: habitColors[1] },
+  { id: 'p4', nameKey: 'onboarding.preset.meditation', icon: '🧘', color: habitColors[3] },
+  { id: 'p5', nameKey: 'onboarding.preset.vitamin', icon: '💊', color: habitColors[5] },
+  { id: 'p6', nameKey: 'onboarding.preset.journal', icon: '✍️', color: habitColors[4] },
 ];
 
 const GUIDE_STEP = 3;
@@ -65,6 +73,7 @@ function SimpleCheckbox({ selected, color, inactiveColor }: { selected: boolean;
 }
 
 export default function OnboardingScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { guideOnly } = useLocalSearchParams<{ guideOnly?: string }>();
   const isGuideOnly = guideOnly === '1';
@@ -77,17 +86,29 @@ export default function OnboardingScreen() {
   const [customName, setCustomName] = useState('');
   const scrollRef = useRef<ScrollView>(null);
 
-  const toggleItem = (item: Omit<HabitDraft, 'reminderTime'>) => {
+  const toggleItem = (preset: PresetSpec) => {
     hapticImpact(ImpactFeedbackStyle.Light);
-    const exists = selected.find((s) => s.id === item.id);
+    const exists = selected.find((s) => s.id === preset.id);
     if (exists) {
-      setSelected(selected.filter((s) => s.id !== item.id));
+      setSelected(selected.filter((s) => s.id !== preset.id));
     } else if (selected.length < 3) {
+      const name = t(preset.nameKey);
       setSelected([
         ...selected,
-        { ...item, reminderTime: getDefaultReminderTime(item.name) },
+        {
+          id: preset.id,
+          name,
+          icon: preset.icon,
+          color: preset.color,
+          reminderTime: getDefaultReminderTime(name),
+        },
       ]);
     }
+  };
+
+  const removeSelected = (id: string) => {
+    hapticImpact(ImpactFeedbackStyle.Light);
+    setSelected(selected.filter((s) => s.id !== id));
   };
 
   const addCustom = () => {
@@ -160,10 +181,10 @@ export default function OnboardingScreen() {
             <Text style={styles.welcomeEmoji}>✨</Text>
           </View>
           <Text style={[styles.welcomeTitle, { color: colors.textPrimary }]}>
-            딱 3개만{'\n'}집중해보세요
+            {t('onboarding.intro.title')}
           </Text>
           <Text style={[styles.welcomeSubtitle, { color: colors.textSecondary }]}>
-            많으면 지치고, 적으면 지켜져요
+            {t('onboarding.intro.subtitle')}
           </Text>
           <Pressable
             style={({ pressed }) => [
@@ -176,7 +197,7 @@ export default function OnboardingScreen() {
               setStep(1);
             }}
           >
-            <Text style={styles.primaryButtonText}>시작하기</Text>
+            <Text style={styles.primaryButtonText}>{t('onboarding.intro.cta')}</Text>
           </Pressable>
         </Animated.View>
       )}
@@ -187,7 +208,7 @@ export default function OnboardingScreen() {
           style={styles.selectStep}
         >
           <Text style={[styles.stepTitle, { color: colors.textPrimary }]}>
-            어떤 습관을 만들어볼까요?
+            {t('onboarding.select.title')}
           </Text>
           <View style={styles.counterRow}>
             {[0, 1, 2].map((i) => (
@@ -199,7 +220,7 @@ export default function OnboardingScreen() {
               />
             ))}
             <Text style={[styles.stepSubtitle, { color: colors.textSecondary }]}>
-              {selected.length}/3개 선택됨
+              {t('onboarding.select.count', { count: selected.length })}
             </Text>
           </View>
 
@@ -224,7 +245,7 @@ export default function OnboardingScreen() {
                     <Text style={styles.presetIcon}>{preset.icon}</Text>
                   </View>
                   <Text style={[styles.presetName, { color: colors.textPrimary }]}>
-                    {preset.name}
+                    {t(preset.nameKey)}
                   </Text>
                   <SimpleCheckbox
                     selected={isSelected}
@@ -246,7 +267,7 @@ export default function OnboardingScreen() {
                       borderWidth: 2,
                     },
                   ]}
-                  onPress={() => toggleItem(item)}
+                  onPress={() => removeSelected(item.id)}
                 >
                   <View style={[styles.presetIconBg, { backgroundColor: item.color + '20' }]}>
                     <Text style={styles.presetIcon}>{item.icon}</Text>
@@ -269,7 +290,7 @@ export default function OnboardingScreen() {
                   style={[styles.customTextInput, { color: colors.textPrimary }]}
                   value={customName}
                   onChangeText={setCustomName}
-                  placeholder="나만의 습관 입력..."
+                  placeholder={t('onboarding.select.customPlaceholder')}
                   placeholderTextColor={colors.textMuted}
                   onSubmitEditing={addCustom}
                   returnKeyType="done"
@@ -280,7 +301,7 @@ export default function OnboardingScreen() {
                     style={[styles.addCustomButton, { backgroundColor: colors.accent }]}
                     onPress={addCustom}
                   >
-                    <Text style={styles.addCustomText}>추가</Text>
+                    <Text style={styles.addCustomText}>{t('onboarding.select.customAdd')}</Text>
                   </Pressable>
                 )}
               </View>
@@ -302,8 +323,8 @@ export default function OnboardingScreen() {
           >
             <Text style={styles.primaryButtonText}>
               {selected.length > 0
-                ? '다음'
-                : '습관을 선택해주세요'}
+                ? t('onboarding.select.next')
+                : t('onboarding.select.requireSelection')}
             </Text>
           </Pressable>
         </Animated.View>
@@ -322,17 +343,17 @@ export default function OnboardingScreen() {
               </View>
             </View>
             <Text style={[styles.alarmHeroTitle, { color: colors.textPrimary }]}>
-              씨앗이 자라려면{'\n'}매일 같은 시간 물을 줘야 해요
+              {t('onboarding.reminder.title')}
             </Text>
             <Text style={[styles.alarmHeroSub, { color: colors.textSecondary }]}>
-              알람이 그 시간을 대신 기억해드릴게요.
+              {t('onboarding.reminder.subtitle')}
             </Text>
           </View>
 
           <View style={[styles.alarmDivider, { backgroundColor: colors.inactive }]} />
 
           <Text style={[styles.alarmHint, { color: colors.textMuted }]}>
-            시간을 탭하면 바꿀 수 있어요
+            {t('onboarding.reminder.editHint')}
           </Text>
 
           <ScrollView style={styles.alarmList} showsVerticalScrollIndicator={false}>
@@ -369,7 +390,7 @@ export default function OnboardingScreen() {
                           { color: value ? colors.accent : colors.textMuted },
                         ]}
                       >
-                        {value ? `⏰ ${value}` : '🔕 없음'}
+                        {value ? t('onboarding.reminder.timeSet', { time: value }) : t('onboarding.reminder.timeNone')}
                       </Text>
                     </Pressable>
                   )}
@@ -380,7 +401,7 @@ export default function OnboardingScreen() {
 
           <Pressable onPress={skipAlarm} style={styles.skipLink} hitSlop={12}>
             <Text style={[styles.skipLinkText, { color: colors.textSecondary }]}>
-              건너뛰기
+              {t('onboarding.reminder.skip')}
             </Text>
           </Pressable>
 
@@ -394,8 +415,8 @@ export default function OnboardingScreen() {
           >
             <Text style={styles.primaryButtonText}>
               {selected.some((h) => h.reminderTime)
-                ? '이 시간으로 알람 켜기'
-                : '알람 없이 시작하기'}
+                ? t('onboarding.reminder.ctaWithTime')
+                : t('onboarding.reminder.ctaNoTime')}
             </Text>
           </Pressable>
         </Animated.View>
@@ -407,22 +428,22 @@ export default function OnboardingScreen() {
           style={styles.guideStep}
         >
           <Text style={[styles.stepTitle, { color: colors.textPrimary }]}>
-            이렇게 사용해요
+            {t('onboarding.guide.title')}
           </Text>
 
           <ScrollView style={styles.guideList} showsVerticalScrollIndicator={false}>
             <View style={[styles.guideCardHighlight, { backgroundColor: colors.accent + '15', borderColor: colors.accent + '30' }]}>
               <Text style={[styles.guideHighlightTitle, { color: colors.textPrimary, marginBottom: spacing.xs }]}>
-                꾸준할수록 자라요
+                {t('onboarding.guide.flow.title')}
               </Text>
               <Text style={[styles.guideHighlightDesc, { color: colors.textSecondary, marginBottom: spacing.md }]}>
-                매일 한 탭이 단계가 되어 자라요
+                {t('onboarding.guide.flow.body')}
               </Text>
               <View style={styles.growthStrip}>
                 {GROWTH_STAGES.map((stage) => (
                   <View key={stage.id} style={styles.growthCell}>
                     <Text style={styles.growthEmoji}>{stage.emoji}</Text>
-                    <Text style={[styles.growthLabel, { color: colors.textPrimary }]}>{stage.label}</Text>
+                    <Text style={[styles.growthLabel, { color: colors.textPrimary }]}>{t(`growth.stage.${stage.id}` as const)}</Text>
                   </View>
                 ))}
               </View>
@@ -431,23 +452,23 @@ export default function OnboardingScreen() {
             <View style={[styles.guideCardHighlight, { backgroundColor: colors.accent + '15', borderColor: colors.accent + '30' }]}>
               <Text style={styles.guideHighlightEmoji}>🌊</Text>
               <Text style={[styles.guideHighlightTitle, { color: colors.textPrimary }]}>
-                하루 쉬어도 괜찮아요
+                {t('onboarding.guide.breathing.title')}
               </Text>
               <Text style={[styles.guideHighlightDesc, { color: colors.textSecondary }]}>
-                하루 빠져도 흐름은 이어져요.{'\n'}이틀 연속 빠지면 새로운 시작.
+                {t('onboarding.guide.breathing.body')}
               </Text>
               <View style={styles.guideFlowExample}>
                 <Text style={[styles.guideFlowDots, { color: colors.accent }]}>● ● ◌ ● ● ●</Text>
-                <Text style={[styles.guideFlowLabel, { color: colors.textMuted }]}>◌ = 쉼표 (흐름 유지)</Text>
+                <Text style={[styles.guideFlowLabel, { color: colors.textMuted }]}>{t('onboarding.guide.breathing.legend')}</Text>
               </View>
             </View>
 
             <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
               <Text style={styles.guideEmoji}>👆</Text>
               <View style={styles.guideTextWrap}>
-                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>탭으로 체크</Text>
+                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.tap.title')}</Text>
                 <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
-                  습관 카드를 탭하면 오늘 완료
+                  {t('onboarding.guide.tap.body')}
                 </Text>
               </View>
             </View>
@@ -455,9 +476,9 @@ export default function OnboardingScreen() {
             <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
               <Text style={styles.guideEmoji}>✏️</Text>
               <View style={styles.guideTextWrap}>
-                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>길게 눌러 수정</Text>
+                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.longPress.title')}</Text>
                 <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
-                  이름, 아이콘, 알림을 변경할 수 있어요
+                  {t('onboarding.guide.longPress.body')}
                 </Text>
               </View>
             </View>
@@ -465,9 +486,9 @@ export default function OnboardingScreen() {
             <View style={[styles.guideCard, { backgroundColor: colors.surface, marginBottom: spacing.md }]}>
               <Text style={styles.guideEmoji}>📅</Text>
               <View style={styles.guideTextWrap}>
-                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>스와이프로 주간 이동</Text>
+                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.swipe.title')}</Text>
                 <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
-                  지난 주 기록도 확인할 수 있어요
+                  {t('onboarding.guide.swipe.body')}
                 </Text>
               </View>
             </View>
@@ -482,7 +503,9 @@ export default function OnboardingScreen() {
             onPress={isGuideOnly ? () => router.back() : handleFinish}
           >
             <Text style={styles.primaryButtonText}>
-              {isGuideOnly ? '확인' : `${selected.length}개로 시작하기`}
+              {isGuideOnly
+                ? t('onboarding.guide.cta.guideOnly')
+                : t('onboarding.guide.cta.start', { count: selected.length })}
             </Text>
           </Pressable>
         </Animated.View>

@@ -1,4 +1,5 @@
 import * as Notifications from 'expo-notifications';
+import i18n from '@/i18n';
 import { useSettingsStore } from '@/store/settingsStore';
 
 // 알림 액션 식별자 — 잠금화면/알림센터에서 "완료" 버튼이 눌렸을 때
@@ -24,7 +25,7 @@ export async function setupNotificationCategories(): Promise<void> {
   await Notifications.setNotificationCategoryAsync(HABIT_TOGGLE_CATEGORY, [
     {
       identifier: HABIT_TOGGLE_ACTION,
-      buttonTitle: '완료',
+      buttonTitle: i18n.t('notifications.actionDone'),
       options: {
         // 액션 탭 시 앱을 깨우지 않음 — 잠금화면 그대로 유지
         opensAppToForeground: false,
@@ -64,8 +65,8 @@ export async function scheduleHabitReminder(
 
   const identifier = await Notifications.scheduleNotificationAsync({
     content: {
-      title: '습관 리마인더',
-      body: `${habitName} 할 시간이에요!`,
+      title: i18n.t('notifications.title'),
+      body: i18n.t('notifications.body', { habitName }),
       data: { habitId },
       // 토글 ON일 때만 카테고리 부여 — 액션 버튼 노출 조건
       ...(lockScreenEnabled && { categoryIdentifier: HABIT_TOGGLE_CATEGORY }),

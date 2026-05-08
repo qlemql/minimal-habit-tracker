@@ -8,13 +8,16 @@
 
 | 항목 | 내용 |
 |------|------|
-| **앱 이름** | 싹 - 습관 트래커 |
-| **부제** | 작은 습관이 자라는 곳 |
+| **앱 이름 (ko)** | 싹: 세 가지 습관 |
+| **앱 이름 (en)** | Ssak: Three Habits |
+| **부제 (ko)** | 작은 습관이 자라는 곳 |
+| **부제 (en)** | Where small habits grow |
 | **번들 ID** | com.qlemql.minimalhabittracker |
 | **카테고리** | 건강 및 피트니스 / 생산성 |
 | **연령 등급** | 4+ (모든 연령) |
 | **가격** | 무료 |
 | **콘텐츠 등급** | 모든 연령 적합, 민감 콘텐츠 없음 |
+| **지원 언어** | 한국어, 영어 |
 
 ---
 
@@ -62,9 +65,14 @@
 
 ## 영어 설명
 
-### Short Description
+### Promotional Text (170자 이내, App Store)
 ```
-Just 3 habits. 5 seconds. Miss a day? Your flow continues. Where small habits grow.
+Just 3 habits. 5 seconds. Miss a day? Your Flow keeps going.
+```
+
+### Short Description (Play Store, 80자 이내)
+```
+Just 3 habits. 5 seconds a day. Miss a day, your Flow keeps going.
 ```
 
 ### Long Description
@@ -79,24 +87,25 @@ You can't add unlimited habits. That's by design. Plant only what truly matters.
 ⚡ Done in 5 Seconds
 Open, tap, close. That's it.
 
-🌿 Forgiving Streaks
-Other apps reset your streak to zero if you miss one day. Here, missing a day is just a pause — your flow continues. Research shows that missing one day barely affects habit formation.
+🌿 Forgiving Flow
+Other apps reset your streak to zero if you miss a day. Here, missing one day is just a Pause — your Flow keeps going. Miss two days in a row, and you start fresh. Research shows that missing one day barely affects habit formation.
 
 ✨ Rewards for Consistency
-Keep your flow going and unlock new icons and colors. Grown, not bought.
+Keep your Flow going and unlock new icons and colors. Grown, not bought.
 
 📋 More Features
 • Weekly calendar — See your week at a glance
 • Flow counter — Track your consecutive days
-• Celebration animation — Confetti when you complete all habits
+• Celebration animation — When all 3 habits are done
 • Reminders — Per-habit notifications
-• Widget — Check progress from home screen
-• Dark/Light mode — Choose your style
+• Lock screen widget — Check off straight from the lock screen
+• Home screen widget — One glance, one tap
+• Dark / Cream theme — Choose your style
 
 🔒 Privacy
-All data stays on your device. No server. No account. No tracking.
+All data stays on your device. No server. No account. No tracking. No ads.
 
-Less is more. Less is kept.
+Less to manage. More to keep.
 Small habits planted today grow into tomorrow's you.
 ```
 
@@ -109,10 +118,22 @@ Small habits planted today grow into tomorrow's you.
 습관,습관트래커,루틴,자기관리,동기부여,데일리,체크리스트,성장,미니멀,간단,심플,매일,기록,꾸준히,3개
 ```
 
-### 영어
+### 영어 (App Store 100자 제한 — comma 포함 카운트)
 ```
-habit,tracker,routine,self-care,motivation,daily,checklist,growth,minimal,simple,streak,3habits
+habit tracker,routine,daily,minimal,simple,streak,3 habits,checklist,minimalist,focus,goal,plant
 ```
+
+### 영어 (Play Store 본문 자연 노출용)
+```
+habit tracker, three habits, minimal habit tracker, daily routine, streak, simple habit, tiny habits, focus, productivity, self care, micro habits, plant
+```
+
+### ASO 메모
+- **Primary**: `habit tracker` (검색 볼륨 높음, 경쟁 격함 — 차별점은 "3개 제약 + Forgiving Flow")
+- **Secondary**: `three habits` / `3 habits` — 직접적 브랜드 매칭, 경쟁 낮음
+- **Long-tail**: `minimal habit tracker`, `tiny habits app`, `simple habit tracker` — 미니멀리즘 사용자 타겟
+- **Niche**: `forgiving streak`, `pause habit` — 본 앱의 "쉼표" 차별점, 검색 볼륨은 낮으나 의도 매칭 명확
+- **회피 키워드**: `goals` (지나치게 광범위), `weight loss` (앱 정체성 불일치), `social habit` (혼자 쓰는 앱)
 
 ---
 
@@ -135,15 +156,20 @@ habit,tracker,routine,self-care,motivation,daily,checklist,growth,minimal,simple
 | 비율 | 16:9 또는 9:16 |
 | 그래픽 이미지 | 1024 x 500 |
 
-### 스크린샷 구성 (6장)
-1. **메인 화면** — 3개 습관 체크 상태 + "딱 3개만, 작은 습관을 심어보세요"
-2. **원탭 체크** — 습관 체크 인터랙션 + "5초면 끝"
-3. **이어가기** — 주간 캘린더 + 쉼표 시각화 + "하루 쉬어도 괜찮아요"
-4. **축하** — 컨페티 애니메이션 + "오늘의 습관, 모두 자랐어요!"
-5. **해금** — 잠긴 아이콘/색상 + "꾸준히 키우면 보상이 와요"
-6. **위젯 + 다크/라이트** — 위젯 활용 + 양쪽 모드 비교
+### 스크린샷 구성 (6장 × 2 언어 = 총 12장)
 
-> 스크린샷 프레임: 크림(#FFF8F0) 배경 통일, 상단에 카피, 하단에 디바이스 목업
+| # | 화면 | 한국어 카피 | 영어 카피 |
+|---|------|------------|----------|
+| 1 | 메인 (3개 습관 체크 상태) | 딱 3개만, 작은 습관을 심어보세요 | Just 3 habits, no more, no less |
+| 2 | 원탭 체크 인터랙션 | 5초면 끝 | Done in 5 seconds |
+| 3 | 주간 캘린더 + 쉼표 시각화 | 하루 쉬어도 괜찮아요 | A day off keeps the Flow |
+| 4 | 컨페티/축하 애니메이션 | 오늘의 습관, 모두 자랐어요! | All grown today |
+| 5 | 잠긴 아이콘/색상 | 꾸준히 키우면 보상이 와요 | Consistency unlocks rewards |
+| 6 | 위젯 + 다크/라이트 비교 | 홈/잠금화면에서 바로 | Right on your home & lock screen |
+
+> 프레임 규격: 크림(#FFF8F0) 배경 통일, 상단 카피, 하단 디바이스 목업.
+> 보관 위치: ko=`assets/screenshots/final/`, en=`assets/screenshots/final-en/` (E2 작업 시 신규 생성).
+> **E2 작업 절차** — (1) 시뮬레이터 언어 영문으로 변경 후 앱 실행 → 6 화면 캡처. (2) `marketing-screenshots.html`에 영문 카피 변형 추가 → 동일 프레임으로 합성. (3) 6.7"/6.5"/iPad 각 해상도 export.
 
 ---
 
@@ -160,6 +186,44 @@ habit,tracker,routine,self-care,motivation,daily,checklist,growth,minimal,simple
 ---
 
 ## 버전별 업데이트 소개 (What's New)
+
+### v1.2.0 (예정 — i18n 완료 후 출시)
+
+#### 한국어
+```
+이제 영어로도 만나고, 자정엔 알아서 새 하루.
+
+• 영어 지원 시작 — 글로벌 출시
+• 위젯이 자정에 스스로 새 하루를 맞이해요
+  앱을 열지 않아도 위젯에 새로운 오늘이 떠요.
+• 잠금화면 알림에서 바로 체크
+  알림을 눌러 '완료'만 누르면 끝.
+  설정에서 끄고 켤 수 있어요.
+• 앱 이름이 정돈됐어요 — '싹: 세 가지 습관'
+
+작은 한 탭이 더 가까워졌어요.
+```
+
+#### English
+```
+Now in English, with widgets that wake up at midnight.
+
+• English language support
+• Widgets refresh themselves at midnight
+  No need to open the app — your widget shows today.
+• Check off habits straight from the lock screen notification
+  Long-press the reminder, tap "Done." That's it.
+  Toggle from Settings.
+• Cleaner name — "Ssak: Three Habits"
+
+One tap, even closer.
+```
+
+**릴리즈 설정**
+- 출시 방식: 승인 후 자동 출시
+- 변경 범위: i18n (한/영) + WidgetKit Timeline 자정 reload + expo-notifications 카테고리 액션 + Android 정식 출시
+- 양 플랫폼 동시 출시 (iOS 1.2.0, Android 1.0.0)
+- v1.1.0은 발행하지 않고 v1.2.0으로 통합 출시
 
 ### v1.0.3 (2026-05-04)
 ```

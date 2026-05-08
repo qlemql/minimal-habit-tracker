@@ -1,8 +1,9 @@
 import { View, Text, Pressable, StyleSheet, Modal } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { hapticImpact, ImpactFeedbackStyle } from '@/utils/haptics';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
-import { DAY_LABELS, getToday } from '@/utils/date';
+import { getToday } from '@/utils/date';
 import { fontSize, spacing } from '@/constants/theme';
 
 interface DayDetailSheetProps {
@@ -11,6 +12,7 @@ interface DayDetailSheetProps {
 }
 
 export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
+  const { t } = useTranslation();
   const colors = useThemeStore((s) => s.getColors());
   const { habits, toggleHabit, isHabitCompleted } = useHabitStore();
 
@@ -19,7 +21,7 @@ export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
   const isEditable = date === getToday();
   const dateObj = new Date(date + 'T00:00:00');
   const dayIndex = dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1;
-  const dayLabel = DAY_LABELS[dayIndex];
+  const dayLabel = t(`days.short.${dayIndex}` as const);
   const dayNum = dateObj.getDate();
 
   return (
@@ -28,12 +30,12 @@ export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
         <Pressable style={[styles.sheet, { backgroundColor: colors.surface }]} onPress={() => {}}>
           <View style={[styles.handle, { backgroundColor: colors.inactive }]} />
           <Text style={[styles.title, { color: colors.textPrimary }]}>
-            {dayLabel}요일 {dayNum}일
+            {t('components.dayDetail.title', { dayLabel, dayNum })}
           </Text>
           {!isEditable && (
             <View style={[styles.readOnlyBanner, { backgroundColor: colors.surfaceLight }]}>
               <Text style={[styles.readOnlyText, { color: colors.textMuted }]}>
-                지난 기록이에요
+                {t('components.dayDetail.pastNotice')}
               </Text>
             </View>
           )}
@@ -90,7 +92,7 @@ export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
             ]}
             onPress={onClose}
           >
-            <Text style={[styles.closeText, { color: colors.textSecondary }]}>닫기</Text>
+            <Text style={[styles.closeText, { color: colors.textSecondary }]}>{t('components.dayDetail.close')}</Text>
           </Pressable>
         </Pressable>
       </Pressable>

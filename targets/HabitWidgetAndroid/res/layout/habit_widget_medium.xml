@@ -24,7 +24,7 @@
                 android:id="@+id/widget_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="오늘의 습관"
+                android:text="@string/widget_title"
                 android:textColor="#8C7B6B"
                 android:textSize="13sp"
                 android:textStyle="bold" />
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="모두 완료! 🎉"
+                android:text="@string/widget_all_completed"
                 android:textColor="#5B8C6A"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -46,7 +46,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:scaleType="fitCenter"
-            android:contentDescription="진행률" />
+            android:contentDescription="@string/widget_progress_a11y" />
     </LinearLayout>
 
     <!-- Row 1 -->
@@ -64,7 +64,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:scaleType="fitCenter"
-            android:contentDescription="check" />
+            android:contentDescription="@string/widget_check_a11y" />
 
         <TextView
             android:id="@+id/widget_name_1"
@@ -101,7 +101,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:scaleType="fitCenter"
-            android:contentDescription="check" />
+            android:contentDescription="@string/widget_check_a11y" />
 
         <TextView
             android:id="@+id/widget_name_2"
@@ -138,7 +138,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:scaleType="fitCenter"
-            android:contentDescription="check" />
+            android:contentDescription="@string/widget_check_a11y" />
 
         <TextView
             android:id="@+id/widget_name_3"
@@ -166,7 +166,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="앱에서 습관을 추가해주세요"
+        android:text="@string/widget_empty"
         android:textColor="#8C7B6B"
         android:textSize="13sp"
         android:visibility="gone" />

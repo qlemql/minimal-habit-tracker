@@ -164,7 +164,10 @@ class HabitWidgetProvider : AppWidgetProvider() {
                     }
 
                     if (flowDays > 0) {
-                        views.setTextViewText(flowIds[i], "${flowDays}일")
+                        views.setTextViewText(
+                            flowIds[i],
+                            context.getString(R.string.widget_flow_days, flowDays)
+                        )
                         views.setTextColor(flowIds[i], habitColor)
                     } else {
                         views.setTextViewText(flowIds[i], "")

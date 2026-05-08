@@ -2,6 +2,7 @@ import { View, Text, Pressable, StyleSheet, Linking, Alert, Switch, Platform } f
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
+import { useTranslation } from 'react-i18next';
 import { hapticImpact, ImpactFeedbackStyle } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import { useHabitStore } from '@/store/habitStore';
@@ -9,22 +10,29 @@ import { useRewardStore } from '@/store/rewardStore';
 import { useSettingsStore } from '@/store/settingsStore';
 import { rescheduleAllReminders } from '@/utils/notifications';
 import { REWARD_TIERS } from '@/constants/rewards';
-// onboardingStore no longer needed for guide
 import { fontSize, spacing } from '@/constants/theme';
 
 const FEEDBACK_EMAIL = 'taehyun_fe@naver.com';
-const PRIVACY_POLICY_URL = 'https://ssak-habit-tracker.pages.dev/privacy-policy.html';
-const TERMS_OF_SERVICE_URL = 'https://ssak-habit-tracker.pages.dev/terms-of-service.html';
+const LEGAL_BASE_URL = 'https://ssak-habit-tracker.pages.dev';
+const APP_VERSION = '1.0.0';
+
+// 디바이스 언어가 영어 계열이면 .en.html, 그 외(ko 등)는 한국어 원본 사용
+function getLegalUrl(lang: string, page: 'privacy-policy' | 'terms-of-service'): string {
+  const isEnglish = lang.toLowerCase().startsWith('en');
+  const suffix = isEnglish ? '.en.html' : '.html';
+  return `${LEGAL_BASE_URL}/${page}${suffix}`;
+}
 
 type ThemeOption = 'dark' | 'cream' | 'system';
 
-const THEME_OPTIONS: { value: ThemeOption; label: string; icon: string }[] = [
-  { value: 'cream', label: '크림', icon: '🌿' },
-  { value: 'dark', label: '다크', icon: '🌙' },
-  { value: 'system', label: '시스템', icon: '📱' },
+const THEME_OPTIONS: { value: ThemeOption; icon: string }[] = [
+  { value: 'cream', icon: '🌿' },
+  { value: 'dark', icon: '🌙' },
+  { value: 'system', icon: '📱' },
 ];
 
 export default function SettingsScreen() {
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   const colors = useThemeStore((s) => s.getColors());
   const mode = useThemeStore((s) => s.mode);
@@ -51,10 +59,14 @@ export default function SettingsScreen() {
   const handleFeedback = async () => {
     const canOpen = await Linking.canOpenURL(`mailto:${FEEDBACK_EMAIL}`);
     if (canOpen) {
-      Linking.openURL(`mailto:${FEEDBACK_EMAIL}?subject=싹 - 습관 트래커 피드백`);
+      const subject = encodeURIComponent(t('settings.general.feedback.emailSubject'));
+      Linking.openURL(`mailto:${FEEDBACK_EMAIL}?subject=${subject}`);
     } else {
       await Clipboard.setStringAsync(FEEDBACK_EMAIL);
-      Alert.alert('이메일 복사됨', `${FEEDBACK_EMAIL}\n클립보드에 복사되었습니다.`);
+      Alert.alert(
+        t('settings.general.feedback.copiedTitle'),
+        t('settings.general.feedback.copiedBody', { email: FEEDBACK_EMAIL })
+      );
     }
   };
 
@@ -68,7 +80,7 @@ export default function SettingsScreen() {
     if (canOpen) {
       Linking.openURL(url);
     } else {
-      Alert.alert('열 수 없음', '링크를 열 수 없습니다.');
+      Alert.alert(t('settings.general.linkError.title'), t('settings.general.linkError.body'));
     }
   };
 
@@ -78,7 +90,7 @@ export default function SettingsScreen() {
         <Pressable
           onPress={() => { hapticImpact(ImpactFeedbackStyle.Light); router.back(); }}
           hitSlop={12}
-          accessibilityLabel="뒤로"
+          accessibilityLabel={t('settings.a11y.back')}
           accessibilityRole="button"
           style={({ pressed }) => [
             styles.backButton,
@@ -88,32 +100,33 @@ export default function SettingsScreen() {
         >
           <Text style={[styles.backIcon, { color: colors.textSecondary }]}>‹</Text>
         </Pressable>
-        <Text style={[styles.title, { color: colors.textPrimary }]}>설정</Text>
+        <Text style={[styles.title, { color: colors.textPrimary }]}>{t('settings.title')}</Text>
         <View style={{ width: 36 }} />
       </View>
 
       <View style={styles.content}>
-        {/* 통계 요약 */}
         <View style={[styles.statsCard, { backgroundColor: colors.surface }]}>
           <View style={styles.statItem}>
             <Text style={[styles.statNumber, { color: colors.accent }]}>{habits.length}</Text>
-            <Text style={[styles.statLabel, { color: colors.textMuted }]}>습관</Text>
+            <Text style={[styles.statLabel, { color: colors.textMuted }]}>{t('settings.stats.habits')}</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.surfaceLight }]} />
           <View style={styles.statItem}>
             <Text style={[styles.statNumber, { color: colors.success }]}>{totalLogs}</Text>
-            <Text style={[styles.statLabel, { color: colors.textMuted }]}>총 달성</Text>
+            <Text style={[styles.statLabel, { color: colors.textMuted }]}>{t('settings.stats.totalDone')}</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.surfaceLight }]} />
           <View style={styles.statItem}>
             <Text style={[styles.statNumber, { color: '#DA77F2' }]}>{unlockedCount}/{REWARD_TIERS.length}</Text>
-            <Text style={[styles.statLabel, { color: colors.textMuted }]}>해금</Text>
+            <Text style={[styles.statLabel, { color: colors.textMuted }]}>{t('settings.stats.unlocks')}</Text>
           </View>
         </View>
         {nextTier && (
           <View style={[styles.nextTierCard, { backgroundColor: colors.surface }]}>
             <Text style={[styles.nextTierLabel, { color: colors.textSecondary }]}>
-              다음 해금: {nextTier.label}
+              {t('settings.stats.nextUnlock', {
+                label: t(`rewards.tier.${nextTier.flowDays}.label` as const),
+              })}
             </Text>
             <View style={[styles.tierProgressBg, { backgroundColor: colors.inactive }]}>
               <View
@@ -127,14 +140,17 @@ export default function SettingsScreen() {
               />
             </View>
             <Text style={[styles.nextTierDesc, { color: colors.textMuted }]}>
-              {nextTier.description} — 흐름 {maxFlowEver}/{nextTier.flowDays}일
+              {t('settings.stats.nextUnlockDescription', {
+                description: t(`rewards.tier.${nextTier.flowDays}.description` as const),
+                current: maxFlowEver,
+                target: nextTier.flowDays,
+              })}
             </Text>
           </View>
         )}
 
-        {/* 테마 */}
         <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
-          테마
+          {t('settings.theme.title')}
         </Text>
         <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
           {THEME_OPTIONS.map((option, index) => (
@@ -157,7 +173,7 @@ export default function SettingsScreen() {
             >
               <Text style={styles.optionIcon}>{option.icon}</Text>
               <Text style={[styles.optionText, { color: colors.textPrimary }]}>
-                {option.label}
+                {t(`settings.theme.${option.value}` as const)}
               </Text>
               {mode === option.value && (
                 <View style={[styles.checkCircle, { backgroundColor: colors.accent }]}>
@@ -168,19 +184,18 @@ export default function SettingsScreen() {
           ))}
         </View>
 
-        {/* 알림 */}
         <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
-          알림
+          {t('settings.notifications.title')}
         </Text>
         <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
           <View style={styles.option}>
             <Text style={styles.optionIcon}>🔔</Text>
             <View style={styles.optionTextWrap}>
               <Text style={[styles.optionTitle, { color: colors.textPrimary }]}>
-                잠금화면에서 체크
+                {t('settings.notifications.lockScreenAction.title')}
               </Text>
               <Text style={[styles.optionHint, { color: colors.textMuted }]}>
-                알림에 완료 버튼이 표시돼요
+                {t('settings.notifications.lockScreenAction.subtitle')}
               </Text>
             </View>
             <Switch
@@ -193,9 +208,8 @@ export default function SettingsScreen() {
           </View>
         </View>
 
-        {/* 일반 */}
         <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
-          일반
+          {t('settings.general.title')}
         </Text>
         <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
           <Pressable
@@ -207,7 +221,7 @@ export default function SettingsScreen() {
             onPress={handleGuide}
           >
             <Text style={styles.optionIcon}>📖</Text>
-            <Text style={[styles.optionText, { color: colors.textPrimary }]}>사용 가이드</Text>
+            <Text style={[styles.optionText, { color: colors.textPrimary }]}>{t('settings.general.guide')}</Text>
             <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
           </Pressable>
           <Pressable
@@ -218,14 +232,13 @@ export default function SettingsScreen() {
             onPress={handleFeedback}
           >
             <Text style={styles.optionIcon}>💬</Text>
-            <Text style={[styles.optionText, { color: colors.textPrimary }]}>피드백 보내기</Text>
+            <Text style={[styles.optionText, { color: colors.textPrimary }]}>{t('settings.general.feedback.menu')}</Text>
             <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
           </Pressable>
         </View>
 
-        {/* 법적 정보 */}
         <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
-          법적 정보
+          {t('settings.legal.title')}
         </Text>
         <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
           <Pressable
@@ -234,12 +247,12 @@ export default function SettingsScreen() {
               { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.surfaceLight },
               pressed && { opacity: 0.6 },
             ]}
-            onPress={() => handleOpenUrl(PRIVACY_POLICY_URL)}
-            accessibilityLabel="개인정보처리방침"
+            onPress={() => handleOpenUrl(getLegalUrl(i18n.language, 'privacy-policy'))}
+            accessibilityLabel={t('settings.legal.privacy')}
             accessibilityRole="link"
           >
             <Text style={styles.optionIcon}>🔒</Text>
-            <Text style={[styles.optionText, { color: colors.textPrimary }]}>개인정보처리방침</Text>
+            <Text style={[styles.optionText, { color: colors.textPrimary }]}>{t('settings.legal.privacy')}</Text>
             <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
           </Pressable>
           <Pressable
@@ -247,20 +260,19 @@ export default function SettingsScreen() {
               styles.option,
               pressed && { opacity: 0.6 },
             ]}
-            onPress={() => handleOpenUrl(TERMS_OF_SERVICE_URL)}
-            accessibilityLabel="이용약관"
+            onPress={() => handleOpenUrl(getLegalUrl(i18n.language, 'terms-of-service'))}
+            accessibilityLabel={t('settings.legal.terms')}
             accessibilityRole="link"
           >
             <Text style={styles.optionIcon}>📄</Text>
-            <Text style={[styles.optionText, { color: colors.textPrimary }]}>이용약관</Text>
+            <Text style={[styles.optionText, { color: colors.textPrimary }]}>{t('settings.legal.terms')}</Text>
             <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
           </Pressable>
         </View>
 
-        {/* 버전 정보 */}
         <View style={styles.versionSection}>
           <Text style={[styles.versionText, { color: colors.textMuted }]}>
-            싹 - 습관 트래커 v1.0.0
+            {t('settings.version', { version: APP_VERSION })}
           </Text>
         </View>
       </View>

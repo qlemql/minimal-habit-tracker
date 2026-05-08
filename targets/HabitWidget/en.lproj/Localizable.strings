@@ -1,0 +1,26 @@
+/* Widget header */
+"widget.title" = "Today's Habits";
+"widget.allCompleted" = "All done! 🎉";
+
+/* Empty states */
+"widget.empty.small" = "Add a habit";
+"widget.empty.medium" = "Add habits in the app";
+"widget.empty.accessory" = "Add in the app";
+
+/* Flow days suffix — appears next to habit name */
+"widget.flowDays" = "%dd";
+
+/* Lock screen accessory */
+"widget.accessory.label" = "Habits";
+"widget.accessory.inline.empty" = "Ssak — no habits";
+"widget.accessory.inline.allDone" = "Ssak %1$d/%2$d done";
+"widget.accessory.inline.progress" = "Ssak today %1$d/%2$d";
+
+/* Widget gallery (configurationDisplayName / description) */
+"widget.config.displayName" = "Today's Habits";
+"widget.config.description" = "See your habits at a glance";
+
+/* Sample data shown in widget gallery preview */
+"widget.sample.water" = "Drink water";
+"widget.sample.exercise" = "Exercise";
+"widget.sample.reading" = "Read";

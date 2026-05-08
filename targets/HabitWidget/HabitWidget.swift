@@ -104,11 +104,11 @@ struct HabitProvider: TimelineProvider {
             from: calendar.date(byAdding: .day, value: -1, to: Date())!
         )
         return [
-            WidgetHabit(id: "1", name: "물 마시기", icon: "💧", color: "#4A90D9",
+            WidgetHabit(id: "1", name: NSLocalizedString("widget.sample.water", comment: ""), icon: "💧", color: "#4A90D9",
                         completedDates: [yesterday, today]),
-            WidgetHabit(id: "2", name: "운동하기", icon: "🏃", color: "#FF6B6B",
+            WidgetHabit(id: "2", name: NSLocalizedString("widget.sample.exercise", comment: ""), icon: "🏃", color: "#FF6B6B",
                         completedDates: [yesterday]),
-            WidgetHabit(id: "3", name: "독서하기", icon: "📖", color: "#7B68EE",
+            WidgetHabit(id: "3", name: NSLocalizedString("widget.sample.reading", comment: ""), icon: "📖", color: "#7B68EE",
                         completedDates: []),
         ]
     }
@@ -179,7 +179,7 @@ struct HabitRowView: View {
             Spacer(minLength: 4)
 
             if flowDays > 0 {
-                Text("\(flowDays)일")
+                Text(String.localizedStringWithFormat(NSLocalizedString("widget.flowDays", comment: ""), flowDays))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(Color(hex: habit.color))
                     .lineLimit(1)
@@ -204,7 +204,7 @@ struct HabitWidgetSmallView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .center, spacing: 4) {
-                Text("오늘의 습관")
+                Text(NSLocalizedString("widget.title", comment: ""))
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(CreamTheme.textSecondary)
                     .lineLimit(1)
@@ -218,7 +218,7 @@ struct HabitWidgetSmallView: View {
 
             if entry.habits.isEmpty {
                 Spacer()
-                Text("습관을 추가해주세요")
+                Text(NSLocalizedString("widget.empty.small", comment: ""))
                     .font(.system(size: 12))
                     .foregroundColor(CreamTheme.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -250,12 +250,12 @@ struct HabitWidgetMediumView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .center, spacing: 8) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("오늘의 습관")
+                    Text(NSLocalizedString("widget.title", comment: ""))
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(CreamTheme.textSecondary)
                         .lineLimit(1)
                     if allCompleted {
-                        Text("모두 완료! 🎉")
+                        Text(NSLocalizedString("widget.allCompleted", comment: ""))
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(CreamTheme.accent)
                             .lineLimit(1)
@@ -284,7 +284,7 @@ struct HabitWidgetMediumView: View {
 
             if entry.habits.isEmpty {
                 Spacer()
-                Text("앱에서 습관을 추가해주세요")
+                Text(NSLocalizedString("widget.empty.medium", comment: ""))
                     .font(.system(size: 13))
                     .foregroundColor(CreamTheme.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -316,7 +316,7 @@ struct HabitWidgetAccessoryCircularView: View {
 
     var body: some View {
         Gauge(value: progress) {
-            Text("습관")
+            Text(NSLocalizedString("widget.accessory.label", comment: ""))
         } currentValueLabel: {
             Text("\(completed)/\(total)")
                 .font(.system(size: 12, weight: .bold))
@@ -334,12 +334,12 @@ struct HabitWidgetAccessoryRectangularView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("오늘의 습관")
+            Text(NSLocalizedString("widget.title", comment: ""))
                 .font(.system(size: 11, weight: .semibold))
                 .foregroundStyle(.secondary)
 
             if total == 0 {
-                Text("앱에서 추가해주세요")
+                Text(NSLocalizedString("widget.empty.accessory", comment: ""))
                     .font(.system(size: 12))
             } else {
                 HStack(spacing: 8) {
@@ -369,11 +369,17 @@ struct HabitWidgetAccessoryInlineView: View {
 
     var body: some View {
         if total == 0 {
-            Text("싹 — 습관 없음")
+            Text(NSLocalizedString("widget.accessory.inline.empty", comment: ""))
         } else if completed == total {
-            Label("싹 \(completed)/\(total) 모두 완료", systemImage: "checkmark.seal.fill")
+            Label(
+                String.localizedStringWithFormat(NSLocalizedString("widget.accessory.inline.allDone", comment: ""), completed, total),
+                systemImage: "checkmark.seal.fill"
+            )
         } else {
-            Label("싹 오늘 \(completed)/\(total)", systemImage: "leaf.fill")
+            Label(
+                String.localizedStringWithFormat(NSLocalizedString("widget.accessory.inline.progress", comment: ""), completed, total),
+                systemImage: "leaf.fill"
+            )
         }
     }
 }
@@ -447,8 +453,8 @@ struct HabitWidget: Widget {
         StaticConfiguration(kind: kind, provider: HabitProvider()) { entry in
             HabitWidgetContainer { HabitWidgetEntryView(entry: entry) }
         }
-        .configurationDisplayName("오늘의 습관")
-        .description("습관 달성 현황을 한눈에 확인하세요")
+        .configurationDisplayName(NSLocalizedString("widget.config.displayName", comment: ""))
+        .description(NSLocalizedString("widget.config.description", comment: ""))
         .supportedFamilies(families)
     }
 }

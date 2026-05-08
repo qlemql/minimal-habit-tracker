@@ -1,0 +1,293 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "confirm": "Confirm",
+    "close": "Close",
+    "done": "Done",
+    "delete": "Delete",
+    "back": "Back"
+  },
+  "home": {
+    "greeting": {
+      "dawn": "Up early",
+      "morning": "Good morning",
+      "lateMorning": "Morning's going well",
+      "lunch": "Lunch time",
+      "afternoon": "How's your day?",
+      "evening": "Good evening",
+      "night": "Well done today"
+    },
+    "summary": {
+      "allCompleted": "All done! 🎉",
+      "progress": "{{completed}}/{{total}}",
+      "breathing": "Taking a Pause — keep going today"
+    },
+    "a11y": {
+      "settings": "Settings"
+    },
+    "empty": {
+      "title": "No habits yet",
+      "subtitle": "Where small habits grow"
+    },
+    "add": {
+      "button": "Add habit",
+      "limitReached": "Just 3 is enough"
+    }
+  },
+  "components": {
+    "habitCard": {
+      "a11y": {
+        "completed": "Completed",
+        "incomplete": "Not done",
+        "stage": "{{label}} stage",
+        "flow": "{{days}}-day Flow",
+        "hint": "Tap to check, long press to edit"
+      },
+      "flow": "{{days}}-day Flow",
+      "flowBreathing": "◌ {{days}}-day Flow"
+    },
+    "celebration": {
+      "message": {
+        "0": "You grew today",
+        "1": "Consistency grows",
+        "2": "The Flow continues",
+        "3": "A drop of water"
+      },
+      "daysToNext": "{{days}} days to next stage {{emoji}}"
+    },
+    "unlockToast": {
+      "grew": "Grew into {{label}}"
+    },
+    "weeklyCalendar": {
+      "thisWeek": "This week",
+      "rangeSameMonth": "{{firstMonth}}/{{firstDay}} – {{lastDay}}",
+      "rangeCrossMonth": "{{firstMonth}}/{{firstDay}} – {{lastMonth}}/{{lastDay}}",
+      "a11y": {
+        "prevWeek": "Previous week",
+        "nextWeek": "Next week",
+        "day": "{{dayLabel}} {{dayNum}}{{allDoneSuffix}}",
+        "allDone": " all done"
+      }
+    },
+    "timePicker": {
+      "daily": "Daily at {{time}}",
+      "none": "No reminder",
+      "modalTitle": "Reminder time",
+      "cancel": "Cancel",
+      "done": "Done",
+      "clear": "Turn off",
+      "hour": "{{hour}}",
+      "minute": "{{minute}}",
+      "a11y": {
+        "set": "Reminder at {{time}}",
+        "unset": "Set reminder"
+      }
+    },
+    "dayDetail": {
+      "title": "{{dayLabel}} {{dayNum}}",
+      "pastNotice": "Past record",
+      "close": "Close"
+    }
+  },
+  "days": {
+    "short": {
+      "0": "Mon",
+      "1": "Tue",
+      "2": "Wed",
+      "3": "Thu",
+      "4": "Fri",
+      "5": "Sat",
+      "6": "Sun"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "a11y": {
+      "back": "Back"
+    },
+    "stats": {
+      "habits": "Habits",
+      "totalDone": "Total done",
+      "unlocks": "Unlocks",
+      "nextUnlock": "Next unlock: {{label}}",
+      "nextUnlockDescription": "{{description}} — Flow {{current}}/{{target}}"
+    },
+    "theme": {
+      "title": "Theme",
+      "cream": "Cream",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "lockScreenAction": {
+        "title": "Check from lock screen",
+        "subtitle": "Adds a Done button to the notification"
+      }
+    },
+    "general": {
+      "title": "General",
+      "guide": "How to use",
+      "feedback": {
+        "menu": "Send feedback",
+        "emailSubject": "Ssak: Three Habits feedback",
+        "copiedTitle": "Email copied",
+        "copiedBody": "{{email}}\nCopied to clipboard."
+      },
+      "linkError": {
+        "title": "Can't open",
+        "body": "Unable to open the link."
+      }
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "version": "Ssak: Three Habits v{{version}}"
+  },
+  "onboarding": {
+    "preset": {
+      "water": "Drink water",
+      "exercise": "Exercise",
+      "reading": "Read",
+      "meditation": "Meditate",
+      "vitamin": "Take vitamins",
+      "journal": "Journal"
+    },
+    "intro": {
+      "title": "Focus on\njust 3",
+      "subtitle": "Too many wears you down. A few keeps you going.",
+      "cta": "Get started"
+    },
+    "select": {
+      "title": "Which habits will you build?",
+      "count": "{{count}}/3 selected",
+      "customPlaceholder": "Add your own habit...",
+      "customAdd": "Add",
+      "next": "Next",
+      "requireSelection": "Please pick a habit"
+    },
+    "reminder": {
+      "title": "Seeds grow when you\nwater them at the same time",
+      "subtitle": "A reminder will remember the time for you.",
+      "editHint": "Tap the time to change it",
+      "timeSet": "⏰ {{time}}",
+      "timeNone": "🔕 None",
+      "skip": "Skip",
+      "ctaWithTime": "Turn on reminder at this time",
+      "ctaNoTime": "Start without a reminder"
+    },
+    "guide": {
+      "title": "How it works",
+      "flow": {
+        "title": "Stay steady, watch it grow",
+        "body": "One tap a day grows into a stage"
+      },
+      "breathing": {
+        "title": "A day off is okay",
+        "body": "Miss one day and the Flow keeps going.\nMiss two in a row, fresh start.",
+        "legend": "◌ = Pause (Flow keeps going)"
+      },
+      "tap": {
+        "title": "Tap to check",
+        "body": "Tap a habit card to mark today done"
+      },
+      "longPress": {
+        "title": "Long press to edit",
+        "body": "Change name, icon, or reminder"
+      },
+      "swipe": {
+        "title": "Swipe between weeks",
+        "body": "Check last week's records too"
+      },
+      "cta": {
+        "guideOnly": "Got it",
+        "start": "Start with {{count}}"
+      }
+    }
+  },
+  "growth": {
+    "stage": {
+      "seed": "Seed",
+      "sprout": "Sprout",
+      "leaf": "Leaf",
+      "stem": "Stem",
+      "bud": "Bud",
+      "bloom": "Bloom"
+    }
+  },
+  "add": {
+    "title": "Add habit",
+    "placeholderName": "Habit name",
+    "label": {
+      "name": "Name",
+      "icon": "Icon",
+      "color": "Color",
+      "reminder": "Reminder"
+    },
+    "input": {
+      "placeholder": "e.g., Drink 2L of water"
+    },
+    "alert": {
+      "noticeTitle": "Notice",
+      "emptyName": "Please enter a habit name.",
+      "limitBody": "You can have up to 3 habits.",
+      "lockedTitle": "Locked",
+      "lockedBody": "Unlocks at {{days}}-day Flow"
+    },
+    "a11y": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "lockedIcon": "Locked icon (needs {{days}}-day Flow)",
+      "lockedColor": "Locked color (needs {{days}}-day Flow)",
+      "icon": "Icon {{icon}}",
+      "color": "Color {{color}}"
+    },
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "edit": {
+    "title": "Edit habit",
+    "delete": {
+      "button": "Delete habit",
+      "a11y": "Delete habit",
+      "alertTitle": "Delete habit",
+      "bodyWithWarning": "Delete \"{{name}}\"?\n{{warning}}",
+      "bodyEmpty": "Delete \"{{name}}\"?",
+      "warningWithFlow": "{{logCount}} days of records and a {{flowDays}}-day Flow will be deleted too.",
+      "warningOnlyLogs": "{{logCount}} days of records will be deleted too.",
+      "cancel": "Cancel",
+      "confirm": "Delete"
+    }
+  },
+  "notifications": {
+    "actionDone": "Done",
+    "title": "Habit reminder",
+    "body": "Time for {{habitName}}!"
+  },
+  "rewards": {
+    "tier": {
+      "7": {
+        "label": "7-day Flow",
+        "description": "2 new colors unlocked"
+      },
+      "14": {
+        "label": "14-day Flow",
+        "description": "4 new icons unlocked"
+      },
+      "30": {
+        "label": "30-day Flow",
+        "description": "3 premium colors unlocked"
+      },
+      "50": {
+        "label": "50-day Flow",
+        "description": "4 premium icons unlocked"
+      }
+    }
+  },
+  "app": {
+    "displayName": "Ssak: Three Habits"
+  }
+}

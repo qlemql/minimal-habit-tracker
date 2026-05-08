@@ -10,6 +10,7 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import { NotificationFeedbackType } from 'expo-haptics';
+import { useTranslation } from 'react-i18next';
 import { hapticNotification } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import {
@@ -20,12 +21,7 @@ import {
 } from '@/constants/growth';
 import { fontSize, spacing } from '@/constants/theme';
 
-const MESSAGES = [
-  '오늘도 잘 자랐어요',
-  '꾸준함이 자라요',
-  '흐름이 이어졌어요',
-  '물 한 모금 줬어요',
-] as const;
+const MESSAGE_COUNT = 4;
 
 interface CelebrationOverlayProps {
   visible: boolean;
@@ -34,17 +30,20 @@ interface CelebrationOverlayProps {
 }
 
 export function CelebrationOverlay({ visible, currentMaxFlow, onDone }: CelebrationOverlayProps) {
+  const { t } = useTranslation();
   const colors = useThemeStore((s) => s.getColors());
 
   const stage = useMemo(() => getCurrentStage(currentMaxFlow), [currentMaxFlow]);
+  const stageLabel = t(`growth.stage.${stage.id}` as const);
   const nextStage = useMemo(() => getNextStage(currentMaxFlow), [currentMaxFlow]);
   const daysToNext = useMemo(() => getDaysUntilNextStage(currentMaxFlow), [currentMaxFlow]);
   const showHint = useMemo(() => shouldShowProximityHint(currentMaxFlow), [currentMaxFlow]);
 
-  const message = useMemo(
-    () => MESSAGES[Math.floor(Math.random() * MESSAGES.length)],
-    [visible]
-  );
+  const message = useMemo(() => {
+    const idx = Math.floor(Math.random() * MESSAGE_COUNT);
+    return t(`components.celebration.message.${idx}` as const);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible, t]);
 
   const scale = useSharedValue(0);
   const bgOpacity = useSharedValue(0);
@@ -104,14 +103,14 @@ export function CelebrationOverlay({ visible, currentMaxFlow, onDone }: Celebrat
         <Animated.View style={[styles.content, contentStyle]}>
           <Text style={styles.emoji}>{stage.emoji}</Text>
           <Text style={[styles.text, { color: colors.textPrimary }]}>{message}</Text>
-          <Text style={[styles.stageLabel, { color: colors.accent }]}>{stage.label}</Text>
+          <Text style={[styles.stageLabel, { color: colors.accent }]}>{stageLabel}</Text>
         </Animated.View>
 
         {showHint && nextStage && daysToNext !== null && (
           <Animated.View style={[styles.hintContainer, hintStyle]}>
             <View style={[styles.hintDivider, { backgroundColor: colors.inactive }]} />
             <Text style={[styles.hintText, { color: colors.textSecondary }]}>
-              다음 성장까지 {daysToNext}일 {nextStage.emoji}
+              {t('components.celebration.daysToNext', { days: daysToNext, emoji: nextStage.emoji })}
             </Text>
           </Animated.View>
         )}

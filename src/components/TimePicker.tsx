@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { View, Text, Pressable, StyleSheet, Modal, ScrollView } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { hapticImpact, hapticSelection, ImpactFeedbackStyle } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing } from '@/constants/theme';
@@ -19,6 +20,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) =>
 const MINUTES = ['00', '15', '30', '45'];
 
 export function TimePicker({ value, onChange, renderTrigger, allowClear = true }: TimePickerProps) {
+  const { t } = useTranslation();
   const colors = useThemeStore((s) => s.getColors());
   const [visible, setVisible] = useState(false);
   const [selectedHour, setSelectedHour] = useState(
@@ -54,12 +56,12 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
             pressed && { opacity: 0.7 },
           ]}
           onPress={open}
-          accessibilityLabel={value ? `알림 시간 ${value}` : '알림 설정'}
+          accessibilityLabel={value ? t('components.timePicker.a11y.set', { time: value }) : t('components.timePicker.a11y.unset')}
           accessibilityRole="button"
         >
           <Text style={styles.triggerIcon}>{value ? '🔔' : '🔕'}</Text>
           <Text style={[styles.triggerText, { color: value ? colors.textPrimary : colors.textMuted }]}>
-            {value ? `매일 ${value}` : '알림 없음'}
+            {value ? t('components.timePicker.daily', { time: value }) : t('components.timePicker.none')}
           </Text>
           <Text style={[styles.triggerArrow, { color: colors.textMuted }]}>›</Text>
         </Pressable>
@@ -71,11 +73,11 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
             <View style={[styles.handle, { backgroundColor: colors.inactive }]} />
             <View style={styles.modalHeader}>
               <Pressable onPress={() => setVisible(false)} hitSlop={12}>
-                <Text style={[styles.modalCancel, { color: colors.textSecondary }]}>취소</Text>
+                <Text style={[styles.modalCancel, { color: colors.textSecondary }]}>{t('components.timePicker.cancel')}</Text>
               </Pressable>
-              <Text style={[styles.modalTitle, { color: colors.textPrimary }]}>알림 시간</Text>
+              <Text style={[styles.modalTitle, { color: colors.textPrimary }]}>{t('components.timePicker.modalTitle')}</Text>
               <Pressable onPress={handleConfirm} hitSlop={12}>
-                <Text style={[styles.modalDone, { color: colors.accent }]}>완료</Text>
+                <Text style={[styles.modalDone, { color: colors.accent }]}>{t('components.timePicker.done')}</Text>
               </Pressable>
             </View>
 
@@ -100,7 +102,7 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
                         selectedHour === h && { color: colors.accent, fontWeight: '600' },
                       ]}
                     >
-                      {h}시
+                      {t('components.timePicker.hour', { hour: h })}
                     </Text>
                   </Pressable>
                 ))}
@@ -125,7 +127,7 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
                         selectedMinute === m && { color: colors.accent, fontWeight: '600' },
                       ]}
                     >
-                      {m}분
+                      {t('components.timePicker.minute', { minute: m })}
                     </Text>
                   </Pressable>
                 ))}
@@ -137,7 +139,7 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
                 style={[styles.clearButton, { backgroundColor: colors.danger + '15' }]}
                 onPress={handleClear}
               >
-                <Text style={[styles.clearText, { color: colors.danger }]}>알림 끄기</Text>
+                <Text style={[styles.clearText, { color: colors.danger }]}>{t('components.timePicker.clear')}</Text>
               </Pressable>
             )}
           </Pressable>

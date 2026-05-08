@@ -10,20 +10,20 @@ interface Rule {
 }
 
 const RULES: readonly Rule[] = [
-  { keywords: ['물', '수분', '마시기'], time: '15:00' },
-  { keywords: ['운동', '헬스', '러닝', '조깅', '산책', '걷기'], time: '19:00' },
-  { keywords: ['스트레칭'], time: '07:00' },
-  { keywords: ['독서', '책'], time: '22:00' },
-  { keywords: ['명상', '요가'], time: '07:00' },
-  { keywords: ['비타민', '영양제', '약'], time: '09:00' },
-  { keywords: ['일기', '저널', '회고'], time: '22:30' },
-  { keywords: ['공부', '학습'], time: '20:00' },
+  { keywords: ['물', '수분', '마시기', 'water', 'drink', 'hydrat'], time: '15:00' },
+  { keywords: ['운동', '헬스', '러닝', '조깅', '산책', '걷기', 'exercise', 'workout', 'run', 'jog', 'walk', 'gym'], time: '19:00' },
+  { keywords: ['스트레칭', 'stretch'], time: '07:00' },
+  { keywords: ['독서', '책', 'read', 'book'], time: '22:00' },
+  { keywords: ['명상', '요가', 'meditat', 'yoga'], time: '07:00' },
+  { keywords: ['비타민', '영양제', '약', 'vitamin', 'supplement', 'pill', 'med'], time: '09:00' },
+  { keywords: ['일기', '저널', '회고', 'journal', 'diary'], time: '22:30' },
+  { keywords: ['공부', '학습', 'study', 'learn'], time: '20:00' },
 ] as const;
 
 const FALLBACK_TIME = '21:00';
 
 export function getDefaultReminderTime(habitName: string): string {
-  const normalized = habitName.trim();
+  const normalized = habitName.trim().toLowerCase();
   for (const rule of RULES) {
     if (rule.keywords.some((k) => normalized.includes(k))) {
       return rule.time;

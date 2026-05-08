@@ -1,13 +1,17 @@
 {
   "expo": {
-    "name": "싹 - 습관 트래커",
+    "name": "싹: 세 가지 습관",
     "slug": "minimal-habit-tracker",
-    "version": "1.0.3",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "scheme": "minimal-habit-tracker",
+    "locales": {
+      "ko": "./locales/ios/ko.json",
+      "en": "./locales/ios/en.json"
+    },
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -16,7 +20,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.qlemql.minimalhabittracker",
-      "buildNumber": "5",
+      "buildNumber": "7",
       "appleTeamId": "5R27CJ6382",
       "entitlements": {
         "com.apple.security.application-groups": [
@@ -26,7 +30,10 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "CFBundleDevelopmentRegion": "ko",
-        "CFBundleLocalizations": ["ko"]
+        "CFBundleLocalizations": [
+          "ko",
+          "en"
+        ]
       }
     },
     "android": {
@@ -54,7 +61,9 @@
       "expo-router",
       "@bacons/apple-targets",
       "./plugins/withSharedDefaults",
-      "./plugins/withAndroidWidget"
+      "./plugins/withAndroidWidget",
+      "./plugins/withAppNameI18n",
+      "expo-localization"
     ],
     "extra": {
       "eas": {

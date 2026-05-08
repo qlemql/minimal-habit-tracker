@@ -92,6 +92,19 @@ function withWidgetFiles(config) {
         }
       }
 
+      // res/values/widget_strings.xml + res/values-en/widget_strings.xml
+      // 위젯 전용 리소스만 별도 파일명(widget_strings.xml)으로 분리해 main app strings.xml과 충돌 방지.
+      // values/는 한국어 기본값, values-en/는 영문 디바이스에서 자동 픽업.
+      for (const valuesDir of ['values', 'values-en']) {
+        const src = path.join(sourceDir, 'res', valuesDir, 'widget_strings.xml');
+        if (fs.existsSync(src)) {
+          copyFile(
+            src,
+            path.join(targetMain, 'res', valuesDir, 'widget_strings.xml')
+          );
+        }
+      }
+
       // Kotlin sources
       const kotlinSrc = path.join(sourceDir, 'kotlin');
       if (fs.existsSync(kotlinSrc)) {

@@ -1,0 +1,26 @@
+/* Widget header */
+"widget.title" = "오늘의 습관";
+"widget.allCompleted" = "모두 완료! 🎉";
+
+/* Empty states */
+"widget.empty.small" = "습관을 추가해주세요";
+"widget.empty.medium" = "앱에서 습관을 추가해주세요";
+"widget.empty.accessory" = "앱에서 추가해주세요";
+
+/* Flow days suffix — appears next to habit name */
+"widget.flowDays" = "%d일";
+
+/* Lock screen accessory */
+"widget.accessory.label" = "습관";
+"widget.accessory.inline.empty" = "싹 — 습관 없음";
+"widget.accessory.inline.allDone" = "싹 %1$d/%2$d 모두 완료";
+"widget.accessory.inline.progress" = "싹 오늘 %1$d/%2$d";
+
+/* Widget gallery (configurationDisplayName / description) */
+"widget.config.displayName" = "오늘의 습관";
+"widget.config.description" = "습관 달성 현황을 한눈에 확인하세요";
+
+/* Sample data shown in widget gallery preview */
+"widget.sample.water" = "물 마시기";
+"widget.sample.exercise" = "운동하기";
+"widget.sample.reading" = "독서하기";

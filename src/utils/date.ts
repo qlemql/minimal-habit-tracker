@@ -27,6 +27,3 @@ export function getWeekDates(baseDate: Date = new Date()): string[] {
   }
   return dates;
 }
-
-// 요일 라벨 (월~일)
-export const DAY_LABELS = ['월', '화', '수', '목', '금', '토', '일'] as const;

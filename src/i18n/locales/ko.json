@@ -1,0 +1,293 @@
+{
+  "common": {
+    "cancel": "취소",
+    "save": "저장",
+    "confirm": "확인",
+    "close": "닫기",
+    "done": "완료",
+    "delete": "삭제",
+    "back": "뒤로"
+  },
+  "home": {
+    "greeting": {
+      "dawn": "아직 새벽이에요",
+      "morning": "좋은 아침이에요",
+      "lateMorning": "오전도 화이팅",
+      "lunch": "점심 잘 챙겨요",
+      "afternoon": "오후도 힘내요",
+      "evening": "저녁이에요",
+      "night": "오늘 하루도 수고했어요"
+    },
+    "summary": {
+      "allCompleted": "모두 완료! 🎉",
+      "progress": "{{completed}}/{{total}}",
+      "breathing": "쉬어가는 중이에요, 오늘 다시 이어가요"
+    },
+    "a11y": {
+      "settings": "설정"
+    },
+    "empty": {
+      "title": "아직 습관이 없어요",
+      "subtitle": "작은 시작이 큰 변화를 만들어요"
+    },
+    "add": {
+      "button": "습관 추가",
+      "limitReached": "3개면 충분해요"
+    }
+  },
+  "components": {
+    "habitCard": {
+      "a11y": {
+        "completed": "완료됨",
+        "incomplete": "미완료",
+        "stage": "{{label}} 단계",
+        "flow": "흐름 {{days}}일째",
+        "hint": "탭하여 체크, 길게 눌러 수정"
+      },
+      "flow": "흐름 {{days}}일째",
+      "flowBreathing": "◌ 흐름 {{days}}일째"
+    },
+    "celebration": {
+      "message": {
+        "0": "오늘도 잘 자랐어요",
+        "1": "꾸준함이 자라요",
+        "2": "흐름이 이어졌어요",
+        "3": "물 한 모금 줬어요"
+      },
+      "daysToNext": "다음 성장까지 {{days}}일 {{emoji}}"
+    },
+    "unlockToast": {
+      "grew": "{{label}}으로 자랐어요"
+    },
+    "weeklyCalendar": {
+      "thisWeek": "이번 주",
+      "rangeSameMonth": "{{firstMonth}}월 {{firstDay}}일 ~ {{lastDay}}일",
+      "rangeCrossMonth": "{{firstMonth}}월 {{firstDay}}일 ~ {{lastMonth}}월 {{lastDay}}일",
+      "a11y": {
+        "prevWeek": "이전 주",
+        "nextWeek": "다음 주",
+        "day": "{{dayLabel}}요일 {{dayNum}}일{{allDoneSuffix}}",
+        "allDone": " 모두 완료"
+      }
+    },
+    "timePicker": {
+      "daily": "매일 {{time}}",
+      "none": "알림 없음",
+      "modalTitle": "알림 시간",
+      "cancel": "취소",
+      "done": "완료",
+      "clear": "알림 끄기",
+      "hour": "{{hour}}시",
+      "minute": "{{minute}}분",
+      "a11y": {
+        "set": "알림 시간 {{time}}",
+        "unset": "알림 설정"
+      }
+    },
+    "dayDetail": {
+      "title": "{{dayLabel}}요일 {{dayNum}}일",
+      "pastNotice": "지난 기록이에요",
+      "close": "닫기"
+    }
+  },
+  "days": {
+    "short": {
+      "0": "월",
+      "1": "화",
+      "2": "수",
+      "3": "목",
+      "4": "금",
+      "5": "토",
+      "6": "일"
+    }
+  },
+  "settings": {
+    "title": "설정",
+    "a11y": {
+      "back": "뒤로"
+    },
+    "stats": {
+      "habits": "습관",
+      "totalDone": "총 달성",
+      "unlocks": "해금",
+      "nextUnlock": "다음 해금: {{label}}",
+      "nextUnlockDescription": "{{description}} — 흐름 {{current}}/{{target}}일"
+    },
+    "theme": {
+      "title": "테마",
+      "cream": "크림",
+      "dark": "다크",
+      "system": "시스템"
+    },
+    "notifications": {
+      "title": "알림",
+      "lockScreenAction": {
+        "title": "잠금화면에서 체크",
+        "subtitle": "알림에 완료 버튼이 표시돼요"
+      }
+    },
+    "general": {
+      "title": "일반",
+      "guide": "사용 가이드",
+      "feedback": {
+        "menu": "피드백 보내기",
+        "emailSubject": "싹: 세 가지 습관 피드백",
+        "copiedTitle": "이메일 복사됨",
+        "copiedBody": "{{email}}\n클립보드에 복사되었습니다."
+      },
+      "linkError": {
+        "title": "열 수 없음",
+        "body": "링크를 열 수 없습니다."
+      }
+    },
+    "legal": {
+      "title": "법적 정보",
+      "privacy": "개인정보처리방침",
+      "terms": "이용약관"
+    },
+    "version": "싹: 세 가지 습관 v{{version}}"
+  },
+  "onboarding": {
+    "preset": {
+      "water": "물 마시기",
+      "exercise": "운동하기",
+      "reading": "독서하기",
+      "meditation": "명상하기",
+      "vitamin": "비타민 먹기",
+      "journal": "일기 쓰기"
+    },
+    "intro": {
+      "title": "딱 3개만\n집중해보세요",
+      "subtitle": "많으면 지치고, 적으면 지켜져요",
+      "cta": "시작하기"
+    },
+    "select": {
+      "title": "어떤 습관을 만들어볼까요?",
+      "count": "{{count}}/3개 선택됨",
+      "customPlaceholder": "나만의 습관 입력...",
+      "customAdd": "추가",
+      "next": "다음",
+      "requireSelection": "습관을 선택해주세요"
+    },
+    "reminder": {
+      "title": "씨앗이 자라려면\n매일 같은 시간 물을 줘야 해요",
+      "subtitle": "알람이 그 시간을 대신 기억해드릴게요.",
+      "editHint": "시간을 탭하면 바꿀 수 있어요",
+      "timeSet": "⏰ {{time}}",
+      "timeNone": "🔕 없음",
+      "skip": "건너뛰기",
+      "ctaWithTime": "이 시간으로 알람 켜기",
+      "ctaNoTime": "알람 없이 시작하기"
+    },
+    "guide": {
+      "title": "이렇게 사용해요",
+      "flow": {
+        "title": "꾸준할수록 자라요",
+        "body": "매일 한 탭이 단계가 되어 자라요"
+      },
+      "breathing": {
+        "title": "하루 쉬어도 괜찮아요",
+        "body": "하루 빠져도 흐름은 이어져요.\n이틀 연속 빠지면 새로운 시작.",
+        "legend": "◌ = 쉼표 (흐름 유지)"
+      },
+      "tap": {
+        "title": "탭으로 체크",
+        "body": "습관 카드를 탭하면 오늘 완료"
+      },
+      "longPress": {
+        "title": "길게 눌러 수정",
+        "body": "이름, 아이콘, 알림을 변경할 수 있어요"
+      },
+      "swipe": {
+        "title": "스와이프로 주간 이동",
+        "body": "지난 주 기록도 확인할 수 있어요"
+      },
+      "cta": {
+        "guideOnly": "확인",
+        "start": "{{count}}개로 시작하기"
+      }
+    }
+  },
+  "growth": {
+    "stage": {
+      "seed": "씨앗",
+      "sprout": "발아",
+      "leaf": "떡잎",
+      "stem": "줄기",
+      "bud": "꽃봉오리",
+      "bloom": "개화"
+    }
+  },
+  "add": {
+    "title": "습관 추가",
+    "placeholderName": "습관 이름",
+    "label": {
+      "name": "이름",
+      "icon": "아이콘",
+      "color": "색상",
+      "reminder": "알림"
+    },
+    "input": {
+      "placeholder": "예: 물 2L 마시기"
+    },
+    "alert": {
+      "noticeTitle": "알림",
+      "emptyName": "습관 이름을 입력해주세요.",
+      "limitBody": "습관은 최대 3개까지만 등록할 수 있어요.",
+      "lockedTitle": "잠김",
+      "lockedBody": "흐름 {{days}}일 달성 시 해금돼요"
+    },
+    "a11y": {
+      "cancel": "취소",
+      "save": "저장",
+      "lockedIcon": "잠긴 아이콘 (흐름 {{days}}일 필요)",
+      "lockedColor": "잠긴 색상 (흐름 {{days}}일 필요)",
+      "icon": "아이콘 {{icon}}",
+      "color": "색상 {{color}}"
+    },
+    "save": "저장",
+    "cancel": "취소"
+  },
+  "edit": {
+    "title": "습관 수정",
+    "delete": {
+      "button": "습관 삭제",
+      "a11y": "습관 삭제",
+      "alertTitle": "습관 삭제",
+      "bodyWithWarning": "\"{{name}}\"을(를) 삭제하시겠어요?\n{{warning}}",
+      "bodyEmpty": "\"{{name}}\"을(를) 삭제하시겠어요?",
+      "warningWithFlow": "{{logCount}}일간의 기록과 흐름 {{flowDays}}일이 함께 삭제됩니다.",
+      "warningOnlyLogs": "{{logCount}}일간의 기록이 함께 삭제됩니다.",
+      "cancel": "취소",
+      "confirm": "삭제"
+    }
+  },
+  "notifications": {
+    "actionDone": "완료",
+    "title": "습관 리마인더",
+    "body": "{{habitName}} 할 시간이에요!"
+  },
+  "rewards": {
+    "tier": {
+      "7": {
+        "label": "7일 흐름",
+        "description": "새로운 색상 2개 해금"
+      },
+      "14": {
+        "label": "14일 흐름",
+        "description": "새로운 아이콘 4개 해금"
+      },
+      "30": {
+        "label": "30일 흐름",
+        "description": "프리미엄 색상 3개 해금"
+      },
+      "50": {
+        "label": "50일 흐름",
+        "description": "프리미엄 아이콘 4개 해금"
+      }
+    }
+  },
+  "app": {
+    "displayName": "싹: 세 가지 습관"
+  }
+}

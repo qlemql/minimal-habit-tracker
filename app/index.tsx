@@ -9,6 +9,7 @@ import Animated, {
   withTiming,
   interpolateColor,
 } from 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 import { useHabitStore } from '@/store/habitStore';
 import { HabitCard } from '@/components/HabitCard';
 import { WeeklyCalendar } from '@/components/WeeklyCalendar';
@@ -22,24 +23,26 @@ import { UnlockToast } from '@/components/UnlockToast';
 import { syncWidgetData, processPendingWidgetToggles } from '@/utils/widgetData';
 import { fontSize, spacing } from '@/constants/theme';
 
-function getGreeting(): string {
+function getGreetingKey(): string {
   const hour = new Date().getHours();
-  if (hour < 5) return '아직 새벽이에요';
-  if (hour < 9) return '좋은 아침이에요';
-  if (hour < 12) return '오전도 화이팅';
-  if (hour < 14) return '점심 잘 챙겨요';
-  if (hour < 18) return '오후도 힘내요';
-  if (hour < 21) return '저녁이에요';
-  return '오늘 하루도 수고했어요';
+  if (hour < 5) return 'home.greeting.dawn';
+  if (hour < 9) return 'home.greeting.morning';
+  if (hour < 12) return 'home.greeting.lateMorning';
+  if (hour < 14) return 'home.greeting.lunch';
+  if (hour < 18) return 'home.greeting.afternoon';
+  if (hour < 21) return 'home.greeting.evening';
+  return 'home.greeting.night';
 }
 
 export default function HomeScreen() {
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   const { habits, logs, toggleHabit, isHabitCompleted, canAddHabit } =
     useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
   const [today, setToday] = useState(getToday());
-  const greeting = useMemo(() => getGreeting(), [today]);
+  const greeting = useMemo(() => t(getGreetingKey()), [today, t]);
+  const dateLocale = i18n.language === 'ko' ? 'ko-KR' : 'en-US';
 
   useEffect(() => {
     // 첫 마운트 시에도 위젯 큐 처리 (콜드 스타트)
@@ -139,13 +142,13 @@ export default function HomeScreen() {
           <View>
             <Text style={[styles.greeting, { color: colors.textSecondary }]}>{greeting}</Text>
             <Text style={[styles.dateText, { color: colors.textPrimary }]}>
-              {new Date(today + 'T00:00:00').toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' })}
+              {new Date(today + 'T00:00:00').toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', weekday: 'long' })}
             </Text>
           </View>
           <Pressable
             onPress={() => router.push('/settings')}
             hitSlop={12}
-            accessibilityLabel="설정"
+            accessibilityLabel={t('home.a11y.settings')}
             accessibilityRole="button"
             style={({ pressed }) => [
               styles.settingsButton,
@@ -170,7 +173,9 @@ export default function HomeScreen() {
               />
             </View>
             <Text style={[styles.progress, { color: allCompleted ? colors.success : colors.textSecondary }]}>
-              {allCompleted ? '모두 완료! 🎉' : `${completedCount}/${totalCount}`}
+              {allCompleted
+                ? t('home.summary.allCompleted')
+                : t('home.summary.progress', { completed: completedCount, total: totalCount })}
             </Text>
           </View>
         )}
@@ -180,7 +185,7 @@ export default function HomeScreen() {
         {activeHabits.length > 0 && hasBreathingHabit && (
           <Animated.View entering={FadeInDown.duration(400)} style={[styles.breathingBanner, { backgroundColor: colors.surface }]}>
             <Text style={[styles.breathingText, { color: colors.textSecondary }]}>
-              쉬어가는 중이에요, 오늘 다시 이어가요
+              {t('home.summary.breathing')}
             </Text>
           </Animated.View>
         )}
@@ -189,9 +194,9 @@ export default function HomeScreen() {
             <View style={[styles.emptyIconCircle, { backgroundColor: colors.surface }]}>
               <Text style={styles.emptyIcon}>✨</Text>
             </View>
-            <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>아직 습관이 없어요</Text>
+            <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>{t('home.empty.title')}</Text>
             <Text style={[styles.emptySubtitle, { color: colors.textMuted }]}>
-              작은 시작이 큰 변화를 만들어요
+              {t('home.empty.subtitle')}
             </Text>
           </Animated.View>
         ) : (
@@ -231,12 +236,12 @@ export default function HomeScreen() {
             onPress={() => router.push('/add')}
           >
             <Text style={[styles.addIcon, { color: colors.accent }]}>+</Text>
-            <Text style={[styles.addButtonText, { color: colors.textSecondary }]}>습관 추가</Text>
+            <Text style={[styles.addButtonText, { color: colors.textSecondary }]}>{t('home.add.button')}</Text>
           </Pressable>
         ) : totalCount > 0 ? (
           <View style={styles.maxHintContainer}>
             <Text style={[styles.maxHint, { color: colors.textMuted }]}>
-              3개면 충분해요
+              {t('home.add.limitReached')}
             </Text>
           </View>
         ) : null}

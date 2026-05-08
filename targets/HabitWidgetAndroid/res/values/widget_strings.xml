@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_title">오늘의 습관</string>
+    <string name="widget_all_completed">모두 완료! 🎉</string>
+    <string name="widget_progress_a11y">진행률</string>
+    <string name="widget_check_a11y">체크</string>
+    <string name="widget_empty">앱에서 습관을 추가해주세요</string>
+    <string name="widget_flow_days">%1$d일</string>
+</resources>

@@ -8,9 +8,10 @@ import Animated, {
   interpolateColor,
   runOnJS,
 } from 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
-import { getWeekDates, getToday, DAY_LABELS } from '@/utils/date';
+import { getWeekDates, getToday } from '@/utils/date';
 import { fontSize, spacing } from '@/constants/theme';
 
 function AnimatedDot({ completed, color, inactiveColor }: { completed: boolean; color: string; inactiveColor: string }) {
@@ -29,10 +30,15 @@ interface WeeklyCalendarProps {
 }
 
 export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
+  const { t } = useTranslation();
   const { habits, isHabitCompleted } = useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
   const activeHabits = habits;
   const today = getToday();
+  const dayLabels = useMemo(
+    () => [0, 1, 2, 3, 4, 5, 6].map((i) => t(`days.short.${i}` as const)),
+    [t]
+  );
 
   const [weekOffset, setWeekOffset] = useState(0);
   const translateX = useSharedValue(0);
@@ -49,10 +55,19 @@ export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
   const firstMonth = firstDate.getMonth() + 1;
   const lastMonth = lastDate.getMonth() + 1;
   const weekLabel = isCurrentWeek
-    ? '이번 주'
+    ? t('components.weeklyCalendar.thisWeek')
     : firstMonth === lastMonth
-      ? `${firstMonth}월 ${firstDate.getDate()}일 ~ ${lastDate.getDate()}일`
-      : `${firstMonth}월 ${firstDate.getDate()}일 ~ ${lastMonth}월 ${lastDate.getDate()}일`;
+      ? t('components.weeklyCalendar.rangeSameMonth', {
+          firstMonth,
+          firstDay: firstDate.getDate(),
+          lastDay: lastDate.getDate(),
+        })
+      : t('components.weeklyCalendar.rangeCrossMonth', {
+          firstMonth,
+          firstDay: firstDate.getDate(),
+          lastMonth,
+          lastDay: lastDate.getDate(),
+        });
 
   const goToPrevWeek = useCallback(() => {
     setWeekOffset((prev) => prev - 1);
@@ -89,7 +104,7 @@ export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
           onPress={() => setWeekOffset((p) => p - 1)}
           hitSlop={12}
           style={[styles.arrowButton, { backgroundColor: colors.surfaceLight }]}
-          accessibilityLabel="이전 주"
+          accessibilityLabel={t('components.weeklyCalendar.a11y.prevWeek')}
           accessibilityRole="button"
         >
           <Text style={[styles.arrow, { color: colors.textSecondary }]}>‹</Text>
@@ -104,7 +119,7 @@ export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
           onPress={() => weekOffset < 0 && setWeekOffset((p) => p + 1)}
           hitSlop={12}
           style={[styles.arrowButton, { backgroundColor: colors.surfaceLight }, isCurrentWeek && { opacity: 0.3 }]}
-          accessibilityLabel="다음 주"
+          accessibilityLabel={t('components.weeklyCalendar.a11y.nextWeek')}
           accessibilityRole="button"
           disabled={isCurrentWeek}
         >
@@ -134,11 +149,15 @@ export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
                 style={styles.dayColumn}
                 onPress={() => !isFuture && onDatePress?.(date)}
                 disabled={isFuture}
-                accessibilityLabel={`${DAY_LABELS[index]}요일 ${parseInt(date.split('-')[2], 10)}일${allDone ? ' 모두 완료' : ''}`}
+                accessibilityLabel={t('components.weeklyCalendar.a11y.day', {
+                  dayLabel: dayLabels[index],
+                  dayNum: parseInt(date.split('-')[2], 10),
+                  allDoneSuffix: allDone ? t('components.weeklyCalendar.a11y.allDone') : '',
+                })}
                 accessibilityRole="button"
               >
                 <Text style={[styles.dayLabel, { color: colors.textMuted }, isToday && { color: colors.accent, fontWeight: '700' }]}>
-                  {DAY_LABELS[index]}
+                  {dayLabels[index]}
                 </Text>
                 <View
                   style={[

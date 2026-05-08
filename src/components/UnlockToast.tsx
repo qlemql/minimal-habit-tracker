@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 import { useRewardStore } from '@/store/rewardStore';
 import { useThemeStore } from '@/store/themeStore';
 import { hapticNotification, NotificationFeedbackType } from '@/utils/haptics';
@@ -8,6 +9,7 @@ import { fontSize, spacing } from '@/constants/theme';
 import { getCurrentStage } from '@/constants/growth';
 
 export function UnlockToast() {
+  const { t } = useTranslation();
   const pendingUnlock = useRewardStore((s) => s.pendingUnlock);
   const dismissUnlock = useRewardStore((s) => s.dismissUnlock);
   const colors = useThemeStore((s) => s.getColors());
@@ -50,10 +52,10 @@ export function UnlockToast() {
         </View>
         <View style={styles.textArea}>
           <Text style={[styles.stageLabel, { color: colors.accent }]}>
-            {stage.label}으로 자랐어요
+            {t('components.unlockToast.grew', { label: t(`growth.stage.${stage.id}` as const) })}
           </Text>
           <Text style={[styles.description, { color: colors.textSecondary }]}>
-            {pendingUnlock.description}
+            {t(`rewards.tier.${pendingUnlock.flowDays}.description` as const)}
           </Text>
         </View>
         <View style={styles.preview}>

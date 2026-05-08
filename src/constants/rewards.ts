@@ -2,8 +2,6 @@ import { unlockableIcons, unlockableColors } from './theme';
 
 export interface RewardTier {
   flowDays: number;
-  label: string;
-  description: string;
   icons?: readonly string[];
   colors?: readonly string[];
 }
@@ -15,26 +13,18 @@ export interface RewardTier {
 export const REWARD_TIERS: RewardTier[] = [
   {
     flowDays: 7,
-    label: '7일 흐름',
-    description: '새로운 색상 2개 해금',
     colors: [unlockableColors[0], unlockableColors[1]],
   },
   {
     flowDays: 14,
-    label: '14일 흐름',
-    description: '새로운 아이콘 4개 해금',
     icons: [unlockableIcons[0], unlockableIcons[1], unlockableIcons[2], unlockableIcons[3]],
   },
   {
     flowDays: 30,
-    label: '30일 흐름',
-    description: '프리미엄 색상 3개 해금',
     colors: [unlockableColors[2], unlockableColors[3], unlockableColors[4]],
   },
   {
     flowDays: 50,
-    label: '50일 흐름',
-    description: '프리미엄 아이콘 4개 해금',
     icons: [unlockableIcons[4], unlockableIcons[5], unlockableIcons[6], unlockableIcons[7]],
   },
 ];

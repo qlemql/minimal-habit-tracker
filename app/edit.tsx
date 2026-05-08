@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { hapticImpact, hapticNotification, ImpactFeedbackStyle, NotificationFeedbackType } from '@/utils/haptics';
 import { useHabitStore } from '@/store/habitStore';
 import { useThemeStore } from '@/store/themeStore';
@@ -24,6 +25,7 @@ import { fontSize, spacing, habitIcons, habitColors, unlockableIcons, unlockable
 import { getUnlockedItems, getRequiredFlowDays } from '@/constants/rewards';
 
 export default function EditHabitScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { habits, updateHabit, deleteHabit } = useHabitStore();
@@ -55,7 +57,7 @@ export default function EditHabitScreen() {
   const handleSave = async () => {
     const trimmed = name.trim();
     if (!trimmed) {
-      Alert.alert('알림', '습관 이름을 입력해주세요.');
+      Alert.alert(t('add.alert.noticeTitle'), t('add.alert.emptyName'));
       return;
     }
     await updateHabit(habit.id, {
@@ -74,12 +76,17 @@ export default function EditHabitScreen() {
     const flow = calculateFlow(habit.id, logs);
     const logCount = logs.filter((l) => l.habitId === habit.id && l.completed).length;
     const warning = logCount > 0
-      ? `${logCount}일간의 기록${flow.currentFlowDays > 0 ? `과 흐름 ${flow.currentFlowDays}일` : ''}이 함께 삭제됩니다.`
+      ? flow.currentFlowDays > 0
+        ? t('edit.delete.warningWithFlow', { logCount, flowDays: flow.currentFlowDays })
+        : t('edit.delete.warningOnlyLogs', { logCount })
       : '';
-    Alert.alert('습관 삭제', `"${habit.name}"을(를) 삭제하시겠어요?${warning ? '\n' + warning : ''}`, [
-      { text: '취소', style: 'cancel' },
+    const body = warning
+      ? t('edit.delete.bodyWithWarning', { name: habit.name, warning })
+      : t('edit.delete.bodyEmpty', { name: habit.name });
+    Alert.alert(t('edit.delete.alertTitle'), body, [
+      { text: t('edit.delete.cancel'), style: 'cancel' },
       {
-        text: '삭제',
+        text: t('edit.delete.confirm'),
         style: 'destructive',
         onPress: async () => {
           deleteHabit(habit.id);
@@ -96,16 +103,16 @@ export default function EditHabitScreen() {
         <Pressable
           onPress={() => { hapticImpact(ImpactFeedbackStyle.Light); router.back(); }}
           hitSlop={12}
-          accessibilityLabel="취소"
+          accessibilityLabel={t('add.a11y.cancel')}
           accessibilityRole="button"
           style={({ pressed }) => pressed && { opacity: 0.6 }}
         >
-          <Text style={[styles.cancel, { color: colors.textSecondary }]}>취소</Text>
+          <Text style={[styles.cancel, { color: colors.textSecondary }]}>{t('add.cancel')}</Text>
         </Pressable>
-        <Text style={[styles.headerTitle, { color: colors.textPrimary }]}>습관 수정</Text>
-        <Pressable onPress={handleSave} hitSlop={12} accessibilityLabel="저장" accessibilityRole="button">
+        <Text style={[styles.headerTitle, { color: colors.textPrimary }]}>{t('edit.title')}</Text>
+        <Pressable onPress={handleSave} hitSlop={12} accessibilityLabel={t('add.a11y.save')} accessibilityRole="button">
           <Text style={[styles.save, { color: colors.accent }, !name.trim() && styles.saveDisabled]}>
-            저장
+            {t('add.save')}
           </Text>
         </Pressable>
       </View>
@@ -123,17 +130,17 @@ export default function EditHabitScreen() {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            {name.trim() || '습관 이름'}
+            {name.trim() || t('add.placeholderName')}
           </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textMuted }]}>이름</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>{t('add.label.name')}</Text>
           <TextInput
             style={[styles.input, { backgroundColor: colors.surface, color: colors.textPrimary }]}
             value={name}
             onChangeText={setName}
-            placeholder="예: 물 2L 마시기"
+            placeholder={t('add.input.placeholder')}
             placeholderTextColor={colors.textMuted}
             maxLength={30}
             returnKeyType="done"
@@ -142,7 +149,7 @@ export default function EditHabitScreen() {
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textMuted }]}>아이콘</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>{t('add.label.icon')}</Text>
           <View style={styles.grid}>
             {allIcons.map((icon) => {
               const requiredDays = getRequiredFlowDays(icon, 'icon');
@@ -162,13 +169,15 @@ export default function EditHabitScreen() {
                   ]}
                   onPress={() => {
                     if (isLocked) {
-                      Alert.alert('잠김', `흐름 ${requiredDays}일 달성 시 해금돼요`);
+                      Alert.alert(t('add.alert.lockedTitle'), t('add.alert.lockedBody', { days: requiredDays }));
                       return;
                     }
                     hapticImpact(ImpactFeedbackStyle.Light);
                     setSelectedIcon(icon);
                   }}
-                  accessibilityLabel={isLocked ? `잠긴 아이콘 (흐름 ${requiredDays}일 필요)` : `아이콘 ${icon}`}
+                  accessibilityLabel={isLocked
+                    ? t('add.a11y.lockedIcon', { days: requiredDays })
+                    : t('add.a11y.icon', { icon })}
                   accessibilityRole="button"
                 >
                   <Text style={[styles.gridIcon, isLocked && { opacity: 0.3 }]}>{icon}</Text>
@@ -180,7 +189,7 @@ export default function EditHabitScreen() {
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textMuted }]}>색상</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>{t('add.label.color')}</Text>
           <View style={styles.colorGrid}>
             {allColors.map((color) => {
               const requiredDays = getRequiredFlowDays(color, 'color');
@@ -199,13 +208,15 @@ export default function EditHabitScreen() {
                   ]}
                   onPress={() => {
                     if (isLocked) {
-                      Alert.alert('잠김', `흐름 ${requiredDays}일 달성 시 해금돼요`);
+                      Alert.alert(t('add.alert.lockedTitle'), t('add.alert.lockedBody', { days: requiredDays }));
                       return;
                     }
                     hapticImpact(ImpactFeedbackStyle.Light);
                     setSelectedColor(color);
                   }}
-                  accessibilityLabel={isLocked ? `잠긴 색상 (흐름 ${requiredDays}일 필요)` : `색상 ${color}`}
+                  accessibilityLabel={isLocked
+                    ? t('add.a11y.lockedColor', { days: requiredDays })
+                    : t('add.a11y.color', { color })}
                   accessibilityRole="button"
                 >
                   {isLocked && <Text style={styles.lockBadge}>🔒</Text>}
@@ -216,17 +227,17 @@ export default function EditHabitScreen() {
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: colors.textMuted }]}>알림</Text>
+          <Text style={[styles.label, { color: colors.textMuted }]}>{t('add.label.reminder')}</Text>
           <TimePicker value={reminderTime} onChange={setReminderTime} />
         </View>
 
         <Pressable
           style={[styles.deleteButton, { backgroundColor: colors.danger + '15' }]}
           onPress={handleDelete}
-          accessibilityLabel="습관 삭제"
+          accessibilityLabel={t('edit.delete.a11y')}
           accessibilityRole="button"
         >
-          <Text style={[styles.deleteText, { color: colors.danger }]}>습관 삭제</Text>
+          <Text style={[styles.deleteText, { color: colors.danger }]}>{t('edit.delete.button')}</Text>
         </Pressable>
       </ScrollView>
       </KeyboardAvoidingView>

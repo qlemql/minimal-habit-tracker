@@ -13,6 +13,7 @@ import Animated, {
   FadeInUp,
   FadeOutUp,
 } from 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 import { hapticImpact, hapticNotification, ImpactFeedbackStyle, NotificationFeedbackType } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing } from '@/constants/theme';
@@ -42,6 +43,7 @@ export function HabitCard({
   onToggle,
   onEdit,
 }: HabitCardProps) {
+  const { t } = useTranslation();
   const colors = useThemeStore((s) => s.getColors());
   const scale = useSharedValue(1);
   const checkScale = useSharedValue(completed ? 1 : 0);
@@ -150,15 +152,23 @@ export function HabitCard({
   const stage = getCurrentStage(flow.longestFlow);
   const showStage = flow.longestFlow >= GROWTH_STAGES[1].threshold;
   const showFlow = flow.currentFlowDays > 1;
+  const stageLabel = t(`growth.stage.${stage.id}` as const);
+
+  const a11yLabel = [
+    name,
+    t(completed ? 'components.habitCard.a11y.completed' : 'components.habitCard.a11y.incomplete'),
+    showStage ? t('components.habitCard.a11y.stage', { label: stageLabel }) : '',
+    showFlow ? t('components.habitCard.a11y.flow', { days: flow.currentFlowDays }) : '',
+  ].filter(Boolean).join(' ');
 
   return (
     <GestureDetector gesture={composedGesture}>
       <Animated.View
         style={[styles.card, cardAnimStyle]}
-        accessibilityLabel={`${name} ${completed ? '완료됨' : '미완료'}${showStage ? ` ${stage.label} 단계` : ''}${showFlow ? ` 흐름 ${flow.currentFlowDays}일째` : ''}`}
+        accessibilityLabel={a11yLabel}
         accessibilityRole="checkbox"
         accessibilityState={{ checked: completed }}
-        accessibilityHint="탭하여 체크, 길게 눌러 수정"
+        accessibilityHint={t('components.habitCard.a11y.hint')}
       >
         <View style={styles.left}>
           <Animated.View style={[styles.iconContainer, iconBgStyle]}>
@@ -179,9 +189,11 @@ export function HabitCard({
                 exiting={FadeOutUp.duration(150)}
                 style={[styles.flowText, { color }]}
               >
-                {showStage && `${stage.emoji} ${stage.label}`}
+                {showStage && `${stage.emoji} ${stageLabel}`}
                 {showStage && showFlow && '  ·  '}
-                {showFlow && `${flow.isBreathingToday ? '◌ ' : ''}흐름 ${flow.currentFlowDays}일째`}
+                {showFlow && (flow.isBreathingToday
+                  ? t('components.habitCard.flowBreathing', { days: flow.currentFlowDays })
+                  : t('components.habitCard.flow', { days: flow.currentFlowDays }))}
               </Animated.Text>
             )}
           </View>
