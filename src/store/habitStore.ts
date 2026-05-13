@@ -53,14 +53,16 @@ export const useHabitStore = create<HabitStore>()(
 
         const now = new Date().toISOString();
         const id = generateId();
-        const activeCount = get().habits.filter((h) => !h.isGraduated).length;
+        // order는 전체 habits(졸업 포함) 중 max + 1 — 졸업한 항목 order와 겹치지 않도록.
+        // 메인 리스트는 활성만 표시하므로 띄엄띄엄한 order 값이라도 정렬엔 영향 없음.
+        const maxOrder = get().habits.reduce((max, h) => Math.max(max, h.order), -1);
         const newHabit: Habit = {
           id,
           name,
           icon,
           color,
           reminderTime: null,
-          order: activeCount,
+          order: maxOrder + 1,
           createdAt: now,
           updatedAt: now,
         };

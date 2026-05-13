@@ -34,6 +34,16 @@ export const useSettingsStore = create<SettingsStore>()(
       name: 'settings-store',
       version: 2,
       storage: createJSONStorage(() => AsyncStorage),
+      // v1 → v2 마이그레이션: graduationProposedFor 신규 필드 추가, 기존 lockScreenActionEnabled 보존
+      migrate: (persisted: any, version: number) => {
+        if (version < 2) {
+          return {
+            ...persisted,
+            graduationProposedFor: persisted?.graduationProposedFor ?? {},
+          };
+        }
+        return persisted;
+      },
     }
   )
 );
