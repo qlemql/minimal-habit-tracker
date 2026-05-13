@@ -40,6 +40,20 @@ module.exports = function withAppNameI18n(config) {
 `;
       fs.writeFileSync(filePath, content, 'utf8');
 
+      // ── iOS locales 누락 정리 ────────────────────────────────────────────
+      // Expo prebuild가 app.json의 `expo.locales` (iOS InfoPlist.strings용)를
+      // Android의 values-b+{locale}/strings.xml 로도 잘못 복사하는 버그가 있음.
+      // → CFBundleDisplayName / CFBundleName 같은 iOS 전용 키가 Android 리소스에
+      //   포함되어 release lint의 ExtraTranslation fatal 에러를 일으킴.
+      // 우리가 만든 values-en/strings.xml(app_name 영문판)만 남기고 leak 디렉토리 제거.
+      const resDir = path.join(platformRoot, 'app', 'src', 'main', 'res');
+      for (const leakDir of ['values-b+ko', 'values-b+en']) {
+        const target = path.join(resDir, leakDir);
+        if (fs.existsSync(target)) {
+          fs.rmSync(target, { recursive: true, force: true });
+        }
+      }
+
       return config;
     },
   ]);
