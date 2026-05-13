@@ -104,6 +104,8 @@ export async function rescheduleAllReminders(): Promise<void> {
   const { habits } = useHabitStore.getState();
 
   for (const habit of habits) {
+    // 졸업한 습관은 알림 재예약 대상 아님
+    if (habit.isGraduated) continue;
     if (habit.reminderTime) {
       await scheduleHabitReminder(habit.id, habit.name, habit.reminderTime);
     }

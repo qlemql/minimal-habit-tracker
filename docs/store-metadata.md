@@ -187,6 +187,45 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 ## 버전별 업데이트 소개 (What's New)
 
+### v1.3.0 (예정 — 졸업 시스템 + 통계 화면)
+
+#### 한국어
+```
+꽃이 핀 습관, 이제 졸업할 수 있어요.
+
+• 7일부터 조기 졸업 가능
+  떡잎이 자라면 본인이 원할 때 졸업시킬 수 있어요.
+• 50일에 자동으로 새 씨앗 제안
+  꽃이 활짝 피면 "보내주기" 한 번에 새 도전이 시작돼요.
+• 졸업한 정원
+  졸업한 습관은 사라지지 않고 정원에 보관돼요.
+• 통계 화면 추가
+  활성 습관·총 완료·최장 흐름·해금을 한눈에.
+
+자란 자리에 새 씨앗이 와요.
+```
+
+#### English
+```
+Graduate bloomed habits, plant new seeds.
+
+• Early graduation from Leaf (7 days)
+  Once your habit has sprouted, you decide when it's ready.
+• Auto suggestion at full bloom (50 days)
+  One tap to graduate and start something new.
+• Graduation Garden
+  Graduated habits stay safe in your garden.
+• New Stats screen
+  Active habits, total done, longest Flow, unlocks — at a glance.
+
+Where one habit blooms, another seed begins.
+```
+
+**릴리즈 설정**
+- 출시 방식: 승인 후 자동 출시
+- 변경 범위: 졸업 시스템 (조기/정시) + 통계 화면 (Free) + 데이터 모델 확장 (graduation 필드 4종)
+- iOS + Android 동시 출시
+
 ### v1.2.0 (예정 — i18n 완료 후 출시)
 
 #### 한국어

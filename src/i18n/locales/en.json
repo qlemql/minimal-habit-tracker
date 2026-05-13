@@ -202,6 +202,10 @@
         "title": "Swipe between weeks",
         "body": "Check last week's records too"
       },
+      "graduation": {
+        "title": "Bloomed habits can graduate",
+        "body": "Grown habits live in your Graduation Garden\nand make room for new seeds"
+      },
       "cta": {
         "guideOnly": "Got it",
         "start": "Start with {{count}}"
@@ -289,5 +293,52 @@
   },
   "app": {
     "displayName": "Ssak: Three Habits"
+  },
+  "graduation": {
+    "action": {
+      "graduate": "Graduate",
+      "earlyGraduate": "Graduate early"
+    },
+    "autoProposal": {
+      "title": "🌸 It's in full bloom",
+      "body": "Graduate this habit and plant a new seed?",
+      "confirm": "Graduate",
+      "decline": "Keep growing"
+    },
+    "earlyDialog": {
+      "title": "Graduate early?",
+      "body": "{{days}} days left until full bloom",
+      "confirm": "Yes, graduate",
+      "cancel": "Cancel"
+    },
+    "fullDialog": {
+      "title": "Graduate now?",
+      "body": "Your habit has fully bloomed. It will live in your Graduation Garden.",
+      "confirm": "Graduate",
+      "cancel": "Cancel"
+    },
+    "stage": {
+      "leaf": "Graduated at Leaf",
+      "stem": "Graduated at Stem",
+      "bud": "Graduated at Bud",
+      "bloom": "Graduated at Bloom"
+    }
+  },
+  "stats": {
+    "title": "Statistics",
+    "enter": "View stats",
+    "basic": {
+      "activeHabits": "Active habits",
+      "totalDone": "Total done",
+      "maxFlow": "Longest Flow",
+      "unlocks": "Unlocks"
+    },
+    "garden": {
+      "title": "Graduation Garden",
+      "empty": "No graduated habits yet",
+      "emptyHint": "Bloomed habits live here after graduation",
+      "totalDays": "{{days}} days total",
+      "graduatedOn": "Graduated {{date}}"
+    }
   }
 }

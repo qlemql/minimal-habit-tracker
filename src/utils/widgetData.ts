@@ -25,7 +25,8 @@ export function getWidgetData(): WidgetHabit[] {
   cutoffDate.setDate(cutoffDate.getDate() - HISTORY_WINDOW_DAYS);
   const cutoff = formatDate(cutoffDate);
 
-  return [...habits]
+  return habits
+    .filter((h) => !h.isGraduated)
     .sort((a, b) => a.order - b.order)
     .slice(0, 3)
     .map((habit) => ({

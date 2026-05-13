@@ -28,7 +28,7 @@ export default function EditHabitScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { habits, updateHabit, deleteHabit } = useHabitStore();
+  const { habits, updateHabit, deleteHabit, graduateHabit } = useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
 
   const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
@@ -38,6 +38,10 @@ export default function EditHabitScreen() {
   const allColors = [...habitColors, ...unlockableColors];
 
   const habit = habits.find((h) => h.id === id);
+
+  // 졸업 액션 노출 임계값 — 떡잎(7일)부터. 50일 이상이면 정시 졸업 라벨.
+  const GRADUATION_MIN_DAYS = 7;
+  const GRADUATION_FULL_DAYS = 50;
 
   const [name, setName] = useState(habit?.name ?? '');
   const [selectedIcon, setSelectedIcon] = useState(habit?.icon ?? habitIcons[0]);
@@ -69,6 +73,38 @@ export default function EditHabitScreen() {
     hapticNotification(NotificationFeedbackType.Success);
     await syncWidgetData();
     router.back();
+  };
+
+  const handleGraduate = () => {
+    if (!habit) return;
+    const { logs } = useHabitStore.getState();
+    const flow = calculateFlow(habit.id, logs);
+    const flowDays = flow.currentFlowDays;
+    const isFull = flowDays >= GRADUATION_FULL_DAYS;
+    const daysLeft = Math.max(0, GRADUATION_FULL_DAYS - flowDays);
+
+    Alert.alert(
+      isFull ? t('graduation.fullDialog.title') : t('graduation.earlyDialog.title'),
+      isFull
+        ? t('graduation.fullDialog.body')
+        : t('graduation.earlyDialog.body', { days: daysLeft }),
+      [
+        {
+          text: isFull ? t('graduation.fullDialog.cancel') : t('graduation.earlyDialog.cancel'),
+          style: 'cancel',
+        },
+        {
+          text: isFull ? t('graduation.fullDialog.confirm') : t('graduation.earlyDialog.confirm'),
+          style: 'default',
+          onPress: async () => {
+            graduateHabit(habit.id);
+            hapticNotification(NotificationFeedbackType.Success);
+            await syncWidgetData();
+            router.back();
+          },
+        },
+      ]
+    );
   };
 
   const handleDelete = () => {
@@ -231,6 +267,28 @@ export default function EditHabitScreen() {
           <TimePicker value={reminderTime} onChange={setReminderTime} />
         </View>
 
+        {(() => {
+          const { logs } = useHabitStore.getState();
+          const flow = calculateFlow(habit.id, logs);
+          if (flow.currentFlowDays < GRADUATION_MIN_DAYS) return null;
+          const isFull = flow.currentFlowDays >= GRADUATION_FULL_DAYS;
+          const label = isFull
+            ? t('graduation.action.graduate')
+            : t('graduation.action.earlyGraduate');
+          return (
+            <Pressable
+              style={[styles.graduateButton, { backgroundColor: colors.accent + '15' }]}
+              onPress={handleGraduate}
+              accessibilityLabel={label}
+              accessibilityRole="button"
+            >
+              <Text style={[styles.graduateText, { color: colors.accent }]}>
+                🌸 {label}
+              </Text>
+            </Pressable>
+          );
+        })()}
+
         <Pressable
           style={[styles.deleteButton, { backgroundColor: colors.danger + '15' }]}
           onPress={handleDelete}
@@ -311,6 +369,13 @@ const styles = StyleSheet.create({
     bottom: 2,
     fontSize: 10,
   },
+  graduateButton: {
+    marginTop: spacing.sm,
+    padding: spacing.md,
+    alignItems: 'center',
+    borderRadius: 14,
+  },
+  graduateText: { fontSize: fontSize.md, fontWeight: '600' },
   deleteButton: {
     marginTop: spacing.sm,
     marginBottom: spacing.xxl,

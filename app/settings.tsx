@@ -38,6 +38,7 @@ export default function SettingsScreen() {
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
   const { habits, logs } = useHabitStore();
+  const activeHabits = habits.filter((h) => !h.isGraduated);
   const totalLogs = logs.filter((l) => l.completed).length;
   const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
   const nextTier = REWARD_TIERS.find((t) => t.flowDays > maxFlowEver);
@@ -107,7 +108,7 @@ export default function SettingsScreen() {
       <View style={styles.content}>
         <View style={[styles.statsCard, { backgroundColor: colors.surface }]}>
           <View style={styles.statItem}>
-            <Text style={[styles.statNumber, { color: colors.accent }]}>{habits.length}</Text>
+            <Text style={[styles.statNumber, { color: colors.accent }]}>{activeHabits.length}</Text>
             <Text style={[styles.statLabel, { color: colors.textMuted }]}>{t('settings.stats.habits')}</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.surfaceLight }]} />
@@ -121,6 +122,26 @@ export default function SettingsScreen() {
             <Text style={[styles.statLabel, { color: colors.textMuted }]}>{t('settings.stats.unlocks')}</Text>
           </View>
         </View>
+        <Pressable
+          onPress={() => {
+            hapticImpact(ImpactFeedbackStyle.Light);
+            router.push('/stats');
+          }}
+          style={({ pressed }) => [
+            styles.statsLinkRow,
+            { backgroundColor: colors.surface },
+            pressed && { opacity: 0.6 },
+          ]}
+          accessibilityLabel={t('stats.enter')}
+          accessibilityRole="link"
+        >
+          <Text style={styles.optionIcon}>📊</Text>
+          <Text style={[styles.optionText, { color: colors.textPrimary }]}>
+            {t('stats.enter')}
+          </Text>
+          <Text style={[styles.chevron, { color: colors.textMuted }]}>›</Text>
+        </Pressable>
+
         {nextTier && (
           <View style={[styles.nextTierCard, { backgroundColor: colors.surface }]}>
             <Text style={[styles.nextTierLabel, { color: colors.textSecondary }]}>
@@ -315,6 +336,15 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: spacing.lg,
     marginBottom: spacing.lg,
+  },
+  statsLinkRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.md,
+    borderRadius: 14,
+    marginBottom: spacing.lg,
+    gap: spacing.sm,
   },
   statItem: {
     flex: 1,

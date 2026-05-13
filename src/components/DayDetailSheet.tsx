@@ -40,7 +40,7 @@ export function DayDetailSheet({ date, onClose }: DayDetailSheetProps) {
             </View>
           )}
 
-          {habits.map((habit) => {
+          {habits.filter((h) => !h.isGraduated).map((habit) => {
             const completed = isHabitCompleted(habit.id, date);
             return (
               <Pressable

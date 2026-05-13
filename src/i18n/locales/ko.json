@@ -202,6 +202,10 @@
         "title": "스와이프로 주간 이동",
         "body": "지난 주 기록도 확인할 수 있어요"
       },
+      "graduation": {
+        "title": "꽃이 피면 졸업할 수 있어요",
+        "body": "자란 습관은 졸업한 정원에 보관되고\n그 자리에 새 씨앗을 심을 수 있어요"
+      },
       "cta": {
         "guideOnly": "확인",
         "start": "{{count}}개로 시작하기"
@@ -289,5 +293,52 @@
   },
   "app": {
     "displayName": "싹: 세 가지 습관"
+  },
+  "graduation": {
+    "action": {
+      "graduate": "졸업시키기",
+      "earlyGraduate": "조기 졸업"
+    },
+    "autoProposal": {
+      "title": "🌸 꽃이 피었어요",
+      "body": "이 습관을 졸업시키고 새 씨앗을 심을까요?",
+      "confirm": "보내주기",
+      "decline": "계속 키울게요"
+    },
+    "earlyDialog": {
+      "title": "조기 졸업할까요?",
+      "body": "개화까지 {{days}}일 남았어요",
+      "confirm": "네, 졸업시킬게요",
+      "cancel": "취소"
+    },
+    "fullDialog": {
+      "title": "졸업시킬까요?",
+      "body": "꽃이 활짝 피었어요. 졸업한 정원에 보관됩니다.",
+      "confirm": "졸업시키기",
+      "cancel": "취소"
+    },
+    "stage": {
+      "leaf": "떡잎에서 졸업",
+      "stem": "줄기에서 졸업",
+      "bud": "꽃봉오리에서 졸업",
+      "bloom": "개화에서 졸업"
+    }
+  },
+  "stats": {
+    "title": "통계",
+    "enter": "통계 보기",
+    "basic": {
+      "activeHabits": "활성 습관",
+      "totalDone": "총 완료",
+      "maxFlow": "최장 흐름",
+      "unlocks": "해금 수"
+    },
+    "garden": {
+      "title": "졸업한 정원",
+      "empty": "아직 졸업한 습관이 없어요",
+      "emptyHint": "꽃이 핀 습관을 졸업시키면 여기에 보관돼요",
+      "totalDays": "총 {{days}}일",
+      "graduatedOn": "{{date}} 졸업"
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, AppState, LayoutChangeEvent } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, AppState, LayoutChangeEvent, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import Animated, {
@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 import { useHabitStore } from '@/store/habitStore';
+import { useSettingsStore } from '@/store/settingsStore';
 import { HabitCard } from '@/components/HabitCard';
 import { WeeklyCalendar } from '@/components/WeeklyCalendar';
 import { CelebrationOverlay } from '@/components/CelebrationOverlay';
@@ -37,8 +38,10 @@ function getGreetingKey(): string {
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const { habits, logs, toggleHabit, isHabitCompleted, canAddHabit } =
+  const { habits, logs, toggleHabit, isHabitCompleted, canAddHabit, graduateHabit } =
     useHabitStore();
+  const markGraduationProposed = useSettingsStore((s) => s.markGraduationProposed);
+  const hasGraduationBeenProposed = useSettingsStore((s) => s.hasGraduationBeenProposed);
   const colors = useThemeStore((s) => s.getColors());
   const [today, setToday] = useState(getToday());
   const greeting = useMemo(() => t(getGreetingKey()), [today, t]);
@@ -57,7 +60,7 @@ export default function HomeScreen() {
   }, []);
 
   const activeHabits = useMemo(
-    () => [...habits].sort((a, b) => a.order - b.order),
+    () => habits.filter((h) => !h.isGraduated).sort((a, b) => a.order - b.order),
     [habits]
   );
 
@@ -133,6 +136,41 @@ export default function HomeScreen() {
 
   const handleCloseCelebration = useCallback(() => setShowCelebration(false), []);
   const handleCloseDetail = useCallback(() => setSelectedDate(null), []);
+
+  // 50일 자동 졸업 제안 — 체크 직후 50일 도달 + 미제안 시 1회 발동
+  const GRADUATION_FULL_DAYS = 50;
+  const handleToggle = useCallback((habitId: string) => {
+    const wasCompleted = isHabitCompleted(habitId, today);
+    toggleHabit(habitId);
+    if (wasCompleted) return; // 체크 해제는 제안 트리거 안 함
+
+    // Zustand set은 동기적 — logs는 이미 최신
+    const { logs: nextLogs } = useHabitStore.getState();
+    const flow = calculateFlow(habitId, nextLogs, today);
+    if (flow.currentFlowDays < GRADUATION_FULL_DAYS) return;
+    if (hasGraduationBeenProposed(habitId)) return;
+
+    Alert.alert(
+      t('graduation.autoProposal.title'),
+      t('graduation.autoProposal.body'),
+      [
+        {
+          text: t('graduation.autoProposal.decline'),
+          style: 'cancel',
+          onPress: () => markGraduationProposed(habitId),
+        },
+        {
+          text: t('graduation.autoProposal.confirm'),
+          style: 'default',
+          onPress: () => {
+            markGraduationProposed(habitId);
+            graduateHabit(habitId);
+            syncWidgetData();
+          },
+        },
+      ]
+    );
+  }, [isHabitCompleted, today, toggleHabit, hasGraduationBeenProposed, markGraduationProposed, graduateHabit, t]);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -211,7 +249,7 @@ export default function HomeScreen() {
                   flow={flowResults.get(habit.id) ?? { currentFlowDays: 0, currentFlowStartDate: today, isBreathingToday: false, longestFlow: 0, status: 'new' as const }}
                   completionIndex={completedCount}
                   totalHabits={totalCount}
-                  onToggle={() => toggleHabit(habit.id)}
+                  onToggle={() => handleToggle(habit.id)}
                   onEdit={() =>
                     router.push({ pathname: '/edit', params: { id: habit.id } })
                   }

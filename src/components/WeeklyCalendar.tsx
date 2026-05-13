@@ -33,7 +33,7 @@ export function WeeklyCalendar({ onDatePress }: WeeklyCalendarProps) {
   const { t } = useTranslation();
   const { habits, isHabitCompleted } = useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
-  const activeHabits = habits;
+  const activeHabits = habits.filter((h) => !h.isGraduated);
   const today = getToday();
   const dayLabels = useMemo(
     () => [0, 1, 2, 3, 4, 5, 6].map((i) => t(`days.short.${i}` as const)),

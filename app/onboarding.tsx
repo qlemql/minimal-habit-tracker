@@ -492,6 +492,16 @@ export default function OnboardingScreen() {
                 </Text>
               </View>
             </View>
+
+            <View style={[styles.guideCard, { backgroundColor: colors.surface, marginBottom: spacing.md }]}>
+              <Text style={styles.guideEmoji}>🌸</Text>
+              <View style={styles.guideTextWrap}>
+                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.graduation.title')}</Text>
+                <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
+                  {t('onboarding.guide.graduation.body')}
+                </Text>
+              </View>
+            </View>
           </ScrollView>
 
           <Pressable

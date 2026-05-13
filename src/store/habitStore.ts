@@ -12,7 +12,9 @@ function generateId(): string {
 import { Habit, HabitLog } from '@/types/habit';
 import { getToday } from '@/utils/date';
 import { scheduleHabitReminder, cancelHabitReminder } from '@/utils/notifications';
-// Pro 기능은 v1.1에서 활성화
+import { getCurrentStage, GrowthStageId } from '@/constants/growth';
+import { calculateFlow } from '@/utils/streak';
+// Pro 기능은 v1.4에서 활성화
 // import { useProStore } from './proStore';
 
 const MAX_FREE_HABITS = 3;
@@ -25,6 +27,11 @@ interface HabitStore {
   addHabit: (name: string, icon: string, color: string) => string | null;
   updateHabit: (id: string, updates: Partial<Pick<Habit, 'name' | 'icon' | 'color' | 'reminderTime'>>) => Promise<void>;
   deleteHabit: (id: string) => void;
+
+  // 졸업 시스템 (v1.3+)
+  graduateHabit: (id: string) => void;
+  getActiveHabits: () => Habit[];
+  getGraduatedHabits: () => Habit[];
 
   // 로그
   toggleHabit: (habitId: string, date?: string) => void;
@@ -46,13 +53,14 @@ export const useHabitStore = create<HabitStore>()(
 
         const now = new Date().toISOString();
         const id = generateId();
+        const activeCount = get().habits.filter((h) => !h.isGraduated).length;
         const newHabit: Habit = {
           id,
           name,
           icon,
           color,
           reminderTime: null,
-          order: get().habits.length,
+          order: activeCount,
           createdAt: now,
           updatedAt: now,
         };
@@ -88,6 +96,45 @@ export const useHabitStore = create<HabitStore>()(
           habits: state.habits.filter((h) => h.id !== id),
           logs: state.logs.filter((l) => l.habitId !== id),
         }));
+      },
+
+      graduateHabit: (id) => {
+        const habit = get().habits.find((h) => h.id === id);
+        if (!habit || habit.isGraduated) return;
+
+        // 졸업 시점 단계 + 누적 흐름 일수 계산해서 보존
+        const flow = calculateFlow(id, get().logs);
+        const stage = getCurrentStage(flow.currentFlowDays).id as GrowthStageId;
+        const today = getToday();
+
+        // 알림 끄기 — 졸업한 습관은 더 이상 푸시 안 옴
+        cancelHabitReminder(id);
+
+        set((state) => ({
+          habits: state.habits.map((h) =>
+            h.id === id
+              ? {
+                  ...h,
+                  isGraduated: true,
+                  graduatedAt: today,
+                  graduatedStage: stage,
+                  totalFlowDays: flow.currentFlowDays,
+                  reminderTime: null,
+                  updatedAt: new Date().toISOString(),
+                }
+              : h
+          ),
+        }));
+      },
+
+      getActiveHabits: () => {
+        return get().habits.filter((h) => !h.isGraduated);
+      },
+
+      getGraduatedHabits: () => {
+        return get()
+          .habits.filter((h) => h.isGraduated)
+          .sort((a, b) => (b.graduatedAt ?? '').localeCompare(a.graduatedAt ?? ''));
       },
 
       toggleHabit: (habitId, date) => {
@@ -133,7 +180,8 @@ export const useHabitStore = create<HabitStore>()(
       },
 
       canAddHabit: () => {
-        return get().habits.length < MAX_FREE_HABITS;
+        const activeCount = get().habits.filter((h) => !h.isGraduated).length;
+        return activeCount < MAX_FREE_HABITS;
       },
     }),
     {
