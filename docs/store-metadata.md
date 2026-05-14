@@ -187,82 +187,47 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 ## 버전별 업데이트 소개 (What's New)
 
-### v1.3.0 (예정 — 졸업 시스템 + 통계 화면)
+### v1.1.0 (예정 — 글로벌 + Android + 졸업 시스템 통합 출시)
 
 #### 한국어
 ```
-꽃이 핀 습관, 이제 졸업할 수 있어요.
+영어로도, 안드로이드로도. 꽃이 핀 습관은 졸업도 가능해요.
 
-• 7일부터 조기 졸업 가능
-  떡잎이 자라면 본인이 원할 때 졸업시킬 수 있어요.
-• 50일에 자동으로 새 씨앗 제안
-  꽃이 활짝 피면 "보내주기" 한 번에 새 도전이 시작돼요.
-• 졸업한 정원
-  졸업한 습관은 사라지지 않고 정원에 보관돼요.
-• 통계 화면 추가
-  활성 습관·총 완료·최장 흐름·해금을 한눈에.
+• 영어 지원 시작 — 글로벌 출시
+• Android 정식 출시 — iOS와 같은 경험으로
+• 앱 이름이 정돈됐어요 — '싹: 세 가지 습관'
+• 잠금화면 알림에서 바로 체크
+  알림을 길게 눌러 '완료'만 누르면 끝.
+• 꽃이 핀 습관, 이제 졸업할 수 있어요
+  7일부터 본인 의지로, 50일에 자동 제안.
+• 졸업한 정원 + 통계 화면 추가
+  활성 습관·총 완료·최장 흐름·졸업한 정원을 한눈에.
 
 자란 자리에 새 씨앗이 와요.
 ```
 
 #### English
 ```
-Graduate bloomed habits, plant new seeds.
+Now in English. Now on Android. Bloomed habits can graduate.
 
-• Early graduation from Leaf (7 days)
-  Once your habit has sprouted, you decide when it's ready.
-• Auto suggestion at full bloom (50 days)
-  One tap to graduate and start something new.
-• Graduation Garden
-  Graduated habits stay safe in your garden.
-• New Stats screen
-  Active habits, total done, longest Flow, unlocks — at a glance.
+• English language support
+• Android — same experience as iOS
+• Cleaner name — "Ssak: Three Habits"
+• Check off habits straight from the lock screen notification
+  Long-press the reminder, tap "Done." That's it.
+• Bloomed habits can graduate
+  Early graduation from Leaf (7 days), auto suggestion at full bloom (50 days).
+• Graduation Garden + new Stats screen
+  Active habits, total done, longest Flow, and your Graduation Garden — all at a glance.
 
 Where one habit blooms, another seed begins.
 ```
 
 **릴리즈 설정**
 - 출시 방식: 승인 후 자동 출시
-- 변경 범위: 졸업 시스템 (조기/정시) + 통계 화면 (Free) + 데이터 모델 확장 (graduation 필드 4종)
-- iOS + Android 동시 출시
-
-### v1.2.0 (예정 — i18n 완료 후 출시)
-
-#### 한국어
-```
-이제 영어로도 만나고, 자정엔 알아서 새 하루.
-
-• 영어 지원 시작 — 글로벌 출시
-• 위젯이 자정에 스스로 새 하루를 맞이해요
-  앱을 열지 않아도 위젯에 새로운 오늘이 떠요.
-• 잠금화면 알림에서 바로 체크
-  알림을 눌러 '완료'만 누르면 끝.
-  설정에서 끄고 켤 수 있어요.
-• 앱 이름이 정돈됐어요 — '싹: 세 가지 습관'
-
-작은 한 탭이 더 가까워졌어요.
-```
-
-#### English
-```
-Now in English, with widgets that wake up at midnight.
-
-• English language support
-• Widgets refresh themselves at midnight
-  No need to open the app — your widget shows today.
-• Check off habits straight from the lock screen notification
-  Long-press the reminder, tap "Done." That's it.
-  Toggle from Settings.
-• Cleaner name — "Ssak: Three Habits"
-
-One tap, even closer.
-```
-
-**릴리즈 설정**
-- 출시 방식: 승인 후 자동 출시
-- 변경 범위: i18n (한/영) + WidgetKit Timeline 자정 reload + expo-notifications 카테고리 액션 + Android 정식 출시
-- 양 플랫폼 동시 출시 (iOS 1.2.0, Android 1.0.0)
-- v1.1.0은 발행하지 않고 v1.2.0으로 통합 출시
+- 변경 범위: i18n (한/영) + Android 정식 출시 + 앱명 변경 + 위젯 i18n + 잠금화면 알림 액션 + WidgetKit Timeline 자정 reload + 졸업 시스템(조기/정시) + 졸업한 정원 + 통계 화면(Free)
+- 양 플랫폼 동시 출시 (iOS 1.1.0 buildNumber 8 / Android 1.1.0 versionCode 6)
+- v1.0.4~v1.0.x 패치 발행하지 않고 v1.1.0으로 단일 통합 출시
 
 ### v1.0.3 (2026-05-04)
 ```
