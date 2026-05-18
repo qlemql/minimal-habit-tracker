@@ -191,10 +191,9 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 #### 한국어
 ```
-영어로도, 안드로이드로도. 꽃이 핀 습관은 졸업도 가능해요.
+영어로 더 많은 분들을 만나요. 꽃이 핀 습관은 졸업도 가능해요.
 
 • 영어 지원 시작 — 글로벌 출시
-• Android 정식 출시 — iOS와 같은 경험으로
 • 앱 이름이 정돈됐어요 — '싹: 세 가지 습관'
 • 잠금화면 알림에서 바로 체크
   알림을 길게 눌러 '완료'만 누르면 끝.
@@ -208,10 +207,9 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 #### English
 ```
-Now in English. Now on Android. Bloomed habits can graduate.
+Now in English. Bloomed habits can graduate.
 
 • English language support
-• Android — same experience as iOS
 • Cleaner name — "Ssak: Three Habits"
 • Check off habits straight from the lock screen notification
   Long-press the reminder, tap "Done." That's it.
@@ -222,6 +220,8 @@ Now in English. Now on Android. Bloomed habits can graduate.
 
 Where one habit blooms, another seed begins.
 ```
+
+> ⚠️ App Store 심사 가이드라인 2.3.10 (Accurate Metadata) 대응: What's New에서 Android 언급 제거. 한 플랫폼 앱 메타데이터에 타 플랫폼 정보 노출 금지.
 
 **릴리즈 설정**
 - 출시 방식: 승인 후 자동 출시
