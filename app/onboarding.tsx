@@ -483,7 +483,7 @@ export default function OnboardingScreen() {
               </View>
             </View>
 
-            <View style={[styles.guideCard, { backgroundColor: colors.surface, marginBottom: spacing.md }]}>
+            <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
               <Text style={styles.guideEmoji}>📅</Text>
               <View style={styles.guideTextWrap}>
                 <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.swipe.title')}</Text>
@@ -493,7 +493,17 @@ export default function OnboardingScreen() {
               </View>
             </View>
 
-            <View style={[styles.guideCard, { backgroundColor: colors.surface, marginBottom: spacing.md }]}>
+            <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
+              <Text style={styles.guideEmoji}>📱</Text>
+              <View style={styles.guideTextWrap}>
+                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.widget.title')}</Text>
+                <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
+                  {t('onboarding.guide.widget.body')}
+                </Text>
+              </View>
+            </View>
+
+            <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
               <Text style={styles.guideEmoji}>🌸</Text>
               <View style={styles.guideTextWrap}>
                 <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.graduation.title')}</Text>
@@ -750,6 +760,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     alignItems: 'center',
+    marginBottom: spacing.md,
   },
   guideHighlightEmoji: {
     fontSize: 32,
@@ -783,6 +794,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: spacing.md,
     borderRadius: 14,
+    marginBottom: spacing.md,
   },
   guideEmoji: {
     fontSize: 24,

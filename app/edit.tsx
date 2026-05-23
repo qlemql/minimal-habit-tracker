@@ -79,7 +79,8 @@ export default function EditHabitScreen() {
     if (!habit) return;
     const { logs } = useHabitStore.getState();
     const flow = calculateFlow(habit.id, logs);
-    const flowDays = flow.currentFlowDays;
+    // 졸업 자격은 한 번이라도 도달한 최장 흐름 기준 — 카드 단계 표시(longestFlow)와 일관.
+    const flowDays = flow.longestFlow;
     const isFull = flowDays >= GRADUATION_FULL_DAYS;
     const daysLeft = Math.max(0, GRADUATION_FULL_DAYS - flowDays);
 
@@ -270,8 +271,8 @@ export default function EditHabitScreen() {
         {(() => {
           const { logs } = useHabitStore.getState();
           const flow = calculateFlow(habit.id, logs);
-          if (flow.currentFlowDays < GRADUATION_MIN_DAYS) return null;
-          const isFull = flow.currentFlowDays >= GRADUATION_FULL_DAYS;
+          if (flow.longestFlow < GRADUATION_MIN_DAYS) return null;
+          const isFull = flow.longestFlow >= GRADUATION_FULL_DAYS;
           const label = isFull
             ? t('graduation.action.graduate')
             : t('graduation.action.earlyGraduate');

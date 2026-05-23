@@ -42,6 +42,7 @@
         "incomplete": "Not done",
         "stage": "{{label}} stage",
         "flow": "{{days}}-day Flow",
+        "reminder": "Reminder at {{time}}",
         "hint": "Tap to check, long press to edit"
       },
       "flow": "{{days}}-day Flow",
@@ -122,8 +123,8 @@
     "notifications": {
       "title": "Notifications",
       "lockScreenAction": {
-        "title": "Check from lock screen",
-        "subtitle": "Adds a Done button to the notification"
+        "title": "Check from notification",
+        "subtitle": "Long-press the reminder, tap 'Done' (works on the lock screen too)"
       }
     },
     "general": {
@@ -201,6 +202,10 @@
       "swipe": {
         "title": "Swipe between weeks",
         "body": "Check last week's records too"
+      },
+      "widget": {
+        "title": "Home & lock screen widgets",
+        "body": "Add a widget to check your day\nwithout opening the app"
       },
       "graduation": {
         "title": "Bloomed habits can graduate",

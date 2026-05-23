@@ -42,6 +42,7 @@
         "incomplete": "미완료",
         "stage": "{{label}} 단계",
         "flow": "흐름 {{days}}일째",
+        "reminder": "알림 {{time}}",
         "hint": "탭하여 체크, 길게 눌러 수정"
       },
       "flow": "흐름 {{days}}일째",
@@ -122,8 +123,8 @@
     "notifications": {
       "title": "알림",
       "lockScreenAction": {
-        "title": "잠금화면에서 체크",
-        "subtitle": "알림에 완료 버튼이 표시돼요"
+        "title": "알림에서 바로 체크",
+        "subtitle": "알림을 길게 눌러 '완료'를 누르면 끝 (잠금화면 알림 포함)"
       }
     },
     "general": {
@@ -201,6 +202,10 @@
       "swipe": {
         "title": "스와이프로 주간 이동",
         "body": "지난 주 기록도 확인할 수 있어요"
+      },
+      "widget": {
+        "title": "홈/잠금화면 위젯",
+        "body": "위젯을 추가하면 앱을 열지 않고도\n오늘의 습관을 한눈에 확인할 수 있어요"
       },
       "graduation": {
         "title": "꽃이 피면 졸업할 수 있어요",

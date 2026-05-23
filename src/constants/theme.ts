@@ -9,6 +9,9 @@ export const darkColors = {
   success: '#51CF66',
   inactive: '#2A2A2A',
   danger: '#FF6B6B',
+  // 완료 표시 (Olive — 모드별 채도 조정)
+  completionBorder: '#8AAD75',
+  completionBg: '#1B2418',
 } as const;
 
 export const creamColors = {
@@ -22,6 +25,9 @@ export const creamColors = {
   success: '#4CAF50',
   inactive: '#EDE5DA',
   danger: '#D94040',
+  // 완료 표시 (Olive — 따뜻한 녹색, 크림 친화)
+  completionBorder: '#6B8E5A',
+  completionBg: '#EFF3E5',
 } as const;
 
 // 기본값 (크림 모드)

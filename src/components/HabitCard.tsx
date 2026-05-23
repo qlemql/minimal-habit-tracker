@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Pressable, View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
@@ -8,7 +8,6 @@ import Animated, {
   withSequence,
   withTiming,
   interpolateColor,
-  interpolate,
   runOnJS,
   FadeInUp,
   FadeOutUp,
@@ -26,6 +25,7 @@ interface HabitCardProps {
   color: string;
   completed: boolean;
   flow: FlowResult;
+  reminderTime?: string | null;
   completionIndex?: number;
   totalHabits?: number;
   onToggle: () => void;
@@ -38,6 +38,7 @@ export function HabitCard({
   color,
   completed,
   flow,
+  reminderTime,
   completionIndex = 0,
   totalHabits = 1,
   onToggle,
@@ -46,29 +47,26 @@ export function HabitCard({
   const { t } = useTranslation();
   const colors = useThemeStore((s) => s.getColors());
   const scale = useSharedValue(1);
-  const checkScale = useSharedValue(completed ? 1 : 0);
-  const fillProgress = useSharedValue(completed ? 1 : 0);
-  const cardBg = useSharedValue(completed ? 1 : 0);
+  const completionProgress = useSharedValue(completed ? 1 : 0);
+  const checkScale = useSharedValue(completed ? 1 : 0.6);
 
   useEffect(() => {
-    if (completed) {
-      checkScale.value = withSpring(1, { damping: 12, stiffness: 200 });
-      fillProgress.value = withTiming(1, { duration: 200 });
-      cardBg.value = withTiming(1, { duration: 300 });
-    } else {
-      checkScale.value = withTiming(0, { duration: 100 });
-      fillProgress.value = withTiming(0, { duration: 100 });
-      cardBg.value = withTiming(0, { duration: 150 });
-    }
+    completionProgress.value = completed
+      ? withTiming(1, { duration: 280 })
+      : withTiming(0, { duration: 180 });
+    checkScale.value = completed
+      ? withTiming(1, { duration: 180 })
+      : withTiming(0.6, { duration: 120 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completed]);
 
   const handleToggle = () => {
+    // 짧고 출렁임 없는 press 피드백
+    scale.value = withSequence(
+      withTiming(0.985, { duration: 50 }),
+      withTiming(1, { duration: 80 })
+    );
     if (!completed) {
-      scale.value = withSequence(
-        withTiming(0.95, { duration: 80 }),
-        withSpring(1, { damping: 10, stiffness: 300 })
-      );
       if (completionIndex >= totalHabits - 1) {
         hapticNotification(NotificationFeedbackType.Success);
       } else if (completionIndex >= totalHabits - 2) {
@@ -77,22 +75,18 @@ export function HabitCard({
         hapticImpact(ImpactFeedbackStyle.Medium);
       }
     } else {
-      scale.value = withSequence(
-        withTiming(0.98, { duration: 80 }),
-        withTiming(1, { duration: 120 })
-      );
       hapticImpact(ImpactFeedbackStyle.Light);
     }
     onToggle();
   };
 
-  // Long-press to edit (shortcut)
   const longPressGesture = Gesture.LongPress()
-    .minDuration(500)
+    .minDuration(450)
     .onBegin(() => {
       scale.value = withTiming(0.97, { duration: 200 });
     })
-    .onEnd(() => {
+    // minDuration 충족 즉시(손가락 떼기 전) 자동 진입 — 일반 앱 패턴
+    .onStart(() => {
       if (onEdit) {
         runOnJS(hapticImpact)(ImpactFeedbackStyle.Heavy);
         runOnJS(onEdit)();
@@ -111,42 +105,23 @@ export function HabitCard({
   const cardAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
     backgroundColor: interpolateColor(
-      cardBg.value,
+      completionProgress.value,
       [0, 1],
-      [colors.surface, color + '10']
-    ),
-    borderColor: interpolateColor(
-      cardBg.value,
-      [0, 1],
-      ['transparent', color + '40']
+      [colors.surface, colors.completionBg]
     ),
   }));
 
-  const checkAnimStyle = useAnimatedStyle(() => ({
+  const iconBorderStyle = useAnimatedStyle(() => ({
+    borderColor: interpolateColor(
+      completionProgress.value,
+      [0, 1],
+      ['transparent', colors.completionBorder]
+    ),
+  }));
+
+  const checkOverlayStyle = useAnimatedStyle(() => ({
+    opacity: completionProgress.value,
     transform: [{ scale: checkScale.value }],
-    opacity: checkScale.value,
-  }));
-
-  const checkboxAnimStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      fillProgress.value,
-      [0, 1],
-      ['transparent', color]
-    ),
-    borderWidth: interpolate(fillProgress.value, [0, 1], [2, 0]),
-    borderColor: interpolateColor(
-      fillProgress.value,
-      [0, 1],
-      [colors.inactive, color]
-    ),
-  }));
-
-  const iconBgStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      cardBg.value,
-      [0, 1],
-      [color + '20', color + '30']
-    ),
   }));
 
   const stage = getCurrentStage(flow.longestFlow);
@@ -159,6 +134,7 @@ export function HabitCard({
     t(completed ? 'components.habitCard.a11y.completed' : 'components.habitCard.a11y.incomplete'),
     showStage ? t('components.habitCard.a11y.stage', { label: stageLabel }) : '',
     showFlow ? t('components.habitCard.a11y.flow', { days: flow.currentFlowDays }) : '',
+    reminderTime ? t('components.habitCard.a11y.reminder', { time: reminderTime }) : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -171,9 +147,23 @@ export function HabitCard({
         accessibilityHint={t('components.habitCard.a11y.hint')}
       >
         <View style={styles.left}>
-          <Animated.View style={[styles.iconContainer, iconBgStyle]}>
+          <View style={[styles.iconContainer, { backgroundColor: color + '20' }]}>
             <Text style={styles.icon}>{icon}</Text>
-          </Animated.View>
+            <Animated.View style={[styles.iconBorder, iconBorderStyle]} pointerEvents="none" />
+            <Animated.View
+              style={[
+                styles.checkOverlay,
+                {
+                  backgroundColor: colors.completionBorder,
+                  borderColor: colors.background,
+                },
+                checkOverlayStyle,
+              ]}
+              pointerEvents="none"
+            >
+              <Text style={styles.checkOverlayText}>✓</Text>
+            </Animated.View>
+          </View>
           <View style={styles.info}>
             <Text
               style={[styles.name, { color: colors.textPrimary }]}
@@ -198,11 +188,15 @@ export function HabitCard({
             )}
           </View>
         </View>
-        <Animated.View style={[styles.checkbox, checkboxAnimStyle]}>
-          <Animated.Text style={[styles.checkmark, checkAnimStyle]}>
-            ✓
-          </Animated.Text>
-        </Animated.View>
+        {reminderTime && (
+          <View
+            style={[styles.reminderChip, { backgroundColor: colors.surfaceLight }]}
+          >
+            <Text style={[styles.reminderChipText, { color: colors.textMuted }]}>
+              ⏰ {reminderTime}
+            </Text>
+          </View>
+        )}
       </Animated.View>
     </GestureDetector>
   );
@@ -215,8 +209,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 16,
     padding: spacing.md,
-    borderWidth: 1.5,
-    borderColor: 'transparent',
   },
   left: {
     flexDirection: 'row',
@@ -230,8 +222,36 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
+  },
+  iconBorder: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderRadius: 14,
+    borderWidth: 1.5,
+    borderColor: 'transparent',
   },
   icon: { fontSize: 24 },
+  checkOverlay: {
+    position: 'absolute',
+    bottom: -4,
+    right: -4,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+  },
+  checkOverlayText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '800',
+    lineHeight: 14,
+  },
   info: {
     marginLeft: spacing.md,
     flex: 1,
@@ -244,16 +264,13 @@ const styles = StyleSheet.create({
     fontSize: fontSize.xs,
     marginTop: 2,
   },
-  checkbox: {
-    width: 30,
-    height: 30,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+  reminderChip: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 999,
   },
-  checkmark: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '700',
+  reminderChipText: {
+    fontSize: 11,
+    fontWeight: '500',
   },
 });

@@ -247,6 +247,7 @@ export default function HomeScreen() {
                   color={habit.color}
                   completed={isHabitCompleted(habit.id, today)}
                   flow={flowResults.get(habit.id) ?? { currentFlowDays: 0, currentFlowStartDate: today, isBreathingToday: false, longestFlow: 0, status: 'new' as const }}
+                  reminderTime={habit.reminderTime}
                   completionIndex={completedCount}
                   totalHabits={totalCount}
                   onToggle={() => handleToggle(habit.id)}

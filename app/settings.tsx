@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Linking, Alert, Switch, Platform } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Linking, Alert, Switch, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
@@ -14,7 +14,7 @@ import { fontSize, spacing } from '@/constants/theme';
 
 const FEEDBACK_EMAIL = 'taehyun_fe@naver.com';
 const LEGAL_BASE_URL = 'https://ssak-habit-tracker.pages.dev';
-const APP_VERSION = '1.0.0';
+const APP_VERSION = '1.1.0';
 
 // 디바이스 언어가 영어 계열이면 .en.html, 그 외(ko 등)는 한국어 원본 사용
 function getLegalUrl(lang: string, page: 'privacy-policy' | 'terms-of-service'): string {
@@ -23,12 +23,11 @@ function getLegalUrl(lang: string, page: 'privacy-policy' | 'terms-of-service'):
   return `${LEGAL_BASE_URL}/${page}${suffix}`;
 }
 
-type ThemeOption = 'dark' | 'cream' | 'system';
+type ThemeOption = 'dark' | 'cream';
 
 const THEME_OPTIONS: { value: ThemeOption; icon: string }[] = [
   { value: 'cream', icon: '🌿' },
   { value: 'dark', icon: '🌙' },
-  { value: 'system', icon: '📱' },
 ];
 
 export default function SettingsScreen() {
@@ -105,7 +104,11 @@ export default function SettingsScreen() {
         <View style={{ width: 36 }} />
       </View>
 
-      <View style={styles.content}>
+      <ScrollView
+        style={styles.contentScroll}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={[styles.statsCard, { backgroundColor: colors.surface }]}>
           <View style={styles.statItem}>
             <Text style={[styles.statNumber, { color: colors.accent }]}>{activeHabits.length}</Text>
@@ -205,29 +208,34 @@ export default function SettingsScreen() {
           ))}
         </View>
 
-        <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
-          {t('settings.notifications.title')}
-        </Text>
-        <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
-          <View style={styles.option}>
-            <Text style={styles.optionIcon}>🔔</Text>
-            <View style={styles.optionTextWrap}>
-              <Text style={[styles.optionTitle, { color: colors.textPrimary }]}>
-                {t('settings.notifications.lockScreenAction.title')}
-              </Text>
-              <Text style={[styles.optionHint, { color: colors.textMuted }]}>
-                {t('settings.notifications.lockScreenAction.subtitle')}
-              </Text>
+        {/* 알림 액션 토글은 Android에서만 노출 — iOS는 알림 카테고리 인터랙션 검증이 어려워 일시 비활성. */}
+        {Platform.OS === 'android' && (
+          <>
+            <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
+              {t('settings.notifications.title')}
+            </Text>
+            <View style={[styles.optionGroup, { backgroundColor: colors.surface }]}>
+              <View style={styles.option}>
+                <Text style={styles.optionIcon}>🔔</Text>
+                <View style={styles.optionTextWrap}>
+                  <Text style={[styles.optionTitle, { color: colors.textPrimary }]}>
+                    {t('settings.notifications.lockScreenAction.title')}
+                  </Text>
+                  <Text style={[styles.optionHint, { color: colors.textMuted }]}>
+                    {t('settings.notifications.lockScreenAction.subtitle')}
+                  </Text>
+                </View>
+                <Switch
+                  value={lockScreenActionEnabled}
+                  onValueChange={handleToggleLockScreenAction}
+                  trackColor={{ false: colors.inactive, true: colors.accent }}
+                  thumbColor={'#FFFFFF'}
+                  ios_backgroundColor={colors.inactive}
+                />
+              </View>
             </View>
-            <Switch
-              value={lockScreenActionEnabled}
-              onValueChange={handleToggleLockScreenAction}
-              trackColor={{ false: colors.inactive, true: colors.accent }}
-              thumbColor={Platform.OS === 'android' ? '#FFFFFF' : undefined}
-              ios_backgroundColor={colors.inactive}
-            />
-          </View>
-        </View>
+          </>
+        )}
 
         <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>
           {t('settings.general.title')}
@@ -296,7 +304,7 @@ export default function SettingsScreen() {
             {t('settings.version', { version: APP_VERSION })}
           </Text>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -327,9 +335,13 @@ const styles = StyleSheet.create({
     fontSize: fontSize.md,
     fontWeight: '600',
   },
+  contentScroll: {
+    flex: 1,
+  },
   content: {
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.sm,
+    paddingBottom: spacing.xxl,
   },
   statsCard: {
     flexDirection: 'row',

@@ -334,26 +334,33 @@ struct HabitWidgetAccessoryRectangularView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(NSLocalizedString("widget.title", comment: ""))
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.secondary)
+            HStack(spacing: 4) {
+                Text(NSLocalizedString("widget.title", comment: ""))
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                Spacer(minLength: 4)
+                if total > 0 {
+                    Text("\(completed)/\(total)")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                        .fixedSize()
+                }
+            }
+
+            Spacer(minLength: 0)
 
             if total == 0 {
                 Text(NSLocalizedString("widget.empty.accessory", comment: ""))
-                    .font(.system(size: 12))
+                    .font(.system(size: 12, weight: .medium))
+                    .frame(maxWidth: .infinity, alignment: .center)
             } else {
-                HStack(spacing: 8) {
-                    HStack(spacing: 4) {
-                        ForEach(entry.habits.prefix(3)) { habit in
-                            Image(systemName: habit.isCompletedToday() ? "checkmark.circle.fill" : "circle")
-                                .font(.system(size: 14))
-                        }
+                HStack(spacing: 5) {
+                    ForEach(entry.habits.prefix(3)) { habit in
+                        Image(systemName: habit.isCompletedToday() ? "checkmark.circle.fill" : "circle")
+                            .font(.system(size: 14, weight: .medium))
                     }
-                    Spacer(minLength: 4)
-                    Text("\(completed)/\(total)")
-                        .font(.system(size: 14, weight: .bold))
-                        .lineLimit(1)
-                        .fixedSize()
+                    Spacer(minLength: 0)
                 }
             }
         }
@@ -477,9 +484,19 @@ struct HabitWidgetContainer<Content: View>: View {
         return false
     }
 
+    private var isRectangularAccessory: Bool {
+        #if os(iOS)
+        if #available(iOS 16.0, *) {
+            return family == .accessoryRectangular
+        }
+        #endif
+        return false
+    }
+
     var body: some View {
         if #available(iOS 17.0, *) {
             content()
+                .padding(isRectangularAccessory ? 8 : 0)
                 .containerBackground(for: .widget) {
                     if isAccessory {
                         Color.clear
@@ -487,14 +504,27 @@ struct HabitWidgetContainer<Content: View>: View {
                         CreamTheme.background
                     }
                 }
+                .overlay(borderOverlay)
         } else {
             if isAccessory {
                 content()
+                    .padding(isRectangularAccessory ? 8 : 0)
+                    .overlay(borderOverlay)
             } else {
                 content()
                     .padding()
                     .background(CreamTheme.background)
             }
+        }
+    }
+
+    // accessoryRectangular에만 옅은 흰색 stroke — 잠금화면에서 영역 인지.
+    // 다른 위젯(circular, inline, 홈스크린)은 보더 없음.
+    @ViewBuilder
+    private var borderOverlay: some View {
+        if isRectangularAccessory {
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .strokeBorder(Color.white.opacity(0.35), lineWidth: 1)
         }
     }
 }

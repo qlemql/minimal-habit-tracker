@@ -1,9 +1,16 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { View, Text, Pressable, StyleSheet, Modal, ScrollView } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 import { hapticImpact, hapticSelection, ImpactFeedbackStyle } from '@/utils/haptics';
 import { useThemeStore } from '@/store/themeStore';
 import { fontSize, spacing } from '@/constants/theme';
+
+const ITEM_HEIGHT = 44; // pickerItem 명시 height와 동일
 
 interface TimePickerProps {
   value: string | null;
@@ -29,19 +36,51 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
   const [selectedMinute, setSelectedMinute] = useState(
     value ? value.split(':')[1] : '00'
   );
+  const hourScrollRef = useRef<ScrollView>(null);
+
+  // Backdrop fade + sheet slide 분리 (Modal animationType=none + Reanimated)
+  const backdropOpacity = useSharedValue(0);
+  const sheetTranslateY = useSharedValue(600);
+
+  useEffect(() => {
+    if (visible) {
+      backdropOpacity.value = withTiming(1, { duration: 180 });
+      sheetTranslateY.value = withTiming(0, { duration: 220 });
+      const h = value ? value.split(':')[0] : '09';
+      const m = value ? value.split(':')[1] : '00';
+      setSelectedHour(h);
+      setSelectedMinute(m);
+      const hourIndex = parseInt(h, 10);
+      setTimeout(() => {
+        hourScrollRef.current?.scrollTo({ y: hourIndex * ITEM_HEIGHT, animated: false });
+      }, 50);
+    } else {
+      backdropOpacity.value = withTiming(0, { duration: 150 });
+      sheetTranslateY.value = withTiming(600, { duration: 180 });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
+
+  const backdropStyle = useAnimatedStyle(() => ({
+    opacity: backdropOpacity.value,
+  }));
+  const sheetStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: sheetTranslateY.value }],
+  }));
 
   const open = () => setVisible(true);
+  const close = () => setVisible(false);
 
   const handleConfirm = () => {
     hapticImpact(ImpactFeedbackStyle.Light);
     onChange(`${selectedHour}:${selectedMinute}`);
-    setVisible(false);
+    close();
   };
 
   const handleClear = () => {
     hapticImpact(ImpactFeedbackStyle.Light);
     onChange(null);
-    setVisible(false);
+    close();
   };
 
   return (
@@ -67,12 +106,14 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
         </Pressable>
       )}
 
-      <Modal visible={visible} transparent animationType="slide">
-        <Pressable style={styles.overlay} onPress={() => setVisible(false)}>
-          <Pressable style={[styles.modal, { backgroundColor: colors.surface }]} onPress={() => {}}>
+      <Modal visible={visible} transparent animationType="none" onRequestClose={close}>
+        <View style={styles.overlayContainer}>
+          <Animated.View style={[styles.backdrop, backdropStyle]} />
+          <Pressable style={StyleSheet.absoluteFill} onPress={close} />
+          <Animated.View style={[styles.modal, { backgroundColor: colors.surface }, sheetStyle]}>
             <View style={[styles.handle, { backgroundColor: colors.inactive }]} />
             <View style={styles.modalHeader}>
-              <Pressable onPress={() => setVisible(false)} hitSlop={12}>
+              <Pressable onPress={close} hitSlop={12}>
                 <Text style={[styles.modalCancel, { color: colors.textSecondary }]}>{t('components.timePicker.cancel')}</Text>
               </Pressable>
               <Text style={[styles.modalTitle, { color: colors.textPrimary }]}>{t('components.timePicker.modalTitle')}</Text>
@@ -82,7 +123,11 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
             </View>
 
             <View style={styles.pickerRow}>
-              <ScrollView style={styles.pickerColumn} showsVerticalScrollIndicator={false}>
+              <ScrollView
+                ref={hourScrollRef}
+                style={styles.pickerColumn}
+                showsVerticalScrollIndicator={false}
+              >
                 {HOURS.map((h) => (
                   <Pressable
                     key={h}
@@ -142,8 +187,8 @@ export function TimePicker({ value, onChange, renderTrigger, allowClear = true }
                 <Text style={[styles.clearText, { color: colors.danger }]}>{t('components.timePicker.clear')}</Text>
               </Pressable>
             )}
-          </Pressable>
-        </Pressable>
+          </Animated.View>
+        </View>
       </Modal>
     </>
   );
@@ -159,7 +204,8 @@ const styles = StyleSheet.create({
   triggerIcon: { fontSize: 18, marginRight: spacing.sm + 2 },
   triggerText: { flex: 1, fontSize: fontSize.md },
   triggerArrow: { fontSize: 18, fontWeight: '500' },
-  overlay: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' },
+  overlayContainer: { flex: 1, justifyContent: 'flex-end' },
+  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.5)' },
   modal: { borderTopLeftRadius: 24, borderTopRightRadius: 24, paddingBottom: spacing.xxl },
   handle: { width: 40, height: 4, borderRadius: 2, alignSelf: 'center', marginTop: spacing.sm, marginBottom: spacing.sm },
   modalHeader: {
@@ -175,7 +221,7 @@ const styles = StyleSheet.create({
   pickerRow: { flexDirection: 'row', padding: spacing.lg, gap: spacing.md },
   pickerColumn: { flex: 1, maxHeight: 200 },
   minuteColumn: { flex: 1, justifyContent: 'center', gap: spacing.sm },
-  pickerItem: { paddingVertical: spacing.sm + 2, paddingHorizontal: spacing.md, borderRadius: 10 },
+  pickerItem: { height: ITEM_HEIGHT, justifyContent: 'center', paddingHorizontal: spacing.md, borderRadius: 10 },
   pickerText: { fontSize: fontSize.md },
   clearButton: { marginHorizontal: spacing.lg, alignItems: 'center', padding: spacing.md, borderRadius: 14 },
   clearText: { fontSize: fontSize.md, fontWeight: '600' },

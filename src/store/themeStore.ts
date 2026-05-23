@@ -17,6 +17,8 @@ export type ThemeColors = {
   success: string;
   inactive: string;
   danger: string;
+  completionBorder: string;
+  completionBg: string;
 };
 
 interface ThemeStore {
