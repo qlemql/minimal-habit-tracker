@@ -92,13 +92,23 @@ iOS를 우선 완성한 뒤 Android에 대응한다. 양쪽 동시 완벽 지원
 
 > 검토 없는 진행은 방향을 잃는 가장 빠른 방법.
 
-### 14. 커밋/푸시 시 반드시 개인 계정으로 전환한다
+### 14. 푸시는 반드시 `scripts/push.sh`로만 한다 — 직접 git/gh push 금지
 
-Git 작업 순서:
-1. 커밋 전: 개인 계정(qlemql)으로 스위칭
-2. 커밋 + 푸시 수행
-3. 푸시 완료 후: 회사 계정(torder-frontend-daniel)으로 복귀
+⛔ **금지 (어떤 도구로도 직접 push 시도 X)**
+- `git push ...` (모든 형태)
+- `gh repo sync` / `gh api`로 ref 업데이트
+- 그 외 어떤 git/gh 명령으로도 직접 push 시도
 
-자동화: `bash scripts/push.sh origin main` 으로 위 과정을 자동 처리.
+✅ **유일하게 허용된 방법**
+```bash
+bash scripts/push.sh origin <branch>
+```
 
-> 개인 프로젝트가 회사 계정으로 커밋되는 사고를 방지. 매번 수동 확인보다 프로세스로 강제하는 것이 안전하다.
+스크립트가 자동 처리하는 것: 개인 계정(qlemql) 스위칭 → push → 회사 계정(torder-frontend-daniel) 복귀.
+
+표준 푸시 플로우 (3단계):
+1. `git add <파일>` — staging은 직접 OK
+2. `git commit -m "..."` — 커밋도 직접 OK (push만 차단)
+3. `bash scripts/push.sh origin main` — **푸시는 반드시 이걸로**
+
+> 직접 `git push`는 이 환경의 Bash 권한 정책에 의해 차단됨. push.sh만 허용 패턴. gh/git 도구를 바꿔도 결과 동일 — 도구가 아니라 명령 패턴이 막힌다. 개인 프로젝트가 회사 계정으로 커밋되는 사고 방지 + 권한 정책 준수, 두 목적을 한 번에 달성하는 유일한 경로다.
