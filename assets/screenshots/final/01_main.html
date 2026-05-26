@@ -191,6 +191,45 @@ body { background: #f0f0f0; font-family: -apple-system, BlinkMacSystemFont, 'SF 
   background: transparent;
 }
 
+/* v1.1.1 새 디자인 — 체크박스 제거 + 아이콘 강조 + 알람 chip */
+.habit-card.completed { background: #EFF3E5 !important; }
+.habit-icon-circle { position: relative; }
+.habit-icon-circle.olive-border {
+  box-shadow: inset 0 0 0 1.5px #6B8E5A;
+}
+.check-overlay {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: #6B8E5A;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFF8F0;
+}
+.reminder-chip {
+  font-size: 11px;
+  color: #8C7B6B;
+  background: #F5F1EC;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+/* @media large mode 대응 (1242x2688) */
+@media (min-width: 1000px) {
+  .check-overlay { width: 60px !important; height: 60px !important; font-size: 32px !important; border-radius: 30px !important; border-width: 6px !important; bottom: -10px !important; right: -10px !important; }
+  .reminder-chip { font-size: 30px !important; padding: 10px 24px !important; border-radius: 999px !important; }
+  .habit-icon-circle.olive-border { box-shadow: inset 0 0 0 4px #6B8E5A !important; }
+}
+
 /* 주간 캘린더 */
 .weekly-cal {
   margin: 16px 24px;
@@ -718,31 +757,90 @@ body {
       </div>
 
       <!-- 습관 카드 -->
-      <div class="habit-card" style="background: rgba(74,144,217,0.08);">
-        <div class="habit-icon-circle" style="background: rgba(74,144,217,0.15);">💧</div>
-        <div class="habit-info">
-          <div class="habit-name">물 마시기</div>
-          <div class="habit-flow" style="color: #4A90D9;">🌱 발아 · 흐름 5일째</div>
+      <div class="habit-card completed" style="background: rgba(74,144,217,0.08);">
+
+        <div class="habit-icon-circle olive-border" style="background: rgba(74,144,217,0.15);">
+
+          💧
+
+          <div class="check-overlay">✓</div>
+
         </div>
-        <div class="habit-check checked" style="background: #4A90D9;"></div>
+
+        <div class="habit-info">
+
+          <div class="habit-name">물 마시기</div>
+
+          <div class="habit-flow" style="color: #4A90D9;">🌱 발아 · 흐름 5일째</div>
+
+        </div>
+
+        <div class="reminder-chip">⏰ 09:00</div>
+
       </div>
 
-      <div class="habit-card" style="background: rgba(255,107,107,0.08);">
-        <div class="habit-icon-circle" style="background: rgba(255,107,107,0.15);">🏃</div>
-        <div class="habit-info">
-          <div class="habit-name">운동하기</div>
-          <div class="habit-flow" style="color: #FF6B6B;">🌱 발아 · 흐름 3일째</div>
+      <div class="habit-card completed" style="background: rgba(255,107,107,0.08);">
+
+
+        <div class="habit-icon-circle olive-border" style="background: rgba(255,107,107,0.15);">
+
+
+          🏃
+
+
+          <div class="check-overlay">✓</div>
+
+
         </div>
-        <div class="habit-check checked" style="background: #FF6B6B;"></div>
+
+
+        <div class="habit-info">
+
+
+          <div class="habit-name">운동하기</div>
+
+
+          <div class="habit-flow" style="color: #FF6B6B;">🌱 발아 · 흐름 3일째</div>
+
+
+        </div>
+
+
+        
+
+
       </div>
 
       <div class="habit-card" style="background: var(--surface);">
-        <div class="habit-icon-circle" style="background: rgba(123,104,238,0.15);">📖</div>
-        <div class="habit-info">
-          <div class="habit-name">독서하기</div>
-          <div class="habit-flow" style="color: #7B68EE;">🌿 떡잎 · 흐름 7일째</div>
+
+
+        <div class="habit-icon-circle" style="background: rgba(123,104,238,0.15);">
+
+
+          📖
+
+
+          
+
+
         </div>
-        <div class="habit-check unchecked"></div>
+
+
+        <div class="habit-info">
+
+
+          <div class="habit-name">독서하기</div>
+
+
+          <div class="habit-flow" style="color: #7B68EE;">🌿 떡잎 · 흐름 7일째</div>
+
+
+        </div>
+
+
+        <div class="reminder-chip">⏰ 21:30</div>
+
+
       </div>
 
       <!-- 주간 캘린더 -->
