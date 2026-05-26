@@ -187,6 +187,44 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 ## 버전별 업데이트 소개 (What's New)
 
+### v1.1.1 (예정 — UX 다듬기 핫픽스)
+
+#### 한국어
+```
+조금 더 깔끔하게, 조금 더 매끄럽게.
+
+• 습관 카드가 더 정돈됐어요
+  체크 버튼 대신 아이콘이 색으로 채워져요. 알람 시간도 카드에서 바로.
+• 줄기까지 키운 습관, 흐름이 끊겨도 졸업 가능
+  한 번이라도 도달한 단계 기준으로 졸업 자격 인정.
+• 시간 설정창이 더 편해졌어요
+  선택한 시간으로 바로 스크롤. 배경이 부드럽게 어두워져요.
+• 설정 화면이 끝까지 스크롤돼요
+• 잠금화면 위젯 디자인이 정돈됐어요
+
+작은 호흡이 모여 매일이 자라요.
+```
+
+#### English
+```
+Cleaner cards. Smoother flows.
+
+• Refined habit cards
+  No more checkbox — your icon fills with color. Reminder time shows right on the card.
+• Stem-grown habits can graduate even if the flow paused
+  Eligibility now based on the longest streak you've reached.
+• Smoother time picker
+  Auto-scrolls to your chosen hour. Backdrop fades cleanly.
+• Settings now scrolls to the bottom
+• Lock screen widget — refined padding and outline
+
+Small breaths grow into a day.
+```
+
+**릴리즈 설정**
+- 출시 방식: 승인 후 자동 출시
+- 변경 범위: HabitCard 디자인 리뉴얼(체크박스 → 아이콘 강조 + 알람 chip + 애니메이션 정리) / 졸업 자격 longestFlow 기준 / TimePicker UX / 설정 화면 ScrollView + 시스템 테마 제거 + 알림 토글 iOS 숨김 / 온보딩 가이드 위젯 안내 추가 / iOS 잠금화면 위젯 padding+border+layout
+
 ### v1.1.0 (예정 — 글로벌 + Android + 졸업 시스템 통합 출시)
 
 #### 한국어
