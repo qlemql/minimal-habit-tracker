@@ -9,6 +9,7 @@
     "back": "뒤로"
   },
   "home": {
+    "tagline": "작은 습관이 자라는 곳",
     "greeting": {
       "dawn": "아직 새벽이에요",
       "morning": "좋은 아침이에요",
@@ -24,11 +25,16 @@
       "breathing": "쉬어가는 중이에요, 오늘 다시 이어가요"
     },
     "a11y": {
-      "settings": "설정"
+      "settings": "설정",
+      "emptySlot": "{{ordinal}}번째 슬롯, 탭하여 습관 추가"
     },
     "empty": {
       "title": "아직 습관이 없어요",
       "subtitle": "작은 시작이 큰 변화를 만들어요"
+    },
+    "emptySlot": {
+      "second": "두 번째 씨앗을 심어보세요",
+      "third": "세 번째 씨앗 — 의도된 마지막 자리"
     },
     "add": {
       "button": "습관 추가",

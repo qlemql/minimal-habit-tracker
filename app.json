@@ -2,7 +2,7 @@
   "expo": {
     "name": "싹: 세 가지 습관",
     "slug": "minimal-habit-tracker",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.qlemql.minimalhabittracker",
-      "buildNumber": "9",
+      "buildNumber": "10",
       "appleTeamId": "5R27CJ6382",
       "entitlements": {
         "com.apple.security.application-groups": [
@@ -43,7 +43,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.qlemql.minimalhabittracker",
-      "versionCode": 7,
+      "versionCode": 8,
       "permissions": [
         "android.permission.POST_NOTIFICATIONS",
         "android.permission.SCHEDULE_EXACT_ALARM"

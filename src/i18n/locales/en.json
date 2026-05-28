@@ -9,6 +9,7 @@
     "back": "Back"
   },
   "home": {
+    "tagline": "Where small habits grow",
     "greeting": {
       "dawn": "Up early",
       "morning": "Good morning",
@@ -24,11 +25,16 @@
       "breathing": "Taking a Pause — keep going today"
     },
     "a11y": {
-      "settings": "Settings"
+      "settings": "Settings",
+      "emptySlot": "Slot {{ordinal}}, tap to add a habit"
     },
     "empty": {
       "title": "No habits yet",
       "subtitle": "Where small habits grow"
+    },
+    "emptySlot": {
+      "second": "Plant the second seed",
+      "third": "The third seed — intentionally last"
     },
     "add": {
       "button": "Add habit",

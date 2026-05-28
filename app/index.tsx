@@ -182,6 +182,9 @@ export default function HomeScreen() {
             <Text style={[styles.dateText, { color: colors.textPrimary }]}>
               {new Date(today + 'T00:00:00').toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', weekday: 'long' })}
             </Text>
+            <Text style={[styles.tagline, { color: colors.completionBorder }]}>
+              🌱 {t('home.tagline')}
+            </Text>
           </View>
           <Pressable
             onPress={() => router.push('/settings')}
@@ -257,6 +260,38 @@ export default function HomeScreen() {
                 />
               </Animated.View>
             ))}
+            {/* 빈 슬롯 카드 — 3개 제약 visibility 강화 */}
+            {activeHabits.length < 3 && Array.from({ length: 3 - activeHabits.length }).map((_, i) => {
+              const slotIndex = activeHabits.length + i;
+              const captionKey = slotIndex === 1
+                ? ('home.emptySlot.second' as const)
+                : ('home.emptySlot.third' as const);
+              return (
+                <Animated.View
+                  key={`empty-slot-${slotIndex}`}
+                  entering={FadeInDown.delay((activeHabits.length + i) * 60).duration(400)}
+                >
+                  <Pressable
+                    onPress={() => router.push('/add')}
+                    accessibilityRole="button"
+                    accessibilityLabel={t('home.a11y.emptySlot', { ordinal: slotIndex + 1 })}
+                    style={({ pressed }) => [
+                      styles.emptySlot,
+                      { borderColor: colors.textMuted + '60' },
+                      pressed && { opacity: 0.6, transform: [{ scale: 0.985 }] },
+                    ]}
+                  >
+                    <View style={[styles.emptySlotIcon, { backgroundColor: colors.inactive }]}>
+                      <Text style={[styles.emptySlotPlus, { color: colors.textMuted }]}>＋</Text>
+                    </View>
+                    <Text style={[styles.emptySlotText, { color: colors.textMuted }]}>
+                      {t(captionKey)}
+                    </Text>
+                    <Text style={[styles.emptySlotArrow, { color: colors.textMuted }]}>›</Text>
+                  </Pressable>
+                </Animated.View>
+              );
+            })}
             <View style={{ marginTop: spacing.xs }}>
               <WeeklyCalendar onDatePress={setSelectedDate} />
             </View>
@@ -329,6 +364,41 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: fontSize.xl,
     fontWeight: '700',
+  },
+  tagline: {
+    fontSize: fontSize.xs,
+    fontWeight: '500',
+    marginTop: 4,
+    fontStyle: 'italic',
+  },
+  emptySlot: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: spacing.md,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    borderStyle: 'dashed',
+    gap: spacing.sm + 4,
+  },
+  emptySlotIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptySlotPlus: {
+    fontSize: 22,
+    fontWeight: '300',
+  },
+  emptySlotText: {
+    flex: 1,
+    fontSize: fontSize.sm,
+    fontWeight: '500',
+  },
+  emptySlotArrow: {
+    fontSize: 18,
+    fontWeight: '500',
   },
   progressRow: {
     flexDirection: 'row',

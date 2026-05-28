@@ -187,6 +187,34 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 ## 버전별 업데이트 소개 (What's New)
 
+### v1.1.2 (예정 — 차별점 visibility 강화)
+
+#### 한국어
+```
+화면 안에서도 차별점이 보여요.
+
+• 빈 슬롯 카드 — 매일 '3개만'이 자연스럽게 인지
+  활성 습관이 1~2개일 때 남은 자리가 시각적으로 드러나요.
+• 상단에 작은 태그라인 — '작은 습관이 자라는 곳'
+
+작은 변화지만 매일 보이는 우리만의 특색.
+```
+
+#### English
+```
+Now you see what makes Ssak different.
+
+• Empty slot cards — the "just 3" rule shows itself every day
+  When you have 1 or 2 habits, the remaining slot is visible.
+• Subtle tagline on top — "Where small habits grow"
+
+Small change, but our identity now shows on every screen.
+```
+
+**릴리즈 설정**
+- 출시 방식: 승인 후 자동 출시
+- 변경 범위: 홈 상단 태그라인 / 빈 슬롯 카드 (3-N개, 탭 시 /add 진입) / 스크린샷 첫 장 카피 강화 + 빈 슬롯 시각화 반영
+
 ### v1.1.1 (예정 — UX 다듬기 핫픽스)
 
 #### 한국어

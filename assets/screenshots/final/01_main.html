@@ -223,6 +223,49 @@ body { background: #f0f0f0; font-family: -apple-system, BlinkMacSystemFont, 'SF 
   flex-shrink: 0;
   font-weight: 500;
 }
+
+/* 빈 슬롯 카드 (3개 제약 visibility) */
+.empty-slot-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 16px;
+  margin: 0 24px 10px;
+  gap: 14px;
+  border: 1.5px dashed #B5A899;
+  background: rgba(255, 255, 255, 0.3);
+}
+.empty-slot-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(181, 168, 153, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #B5A899;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+.empty-slot-text {
+  flex: 1;
+  font-size: 14px;
+  color: #B5A899;
+  font-weight: 500;
+}
+.empty-slot-arrow {
+  font-size: 18px;
+  color: #B5A899;
+  font-weight: 500;
+}
+@media (min-width: 1000px) {
+  .empty-slot-card { padding: 46px !important; border-radius: 46px !important; margin: 0 72px 28px !important; gap: 40px !important; border-width: 4px !important; }
+  .empty-slot-icon { width: 128px !important; height: 128px !important; border-radius: 40px !important; font-size: 64px !important; }
+  .empty-slot-text { font-size: 36px !important; }
+  .empty-slot-arrow { font-size: 48px !important; }
+}
+
 /* @media large mode 대응 (1242x2688) */
 @media (min-width: 1000px) {
   .check-overlay { width: 60px !important; height: 60px !important; font-size: 32px !important; border-radius: 30px !important; border-width: 6px !important; bottom: -10px !important; right: -10px !important; }
@@ -735,8 +778,8 @@ body {
 <div class="screenshots"><div class="frame" style="background: #FFF8F0;">
   <div class="screen-num">1</div>
   <div class="marketing">
-    <h2 style="color: #2D2016;">딱 3개만,<br>싹을 키워보세요</h2>
-    <p style="color: #8C7B6B;">매일 한 탭이 단계가 되어 자라요</p>
+    <h2 style="color: #2D2016;">딱 3개 습관.<br><span style="color: #6B8E5A;">그 이상도, 그 이하도 아니에요.</span></h2>
+    <p style="color: #8C7B6B;">슬롯이 곧 메시지예요</p>
   </div>
   <div class="app-screen" style="background: var(--bg);">
     <div class="app-inner">
@@ -811,36 +854,10 @@ body {
 
       </div>
 
-      <div class="habit-card" style="background: var(--surface);">
-
-
-        <div class="habit-icon-circle" style="background: rgba(123,104,238,0.15);">
-
-
-          📖
-
-
-          
-
-
-        </div>
-
-
-        <div class="habit-info">
-
-
-          <div class="habit-name">독서하기</div>
-
-
-          <div class="habit-flow" style="color: #7B68EE;">🌿 떡잎 · 흐름 7일째</div>
-
-
-        </div>
-
-
-        <div class="reminder-chip">⏰ 21:30</div>
-
-
+      <div class="empty-slot-card">
+        <div class="empty-slot-icon">＋</div>
+        <div class="empty-slot-text">세 번째 씨앗 — 의도된 마지막 자리</div>
+        <div class="empty-slot-arrow">›</div>
       </div>
 
       <!-- 주간 캘린더 -->
