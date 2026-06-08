@@ -11,7 +11,7 @@ function generateId(): string {
 }
 import { Habit, HabitLog } from '@/types/habit';
 import { getToday } from '@/utils/date';
-import { scheduleHabitReminder, cancelHabitReminder } from '@/utils/notifications';
+import { scheduleHabitReminder, cancelHabitReminder, cancelTodayReminder } from '@/utils/notifications';
 import { getCurrentStage, GrowthStageId } from '@/constants/growth';
 import { calculateFlow } from '@/utils/streak';
 // Pro 기능은 v1.4에서 활성화
@@ -147,19 +147,22 @@ export const useHabitStore = create<HabitStore>()(
           (l) => l.habitId === habitId && l.date === targetDate
         );
 
+        let nowCompleted = false;
         if (existing) {
+          nowCompleted = !existing.completed;
           set((state) => ({
             logs: state.logs.map((l) =>
               l.id === existing.id
                 ? {
                     ...l,
-                    completed: !l.completed,
-                    completedAt: !l.completed ? new Date().toISOString() : null,
+                    completed: nowCompleted,
+                    completedAt: nowCompleted ? new Date().toISOString() : null,
                   }
                 : l
             ),
           }));
         } else {
+          nowCompleted = true;
           const newLog: HabitLog = {
             id: generateId(),
             habitId,
@@ -168,6 +171,12 @@ export const useHabitStore = create<HabitStore>()(
             completedAt: new Date().toISOString(),
           };
           set((state) => ({ logs: [...state.logs, newLog] }));
+        }
+
+        // 완료 처리되면 오늘 알림 cancel (중복 알림 회피).
+        // 미완료로 되돌리면 알림 복구 X — 그 시각이 이미 지났을 가능성 高 + UX 단순화.
+        if (nowCompleted) {
+          cancelTodayReminder(habitId).catch(() => {});
         }
       },
 

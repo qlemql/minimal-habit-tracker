@@ -280,7 +280,11 @@
   "notifications": {
     "actionDone": "완료",
     "title": "습관 리마인더",
-    "body": "{{habitName}} 할 시간이에요!"
+    "body": "{{habitName}} 할 시간이에요!",
+    "reactivation": {
+      "title": "🌱 일주일 만이에요",
+      "body": "{{habitName}}, 다시 이어가볼까요?"
+    }
   },
   "rewards": {
     "tier": {

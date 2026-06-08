@@ -10,6 +10,7 @@ import { useOnboardingStore } from '@/store/onboardingStore';
 import { useHabitStore } from '@/store/habitStore';
 import {
   setupNotificationCategories,
+  refreshHabitReminders,
   HABIT_TOGGLE_ACTION,
 } from '@/utils/notifications';
 import { syncWidgetData } from '@/utils/widgetData';
@@ -32,18 +33,30 @@ export default function RootLayout() {
   useEffect(() => {
     // 카테고리 등록은 알림이 도착하기 전에 끝나야 함 — 앱 시작 시 한 번
     setupNotificationCategories().catch(() => {});
+    // 앱 launch마다 다음 N일치 reminder 보충 + reactivation 갱신
+    // (7일 이상 미사용으로 모든 single-shot이 소진되었거나 일부만 남은 경우 대비)
+    refreshHabitReminders().catch(() => {});
 
     // 잠금화면/알림센터에서 "완료" 버튼 또는 알림 탭 → 처리
     const sub = Notifications.addNotificationResponseReceivedListener(
       (response) => {
-        const habitId = response.notification.request.content.data?.habitId as
-          | string
+        const data = response.notification.request.content.data as
+          | { habitId?: string; kind?: string }
           | undefined;
+        const habitId = data?.habitId;
         if (!habitId) return;
+
         // 액션 버튼 "완료"만 토글 — 알림 본문 탭은 앱 진입(기본 동작)
         if (response.actionIdentifier === HABIT_TOGGLE_ACTION) {
           useHabitStore.getState().toggleHabit(habitId);
           syncWidgetData().catch(() => {});
+          return;
+        }
+
+        // reactivation 알람을 탭해 들어온 경우 — 보충 로직은 launch effect에서
+        // 이미 호출되지만, 안전을 위해 한 번 더 호출 (idempotent)
+        if (data?.kind === 'reactivation') {
+          refreshHabitReminders().catch(() => {});
         }
       }
     );
@@ -51,9 +64,10 @@ export default function RootLayout() {
     // 콜드 스타트: 앱 종료 상태에서 액션을 눌렀을 경우 큐된 응답 처리
     Notifications.getLastNotificationResponseAsync().then((response) => {
       if (!response) return;
-      const habitId = response.notification.request.content.data?.habitId as
-        | string
+      const data = response.notification.request.content.data as
+        | { habitId?: string; kind?: string }
         | undefined;
+      const habitId = data?.habitId;
       if (!habitId) return;
       if (response.actionIdentifier === HABIT_TOGGLE_ACTION) {
         useHabitStore.getState().toggleHabit(habitId);

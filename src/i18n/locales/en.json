@@ -280,7 +280,11 @@
   "notifications": {
     "actionDone": "Done",
     "title": "Habit reminder",
-    "body": "Time for {{habitName}}!"
+    "body": "Time for {{habitName}}!",
+    "reactivation": {
+      "title": "🌱 It's been a week",
+      "body": "Ready to continue with {{habitName}}?"
+    }
   },
   "rewards": {
     "tier": {
