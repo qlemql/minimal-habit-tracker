@@ -222,7 +222,7 @@ export default function HomeScreen() {
         )}
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView overScrollMode="never" style={styles.content} showsVerticalScrollIndicator={false}>
         {activeHabits.length > 0 && hasBreathingHabit && (
           <Animated.View entering={FadeInDown.duration(400)} style={[styles.breathingBanner, { backgroundColor: colors.surface }]}>
             <Text style={[styles.breathingText, { color: colors.textSecondary }]}>

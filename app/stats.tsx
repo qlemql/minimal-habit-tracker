@@ -66,7 +66,7 @@ export default function StatsScreen() {
         <View style={{ width: 36 }} />
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView overScrollMode="never" style={styles.content} showsVerticalScrollIndicator={false}>
         {/* 기본 통계 (2x2 그리드) */}
         <View style={[styles.statsCard, { backgroundColor: colors.surface }]}>
           <View style={styles.statsRow}>

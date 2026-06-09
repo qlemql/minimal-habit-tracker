@@ -224,7 +224,7 @@ export default function OnboardingScreen() {
             </Text>
           </View>
 
-          <ScrollView ref={scrollRef} style={styles.presetList} showsVerticalScrollIndicator={false}>
+          <ScrollView overScrollMode="never" ref={scrollRef} style={styles.presetList} showsVerticalScrollIndicator={false}>
             {PRESETS.map((preset) => {
               const isSelected = selected.some((s) => s.id === preset.id);
               return (
@@ -356,7 +356,7 @@ export default function OnboardingScreen() {
             {t('onboarding.reminder.editHint')}
           </Text>
 
-          <ScrollView style={styles.alarmList} showsVerticalScrollIndicator={false}>
+          <ScrollView overScrollMode="never" style={styles.alarmList} showsVerticalScrollIndicator={false}>
             {selected.map((habit) => (
               <View
                 key={habit.id}
@@ -431,7 +431,7 @@ export default function OnboardingScreen() {
             {t('onboarding.guide.title')}
           </Text>
 
-          <ScrollView style={styles.guideList} showsVerticalScrollIndicator={false}>
+          <ScrollView overScrollMode="never" style={styles.guideList} showsVerticalScrollIndicator={false}>
             <View style={[styles.guideCardHighlight, { backgroundColor: colors.accent + '15', borderColor: colors.accent + '30' }]}>
               <Text style={[styles.guideHighlightTitle, { color: colors.textPrimary, marginBottom: spacing.xs }]}>
                 {t('onboarding.guide.flow.title')}

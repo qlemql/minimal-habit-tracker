@@ -83,7 +83,7 @@ export default function AddHabitScreen() {
       </View>
 
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled">
+      <ScrollView overScrollMode="never" style={styles.content} showsVerticalScrollIndicator={false} keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled">
         <View style={[styles.preview, { backgroundColor: colors.surface, borderRadius: 20 }]}>
           <View
             style={[

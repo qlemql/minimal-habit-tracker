@@ -105,6 +105,7 @@ export default function SettingsScreen() {
       </View>
 
       <ScrollView
+        overScrollMode="never"
         style={styles.contentScroll}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
