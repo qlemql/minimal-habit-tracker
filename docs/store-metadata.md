@@ -187,35 +187,46 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 ## 버전별 업데이트 소개 (What's New)
 
-### v1.2.0 (예정 — 차별화 visibility + 똑똑한 알림)
+### v1.2.0 (예정 — 차별화 + 똑똑한 알림 + 해금 새단장)
 
 #### 한국어
 ```
-화면 안에서도 차별점이 보여요. 알림도 더 똑똑해졌어요.
+화면, 알림, 보상까지 — 매일 보이는 것들을 다듬었어요.
 
-• 빈 슬롯 카드 — 매일 '3개만'이 자연스럽게 인지
-  활성 습관이 1~2개일 때 남은 자리가 시각적으로 드러나요.
+차별점이 보여요
+• 빈 슬롯 카드 — 활성 습관이 1~2개일 때 남은 자리가 시각적으로 드러나요
 • 상단에 작은 태그라인 — '작은 습관이 자라는 곳'
-• 이미 완료한 날엔 알림이 안 와요
-  체크하는 순간 그날 알림은 조용히 패스.
-• 일주일 동안 앱을 안 열면 부드러운 복귀 알림
-  '다시 이어가볼까요?' 한 번만 띄워요.
 
-매일 보이는 차별점, 매일 덜 거슬리는 알림.
+알림이 더 똑똑해졌어요
+• 이미 완료한 날엔 그날 알림이 안 와요
+• 일주일 동안 앱을 안 열면 '다시 이어가볼까요?' 부드러운 복귀 알림 한 번
+
+해금이 새로워졌어요
+• 4개 카테고리 팩 — 건강 🏃 · 마음 🦋 · 창작 🎨 · 자연 🌳
+  마일스톤마다 받을 팩을 직접 골라요
+• 통계 화면에서 다음 해금을 미리 골라둘 수 있어요
+
+매일 보이는 차별점, 매일 덜 거슬리는 알림, 직접 골라 받는 보상.
 ```
 
 #### English
 ```
-Now you see what makes Ssak different. Reminders got smarter, too.
+Screens, reminders, rewards — polish across the board.
 
-• Empty slot cards — the "just 3" rule shows itself every day
-  When you have 1 or 2 habits, the remaining slot is visible.
-• Subtle tagline on top — "Where small habits grow"
-• Already done today? No reminder.
-  The moment you check off, today's notification quietly skips.
-• Inactive for a week? A gentle "let's resume" nudge — just once.
+Identity that shows
+• Empty slot cards — the remaining spots are visible when you have 1 or 2 habits
+• Subtle tagline up top — "Where small habits grow"
 
-A daily-visible identity. Less noisy reminders.
+Smarter reminders
+• Already done today? Today's reminder quietly skips
+• Inactive for a week? One gentle "let's resume" nudge
+
+Rewards, redesigned
+• 4 category packs — Health 🏃 · Mind 🦋 · Creator 🎨 · Nature 🌳
+  Choose which pack you unlock at each milestone
+• Preview upcoming unlocks on the Stats screen
+
+Identity you see, reminders that don't, rewards you choose.
 ```
 
 **릴리즈 설정**
@@ -224,7 +235,8 @@ A daily-visible identity. Less noisy reminders.
   - **차별화 visibility (v1.1.2 흡수)**: 홈 상단 태그라인 / 빈 슬롯 카드 (3-N개, 탭 시 /add 진입) / 스크린샷 첫 장 카피 강화 + 빈 슬롯 시각화 반영
   - **알림 시스템 v2**: DAILY trigger → 7일치 calendar single-shot + reactivation 1개. 완료 시 그날 reminder만 cancel. 앱 launch 시 보충(idempotent).
   - **Android polish**: 모든 ScrollView `overScrollMode="never"` 적용 (stretch overscroll 비활성)
-- v1.1.2 빌드는 ASC에 attach만 된 상태 → 폐기, v1.2.0 신규 빌드로 출시
+  - **해금 팩 시스템 v2**: 흩어진 8개 자동 해금 아이콘 → 카테고리 기반 4개 팩(Health/Mind/Creator/Nature). 마일스톤(7/21/50/100일)마다 사용자가 받을 팩 1개 선택(마지막은 자동). 통계 화면 D-3 이내 미리보기 카드. iOS/Android 호환 이모지(Unicode 9.0 이하, 스킨톤 X). `UnlockToast` 팩 카드 시각화 강화 + 신규 `MilestoneChoiceDialog` + `UpcomingUnlockCard`.
+- v1.1.2 빌드는 ASC에 attach만 된 상태 → 폐기, v1.2.0 신규 빌드(buildNumber 12)로 출시
 
 ### v1.1.1 (예정 — UX 다듬기 핫픽스)
 

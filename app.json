@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.qlemql.minimalhabittracker",
-      "buildNumber": "11",
+      "buildNumber": "12",
       "appleTeamId": "5R27CJ6382",
       "entitlements": {
         "com.apple.security.application-groups": [
@@ -43,7 +43,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.qlemql.minimalhabittracker",
-      "versionCode": 9,
+      "versionCode": 10,
       "permissions": [
         "android.permission.POST_NOTIFICATIONS",
         "android.permission.SCHEDULE_EXACT_ALARM"
