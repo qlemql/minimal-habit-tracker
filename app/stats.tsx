@@ -8,7 +8,8 @@ import { useThemeStore } from '@/store/themeStore';
 import { useHabitStore } from '@/store/habitStore';
 import { useRewardStore } from '@/store/rewardStore';
 import { calculateFlow } from '@/utils/streak';
-import { REWARD_TIERS } from '@/constants/rewards';
+import { UNLOCK_MILESTONES } from '@/constants/rewards';
+import { UpcomingUnlockCard } from '@/components/UpcomingUnlockCard';
 import { GROWTH_STAGES, GrowthStageId } from '@/constants/growth';
 import { fontSize, spacing } from '@/constants/theme';
 
@@ -24,6 +25,7 @@ export default function StatsScreen() {
   const colors = useThemeStore((s) => s.getColors());
   const { habits, logs } = useHabitStore();
   const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
+  const unlockedPacks = useRewardStore((s) => s.unlockedPacks);
 
   const activeHabits = useMemo(() => habits.filter((h) => !h.isGraduated), [habits]);
   const graduatedHabits = useMemo(
@@ -35,7 +37,7 @@ export default function StatsScreen() {
   );
 
   const totalDone = logs.filter((l) => l.completed).length;
-  const unlockedCount = REWARD_TIERS.filter((tier) => tier.flowDays <= maxFlowEver).length;
+  const unlockedCount = unlockedPacks.length;
   const dateLocale = i18n.language === 'ko' ? 'ko-KR' : 'en-US';
 
   // 활성 습관의 현재 최장 흐름 (이미 완료된 습관 제외, 졸업 시점에 정확한 값이 totalFlowDays로 보존됨)
@@ -101,6 +103,9 @@ export default function StatsScreen() {
             </View>
           </View>
         </View>
+
+        {/* 다음 해금 — D-3 이내 또는 모두 해금 시 표시 */}
+        <UpcomingUnlockCard maxFlowEver={currentMaxFlow} />
 
         {/* 졸업한 정원 */}
         <Text style={[styles.sectionLabel, { color: colors.textMuted }]}>

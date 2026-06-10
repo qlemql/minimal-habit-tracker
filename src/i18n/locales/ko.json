@@ -286,6 +286,33 @@
       "body": "{{habitName}}, 다시 이어가볼까요?"
     }
   },
+  "packs": {
+    "health": { "name": "건강 팩", "tag": "몸이 자라는 사람에게" },
+    "mind": { "name": "마음 팩", "tag": "내면을 다듬는 사람에게" },
+    "creator": { "name": "창작 팩", "tag": "무언가를 만드는 사람에게" },
+    "nature": { "name": "자연 팩", "tag": "자연 가까이에 있는 사람에게" }
+  },
+  "milestoneChoice": {
+    "title": "{{days}}일 흐름 달성!",
+    "subtitle": "받을 팩을 골라주세요",
+    "cta": "{{packName}} 받기",
+    "autoTitle": "{{days}}일 흐름 달성!",
+    "autoSubtitle": "마지막 팩이 도착했어요"
+  },
+  "upcoming": {
+    "label": "🎁 다음 해금까지 {{days}}일",
+    "title": "{{days}}일 마일스톤",
+    "desc": "받을 팩을 미리 골라보세요",
+    "picked": "✓ {{packName}}을 받기로 했어요",
+    "tapToChange": "탭하여 변경",
+    "noneSelected": "탭하여 선택",
+    "allDone": "🎉 모든 팩을 모았어요"
+  },
+  "unlock": {
+    "newPack": "{{packName}} 해금",
+    "milestone": "{{days}}일 흐름 달성",
+    "cta": "탭하여 새 아이콘으로 바꾸기"
+  },
   "rewards": {
     "tier": {
       "7": {

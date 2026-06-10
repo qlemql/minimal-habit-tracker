@@ -21,7 +21,7 @@ import { syncWidgetData } from '@/utils/widgetData';
 import { useRewardStore } from '@/store/rewardStore';
 import { TimePicker } from '@/components/TimePicker';
 import { fontSize, spacing, habitIcons, habitColors, unlockableIcons, unlockableColors } from '@/constants/theme';
-import { getUnlockedItems, getRequiredFlowDays } from '@/constants/rewards';
+import { getUnlockedItemsFromPacks, getRequiredFlowDays } from '@/constants/rewards';
 
 export default function AddHabitScreen() {
   const { t } = useTranslation();
@@ -29,8 +29,8 @@ export default function AddHabitScreen() {
   const { addHabit } = useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
 
-  const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
-  const unlocked = getUnlockedItems(maxFlowEver);
+  const unlockedPacks = useRewardStore((s) => s.unlockedPacks);
+  const unlocked = getUnlockedItemsFromPacks(unlockedPacks);
 
   const allIcons = [...habitIcons, ...unlockableIcons];
   const allColors = [...habitColors, ...unlockableColors];

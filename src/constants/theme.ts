@@ -68,14 +68,57 @@ export const habitIcons = [
   '💊', '🚶',
 ] as const;
 
-// 해금 가능 아이콘 (흐름 달성으로 해금)
-export const unlockableIcons = [
-  '🎵', '🧠', '🌿', '☕',   // 14일 해금
-  '🔥', '⭐', '🌙', '💎',   // 50일 해금
-] as const;
+// ────────────────────────────────────────────────────────────────────────────
+// 해금 팩 (v1.3+) — 카테고리 기반 4개 팩
+// 마일스톤(7/21/50/100일)마다 4개 중 1개 선택 (마지막은 자동)
+// 아이콘은 iOS Apple Color + Android Noto Emoji 양쪽 호환 보장 (Unicode 9.0 이하, 스킨톤 modifier X)
+// ────────────────────────────────────────────────────────────────────────────
 
-// 해금 가능 색상 (흐름 달성으로 해금)
-export const unlockableColors = [
-  '#FF5C93', '#00B4D8',       // 7일 해금 (핑크, 스카이블루)
-  '#E8A838', '#8B5CF6', '#06D6A0', // 30일 해금 (골드, 인디고, 민트)
-] as const;
+export type PackId = 'health' | 'mind' | 'creator' | 'nature';
+
+export interface UnlockPack {
+  id: PackId;
+  emoji: string; // 대표 이모지
+  icons: readonly string[]; // 신규 아이콘 5개
+  colors: readonly string[]; // 신규 색상 3개
+}
+
+export const UNLOCK_PACKS: Record<PackId, UnlockPack> = {
+  health: {
+    id: 'health',
+    emoji: '🏃',
+    icons: ['🏃', '🏋️', '🥗', '🥤', '😴'],
+    colors: ['#E08A6B', '#E8A538', '#D94040'],
+  },
+  mind: {
+    id: 'mind',
+    emoji: '🦋',
+    icons: ['✨', '📝', '🌙', '💭', '🦋'],
+    colors: ['#9580CC', '#2C3E5F', '#6B8FB5'],
+  },
+  creator: {
+    id: 'creator',
+    emoji: '🎨',
+    icons: ['🎨', '✏️', '🎵', '📷', '🎸'],
+    colors: ['#D86BA8', '#D4A55B', '#20C997'],
+  },
+  nature: {
+    id: 'nature',
+    emoji: '🌳',
+    icons: ['🌳', '🌻', '🌷', '🍀', '🌿'],
+    colors: ['#3D7950', '#6B8E5A', '#7A8C5C'],
+  },
+};
+
+export const PACK_IDS: readonly PackId[] = ['health', 'mind', 'creator', 'nature'];
+
+/** 모든 팩의 아이콘을 평탄화 — add/edit 화면 grid 렌더링용 */
+export const allPackIcons: readonly string[] = PACK_IDS.flatMap((id) => UNLOCK_PACKS[id].icons);
+/** 모든 팩의 색상을 평탄화 */
+export const allPackColors: readonly string[] = PACK_IDS.flatMap((id) => UNLOCK_PACKS[id].colors);
+
+// ────────────────────────────────────────────────────────────────────────────
+// 레거시 호환 — v1.2.x 까지 사용된 평탄 배열. 새 코드는 UNLOCK_PACKS 직접 사용.
+// ────────────────────────────────────────────────────────────────────────────
+export const unlockableIcons = allPackIcons;
+export const unlockableColors = allPackColors;

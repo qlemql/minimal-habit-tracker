@@ -9,7 +9,7 @@ import { useHabitStore } from '@/store/habitStore';
 import { useRewardStore } from '@/store/rewardStore';
 import { useSettingsStore } from '@/store/settingsStore';
 import { rescheduleAllReminders } from '@/utils/notifications';
-import { REWARD_TIERS } from '@/constants/rewards';
+import { UNLOCK_MILESTONES } from '@/constants/rewards';
 import { fontSize, spacing } from '@/constants/theme';
 
 const FEEDBACK_EMAIL = 'taehyun_fe@naver.com';
@@ -40,8 +40,9 @@ export default function SettingsScreen() {
   const activeHabits = habits.filter((h) => !h.isGraduated);
   const totalLogs = logs.filter((l) => l.completed).length;
   const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
-  const nextTier = REWARD_TIERS.find((t) => t.flowDays > maxFlowEver);
-  const unlockedCount = REWARD_TIERS.filter((t) => t.flowDays <= maxFlowEver).length;
+  const unlockedPacks = useRewardStore((s) => s.unlockedPacks);
+  const nextTier = UNLOCK_MILESTONES.find((m) => m.flowDays > maxFlowEver);
+  const unlockedCount = unlockedPacks.length;
   const lockScreenActionEnabled = useSettingsStore((s) => s.lockScreenActionEnabled);
   const setLockScreenActionEnabled = useSettingsStore((s) => s.setLockScreenActionEnabled);
 
@@ -122,7 +123,7 @@ export default function SettingsScreen() {
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.surfaceLight }]} />
           <View style={styles.statItem}>
-            <Text style={[styles.statNumber, { color: '#DA77F2' }]}>{unlockedCount}/{REWARD_TIERS.length}</Text>
+            <Text style={[styles.statNumber, { color: '#DA77F2' }]}>{unlockedCount}/{UNLOCK_MILESTONES.length}</Text>
             <Text style={[styles.statLabel, { color: colors.textMuted }]}>{t('settings.stats.unlocks')}</Text>
           </View>
         </View>

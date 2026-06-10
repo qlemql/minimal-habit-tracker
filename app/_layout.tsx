@@ -14,6 +14,7 @@ import {
   HABIT_TOGGLE_ACTION,
 } from '@/utils/notifications';
 import { syncWidgetData } from '@/utils/widgetData';
+import { MilestoneChoiceDialog } from '@/components/MilestoneChoiceDialog';
 
 export default function RootLayout() {
   const colors = useThemeStore((s) => s.getColors());
@@ -102,7 +103,9 @@ export default function RootLayout() {
         <Stack.Screen name="add" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
         <Stack.Screen name="edit" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
         <Stack.Screen name="settings" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="stats" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
       </Stack>
+      <MilestoneChoiceDialog />
     </GestureHandlerRootView>
   );
 }

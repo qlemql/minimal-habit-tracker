@@ -22,7 +22,7 @@ import { useRewardStore } from '@/store/rewardStore';
 import { calculateFlow } from '@/utils/streak';
 import { TimePicker } from '@/components/TimePicker';
 import { fontSize, spacing, habitIcons, habitColors, unlockableIcons, unlockableColors } from '@/constants/theme';
-import { getUnlockedItems, getRequiredFlowDays } from '@/constants/rewards';
+import { getUnlockedItemsFromPacks, getRequiredFlowDays } from '@/constants/rewards';
 
 export default function EditHabitScreen() {
   const { t } = useTranslation();
@@ -31,8 +31,8 @@ export default function EditHabitScreen() {
   const { habits, updateHabit, deleteHabit, graduateHabit } = useHabitStore();
   const colors = useThemeStore((s) => s.getColors());
 
-  const maxFlowEver = useRewardStore((s) => s.maxFlowEver);
-  const unlocked = getUnlockedItems(maxFlowEver);
+  const unlockedPacks = useRewardStore((s) => s.unlockedPacks);
+  const unlocked = getUnlockedItemsFromPacks(unlockedPacks);
 
   const allIcons = [...habitIcons, ...unlockableIcons];
   const allColors = [...habitColors, ...unlockableColors];

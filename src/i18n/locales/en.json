@@ -286,6 +286,33 @@
       "body": "Ready to continue with {{habitName}}?"
     }
   },
+  "packs": {
+    "health": { "name": "Health Pack", "tag": "For those who grow their body" },
+    "mind": { "name": "Mind Pack", "tag": "For those who tend their inner self" },
+    "creator": { "name": "Creator Pack", "tag": "For those who make things" },
+    "nature": { "name": "Nature Pack", "tag": "For those close to nature" }
+  },
+  "milestoneChoice": {
+    "title": "{{days}}-day Flow reached!",
+    "subtitle": "Pick the pack to unlock",
+    "cta": "Unlock {{packName}}",
+    "autoTitle": "{{days}}-day Flow reached!",
+    "autoSubtitle": "The final pack has arrived"
+  },
+  "upcoming": {
+    "label": "🎁 {{days}} days until next unlock",
+    "title": "{{days}}-day milestone",
+    "desc": "Choose which pack you'll receive",
+    "picked": "✓ {{packName}} ready to unlock",
+    "tapToChange": "Tap to change",
+    "noneSelected": "Tap to choose",
+    "allDone": "🎉 All packs collected"
+  },
+  "unlock": {
+    "newPack": "{{packName}} unlocked",
+    "milestone": "{{days}}-day Flow reached",
+    "cta": "Tap to swap icons"
+  },
   "rewards": {
     "tier": {
       "7": {
