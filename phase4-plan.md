@@ -5,45 +5,57 @@
 
 ---
 
-## 0. 현재 상태 (v1.0.3 출시 완료, v1.1.0 통합 출시 빌드 완성)
+## 0. 현재 상태 (v1.1.1 출시 완료, v1.2.0 작업 중 — 빌드 직전)
 
-**최근 출시**: v1.0.3 (2026-05-04, 잠금화면 위젯 + 온보딩 4단계 통합)
-**브랜드 (변경 예정)**: 싹: 세 가지 습관 / Ssak: Three Habits — v1.2 출시와 함께 적용
-**브랜드 (현행)**: 싹 - 습관 트래커
-**태그라인**: 작은 습관이 자라는 곳 / Where small habits grow
-**기본 테마**: 크림 (세이지 그린 accent)
+**최근 출시**: v1.1.1 (2026-05-26, UX 다듬기 핫픽스)
+**브랜드**: 싹: 세 가지 습관 / Ssak: Three Habits (v1.1.0에서 변경 완료)
+**태그라인**: 작은 습관이 자라는 곳 / Where small habits grow (v1.2.0부터 홈 상단에 직접 노출)
+**기본 테마**: 크림 (Olive #6B8E5A accent) — system 옵션은 v1.1.1에서 제거
 
-### v1.0 ~ v1.0.3 누적 산출 요약
+### v1.0 ~ v1.1.1 누적 산출 요약
 
 | 마일스톤 | 출시일 | 핵심 |
 |---------|-------|------|
 | v1.0.0 | 2026-04 | iOS Free 출시. 위젯 (Small/Medium), 이어가기 시스템(Two-Day Rule), 크림 브랜딩, 온보딩 3단계, 주간 캘린더 스와이프, 축하 애니메이션, 법적 문서 |
 | v1.0.1 | 2026-04-19 | 알람 설정을 온보딩에 추가, 습관 프리셋 단순화 (FB-001 대응) |
 | v1.0.2 | 2026-04-27 | 싹 성장 시각화 시스템(씨앗→발아→떡잎→줄기→꽃봉오리→개화), `CelebrationOverlay` 리팩터, `UnlockToast` 리디자인. FB-002·003·004 통합 해결 |
-| v1.0.3 | 2026-05-04 | 잠금화면 위젯 3종(accessoryCircular/Rectangular/Inline), 온보딩 3→4단계 통합 (성장 안내 + 가이드 병합) |
+| v1.0.3 | 2026-05-04 | 잠금화면 위젯 3종(accessoryCircular/Rectangular/Inline), 온보딩 3→4단계 통합 |
+| **v1.1.0** | **2026-05-19** | **글로벌(영어) + 졸업 시스템 + 통계 화면 + 앱명 변경(`싹: 세 가지 습관`) 통합 출시.** 잠금화면 알림 액션, 위젯 i18n, Privacy/Terms 영문판 |
+| **v1.1.1** | **2026-05-26** | **UX 핫픽스** — HabitCard 디자인 리뉴얼(체크박스→아이콘 ✓ overlay+Olive 톤+알람 chip), 졸업 자격 `currentFlowDays`→`longestFlow`, TimePicker 모달 backdrop 분리+자동 스크롤, 설정 ScrollView+system 테마 제거+알림 토글 iOS 숨김 |
 
-### 현재 작업 중 (v1.2 — 글로벌 + Android)
+### 현재 작업 중 (v1.2.0 — 차별화 visibility + 똑똑한 알림 + Android polish)
 
-상세는 `v1.2-sprint-plan.md` 참조. 핵심:
-- **i18n 도입** (한국어/영어, react-i18next + expo-localization)
-- **Android 정식 출시** (이전엔 iOS 전용)
-- **앱 표시명 변경**: `싹 - 습관 트래커` → `싹: 세 가지 습관` / `Ssak: Three Habits`
-- **위젯 i18n** (iOS Localizable.strings ko/en + Android values-en/strings.xml)
-- **Privacy/Terms 영문판** + URL `i18n.language` 분기
+빌드 직전 단계. 핵심 변경:
 
-### 보류한 것 (v1.3로 이연)
+- **차별화 visibility (A+C)**
+  - 홈 헤더에 태그라인 노출 (`🌱 작은 습관이 자라는 곳`)
+  - 활성 습관 < 3개일 때 빈 슬롯 카드 (dashed border, "두 번째/세 번째 씨앗") — 탭 시 `/add` 진입
+  - App Store 스크린샷 첫 장 카피 강화 (`Just 3 habits. No more, no less.` + `The slot is the message.`) + 빈 슬롯 시각화 반영
+- **알림 시스템 v2**
+  - DAILY trigger → 7일치 calendar single-shot + reactivation 1개
+  - 완료 시 그날 reminder만 cancel (내일 이후 + reactivation 유지)
+  - 7일 미사용 시 reactivation 알람 (`🌱 일주일 만이에요`)
+  - 앱 launch 시 보충 (idempotent)
+- **Android polish**
+  - 모든 ScrollView `overScrollMode="never"` — stretch overscroll 비활성
+
+> v1.1.2 빌드는 ASC에 attach만 된 상태였음 (잦은 cadence 우려 → 보류) → v1.2.0 묶음으로 통합 후 신규 빌드(`1.2.0 (11)`)로 출시.
+
+### 보류한 것 (v1.2 이후로 이연)
 
 | 항목 | 보류 사유 |
 |------|----------|
-| RevenueCat 실제 IAP 연동 | v1.0~1.0.3 Free 우선, stub만 남김 (`src/utils/purchases.ts`). 글로벌 출시(v1.2) 후 결제 도입이 시장 검증 측면에서 합리적 |
-| 통계 화면 (`app/stats.tsx`) | Pro 전용이어서 Pro와 함께 재도입 |
+| RevenueCat 실제 IAP 연동 | 별도 Pro 출시(v1.3 또는 후속)에서 도입 — v1.x 차별화/UX 폴리시 우선 |
 | 클라우드 백업 (Supabase) | Pro 기능, 추후 검토 |
+| Android 정식 출시 | **DUNS 등록 신청 완료, Apple 검증 대기** (사용자 액션 진행 중). 검증 통과 → Play Console 사업자 계정 신설 → APK 빌드 → 등록 → 출시 |
 
-### 원 계획과 달라진 정책
+### 원 계획과 달라진 정책 (누적)
 
 - **과거 날짜 소급 체크**: 원래 v1.1~v1.2 UX 강화 항목에 "주간 캘린더에서 어제 체크 복구"가 있었으나, **반대 방향(과거는 read-only)으로 확정**됨 (`b3cbf3b`, `ac5a33d`). 데이터 무결성과 "습관은 오늘을 사는 것" 정신 우선.
-- **글로벌 진출 (2026-05-08 정책 변경)**: 원 계획은 "i18n / Product Hunt / 영어권 커뮤니티 — v1.x 전면 제외"였으나, v1.0.x 한국어 출시로 본인 사용 검증 + 룰 8 통과 + 코어 기능 안정화가 입증되어 **i18n + 글로벌 채널을 v1.2 범위에 정식 편입**. 단, 헌법 룰 1(3개 제약) / 룰 2(5초) / 룰 5(서버 운영 안 함)는 그대로 유지.
-- **v1.1 폐기 (2026-05-08)**: 원 계획의 v1.1(Pro IAP)은 글로벌 출시 우선순위로 인해 **v1.2 통합 출시로 흡수되지 않고 v1.3으로 이연**. v1.1 버전 번호는 발행하지 않고 v1.0.3 → v1.2.0 점프.
+- **글로벌 진출 (2026-05-08 정책 변경)**: 원 계획은 "i18n / Product Hunt / 영어권 커뮤니티 — v1.x 전면 제외"였으나, v1.0.x 한국어 출시로 본인 사용 검증 + 룰 8 통과 + 코어 기능 안정화가 입증되어 **i18n + 글로벌 채널을 v1.1.0 통합 출시로 정식 편입**. 단, 헌법 룰 1(3개 제약) / 룰 2(5초) / 룰 5(서버 운영 안 함)는 그대로 유지.
+- **v1.1 폐기 → v1.1.0 통합 출시 (2026-05-14)**: 옛 v1.1 (Pro IAP) 폐기. 글로벌 + Android + 졸업 시스템 + 통계 화면을 모두 **v1.1.0** 한 묶음으로 출시 — 사용자에게 보이는 출시 history 자연스러움 우선. v1.0.3 → v1.1.0 minor bump로 연결. 옛 v1.2 EAS 빌드는 심사 미제출이었으므로 폐기.
+- **잦은 cadence 우려 → v1.1.2 보류, v1.2.0 통합 (2026-05-28)**: v1.1.0/1.1.1 8일 사이 출시 후 v1.1.2를 또 단독 출시하면 신뢰도/심사 부담 누적. ASC에 v1.1.2 빌드만 attach + 페이지 생성 보류 → 차별화 + 알림 v2 + Android polish 한 묶음으로 **v1.2.0** 신규 빌드 출시. 사용자가 보는 history는 1.1.1 → 1.2.0 minor bump로 깔끔.
+- **알림 시스템 v2 도입 동기 (2026-06-08)**: 사용자 본인 피드백 — "이미 완료한 날도 알람이 와서 거슬린다". 백그라운드에서 JS handler가 발사 시점 결정 불가하므로 **7일치 single-shot + 완료 시 그날 cancel + 7일 후 reactivation으로 복귀 유도** 방식 선택. 헌법 룰 5(서버 X) / 2(5초) / 6(설정 X) 모두 충족.
 
 ---
 

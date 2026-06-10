@@ -187,33 +187,44 @@ habit tracker, three habits, minimal habit tracker, daily routine, streak, simpl
 
 ## 버전별 업데이트 소개 (What's New)
 
-### v1.1.2 (예정 — 차별점 visibility 강화)
+### v1.2.0 (예정 — 차별화 visibility + 똑똑한 알림)
 
 #### 한국어
 ```
-화면 안에서도 차별점이 보여요.
+화면 안에서도 차별점이 보여요. 알림도 더 똑똑해졌어요.
 
 • 빈 슬롯 카드 — 매일 '3개만'이 자연스럽게 인지
   활성 습관이 1~2개일 때 남은 자리가 시각적으로 드러나요.
 • 상단에 작은 태그라인 — '작은 습관이 자라는 곳'
+• 이미 완료한 날엔 알림이 안 와요
+  체크하는 순간 그날 알림은 조용히 패스.
+• 일주일 동안 앱을 안 열면 부드러운 복귀 알림
+  '다시 이어가볼까요?' 한 번만 띄워요.
 
-작은 변화지만 매일 보이는 우리만의 특색.
+매일 보이는 차별점, 매일 덜 거슬리는 알림.
 ```
 
 #### English
 ```
-Now you see what makes Ssak different.
+Now you see what makes Ssak different. Reminders got smarter, too.
 
 • Empty slot cards — the "just 3" rule shows itself every day
   When you have 1 or 2 habits, the remaining slot is visible.
 • Subtle tagline on top — "Where small habits grow"
+• Already done today? No reminder.
+  The moment you check off, today's notification quietly skips.
+• Inactive for a week? A gentle "let's resume" nudge — just once.
 
-Small change, but our identity now shows on every screen.
+A daily-visible identity. Less noisy reminders.
 ```
 
 **릴리즈 설정**
 - 출시 방식: 승인 후 자동 출시
-- 변경 범위: 홈 상단 태그라인 / 빈 슬롯 카드 (3-N개, 탭 시 /add 진입) / 스크린샷 첫 장 카피 강화 + 빈 슬롯 시각화 반영
+- 변경 범위:
+  - **차별화 visibility (v1.1.2 흡수)**: 홈 상단 태그라인 / 빈 슬롯 카드 (3-N개, 탭 시 /add 진입) / 스크린샷 첫 장 카피 강화 + 빈 슬롯 시각화 반영
+  - **알림 시스템 v2**: DAILY trigger → 7일치 calendar single-shot + reactivation 1개. 완료 시 그날 reminder만 cancel. 앱 launch 시 보충(idempotent).
+  - **Android polish**: 모든 ScrollView `overScrollMode="never"` 적용 (stretch overscroll 비활성)
+- v1.1.2 빌드는 ASC에 attach만 된 상태 → 폐기, v1.2.0 신규 빌드로 출시
 
 ### v1.1.1 (예정 — UX 다듬기 핫픽스)
 

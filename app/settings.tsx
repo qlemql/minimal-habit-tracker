@@ -14,7 +14,7 @@ import { fontSize, spacing } from '@/constants/theme';
 
 const FEEDBACK_EMAIL = 'taehyun_fe@naver.com';
 const LEGAL_BASE_URL = 'https://ssak-habit-tracker.pages.dev';
-const APP_VERSION = '1.1.2';
+const APP_VERSION = '1.2.0';
 
 // 디바이스 언어가 영어 계열이면 .en.html, 그 외(ko 등)는 한국어 원본 사용
 function getLegalUrl(lang: string, page: 'privacy-policy' | 'terms-of-service'): string {
