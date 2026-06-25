@@ -317,19 +317,19 @@
     "tier": {
       "7": {
         "label": "7일 흐름",
-        "description": "새로운 색상 2개 해금"
+        "description": "새 색상 팩 해금"
       },
-      "14": {
-        "label": "14일 흐름",
-        "description": "새로운 아이콘 4개 해금"
-      },
-      "30": {
-        "label": "30일 흐름",
-        "description": "프리미엄 색상 3개 해금"
+      "21": {
+        "label": "21일 흐름",
+        "description": "새 색상 팩 해금"
       },
       "50": {
         "label": "50일 흐름",
-        "description": "프리미엄 아이콘 4개 해금"
+        "description": "새 색상 팩 해금"
+      },
+      "100": {
+        "label": "100일 흐름",
+        "description": "마지막 색상 팩 해금"
       }
     }
   },

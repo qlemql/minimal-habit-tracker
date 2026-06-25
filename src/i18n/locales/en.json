@@ -317,19 +317,19 @@
     "tier": {
       "7": {
         "label": "7-day Flow",
-        "description": "2 new colors unlocked"
+        "description": "Unlock a color pack"
       },
-      "14": {
-        "label": "14-day Flow",
-        "description": "4 new icons unlocked"
-      },
-      "30": {
-        "label": "30-day Flow",
-        "description": "3 premium colors unlocked"
+      "21": {
+        "label": "21-day Flow",
+        "description": "Unlock a color pack"
       },
       "50": {
         "label": "50-day Flow",
-        "description": "4 premium icons unlocked"
+        "description": "Unlock a color pack"
+      },
+      "100": {
+        "label": "100-day Flow",
+        "description": "Unlock the final color pack"
       }
     }
   },
