@@ -255,7 +255,7 @@
     "a11y": {
       "cancel": "Cancel",
       "save": "Save",
-      "lockedIcon": "Locked icon (needs {{days}}-day Flow)",
+      "customIcon": "Pick any emoji",
       "lockedColor": "Locked color (needs {{days}}-day Flow)",
       "icon": "Icon {{icon}}",
       "color": "Color {{color}}"
@@ -311,7 +311,7 @@
   "unlock": {
     "newPack": "{{packName}} unlocked",
     "milestone": "{{days}}-day Flow reached",
-    "cta": "Tap to swap icons"
+    "cta": "Tap to dismiss"
   },
   "rewards": {
     "tier": {

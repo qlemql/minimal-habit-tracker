@@ -105,11 +105,9 @@ export function UpcomingUnlockCard({ maxFlowEver }: Props) {
               <Text style={[styles.packName, { color: colors.textPrimary }]} numberOfLines={1}>
                 {t(`packs.${id}.name` as 'packs.health.name')}
               </Text>
-              <View style={styles.packIconsRow}>
-                {pack.icons.slice(0, 3).map((ic, i) => (
-                  <Text key={i} style={[styles.packIconMini, { opacity: 0.7 }]}>
-                    {ic}
-                  </Text>
+              <View style={styles.packColorRow}>
+                {pack.colors.map((c, i) => (
+                  <View key={i} style={[styles.packColorDot, { backgroundColor: c }]} />
                 ))}
               </View>
             </Pressable>
@@ -188,12 +186,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 4,
   },
-  packIconsRow: {
+  packColorRow: {
     flexDirection: 'row',
-    gap: 3,
+    gap: 5,
   },
-  packIconMini: {
-    fontSize: 12,
+  packColorDot: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
   },
   footer: {
     fontSize: fontSize.xs,

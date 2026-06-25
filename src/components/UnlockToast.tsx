@@ -58,19 +58,11 @@ export function UnlockToast() {
           </View>
         </View>
 
-        <View style={styles.iconGrid}>
-          {pack.icons.map((icon, i) => (
-            <View key={`icon-${i}`} style={[styles.iconCell, { backgroundColor: colors.background }]}>
-              <Text style={styles.iconText}>{icon}</Text>
-            </View>
-          ))}
-        </View>
-
         <View style={styles.colorRow}>
           {pack.colors.map((color, i) => (
             <View
               key={`color-${i}`}
-              style={[styles.colorBar, { backgroundColor: color }]}
+              style={[styles.colorSwatch, { backgroundColor: color }]}
             />
           ))}
         </View>
@@ -127,30 +119,15 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     marginTop: 2,
   },
-  iconGrid: {
-    flexDirection: 'row',
-    gap: 5,
-    marginBottom: spacing.sm,
-  },
-  iconCell: {
-    flex: 1,
-    height: 38,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconText: {
-    fontSize: 18,
-  },
   colorRow: {
     flexDirection: 'row',
-    gap: 5,
+    gap: 6,
     marginBottom: spacing.sm,
   },
-  colorBar: {
+  colorSwatch: {
     flex: 1,
-    height: 8,
-    borderRadius: 4,
+    height: 40,
+    borderRadius: 12,
   },
   cta: {
     fontSize: fontSize.xs,

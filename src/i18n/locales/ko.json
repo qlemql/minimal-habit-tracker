@@ -255,7 +255,7 @@
     "a11y": {
       "cancel": "취소",
       "save": "저장",
-      "lockedIcon": "잠긴 아이콘 (흐름 {{days}}일 필요)",
+      "customIcon": "이모지 직접 선택",
       "lockedColor": "잠긴 색상 (흐름 {{days}}일 필요)",
       "icon": "아이콘 {{icon}}",
       "color": "색상 {{color}}"
@@ -311,7 +311,7 @@
   "unlock": {
     "newPack": "{{packName}} 해금",
     "milestone": "{{days}}일 흐름 달성",
-    "cta": "탭하여 새 아이콘으로 바꾸기"
+    "cta": "탭하여 닫기"
   },
   "rewards": {
     "tier": {

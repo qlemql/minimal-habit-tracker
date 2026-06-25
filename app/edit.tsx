@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -34,8 +34,9 @@ export default function EditHabitScreen() {
   const unlockedPacks = useRewardStore((s) => s.unlockedPacks);
   const unlocked = getUnlockedItemsFromPacks(unlockedPacks);
 
-  const allIcons = [...habitIcons, ...unlockableIcons];
-  const allColors = [...habitColors, ...unlockableColors];
+  // 아이콘은 전부 무료 — 기본셋 + (구)팩 아이콘 합쳐 중복 제거. 색상만 보상으로 잠김.
+  const allIcons = [...new Set<string>([...habitIcons, ...unlockableIcons])];
+  const allColors = [...new Set<string>([...habitColors, ...unlockableColors])];
 
   const habit = habits.find((h) => h.id === id);
 
@@ -51,6 +52,20 @@ export default function EditHabitScreen() {
   const [reminderTime, setReminderTime] = useState<string | null>(
     habit?.reminderTime ?? null
   );
+
+  // 무의존 이모지 선택 — OS 기본 키보드로 어떤 이모지든 입력. 그리드에 없는 값이면 커스텀.
+  const emojiRef = useRef<TextInput>(null);
+  const isCustomIcon = !allIcons.includes(selectedIcon);
+  const handleEmojiPick = (text: string) => {
+    const trimmed = text.trim();
+    emojiRef.current?.clear();
+    emojiRef.current?.blur();
+    // ASCII(평문 글자/숫자)는 거르고 이모지·기호만 허용
+    if (trimmed && trimmed.charCodeAt(0) > 127) {
+      hapticImpact(ImpactFeedbackStyle.Light);
+      setSelectedIcon(trimmed);
+    }
+  };
 
   useEffect(() => {
     if (!habit) router.back();
@@ -188,48 +203,62 @@ export default function EditHabitScreen() {
         <View style={styles.section}>
           <Text style={[styles.label, { color: colors.textMuted }]}>{t('add.label.icon')}</Text>
           <View style={styles.grid}>
-            {allIcons.map((icon) => {
-              const requiredDays = getRequiredFlowDays(icon, 'icon');
-              const isLocked = requiredDays > 0 && !unlocked.icons.includes(icon);
-              return (
-                <Pressable
-                  key={icon}
-                  style={[
-                    styles.gridItem,
-                    { backgroundColor: colors.surface },
-                    selectedIcon === icon && !isLocked && {
-                      borderColor: selectedColor,
-                      borderWidth: 2,
-                      backgroundColor: selectedColor + '15',
-                    },
-                    isLocked && { opacity: 0.4 },
-                  ]}
-                  onPress={() => {
-                    if (isLocked) {
-                      Alert.alert(t('add.alert.lockedTitle'), t('add.alert.lockedBody', { days: requiredDays }));
-                      return;
-                    }
-                    hapticImpact(ImpactFeedbackStyle.Light);
-                    setSelectedIcon(icon);
-                  }}
-                  accessibilityLabel={isLocked
-                    ? t('add.a11y.lockedIcon', { days: requiredDays })
-                    : t('add.a11y.icon', { icon })}
-                  accessibilityRole="button"
-                >
-                  <Text style={[styles.gridIcon, isLocked && { opacity: 0.3 }]}>{icon}</Text>
-                  {isLocked && <Text style={styles.lockBadge}>🔒</Text>}
-                </Pressable>
-              );
-            })}
+            {allIcons.map((icon) => (
+              <Pressable
+                key={icon}
+                style={[
+                  styles.gridItem,
+                  { backgroundColor: colors.surface },
+                  selectedIcon === icon && {
+                    borderColor: selectedColor,
+                    borderWidth: 2,
+                    backgroundColor: selectedColor + '15',
+                  },
+                ]}
+                onPress={() => {
+                  hapticImpact(ImpactFeedbackStyle.Light);
+                  setSelectedIcon(icon);
+                }}
+                accessibilityLabel={t('add.a11y.icon', { icon })}
+                accessibilityRole="button"
+              >
+                <Text style={styles.gridIcon}>{icon}</Text>
+              </Pressable>
+            ))}
+            <Pressable
+              style={[
+                styles.gridItem,
+                styles.gridItemMore,
+                { borderColor: colors.textMuted },
+                isCustomIcon && {
+                  borderColor: selectedColor,
+                  borderStyle: 'solid',
+                  backgroundColor: selectedColor + '15',
+                },
+              ]}
+              onPress={() => emojiRef.current?.focus()}
+              accessibilityLabel={t('add.a11y.customIcon')}
+              accessibilityRole="button"
+            >
+              <Text style={styles.gridIcon}>{isCustomIcon ? selectedIcon : '➕'}</Text>
+            </Pressable>
           </View>
+          <TextInput
+            ref={emojiRef}
+            onChangeText={handleEmojiPick}
+            style={styles.hiddenEmojiInput}
+            caretHidden
+            autoCorrect={false}
+            importantForAccessibility="no-hide-descendants"
+          />
         </View>
 
         <View style={styles.section}>
           <Text style={[styles.label, { color: colors.textMuted }]}>{t('add.label.color')}</Text>
           <View style={styles.colorGrid}>
             {allColors.map((color) => {
-              const requiredDays = getRequiredFlowDays(color, 'color');
+              const isBase = (habitColors as readonly string[]).includes(color);
+              const requiredDays = isBase ? 0 : getRequiredFlowDays(color, 'color');
               const isLocked = requiredDays > 0 && !unlocked.colors.includes(color);
               return (
                 <Pressable
@@ -354,6 +383,16 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   gridIcon: { fontSize: 24 },
+  gridItemMore: {
+    borderWidth: 1.5,
+    borderStyle: 'dashed',
+  },
+  hiddenEmojiInput: {
+    position: 'absolute',
+    width: 1,
+    height: 1,
+    opacity: 0,
+  },
   colorGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
   colorItem: {
     width: 40,

@@ -75,6 +75,11 @@ export function MilestoneChoiceDialog() {
                   <Text style={[styles.packTag, { color: colors.textMuted }]} numberOfLines={1}>
                     {t(`packs.${id}.tag` as 'packs.health.tag')}
                   </Text>
+                  <View style={styles.packColorRow}>
+                    {pack.colors.map((c, i) => (
+                      <View key={i} style={[styles.packColorDot, { backgroundColor: c }]} />
+                    ))}
+                  </View>
                 </Pressable>
               );
             })}
@@ -161,6 +166,16 @@ const styles = StyleSheet.create({
     fontSize: fontSize.xs - 1,
     marginTop: 2,
     textAlign: 'center',
+  },
+  packColorRow: {
+    flexDirection: 'row',
+    gap: 5,
+    marginTop: 8,
+  },
+  packColorDot: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
   },
   confirmButton: {
     padding: spacing.md,
