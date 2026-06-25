@@ -72,7 +72,7 @@ export function MilestoneChoiceDialog() {
                   <Text style={[styles.packName, { color: colors.textPrimary }]}>
                     {t(`packs.${id}.name` as 'packs.health.name')}
                   </Text>
-                  <Text style={[styles.packTag, { color: colors.textMuted }]} numberOfLines={1}>
+                  <Text style={[styles.packTag, { color: colors.textMuted }]} numberOfLines={2}>
                     {t(`packs.${id}.tag` as 'packs.health.tag')}
                   </Text>
                   <View style={styles.packColorRow}>

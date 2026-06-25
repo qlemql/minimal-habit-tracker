@@ -11,8 +11,6 @@ interface Props {
   maxFlowEver: number;
 }
 
-const PROXIMITY_THRESHOLD = 3; // D-3 이내일 때 표시
-
 /**
  * 다음 마일스톤이 D-3 이내일 때 통계 화면에 노출되는 미리보기 카드.
  * 사용자가 4개 팩 중 받을 것을 미리 골라둘 수 있음.
@@ -42,9 +40,6 @@ export function UpcomingUnlockCard({ maxFlowEver }: Props) {
       </View>
     );
   }
-
-  // D-3보다 멀면 표시 안 함
-  if (next.daysLeft > PROXIMITY_THRESHOLD) return null;
 
   const handlePick = (id: PackId) => {
     hapticImpact(ImpactFeedbackStyle.Light);
@@ -102,7 +97,7 @@ export function UpcomingUnlockCard({ maxFlowEver }: Props) {
                   {isSelected ? '✓' : '🔒'}
                 </Text>
               </View>
-              <Text style={[styles.packName, { color: colors.textPrimary }]} numberOfLines={1}>
+              <Text style={[styles.packName, { color: colors.textPrimary }]} numberOfLines={2}>
                 {t(`packs.${id}.name` as 'packs.health.name')}
               </Text>
               <View style={styles.packColorRow}>

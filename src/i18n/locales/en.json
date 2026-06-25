@@ -34,7 +34,7 @@
     },
     "emptySlot": {
       "second": "Plant the second seed",
-      "third": "The third seed — intentionally last"
+      "third": "Plant the third seed"
     },
     "add": {
       "button": "Add habit",
@@ -287,26 +287,26 @@
     }
   },
   "packs": {
-    "health": { "name": "Health Pack", "tag": "For those who grow their body" },
-    "mind": { "name": "Mind Pack", "tag": "For those who tend their inner self" },
-    "creator": { "name": "Creator Pack", "tag": "For those who make things" },
-    "nature": { "name": "Nature Pack", "tag": "For those close to nature" }
+    "health": { "name": "Health Palette", "tag": "For those who grow their body" },
+    "mind": { "name": "Mind Palette", "tag": "For those who tend their inner self" },
+    "creator": { "name": "Creator Palette", "tag": "For those who make things" },
+    "nature": { "name": "Nature Palette", "tag": "For those close to nature" }
   },
   "milestoneChoice": {
     "title": "{{days}}-day Flow reached!",
-    "subtitle": "Pick the pack to unlock",
+    "subtitle": "Pick a color palette",
     "cta": "Unlock {{packName}}",
     "autoTitle": "{{days}}-day Flow reached!",
-    "autoSubtitle": "The final pack has arrived"
+    "autoSubtitle": "The final palette has arrived"
   },
   "upcoming": {
-    "label": "🎁 {{days}} days until next unlock",
+    "label": "🎨 {{days}} days until next colors",
     "title": "{{days}}-day milestone",
-    "desc": "Choose which pack you'll receive",
+    "desc": "Choose which palette you'll receive",
     "picked": "✓ {{packName}} ready to unlock",
     "tapToChange": "Tap to change",
     "noneSelected": "Tap to choose",
-    "allDone": "🎉 All packs collected"
+    "allDone": "🎉 All palettes collected"
   },
   "unlock": {
     "newPack": "{{packName}} unlocked",
@@ -317,19 +317,19 @@
     "tier": {
       "7": {
         "label": "7-day Flow",
-        "description": "Unlock a color pack"
+        "description": "Unlock a color palette"
       },
       "21": {
         "label": "21-day Flow",
-        "description": "Unlock a color pack"
+        "description": "Unlock a color palette"
       },
       "50": {
         "label": "50-day Flow",
-        "description": "Unlock a color pack"
+        "description": "Unlock a color palette"
       },
       "100": {
         "label": "100-day Flow",
-        "description": "Unlock the final color pack"
+        "description": "Unlock the final color palette"
       }
     }
   },
