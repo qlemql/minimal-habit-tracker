@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -23,6 +23,7 @@ import { calculateFlow } from '@/utils/streak';
 import { TimePicker } from '@/components/TimePicker';
 import { fontSize, spacing, habitIcons, habitColors, unlockableIcons, unlockableColors } from '@/constants/theme';
 import { getUnlockedItemsFromPacks, getRequiredFlowDays } from '@/constants/rewards';
+import EmojiPicker from 'rn-emoji-keyboard';
 
 export default function EditHabitScreen() {
   const { t } = useTranslation();
@@ -53,19 +54,9 @@ export default function EditHabitScreen() {
     habit?.reminderTime ?? null
   );
 
-  // 무의존 이모지 선택 — OS 기본 키보드로 어떤 이모지든 입력. 그리드에 없는 값이면 커스텀.
-  const emojiRef = useRef<TextInput>(null);
+  // 이모지 피커 — 그리드에 없는 값이면 커스텀(➕ 타일에 표시)
+  const [emojiOpen, setEmojiOpen] = useState(false);
   const isCustomIcon = !allIcons.includes(selectedIcon);
-  const handleEmojiPick = (text: string) => {
-    const trimmed = text.trim();
-    emojiRef.current?.clear();
-    emojiRef.current?.blur();
-    // ASCII(평문 글자/숫자)는 거르고 이모지·기호만 허용
-    if (trimmed && trimmed.charCodeAt(0) > 127) {
-      hapticImpact(ImpactFeedbackStyle.Light);
-      setSelectedIcon(trimmed);
-    }
-  };
 
   useEffect(() => {
     if (!habit) router.back();
@@ -236,20 +227,21 @@ export default function EditHabitScreen() {
                   backgroundColor: selectedColor + '15',
                 },
               ]}
-              onPress={() => emojiRef.current?.focus()}
+              onPress={() => setEmojiOpen(true)}
               accessibilityLabel={t('add.a11y.customIcon')}
               accessibilityRole="button"
             >
               <Text style={styles.gridIcon}>{isCustomIcon ? selectedIcon : '➕'}</Text>
             </Pressable>
           </View>
-          <TextInput
-            ref={emojiRef}
-            onChangeText={handleEmojiPick}
-            style={styles.hiddenEmojiInput}
-            caretHidden
-            autoCorrect={false}
-            importantForAccessibility="no-hide-descendants"
+          <EmojiPicker
+            open={emojiOpen}
+            onClose={() => setEmojiOpen(false)}
+            onEmojiSelected={(e) => {
+              hapticImpact(ImpactFeedbackStyle.Light);
+              setSelectedIcon(e.emoji);
+            }}
+            enableSearchBar
           />
         </View>
 
@@ -386,12 +378,6 @@ const styles = StyleSheet.create({
   gridItemMore: {
     borderWidth: 1.5,
     borderStyle: 'dashed',
-  },
-  hiddenEmojiInput: {
-    position: 'absolute',
-    width: 1,
-    height: 1,
-    opacity: 0,
   },
   colorGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
   colorItem: {
