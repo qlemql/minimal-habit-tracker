@@ -105,8 +105,9 @@ export const useHabitStore = create<HabitStore>()(
         if (!habit || habit.isGraduated) return;
 
         // 졸업 시점 단계 + 누적 흐름 일수 계산해서 보존
+        // 졸업 자격·카드 표시와 동일하게 역대 최장 흐름(longestFlow) 기준 — 흐름이 끊긴 상태로 졸업해도 seed/sprout로 저장되지 않음
         const flow = calculateFlow(id, get().logs);
-        const stage = getCurrentStage(flow.currentFlowDays).id as GrowthStageId;
+        const stage = getCurrentStage(flow.longestFlow).id as GrowthStageId;
         const today = getToday();
 
         // 알림 끄기 — 졸업한 습관은 더 이상 푸시 안 옴
@@ -120,7 +121,7 @@ export const useHabitStore = create<HabitStore>()(
                   isGraduated: true,
                   graduatedAt: today,
                   graduatedStage: stage,
-                  totalFlowDays: flow.currentFlowDays,
+                  totalFlowDays: flow.longestFlow,
                   reminderTime: null,
                   updatedAt: new Date().toISOString(),
                 }

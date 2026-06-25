@@ -360,6 +360,8 @@
       "cancel": "Cancel"
     },
     "stage": {
+      "seed": "Graduated at Seed",
+      "sprout": "Graduated at Sprout",
       "leaf": "Graduated at Leaf",
       "stem": "Graduated at Stem",
       "bud": "Graduated at Bud",
