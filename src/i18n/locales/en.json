@@ -195,19 +195,12 @@
       "breathing": {
         "title": "A day off is okay",
         "body": "Miss one day and the Flow keeps going.\nMiss two in a row, fresh start.",
-        "legend": "◌ = Pause (Flow keeps going)"
+        "legend": "◌ = Pause (Flow keeps going)",
+        "pauseLabel": "Rest"
       },
-      "tap": {
-        "title": "Tap to check",
-        "body": "Tap a habit card to mark today done"
-      },
-      "longPress": {
-        "title": "Long press to edit",
-        "body": "Change name, icon, or reminder"
-      },
-      "swipe": {
-        "title": "Swipe between weeks",
-        "body": "Check last week's records too"
+      "controls": {
+        "title": "Controls",
+        "body": "Tap = check · Hold = edit · Swipe = weeks"
       },
       "widget": {
         "title": "Home & lock screen widgets",
@@ -216,6 +209,10 @@
       "graduation": {
         "title": "Bloomed habits can graduate",
         "body": "Grown habits live in your Graduation Garden\nand make room for new seeds"
+      },
+      "palette": {
+        "title": "Steady days unlock colors",
+        "body": "Build your Flow to earn new color palettes"
       },
       "cta": {
         "guideOnly": "Got it",

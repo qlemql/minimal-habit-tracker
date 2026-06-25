@@ -45,6 +45,8 @@ const PRESETS: PresetSpec[] = [
 ];
 
 const GUIDE_STEP = 3;
+// 쉼표(흐름 유지) 마커 색 — 흐름 점(액센트)과 구분되는 웜 골드, 양 테마 고정
+const PAUSE_COLOR = '#C2A86B';
 
 function AnimatedCounterDot({ filled, accentColor, inactiveColor }: { filled: boolean; accentColor: string; inactiveColor: string }) {
   return (
@@ -458,7 +460,19 @@ export default function OnboardingScreen() {
                 {t('onboarding.guide.breathing.body')}
               </Text>
               <View style={styles.guideFlowExample}>
-                <Text style={[styles.guideFlowDots, { color: colors.accent }]}>● ● ◌ ● ● ●</Text>
+                <View style={styles.flowDotsRow}>
+                  <View style={[styles.flowDot, { backgroundColor: colors.accent }]} />
+                  <View style={[styles.flowDot, { backgroundColor: colors.accent }]} />
+                  <View style={styles.flowPauseWrap}>
+                    <View style={[styles.flowPause, { borderColor: PAUSE_COLOR }]} />
+                    <Text style={[styles.flowPauseLabel, { color: PAUSE_COLOR }]}>
+                      {t('onboarding.guide.breathing.pauseLabel')}
+                    </Text>
+                  </View>
+                  <View style={[styles.flowDot, { backgroundColor: colors.accent }]} />
+                  <View style={[styles.flowDot, { backgroundColor: colors.accent }]} />
+                  <View style={[styles.flowDot, { backgroundColor: colors.accent }]} />
+                </View>
                 <Text style={[styles.guideFlowLabel, { color: colors.textMuted }]}>{t('onboarding.guide.breathing.legend')}</Text>
               </View>
             </View>
@@ -466,29 +480,9 @@ export default function OnboardingScreen() {
             <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
               <Text style={styles.guideEmoji}>👆</Text>
               <View style={styles.guideTextWrap}>
-                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.tap.title')}</Text>
+                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.controls.title')}</Text>
                 <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
-                  {t('onboarding.guide.tap.body')}
-                </Text>
-              </View>
-            </View>
-
-            <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
-              <Text style={styles.guideEmoji}>✏️</Text>
-              <View style={styles.guideTextWrap}>
-                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.longPress.title')}</Text>
-                <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
-                  {t('onboarding.guide.longPress.body')}
-                </Text>
-              </View>
-            </View>
-
-            <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
-              <Text style={styles.guideEmoji}>📅</Text>
-              <View style={styles.guideTextWrap}>
-                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.swipe.title')}</Text>
-                <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
-                  {t('onboarding.guide.swipe.body')}
+                  {t('onboarding.guide.controls.body')}
                 </Text>
               </View>
             </View>
@@ -509,6 +503,16 @@ export default function OnboardingScreen() {
                 <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.graduation.title')}</Text>
                 <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
                   {t('onboarding.guide.graduation.body')}
+                </Text>
+              </View>
+            </View>
+
+            <View style={[styles.guideCard, { backgroundColor: colors.surface }]}>
+              <Text style={styles.guideEmoji}>🎨</Text>
+              <View style={styles.guideTextWrap}>
+                <Text style={[styles.guideTitle, { color: colors.textPrimary }]}>{t('onboarding.guide.palette.title')}</Text>
+                <Text style={[styles.guideDesc, { color: colors.textSecondary }]}>
+                  {t('onboarding.guide.palette.body')}
                 </Text>
               </View>
             </View>
@@ -788,6 +792,32 @@ const styles = StyleSheet.create({
   guideFlowLabel: {
     fontSize: fontSize.xs,
     marginTop: spacing.xs,
+  },
+  flowDotsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  flowDot: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+  },
+  flowPauseWrap: {
+    alignItems: 'center',
+    marginHorizontal: 4,
+  },
+  flowPause: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    borderWidth: 3,
+    backgroundColor: 'transparent',
+  },
+  flowPauseLabel: {
+    fontSize: 9,
+    fontWeight: '700',
+    marginTop: 3,
   },
   guideCard: {
     flexDirection: 'row',
