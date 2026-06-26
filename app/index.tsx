@@ -126,13 +126,16 @@ export default function HomeScreen() {
 
   // 해금 체크: 모든 습관 중 최대 흐름 일수 기준
   const checkUnlocks = useRewardStore((s) => s.checkUnlocks);
+  const pendingMilestoneChoice = useRewardStore((s) => s.pendingMilestoneChoice);
+  const pendingPackUnlock = useRewardStore((s) => s.pendingPackUnlock);
   const currentMaxFlow = useMemo(() => {
     if (flowResults.size === 0) return 0;
     return Math.max(...Array.from(flowResults.values()).map((f) => f.longestFlow));
   }, [flowResults]);
+  // 보상 UI가 닫히면(pending 해제) 다음 마일스톤을 이어서 처리 — 한 번에 하나
   useEffect(() => {
     if (currentMaxFlow > 0) checkUnlocks(currentMaxFlow);
-  }, [currentMaxFlow, checkUnlocks]);
+  }, [currentMaxFlow, pendingMilestoneChoice, pendingPackUnlock, checkUnlocks]);
 
   const handleCloseCelebration = useCallback(() => setShowCelebration(false), []);
   const handleCloseDetail = useCallback(() => setSelectedDate(null), []);

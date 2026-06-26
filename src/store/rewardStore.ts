@@ -2,10 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PackId, PACK_IDS } from '@/constants/theme';
-import {
-  UNLOCK_MILESTONES,
-  getNewlyReachedMilestones,
-} from '@/constants/rewards';
+import { UNLOCK_MILESTONES } from '@/constants/rewards';
 
 interface RewardStore {
   /** 지금까지 달성한 최대 흐름 일수 (어떤 습관이든) */
@@ -44,46 +41,46 @@ export const useRewardStore = create<RewardStore>()(
       pendingMilestoneChoice: null,
 
       checkUnlocks: (currentMaxFlow: number) => {
-        const { maxFlowEver, unlockedPacks, selectedUpcomingPack } = get();
-        if (currentMaxFlow <= maxFlowEver) return;
+        const s = get();
+        // 처리 대기 중인 보상 UI가 있으면, 그게 닫힐 때까지 대기 — 한 번에 하나만
+        if (s.pendingMilestoneChoice != null || s.pendingPackUnlock != null) return;
+        if (currentMaxFlow <= s.maxFlowEver) return;
 
-        const reached = getNewlyReachedMilestones(maxFlowEver, currentMaxFlow);
-        set({ maxFlowEver: currentMaxFlow });
+        // maxFlowEver 다음으로 '새로 도달한' 첫 마일스톤 하나만 처리
+        const next = UNLOCK_MILESTONES.find(
+          (m) => m.flowDays > s.maxFlowEver && m.flowDays <= currentMaxFlow
+        );
+        if (!next) {
+          set({ maxFlowEver: currentMaxFlow });
+          return;
+        }
 
-        // 도달한 milestone들을 순서대로 처리
-        let workingUnlocked = [...unlockedPacks];
-        let workingSelected = selectedUpcomingPack;
+        const remaining = remainingPacks(s.unlockedPacks);
+        if (remaining.length === 0) {
+          set({ maxFlowEver: currentMaxFlow });
+          return;
+        }
 
-        for (const m of reached) {
-          const remaining = remainingPacks(workingUnlocked);
-          if (remaining.length === 0) continue;
-
-          // selectable=false (100일) 또는 남은 게 1개면 자동
-          if (!m.selectable || remaining.length === 1) {
-            const auto = remaining[0];
-            workingUnlocked = [...workingUnlocked, auto];
-            set({
-              unlockedPacks: workingUnlocked,
-              pendingPackUnlock: auto,
-            });
-            continue;
-          }
-
-          // 미리 선택한 게 있고 아직 해금 안 됐으면 자동 사용
-          if (workingSelected && remaining.includes(workingSelected)) {
-            workingUnlocked = [...workingUnlocked, workingSelected];
-            set({
-              unlockedPacks: workingUnlocked,
-              pendingPackUnlock: workingSelected,
-              selectedUpcomingPack: null,
-            });
-            workingSelected = null;
-            continue;
-          }
-
-          // 안 골랐음 — 다이얼로그 표시 (한 번에 하나만)
-          set({ pendingMilestoneChoice: m.flowDays });
-          break; // 사용자가 다이얼로그 처리할 때까지 다음 milestone 대기
+        // 진도는 이 마일스톤까지만 — 다음 것은 보상 UI가 닫힌 뒤 다음 checkUnlocks에서
+        if (!next.selectable || remaining.length === 1) {
+          // 100일(자동) 또는 남은 게 1개 — 자동 해금 + 토스트
+          set({
+            maxFlowEver: next.flowDays,
+            unlockedPacks: [...s.unlockedPacks, remaining[0]],
+            pendingPackUnlock: remaining[0],
+          });
+        } else if (s.selectedUpcomingPack && remaining.includes(s.selectedUpcomingPack)) {
+          // 미리 골라둔 게 있으면 자동 적용 + 토스트
+          set({
+            maxFlowEver: next.flowDays,
+            unlockedPacks: [...s.unlockedPacks, s.selectedUpcomingPack],
+            pendingPackUnlock: s.selectedUpcomingPack,
+            selectedUpcomingPack: null,
+          });
+        } else {
+          // 안 골랐음 — 선택 다이얼로그. maxFlowEver는 confirm 시 전진
+          // (다이얼로그 도중 앱 종료돼도 재진입 시 다시 떠서 보상 누락 방지)
+          set({ pendingMilestoneChoice: next.flowDays });
         }
       },
 
@@ -92,10 +89,12 @@ export const useRewardStore = create<RewardStore>()(
       },
 
       confirmMilestoneChoice: (id) => {
-        const { unlockedPacks } = get();
+        // 다이얼로그에서 직접 고른 순간이 곧 보상 확인 — 토스트 중복 노출 안 함
+        // 확정 시점에 진도(maxFlowEver)를 해당 마일스톤까지 전진
+        const { unlockedPacks, maxFlowEver, pendingMilestoneChoice } = get();
         set({
           unlockedPacks: [...unlockedPacks, id],
-          pendingPackUnlock: id,
+          maxFlowEver: Math.max(maxFlowEver, pendingMilestoneChoice ?? maxFlowEver),
           pendingMilestoneChoice: null,
           selectedUpcomingPack: null,
         });
