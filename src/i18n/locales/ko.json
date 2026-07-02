@@ -279,8 +279,18 @@
     "title": "습관 리마인더",
     "body": "{{habitName}} 할 시간이에요!",
     "reactivation": {
-      "title": "🌱 일주일 만이에요",
-      "body": "{{habitName}}, 다시 이어가볼까요?"
+      "week": {
+        "title": "🌱 일주일 만이에요",
+        "body": "{{habitName}}, 다시 이어가볼까요?"
+      },
+      "twoWeeks": {
+        "title": "🌱 잠시 쉬어갔어요",
+        "body": "{{habitName}}, 오늘 다시 시작하기 좋은 날이에요"
+      },
+      "month": {
+        "title": "🌱 씨앗은 아직 그대로예요",
+        "body": "{{habitName}}, 언제든 다시 이어갈 수 있어요"
+      }
     }
   },
   "packs": {

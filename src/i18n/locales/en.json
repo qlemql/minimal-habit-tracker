@@ -279,8 +279,18 @@
     "title": "Habit reminder",
     "body": "Time for {{habitName}}!",
     "reactivation": {
-      "title": "🌱 It's been a week",
-      "body": "Ready to continue with {{habitName}}?"
+      "week": {
+        "title": "🌱 It's been a week",
+        "body": "Ready to continue with {{habitName}}?"
+      },
+      "twoWeeks": {
+        "title": "🌱 Taking a break?",
+        "body": "Today is a good day to restart {{habitName}}"
+      },
+      "month": {
+        "title": "🌱 Your seed is still here",
+        "body": "You can pick {{habitName}} back up anytime"
+      }
     }
   },
   "packs": {

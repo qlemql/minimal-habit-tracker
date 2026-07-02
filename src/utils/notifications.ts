@@ -9,9 +9,16 @@ import { getToday } from '@/utils/date';
 export const HABIT_TOGGLE_CATEGORY = 'HABIT_TOGGLE';
 export const HABIT_TOGGLE_ACTION = 'toggle';
 
-// 한 습관당 미리 등록하는 single-shot reminder 일수 — 그 후 reactivation 1개
-// 3 habits × 7 reminders + 3 reactivation = 24개 (iOS 64개 한도 안전)
+// 한 습관당 미리 등록하는 single-shot reminder 일수 — 그 후 reactivation 사다리
+// 3 habits × (7 reminders + 3 reactivation) = 30개 (iOS 64개 한도 안전)
 const REMINDER_DAYS_AHEAD = 7;
+
+// 복귀 알람 사다리 — 마지막 reminder 기준 +N일 (마지막 앱 실행일 기준 8/14/30일째)
+const REACTIVATION_STEPS = [
+  { offsetDays: 1, copyKey: 'week' },
+  { offsetDays: 7, copyKey: 'twoWeeks' },
+  { offsetDays: 23, copyKey: 'month' },
+] as const;
 
 // 알림 data payload kind 분류
 type NotificationKind = 'reminder' | 'reactivation';
@@ -145,30 +152,34 @@ export async function scheduleHabitReminder(
     });
   }
 
-  // 2) reactivation 알람 — 마지막 reminder 다음날 같은 시간
-  const reactivationDate = new Date(fireDates[fireDates.length - 1]);
-  reactivationDate.setDate(reactivationDate.getDate() + 1);
-  const reactivationData: NotificationData = {
-    habitId,
-    kind: 'reactivation',
-  };
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: i18n.t('notifications.reactivation.title'),
-      body: i18n.t('notifications.reactivation.body', { habitName }),
-      data: reactivationData,
-      // reactivation은 액션 카테고리 X — 탭만으로 앱 launch
-    },
-    trigger: {
-      type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
-      year: reactivationDate.getFullYear(),
-      month: reactivationDate.getMonth() + 1,
-      day: reactivationDate.getDate(),
-      hour: reactivationDate.getHours(),
-      minute: reactivationDate.getMinutes(),
-      repeats: false,
-    },
-  });
+  // 2) reactivation 사다리 — 마지막 reminder 이후 +1/+7/+23일 같은 시간
+  //    (앱을 열면 전체 재예약되므로 사용 중엔 울리지 않음)
+  const lastReminder = fireDates[fireDates.length - 1];
+  for (const step of REACTIVATION_STEPS) {
+    const reactivationDate = new Date(lastReminder);
+    reactivationDate.setDate(reactivationDate.getDate() + step.offsetDays);
+    const reactivationData: NotificationData = {
+      habitId,
+      kind: 'reactivation',
+    };
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: i18n.t(`notifications.reactivation.${step.copyKey}.title`),
+        body: i18n.t(`notifications.reactivation.${step.copyKey}.body`, { habitName }),
+        data: reactivationData,
+        // reactivation은 액션 카테고리 X — 탭만으로 앱 launch
+      },
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
+        year: reactivationDate.getFullYear(),
+        month: reactivationDate.getMonth() + 1,
+        day: reactivationDate.getDate(),
+        hour: reactivationDate.getHours(),
+        minute: reactivationDate.getMinutes(),
+        repeats: false,
+      },
+    });
+  }
 }
 
 /** 습관의 모든 알림(reminder + reactivation) 취소. */
