@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<style>
+  :root{
+    --bg:#FFF8F0; --surface:#FFFFFF; --surfaceLight:#FFF1E6;
+    --t1:#2D2016; --t2:#8C7B6B; --t3:#B5A899;
+    --accent:#5B8C6A; --cb:#6B8E5A; --cbg:#EFF3E5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html,body{width:900px;height:1000px;background:#E7E0D6;
+    font-family:-apple-system,"Apple SD Gothic Neo","Helvetica Neue",sans-serif;color:var(--t1);}
+  .page{display:flex;gap:44px;padding:46px 40px 22px;justify-content:center;}
+  .col{display:flex;flex-direction:column;align-items:center;gap:15px;}
+  .caption{font-size:14px;font-weight:600;color:#6f655a;}
+  .phone{width:372px;height:806px;background:var(--bg);border-radius:44px;overflow:hidden;
+    position:relative;box-shadow:0 24px 60px rgba(60,45,30,.22),0 4px 14px rgba(60,45,30,.10);
+    display:flex;flex-direction:column;}
+  .status{display:flex;justify-content:space-between;align-items:center;padding:16px 30px 4px;
+    font-size:14px;font-weight:600;}
+  .status .dots{letter-spacing:2px;font-size:12px;color:var(--t2);}
+
+  /* ---- behind: faint home ---- */
+  .home{flex:1;padding:14px 18px;}
+  .hHeader{font-size:13px;color:var(--t3);margin:6px 2px 12px;}
+  .hcard{background:var(--surface);border-radius:18px;padding:15px 16px;margin-bottom:11px;
+    display:flex;align-items:center;gap:13px;}
+  .hicon{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;}
+  .hname{font-size:15.5px;font-weight:600;}
+  .hflow{font-size:12px;color:var(--t2);margin-top:2px;}
+
+  /* ---- Frame 1: milestone choice dialog ---- */
+  .scrim{position:absolute;inset:0;background:rgba(45,32,22,.55);}
+  .dialog{position:absolute;left:16px;right:16px;top:50%;transform:translateY(-50%);
+    background:var(--bg);border-radius:24px;padding:24px 20px 20px;}
+  .dEmoji{font-size:42px;text-align:center;}
+  .dTitle{font-size:20px;font-weight:800;text-align:center;margin-top:6px;}
+  .dSub{font-size:14px;color:var(--t2);text-align:center;margin-top:6px;margin-bottom:18px;}
+  .grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .pcard{width:calc(50% - 5px);background:var(--surface);border:1.5px solid transparent;
+    border-radius:14px;padding:14px 12px;text-align:center;}
+  .pcard.sel{background:var(--cbg);border-color:var(--cb);}
+  .pEmoji{font-size:27px;}
+  .pName{font-size:14px;font-weight:700;margin-top:5px;}
+  .pTag{font-size:11px;color:var(--t3);margin-top:3px;line-height:1.3;}
+  .dots{display:flex;gap:5px;justify-content:center;margin-top:9px;}
+  .dot{width:14px;height:14px;border-radius:7px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);}
+  .confirm{margin-top:18px;height:50px;border-radius:13px;background:var(--cb);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;}
+
+  /* ---- Frame 2: unlock toast ---- */
+  .toast{position:absolute;left:18px;right:18px;bottom:96px;background:var(--surface);
+    border:1.5px solid var(--cb);border-radius:18px;padding:16px;
+    box-shadow:0 10px 30px rgba(60,45,30,.18);}
+  .tHead{display:flex;align-items:center;gap:12px;margin-bottom:13px;}
+  .tBadge{width:48px;height:48px;border-radius:24px;background:var(--cbg);
+    display:flex;align-items:center;justify-content:center;font-size:27px;}
+  .tTitle{font-size:16px;font-weight:800;}
+  .tTag{font-size:12px;font-weight:500;font-style:italic;color:var(--cb);margin-top:2px;}
+  .swatches{display:flex;gap:6px;margin-bottom:11px;}
+  .sw{flex:1;height:40px;border-radius:12px;}
+  .tCta{font-size:12px;color:var(--t3);text-align:center;}
+  .tabbar{position:absolute;left:0;right:0;bottom:0;height:78px;background:var(--surface);
+    border-top:1px solid #EFE7DC;display:flex;align-items:center;justify-content:space-around;
+    font-size:22px;padding-bottom:14px;color:var(--t3);}
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Frame 1: 마일스톤 선택 다이얼로그 -->
+    <div class="col">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots">● ● ●  ▮▮▮</span></div>
+        <div class="home" style="filter:blur(1px);opacity:.5">
+          <div class="hHeader">🌱 작은 습관이 자라는 곳</div>
+          <div class="hcard"><div class="hicon" style="background:#E7F0E0">💧</div>
+            <div><div class="hname">아침 물 마시기</div><div class="hflow">흐름 21일째</div></div></div>
+        </div>
+        <div class="scrim"></div>
+        <div class="dialog">
+          <div class="dEmoji">🎉</div>
+          <div class="dTitle">21일 흐름 달성!</div>
+          <div class="dSub">받을 색상 팔레트를 골라주세요</div>
+          <div class="grid">
+            <div class="pcard sel">
+              <div class="pEmoji">🏃</div><div class="pName">건강 팔레트</div>
+              <div class="pTag">몸이 자라는 사람에게</div>
+              <div class="dots"><span class="dot" style="background:#E08A6B"></span><span class="dot" style="background:#E8A538"></span><span class="dot" style="background:#D94040"></span></div>
+            </div>
+            <div class="pcard">
+              <div class="pEmoji">🦋</div><div class="pName">마음 팔레트</div>
+              <div class="pTag">내면을 다듬는 사람에게</div>
+              <div class="dots"><span class="dot" style="background:#9580CC"></span><span class="dot" style="background:#2C3E5F"></span><span class="dot" style="background:#6B8FB5"></span></div>
+            </div>
+            <div class="pcard">
+              <div class="pEmoji">🎨</div><div class="pName">창작 팔레트</div>
+              <div class="pTag">무언가를 만드는 사람에게</div>
+              <div class="dots"><span class="dot" style="background:#D86BA8"></span><span class="dot" style="background:#D4A55B"></span><span class="dot" style="background:#20C997"></span></div>
+            </div>
+            <div class="pcard">
+              <div class="pEmoji">🌳</div><div class="pName">자연 팔레트</div>
+              <div class="pTag">자연 가까이에 있는 사람에게</div>
+              <div class="dots"><span class="dot" style="background:#3D7950"></span><span class="dot" style="background:#6B8E5A"></span><span class="dot" style="background:#7A8C5C"></span></div>
+            </div>
+          </div>
+          <div class="confirm">건강 팔레트 받기</div>
+        </div>
+      </div>
+      <div class="caption">① 마일스톤 선택 — 받을 색상 팔레트 고르기</div>
+    </div>
+
+    <!-- Frame 2: 해금 토스트 -->
+    <div class="col">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots">● ● ●  ▮▮▮</span></div>
+        <div class="home">
+          <div class="hHeader">🌱 작은 습관이 자라는 곳</div>
+          <div class="hcard"><div class="hicon" style="background:#E7F0E0">💧</div>
+            <div><div class="hname">아침 물 마시기</div><div class="hflow">흐름 21일째</div></div></div>
+          <div class="hcard"><div class="hicon" style="background:#FBEEE6">📖</div>
+            <div><div class="hname">독서 10분</div><div class="hflow">흐름 9일째</div></div></div>
+          <div class="hcard"><div class="hicon" style="background:#EDE7F5">🧘</div>
+            <div><div class="hname">명상</div><div class="hflow">흐름 5일째</div></div></div>
+        </div>
+        <div class="toast">
+          <div class="tHead">
+            <div class="tBadge">🏃</div>
+            <div><div class="tTitle">건강 팔레트 해금</div>
+              <div class="tTag">몸이 자라는 사람에게</div></div>
+          </div>
+          <div class="swatches">
+            <span class="sw" style="background:#E08A6B"></span>
+            <span class="sw" style="background:#E8A538"></span>
+            <span class="sw" style="background:#D94040"></span>
+          </div>
+          <div class="tCta">탭하여 닫기</div>
+        </div>
+        <div class="tabbar"><span>🏠</span><span>📊</span><span>⚙️</span></div>
+      </div>
+      <div class="caption">② 해금 토스트 — 새 색상 팔레트 도착</div>
+    </div>
+
+  </div>
+</body>
+</html>

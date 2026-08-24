@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<style>
+  :root{
+    --bg:#FFF8F0; --surface:#FFFFFF; --surfaceLight:#FFF1E6;
+    --t1:#2D2016; --t2:#8C7B6B; --t3:#B5A899;
+    --accent:#5B8C6A; --accentBorder:#6B8E5A; --accentBg:#EFF3E5;
+    --line:#EDE5DA;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-font-smoothing:antialiased;}
+  html,body{
+    width:900px; height:1000px;
+    background:#E7E0D6;
+    font-family:-apple-system,"Apple SD Gothic Neo","Helvetica Neue",sans-serif;
+    color:var(--t1);
+  }
+  .page{display:flex; gap:44px; padding:48px 40px 24px; justify-content:center;}
+  .col{display:flex; flex-direction:column; align-items:center; gap:16px;}
+  .caption{font-size:14px; font-weight:600; color:#6f655a; letter-spacing:.3px;}
+  .phone{
+    width:372px; height:806px; background:var(--bg);
+    border-radius:44px; overflow:hidden; position:relative;
+    box-shadow:0 24px 60px rgba(60,45,30,.22), 0 4px 14px rgba(60,45,30,.10);
+    display:flex; flex-direction:column;
+  }
+  .status{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 30px 4px; font-size:14px; font-weight:600; color:var(--t1);}
+  .status .dots{letter-spacing:2px; font-size:12px; color:var(--t2);}
+  .grabber{width:38px; height:5px; border-radius:3px; background:#E0D6C8; margin:10px auto 0;}
+
+  /* ---- Pro screen ---- */
+  .body{flex:1; padding:8px 22px 0; display:flex; flex-direction:column;}
+  .hero{display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 0 10px;}
+  .badge{width:84px; height:84px; border-radius:26px; background:var(--accentBg);
+    display:flex; align-items:center; justify-content:center; font-size:44px;
+    box-shadow:inset 0 0 0 1px rgba(107,142,90,.25);}
+  .title{font-size:27px; font-weight:800; margin-top:16px; letter-spacing:-.4px;}
+  .sub{font-size:14.5px; color:var(--t2); margin-top:8px; line-height:1.5;}
+  .label{font-size:11px; font-weight:700; color:var(--t3);
+    text-transform:uppercase; letter-spacing:1px; margin:24px 4px 12px;}
+
+  /* highlighted hero feature (backup) */
+  .rowHi{background:var(--accentBg); border:1.5px solid var(--accentBorder);
+    border-radius:18px; padding:17px 16px; display:flex; align-items:center; gap:14px;
+    margin-bottom:12px; position:relative;}
+  .rIcon{width:44px; height:44px; border-radius:13px; background:var(--surfaceLight);
+    display:flex; align-items:center; justify-content:center; font-size:23px; flex:0 0 auto;}
+  .rIcon.hi{background:#fff;}
+  .rTxt{flex:1;}
+  .rTitle{font-size:16px; font-weight:800;}
+  .rDesc{font-size:12.5px; color:var(--t2); margin-top:3px; line-height:1.35;}
+  .hiBadge{position:absolute; top:13px; right:14px; background:var(--accent); color:#fff;
+    font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px; letter-spacing:.5px;}
+
+  .row{background:var(--surface); border-radius:18px; padding:15px 16px;
+    display:flex; align-items:center; gap:14px; margin-bottom:10px;
+    box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .rTitle.sm{font-size:15.5px; font-weight:700;}
+  .swatches{display:flex; gap:6px; margin-left:auto; align-items:center;}
+  .sw{width:18px; height:18px; border-radius:6px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);}
+  .chip{width:24px; height:28px; border-radius:7px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);}
+
+  .cta{margin-top:auto; padding-bottom:14px;}
+  .buy{background:var(--accent); color:#fff; border-radius:16px; height:56px;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    font-size:17px; font-weight:800; box-shadow:0 8px 18px rgba(91,140,106,.35);}
+  .buy small{font-weight:600; opacity:.85; font-size:13px;}
+  .fine{text-align:center; font-size:11.5px; color:var(--t3); margin-top:12px; line-height:1.5;}
+  .later{text-align:center; font-size:14px; color:var(--t2); font-weight:600; margin-top:14px;}
+
+  /* ---- Protect-your-record moment (frame 2) ---- */
+  .garden{flex:1; padding:20px 18px; position:relative; background:
+    radial-gradient(120% 60% at 50% 0%, #FFF1E6 0%, var(--bg) 60%);}
+  .gHead{font-size:11px; font-weight:700; color:var(--t3); text-transform:uppercase;
+    letter-spacing:1px; margin:6px 4px 14px;}
+  .gcard{background:var(--surface); border-radius:18px; padding:14px 16px; margin-bottom:12px;
+    display:flex; align-items:center; gap:13px; opacity:.55;}
+  .gdim{filter:grayscale(.2);}
+  .gIcon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+  .scrim{position:absolute; inset:0; background:rgba(45,32,22,.40);}
+  .sheet{position:absolute; left:14px; right:14px; bottom:14px; background:var(--bg);
+    border-radius:26px; padding:26px 22px 20px; text-align:center;
+    box-shadow:0 -10px 40px rgba(0,0,0,.25);}
+  .sEmoji{font-size:46px;}
+  .sTitle{font-size:20px; font-weight:800; margin-top:8px;}
+  .sBody{font-size:14px; color:var(--t2); line-height:1.55; margin-top:9px;}
+  .sBody b{color:var(--t1); font-weight:800;}
+  .sBuy{background:var(--accent); color:#fff; border-radius:14px; height:50px; margin-top:18px;
+    display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800;}
+  .sLater{font-size:13.5px; color:var(--t3); font-weight:600; margin-top:13px;}
+  .pricePill{display:inline-block; background:var(--accentBg); color:var(--accentBorder);
+    font-size:12px; font-weight:800; padding:5px 12px; border-radius:999px; margin-top:14px;}
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Frame 1: Pro unlock (backup-led) -->
+    <div class="col">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots">● ● ●  ▮▮▮</span></div>
+        <div class="grabber"></div>
+        <div class="body">
+          <div class="hero">
+            <div class="badge">🌱</div>
+            <div class="title">싹 Pro</div>
+            <div class="sub">기기를 바꿔도, 잃어버려도 —<br/>당신의 정원은 안전하게.</div>
+          </div>
+
+          <div class="label">포함된 것</div>
+
+          <div class="rowHi">
+            <div class="rIcon hi">☁️</div>
+            <div class="rTxt">
+              <div class="rTitle">기록 평생 백업 · 복원</div>
+              <div class="rDesc">기기를 바꿔도 정원·흐름 그대로 되살아나요</div>
+            </div>
+            <div class="hiBadge">핵심</div>
+          </div>
+
+          <div class="row">
+            <div class="rIcon">🎨</div>
+            <div class="rTxt">
+              <div class="rTitle sm">모든 꾸미기</div>
+              <div class="rDesc">테마 · 홈 화면 앱 아이콘 · 응원자 색</div>
+            </div>
+            <div class="swatches">
+              <div class="chip" style="background:#FFF8F0"></div>
+              <div class="chip" style="background:#161616"></div>
+              <div class="sw" style="background:#C9A227; margin-left:2px"></div>
+            </div>
+          </div>
+
+          <div class="cta">
+            <div class="buy">₩4,400&nbsp;<small>· 한 번 사면 평생</small></div>
+            <div class="fine">구독 아님 · 광고 없음 · 서버 없음(iCloud·구글 드라이브)</div>
+            <div class="later">나중에 할게요</div>
+          </div>
+        </div>
+      </div>
+      <div class="caption">① 설정 → 싹 Pro · 백업이 주력, 꾸미기는 덤</div>
+    </div>
+
+    <!-- Frame 2: protect-your-record moment -->
+    <div class="col">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots">● ● ●  ▮▮▮</span></div>
+        <div class="garden">
+          <div class="gHead">졸업한 정원</div>
+          <div class="gcard">
+            <div class="gIcon" style="background:#EAF2E4">🌸</div>
+            <div class="rTxt"><div class="rTitle sm">아침 물 마시기</div>
+              <div class="rDesc">개화에서 졸업 · 총 52일</div></div>
+          </div>
+          <div class="gcard gdim">
+            <div class="gIcon" style="background:#FBEEE6">🌿</div>
+            <div class="rTxt"><div class="rTitle sm">독서 10분</div>
+              <div class="rDesc">떡잎에서 졸업 · 총 9일</div></div>
+          </div>
+
+          <div class="scrim"></div>
+          <div class="sheet">
+            <div class="sEmoji">🌸</div>
+            <div class="sTitle">첫 졸업을 축하해요</div>
+            <div class="sBody">이 <b>52일</b>의 기록은 지금 <b>이 기기에만</b> 있어요.<br/>안전하게 지키고, 꾸미기도 전부 열까요?</div>
+            <div class="pricePill">싹 Pro · ₩4,400 한 번</div>
+            <div class="sBuy">백업하고 전부 열기</div>
+            <div class="sLater">나중에</div>
+          </div>
+        </div>
+      </div>
+      <div class="caption">② 잃을 게 생긴 순간 (첫 졸업/30일+) 1회 권유</div>
+    </div>
+
+  </div>
+</body>
+</html>

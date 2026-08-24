@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<style>
+  :root{--bg:#FFF8F0;--surface:#FFFFFF;--t1:#2D2016;--t2:#8C7B6B;--t3:#B5A899;--accent:#5B8C6A;}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html,body{width:900px;height:1010px;background:#E7E0D6;
+    font-family:-apple-system,"Apple SD Gothic Neo","Helvetica Neue",sans-serif;color:var(--t1);}
+  .page{display:flex;gap:44px;padding:46px 40px 22px;justify-content:center;}
+  .col{display:flex;flex-direction:column;align-items:center;gap:15px;}
+  .caption{font-size:14px;font-weight:700;color:#6f655a;}
+  .sub{font-size:12px;color:#8a7f72;margin-top:-9px;}
+  .phone{width:372px;height:812px;background:var(--bg);border-radius:44px;overflow:hidden;
+    position:relative;box-shadow:0 24px 60px rgba(60,45,30,.22);display:flex;flex-direction:column;}
+  .status{display:flex;justify-content:space-between;align-items:center;padding:15px 30px 2px;font-size:14px;font-weight:600;}
+  .status .dots{letter-spacing:2px;font-size:12px;color:var(--t2);}
+  .title{font-size:22px;font-weight:800;padding:10px 22px 12px;}
+  .list{flex:1;overflow:hidden;padding:0 18px;display:flex;flex-direction:column;gap:9px;}
+  /* highlight cards */
+  .hl{background:#EAF1E4;border:1px solid #D5E3CC;border-radius:16px;padding:13px 14px;}
+  .hlTitle{font-size:15px;font-weight:800;}
+  .hlDesc{font-size:12px;color:var(--t2);margin-top:3px;line-height:1.35;}
+  .strip{display:flex;justify-content:space-between;margin-top:10px;}
+  .cell{display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .cEmoji{font-size:17px;}
+  .cLabel{font-size:8.5px;color:var(--t2);}
+  .dots{font-size:14px;color:var(--accent);letter-spacing:2px;margin-top:8px;}
+  .legend{font-size:10px;color:var(--t3);margin-top:3px;}
+  /* plain cards */
+  .card{background:var(--surface);border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:12px;}
+  .cardNew{border:1.5px dashed #C8BBA9;}
+  .emoji{font-size:24px;flex:0 0 auto;width:30px;text-align:center;}
+  .cTitle{font-size:14.5px;font-weight:700;}
+  .cDesc{font-size:12px;color:var(--t2);margin-top:2px;}
+  .newBadge{margin-left:auto;background:var(--accent);color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:999px;}
+  .cut{position:absolute;left:0;right:0;bottom:84px;height:40px;
+    background:linear-gradient(to bottom,rgba(255,248,240,0),var(--bg));}
+  .cta{position:absolute;left:18px;right:18px;bottom:20px;height:52px;border-radius:14px;
+    background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;}
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 현재 (7장) -->
+    <div class="col">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots">● ● ●  ▮▮▮</span></div>
+        <div class="title">이렇게 사용해요</div>
+        <div class="list">
+          <div class="hl">
+            <div class="hlTitle">꾸준할수록 자라요</div>
+            <div class="hlDesc">매일 한 탭이 단계가 되어 자라요</div>
+            <div class="strip">
+              <div class="cell"><span class="cEmoji">🌰</span><span class="cLabel">씨앗</span></div>
+              <div class="cell"><span class="cEmoji">🌱</span><span class="cLabel">발아</span></div>
+              <div class="cell"><span class="cEmoji">🌿</span><span class="cLabel">떡잎</span></div>
+              <div class="cell"><span class="cEmoji">🎋</span><span class="cLabel">줄기</span></div>
+              <div class="cell"><span class="cEmoji">🌷</span><span class="cLabel">꽃봉오리</span></div>
+              <div class="cell"><span class="cEmoji">🌸</span><span class="cLabel">개화</span></div>
+            </div>
+          </div>
+          <div class="hl">
+            <div class="hlTitle">🌊 하루 쉬어도 괜찮아요</div>
+            <div class="hlDesc">하루 빠져도 흐름은 이어져요. 이틀 연속 빠지면 새 시작.</div>
+            <div class="dots">● ● ◌ ● ● ●</div>
+            <div class="legend">◌ = 쉼표 (흐름 유지)</div>
+          </div>
+          <div class="card"><span class="emoji">👆</span><div><div class="cTitle">탭으로 체크</div><div class="cDesc">습관 카드를 탭하면 오늘 완료</div></div></div>
+          <div class="card"><span class="emoji">✏️</span><div><div class="cTitle">길게 눌러 수정</div><div class="cDesc">이름, 아이콘, 알림을 변경</div></div></div>
+          <div class="card"><span class="emoji">📅</span><div><div class="cTitle">스와이프로 주간 이동</div><div class="cDesc">지난 주 기록도 확인</div></div></div>
+          <div class="card"><span class="emoji">📱</span><div><div class="cTitle">홈/잠금화면 위젯</div><div class="cDesc">앱 안 열고 한눈에 확인</div></div></div>
+          <div class="card"><span class="emoji">🌸</span><div><div class="cTitle">꽃이 피면 졸업</div><div class="cDesc">자란 습관은 정원에 보관</div></div></div>
+        </div>
+        <div class="cut"></div>
+        <div class="cta">3개로 시작하기</div>
+      </div>
+      <div class="caption">현재 — 7장 (스크롤 많고 빽빽)</div>
+      <div class="sub">+ 색상 팔레트까지 넣으면 8장</div>
+    </div>
+
+    <!-- A안 (6장) -->
+    <div class="col">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="dots">● ● ●  ▮▮▮</span></div>
+        <div class="title">이렇게 사용해요</div>
+        <div class="list">
+          <div class="hl">
+            <div class="hlTitle">꾸준할수록 자라요</div>
+            <div class="hlDesc">매일 한 탭이 단계가 되어 자라요</div>
+            <div class="strip">
+              <div class="cell"><span class="cEmoji">🌰</span><span class="cLabel">씨앗</span></div>
+              <div class="cell"><span class="cEmoji">🌱</span><span class="cLabel">발아</span></div>
+              <div class="cell"><span class="cEmoji">🌿</span><span class="cLabel">떡잎</span></div>
+              <div class="cell"><span class="cEmoji">🎋</span><span class="cLabel">줄기</span></div>
+              <div class="cell"><span class="cEmoji">🌷</span><span class="cLabel">꽃봉오리</span></div>
+              <div class="cell"><span class="cEmoji">🌸</span><span class="cLabel">개화</span></div>
+            </div>
+          </div>
+          <div class="hl">
+            <div class="hlTitle">🌊 하루 쉬어도 괜찮아요</div>
+            <div class="hlDesc">하루 빠져도 흐름은 이어져요. 이틀 연속 빠지면 새 시작.</div>
+            <div class="dots">● ● ◌ ● ● ●</div>
+            <div class="legend">◌ = 쉼표 (흐름 유지)</div>
+          </div>
+          <div class="card"><span class="emoji">👆</span><div><div class="cTitle">기본 조작</div><div class="cDesc">탭=체크 · 길게=수정 · 좌우=주간 이동</div></div></div>
+          <div class="card"><span class="emoji">📱</span><div><div class="cTitle">홈/잠금화면 위젯</div><div class="cDesc">앱 안 열고 한눈에 확인</div></div></div>
+          <div class="card"><span class="emoji">🌸</span><div><div class="cTitle">꽃이 피면 졸업</div><div class="cDesc">자란 습관은 정원에 보관</div></div></div>
+          <div class="card cardNew"><span class="emoji">🎨</span><div><div class="cTitle">꾸준하면 색이 늘어요</div><div class="cDesc">흐름이 쌓이면 새 색상 팔레트를 받아요</div></div><span class="newBadge">NEW</span></div>
+        </div>
+        <div class="cta">3개로 시작하기</div>
+      </div>
+      <div class="caption">A안 — 6장 (조작 통합 + 색상 팔레트)</div>
+      <div class="sub">탭·수정·스와이프 → "기본 조작" 1장</div>
+    </div>
+
+  </div>
+</body>
+</html>
