@@ -1,217 +1,235 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// 네이티브 의존성 없는 UUID 생성
-function generateId(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
-import { Habit, HabitLog } from '@/types/habit';
-import { getToday } from '@/utils/date';
-import { scheduleHabitReminder, cancelHabitReminder, cancelTodayReminder } from '@/utils/notifications';
-import { getCurrentStage, GrowthStageId } from '@/constants/growth';
-import { calculateFlow } from '@/utils/streak';
-// Pro 기능은 v1.4에서 활성화
-// import { useProStore } from './proStore';
+import { habitStorage } from '@/renewal/storage';
+import { trackableHabits } from '@/renewal/access';
+import { localDate, migrateHabitData } from '@/renewal/domain';
+import {
+  cancelHabitReminder,
+  cancelTodayReminder,
+  scheduleHabitReminder,
+} from '@/utils/notifications';
+import { useProStore } from './proStore';
+import type { Habit, HabitLog, HabitReview } from '@/types/habit';
 
-const MAX_FREE_HABITS = 3;
-
+const generateId = (): string =>
+  `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
+type HabitUpdates = Partial<
+  Pick<Habit, 'name' | 'icon' | 'color' | 'reminderTime' | 'cue' | 'minimum' | 'weeklyTarget'>
+>;
 interface HabitStore {
   habits: Habit[];
   logs: HabitLog[];
-
-  // 습관 CRUD — addHabit은 생성된 습관 ID를 반환 (null이면 제한 초과)
-  addHabit: (name: string, icon: string, color: string) => string | null;
-  updateHabit: (id: string, updates: Partial<Pick<Habit, 'name' | 'icon' | 'color' | 'reminderTime'>>) => Promise<void>;
+  legacyAccess: boolean;
+  freeHabitId: string | null;
+  selectFreeHabit: (id: string) => void;
+  canTrackHabit: (id: string) => boolean;
+  widgetEventIds: string[];
+  applyWidgetEvent: (id: string, date: string, completed: boolean, eventId?: string) => void;
+  addHabit: (name: string, icon: string, color: string, details?: HabitUpdates) => string | null;
+  updateHabit: (id: string, updates: HabitUpdates) => Promise<void>;
   deleteHabit: (id: string) => void;
-
-  // 졸업 시스템 (v1.3+)
   graduateHabit: (id: string) => void;
+  restartHabit: (id: string) => boolean;
+  reviewHabit: (id: string, review: Omit<HabitReview, 'id' | 'date'>) => void;
   getActiveHabits: () => Habit[];
   getGraduatedHabits: () => Habit[];
-
-  // 로그
-  toggleHabit: (habitId: string, date?: string) => void;
+  toggleHabit: (id: string, date?: string) => void;
+  checkIn: (id: string, effort: 'full' | 'tiny') => void;
   getLogsForDate: (date: string) => HabitLog[];
-  isHabitCompleted: (habitId: string, date: string) => boolean;
-
-  // 제한
+  isHabitCompleted: (id: string, date: string) => boolean;
   canAddHabit: () => boolean;
 }
-
 export const useHabitStore = create<HabitStore>()(
   persist(
     (set, get) => ({
       habits: [],
       logs: [],
-
-      addHabit: (name, icon, color) => {
-        if (!get().canAddHabit()) return null;
-
+      legacyAccess: false,
+      freeHabitId: null,
+      widgetEventIds: [],
+      selectFreeHabit: (id) => {
+        if (get().habits.some((habit) => habit.id === id && !habit.isGraduated))
+          set({ freeHabitId: id });
+      },
+      canTrackHabit: (id) => trackableHabits(
+        get().habits, useProStore.getState().isPro, get().legacyAccess, get().freeHabitId,
+      ).some((habit) => habit.id === id),
+      applyWidgetEvent: (id, date, completed, eventId) => {
+        if (eventId && get().widgetEventIds.includes(eventId)) return;
+        // Widget events may legitimately arrive days later. Preserve the day tapped.
+        if (!get().habits.some((habit) => habit.id === id)) return;
+        const parsed = new Date(`${date}T12:00:00`);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(parsed.getTime()) ||
+            localDate(parsed) !== date || date > localDate()) return;
+        set((state) => ({
+          widgetEventIds: eventId ? [...state.widgetEventIds, eventId].slice(-2000) : state.widgetEventIds,
+          logs: [
+          ...state.logs.filter((log) => log.habitId !== id || log.date !== date),
+          ...(completed ? [{ id: `${id}/${date}`, habitId: id, date, completed: true,
+            effort: 'full' as const, completedAt: new Date().toISOString() }] : []),
+        ] }));
+      },
+      addHabit: (name, icon, color, details = {}) => {
+        if (!get().canAddHabit() || !name.trim()) return null;
         const now = new Date().toISOString();
         const id = generateId();
-        // order는 전체 habits(졸업 포함) 중 max + 1 — 졸업한 항목 order와 겹치지 않도록.
-        // 메인 리스트는 활성만 표시하므로 띄엄띄엄한 order 값이라도 정렬엔 영향 없음.
-        const maxOrder = get().habits.reduce((max, h) => Math.max(max, h.order), -1);
-        const newHabit: Habit = {
+        const habit: Habit = {
           id,
-          name,
+          name: name.trim(),
           icon,
           color,
           reminderTime: null,
-          order: maxOrder + 1,
+          order: get().habits.reduce((max, item) => Math.max(max, item.order), -1) + 1,
           createdAt: now,
           updatedAt: now,
+          ...details,
         };
-
-        set((state) => ({ habits: [...state.habits, newHabit] }));
+        set((state) => ({ habits: [...state.habits, habit] }));
         return id;
       },
-
       updateHabit: async (id, updates) => {
-        const habit = get().habits.find((h) => h.id === id);
-        set((state) => ({
-          habits: state.habits.map((h) =>
-            h.id === id
-              ? { ...h, ...updates, updatedAt: new Date().toISOString() }
-              : h
-          ),
-        }));
-
-        // 알림 시간이 변경된 경우
-        if (updates.reminderTime !== undefined && habit) {
-          const name = updates.name ?? habit.name;
-          if (updates.reminderTime) {
-            await scheduleHabitReminder(id, name, updates.reminderTime);
-          } else {
-            await cancelHabitReminder(id);
+        if (!get().canTrackHabit(id)) throw new Error('habit-read-only');
+        const habit = get().habits.find((item) => item.id === id);
+        if (!habit) return;
+        const next = { ...habit, ...updates, updatedAt: new Date().toISOString() };
+        set((state) => ({ habits: state.habits.map((item) => (item.id === id ? next : item)) }));
+        try {
+          if (
+            updates.reminderTime !== undefined ||
+            ((updates.name !== undefined || updates.minimum !== undefined) && next.reminderTime)
+          ) {
+            if (next.reminderTime && !next.isGraduated)
+              await scheduleHabitReminder(id, next.name, next.reminderTime);
+            else await cancelHabitReminder(id);
           }
+        } catch (error) {
+          set((state) => ({ habits: state.habits.map((item) => (item === next ? habit : item)) }));
+          throw error;
         }
       },
-
       deleteHabit: (id) => {
-        cancelHabitReminder(id);
+        void cancelHabitReminder(id).catch(() => {});
         set((state) => ({
-          habits: state.habits.filter((h) => h.id !== id),
-          logs: state.logs.filter((l) => l.habitId !== id),
+          habits: state.habits.filter((item) => item.id !== id),
+          logs: state.logs.filter((item) => item.habitId !== id),
         }));
       },
-
       graduateHabit: (id) => {
-        const habit = get().habits.find((h) => h.id === id);
-        if (!habit || habit.isGraduated) return;
-
-        // 졸업 시점 단계 + 누적 흐름 일수 계산해서 보존
-        // 졸업 자격·카드 표시와 동일하게 역대 최장 흐름(longestFlow) 기준 — 흐름이 끊긴 상태로 졸업해도 seed/sprout로 저장되지 않음
-        const flow = calculateFlow(id, get().logs);
-        const stage = getCurrentStage(flow.longestFlow).id as GrowthStageId;
-        const today = getToday();
-
-        // 알림 끄기 — 졸업한 습관은 더 이상 푸시 안 옴
-        cancelHabitReminder(id);
-
+        void cancelHabitReminder(id).catch(() => {});
+        const count = new Set(
+          get()
+            .logs.filter((log) => log.habitId === id && log.completed)
+            .map((log) => log.date),
+        ).size;
         set((state) => ({
-          habits: state.habits.map((h) =>
-            h.id === id
+          habits: state.habits.map((habit) =>
+            habit.id === id && !habit.isGraduated
               ? {
-                  ...h,
+                  ...habit,
                   isGraduated: true,
-                  graduatedAt: today,
-                  graduatedStage: stage,
-                  totalFlowDays: flow.longestFlow,
+                  graduatedAt: localDate(),
+                  totalFlowDays: count,
                   reminderTime: null,
                   updatedAt: new Date().toISOString(),
                 }
-              : h
+              : habit,
           ),
         }));
       },
-
-      getActiveHabits: () => {
-        return get().habits.filter((h) => !h.isGraduated);
+      restartHabit: (id) => {
+        if (
+          !get().canAddHabit() ||
+          !get().habits.some((habit) => habit.id === id && habit.isGraduated)
+        )
+          return false;
+        set((state) => ({
+          habits: state.habits.map((habit) =>
+            habit.id === id
+              ? {
+                  ...habit,
+                  isGraduated: false,
+                  restartedAt: new Date().toISOString(),
+                  updatedAt: new Date().toISOString(),
+                }
+              : habit,
+          ),
+        }));
+        return true;
       },
-
-      getGraduatedHabits: () => {
-        return get()
-          .habits.filter((h) => h.isGraduated)
-          .sort((a, b) => (b.graduatedAt ?? '').localeCompare(a.graduatedAt ?? ''));
-      },
-
-      toggleHabit: (habitId, date) => {
-        const targetDate = date ?? getToday();
-        // 오늘만 수정 가능 — 과거/미래 날짜 조작 방지
-        if (targetDate !== getToday()) return;
-        const existing = get().logs.find(
-          (l) => l.habitId === habitId && l.date === targetDate
-        );
-
-        let nowCompleted = false;
-        if (existing) {
-          nowCompleted = !existing.completed;
-          set((state) => ({
-            logs: state.logs.map((l) =>
-              l.id === existing.id
-                ? {
-                    ...l,
-                    completed: nowCompleted,
-                    completedAt: nowCompleted ? new Date().toISOString() : null,
-                  }
-                : l
-            ),
-          }));
-        } else {
-          nowCompleted = true;
-          const newLog: HabitLog = {
-            id: generateId(),
-            habitId,
-            date: targetDate,
-            completed: true,
-            completedAt: new Date().toISOString(),
-          };
-          set((state) => ({ logs: [...state.logs, newLog] }));
-        }
-
-        // 완료 처리되면 오늘 알림 cancel (중복 알림 회피).
-        // 미완료로 되돌리면 알림 복구 X — 그 시각이 이미 지났을 가능성 高 + UX 단순화.
-        if (nowCompleted) {
-          cancelTodayReminder(habitId).catch(() => {});
+      reviewHabit: (id, review) => {
+        if (!get().canTrackHabit(id)) return;
+        set((state) => ({
+          habits: state.habits.map((habit) =>
+            habit.id === id
+              ? {
+                  ...habit,
+                  minimum: review.minimum.trim(),
+                  updatedAt: new Date().toISOString(),
+                  reviews: [
+                    ...(habit.reviews ?? []),
+                    { ...review, id: generateId(), date: localDate() },
+                  ],
+                }
+              : habit,
+          ),
+        }));
+        const current = get().habits.find((habit) => habit.id === id);
+        if (current?.reminderTime && !current.isGraduated) {
+          void scheduleHabitReminder(id, current.name, current.reminderTime).catch(() => {});
         }
       },
-
-      getLogsForDate: (date) => {
-        return get().logs.filter((l) => l.date === date);
+      getActiveHabits: () => get().habits.filter((habit) => !habit.isGraduated),
+      getGraduatedHabits: () =>
+        get()
+          .habits.filter((habit) => habit.isGraduated)
+          .sort((a, b) => (b.graduatedAt ?? '').localeCompare(a.graduatedAt ?? '')),
+      checkIn: (id, effort) => {
+        if (!get().canTrackHabit(id)) return;
+        if (!get().habits.some((habit) => habit.id === id && !habit.isGraduated)) return;
+        const date = localDate();
+        set((state) => ({
+          logs: [
+            ...state.logs.filter((log) => log.habitId !== id || log.date !== date),
+            {
+              id: `${id}/${date}`,
+              habitId: id,
+              date,
+              completed: true,
+              completedAt: new Date().toISOString(),
+              effort,
+            },
+          ],
+        }));
+        void cancelTodayReminder(id).catch(() => {});
       },
-
-      isHabitCompleted: (habitId, date) => {
-        return get().logs.some(
-          (l) => l.habitId === habitId && l.date === date && l.completed
-        );
+      toggleHabit: (id, date) => {
+        if (!get().canTrackHabit(id)) return;
+        if (date && date !== localDate()) return;
+        if (!get().habits.some((habit) => habit.id === id && !habit.isGraduated)) return;
+        if (!get().isHabitCompleted(id, localDate())) {
+          get().checkIn(id, 'full');
+          return;
+        }
+        set((state) => ({
+          logs: state.logs.filter((log) => log.habitId !== id || log.date !== localDate()),
+        }));
+        const habit = get().habits.find((item) => item.id === id);
+        if (habit?.reminderTime) {
+          void scheduleHabitReminder(id, habit.name, habit.reminderTime).catch(() => {});
+        }
       },
-
-      canAddHabit: () => {
-        const activeCount = get().habits.filter((h) => !h.isGraduated).length;
-        return activeCount < MAX_FREE_HABITS;
-      },
+      getLogsForDate: (date) => get().logs.filter((log) => log.date === date),
+      isHabitCompleted: (id, date) =>
+        get().logs.some((log) => log.habitId === id && log.date === date && log.completed),
+      canAddHabit: () =>
+        get().getActiveHabits().length <
+        (get().legacyAccess || useProStore.getState().isPro ? 3 : 1),
     }),
     {
       name: 'habit-store',
-      version: 1,
-      storage: createJSONStorage(() => AsyncStorage),
-      migrate: (persisted, version) => persisted as any,
-      onRehydrateStorage: () => {
-        return () => {
-          // 스토어 복원 완료 후 위젯 데이터 동기화
-          try {
-            const { syncWidgetData } = require('@/utils/widgetData');
-            syncWidgetData();
-          } catch (e) {
-            console.warn('[Widget] Hydration sync failed:', e);
-          }
-        };
-      },
-    }
-  )
+      version: 2,
+      storage: createJSONStorage(() => habitStorage),
+      migrate: (state, version) => migrateHabitData(state, version),
+    },
+  ),
 );

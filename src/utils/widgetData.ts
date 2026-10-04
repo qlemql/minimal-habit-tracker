@@ -1,3 +1,5 @@
+import { ackWidgetEvents } from '../../modules/shared-defaults';
+import { flushHabitStorage } from '@/renewal/storage';
 import { useHabitStore } from '@/store/habitStore';
 import { formatDate } from './date';
 import { Platform } from 'react-native';
@@ -26,7 +28,7 @@ export function getWidgetData(): WidgetHabit[] {
   const cutoff = formatDate(cutoffDate);
 
   return habits
-    .filter((h) => !h.isGraduated)
+    .filter((h) => useHabitStore.getState().canTrackHabit(h.id))
     .sort((a, b) => a.order - b.order)
     .slice(0, 3)
     .map((habit) => ({
@@ -46,31 +48,44 @@ export function getWidgetData(): WidgetHabit[] {
     }));
 }
 
-export async function syncWidgetData(): Promise<void> {
-  const data = getWidgetData();
-  await setSharedDefault(WIDGET_DATA_KEY, JSON.stringify(data));
+let syncing: Promise<void> = Promise.resolve();
+export function syncWidgetData(): Promise<void> {
+  syncing = syncing.catch(() => {}).then(() =>
+    setSharedDefault(WIDGET_DATA_KEY, JSON.stringify(getWidgetData())),
+  );
+  return syncing;
 }
 
 /**
  * Android 위젯의 tap-to-check 큐를 처리
- * 앱 포그라운드 전환 시 호출 — 큐의 habitId들에 대해 toggleHabit 수행 후 큐 비움
+ * 날짜와 최종 완료 상태를 저장한 후 처리된 이벤트만 확인 처리한다.
  */
-export async function processPendingWidgetToggles(): Promise<void> {
-  if (Platform.OS !== 'android') return;
+let processing: Promise<void> | null = null;
+export function processPendingWidgetToggles(): Promise<void> {
+  if (Platform.OS !== 'android') return Promise.resolve();
+  if (processing) return processing;
+  processing = importPendingEvents().finally(() => { processing = null; });
+  return processing;
+}
+async function importPendingEvents(): Promise<void> {
   const raw = await getSharedDefault('widgetPendingToggles');
   if (!raw) return;
-  try {
-    const queue = JSON.parse(raw) as string[];
-    if (!Array.isArray(queue) || queue.length === 0) return;
-    const { toggleHabit } = useHabitStore.getState();
-    for (const habitId of queue) {
-      toggleHabit(habitId);
-    }
-    // 큐 비우기
-    await setSharedDefault('widgetPendingToggles', JSON.stringify([]));
-    // 변경된 store 상태로 위젯 재동기화
-    await syncWidgetData();
-  } catch (e) {
-    console.warn('[Widget] process pending failed:', e);
+  const queue: unknown = JSON.parse(raw);
+  if (!Array.isArray(queue) || queue.length === 0) return;
+  const ids: string[] = [];
+  const events: unknown[] = queue;
+  for (const event of events) {
+    if (!event || typeof event !== 'object') continue;
+    if (!('eventId' in event) || typeof event.eventId !== 'string') continue;
+    ids.push(event.eventId);
+    if (!('habitId' in event) || !('date' in event) || !('completed' in event) ||
+        typeof event.habitId !== 'string' || typeof event.date !== 'string' ||
+        typeof event.completed !== 'boolean') continue;
+    useHabitStore.getState().applyWidgetEvent(event.habitId, event.date, event.completed, event.eventId);
   }
+  // Also retry persisting already-applied events after a previous storage failure.
+  useHabitStore.setState({});
+  await flushHabitStorage();
+  await ackWidgetEvents(ids);
+  await syncWidgetData();
 }

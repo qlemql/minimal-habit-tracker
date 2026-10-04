@@ -138,10 +138,10 @@ extension Color {
 // MARK: - Cream Theme Colors
 
 enum CreamTheme {
-    static let background = Color(hex: "#FFF8F0")
-    static let textPrimary = Color(hex: "#2D2016")
-    static let textSecondary = Color(hex: "#8C7B6B")
-    static let accent = Color(hex: "#5B8C6A")
+    static let background = Color(hex: "#F7F7F2")
+    static let textPrimary = Color(hex: "#233C35")
+    static let textSecondary = Color(hex: "#56695F")
+    static let accent = Color(hex: "#315E4C")
 }
 
 // MARK: - Widget Views

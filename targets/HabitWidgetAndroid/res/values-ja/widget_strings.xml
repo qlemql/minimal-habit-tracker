@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="widget_title">今日の習慣</string>
+  <string name="widget_all_completed">今日はできました</string>
+  <string name="widget_progress_a11y">今日の進み具合</string>
+  <string name="widget_check_a11y">完了を切り替え</string>
+  <string name="widget_empty">アプリで習慣を追加してください</string>
+  <string name="widget_flow_days">%1$d日</string>
+</resources>

@@ -1,0 +1,15 @@
+"widget.title" = "今日の習慣";
+"widget.allCompleted" = "今日はできました";
+"widget.empty.small" = "習慣を追加";
+"widget.empty.medium" = "アプリで習慣を追加してください";
+"widget.empty.accessory" = "アプリで追加";
+"widget.flowDays" = "%d日";
+"widget.accessory.label" = "習慣";
+"widget.accessory.inline.empty" = "Ssak — 習慣を追加";
+"widget.accessory.inline.allDone" = "Ssak %1$d/%2$d 完了";
+"widget.accessory.inline.progress" = "Ssak 今日 %1$d/%2$d";
+"widget.config.displayName" = "今日の習慣";
+"widget.config.description" = "今日の習慣を確認できます";
+"widget.sample.water" = "水を飲む";
+"widget.sample.exercise" = "体を動かす";
+"widget.sample.reading" = "本を読む";

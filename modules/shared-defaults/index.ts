@@ -1,6 +1,11 @@
 import { Platform } from 'react-native';
 
-let SharedDefaultsModule: any = null;
+interface SharedDefaultsNative {
+  setItem: (key: string, value: string) => Promise<boolean>;
+  getItem: (key: string) => Promise<string | null>;
+  ackWidgetEvents?: (ids: string) => Promise<boolean>;
+}
+let SharedDefaultsModule: SharedDefaultsNative | null = null;
 
 if (Platform.OS === 'ios' || Platform.OS === 'android') {
   try {
@@ -19,4 +24,9 @@ export async function setItem(key: string, value: string): Promise<boolean> {
 export async function getItem(key: string): Promise<string | null> {
   if (!SharedDefaultsModule) return null;
   return SharedDefaultsModule.getItem(key);
+}
+
+export async function ackWidgetEvents(ids: string[]): Promise<void> {
+  if (!SharedDefaultsModule?.ackWidgetEvents) throw new Error('widget-native-update-required');
+  await SharedDefaultsModule.ackWidgetEvents(JSON.stringify(ids));
 }

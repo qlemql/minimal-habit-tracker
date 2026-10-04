@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="widget_title">今天的習慣</string>
+  <string name="widget_all_completed">今天都完成了</string>
+  <string name="widget_progress_a11y">今天的進度</string>
+  <string name="widget_check_a11y">切換完成狀態</string>
+  <string name="widget_empty">到 App 新增習慣</string>
+  <string name="widget_flow_days">%1$d天</string>
+</resources>

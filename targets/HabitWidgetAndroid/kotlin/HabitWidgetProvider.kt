@@ -21,6 +21,8 @@ import android.view.View
 import android.widget.RemoteViews
 import com.qlemql.minimalhabittracker.R
 import org.json.JSONArray
+import org.json.JSONObject
+import java.util.UUID
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -40,10 +42,10 @@ class HabitWidgetProvider : AppWidgetProvider() {
         private const val MIDNIGHT_REQUEST_CODE = 9001
 
         // 크림 톤 팔레트 — iOS HabitWidget.swift CreamTheme와 동일
-        private const val COLOR_TEXT_PRIMARY = "#2D2016"
-        private const val COLOR_TEXT_SECONDARY = "#8C7B6B"
-        private const val COLOR_ACCENT = "#5B8C6A"
-        private const val COLOR_FALLBACK_HABIT = "#5B8C6A"
+        private const val COLOR_TEXT_PRIMARY = "#233C35"
+        private const val COLOR_TEXT_SECONDARY = "#56695F"
+        private const val COLOR_ACCENT = "#315E4C"
+        private const val COLOR_FALLBACK_HABIT = "#315E4C"
 
         private fun dateFormatter(): SimpleDateFormat =
             SimpleDateFormat("yyyy-MM-dd", Locale.US)
@@ -68,8 +70,7 @@ class HabitWidgetProvider : AppWidgetProvider() {
         when (intent.action) {
             ACTION_TOGGLE -> {
                 val habitId = intent.getStringExtra(EXTRA_HABIT_ID) ?: return
-                optimisticToggle(context, habitId)
-                queuePendingToggle(context, habitId)
+                recordToggle(context, habitId)
                 refreshAllWidgets(context)
             }
             ACTION_MIDNIGHT_REFRESH -> {
@@ -181,7 +182,7 @@ class HabitWidgetProvider : AppWidgetProvider() {
                         context,
                         habit.id.hashCode(),
                         toggleIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                     )
                     views.setOnClickPendingIntent(rowIds[i], pi)
                 } else {
@@ -229,43 +230,39 @@ class HabitWidgetProvider : AppWidgetProvider() {
      * completedDates 배열에 오늘 날짜 추가/제거.
      * App 포그라운드 시 큐로 store와 동기화.
      */
-    private fun optimisticToggle(context: Context, habitId: String) {
+    private fun recordToggle(context: Context, habitId: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val raw = prefs.getString(KEY_WIDGET_HABITS, "[]") ?: "[]"
-        val arr = try { JSONArray(raw) } catch (e: Exception) { JSONArray() }
-        val today = todayKey()
-        for (i in 0 until arr.length()) {
-            val o = arr.getJSONObject(i)
-            if (o.getString("id") == habitId) {
-                val dates = o.optJSONArray("completedDates") ?: JSONArray()
-                var todayIdx = -1
+        // The native module uses this same SharedPreferences instance as its lock.
+        synchronized(prefs) {
+            val habits = try { JSONArray(prefs.getString(KEY_WIDGET_HABITS, "[]")) }
+                catch (_: Exception) { return }
+            val today = todayKey()
+            for (i in 0 until habits.length()) {
+                val habit = habits.getJSONObject(i)
+                if (habit.optString("id") != habitId) continue
+                val dates = habit.optJSONArray("completedDates") ?: JSONArray()
+                val next = JSONArray()
+                var wasCompleted = false
                 for (j in 0 until dates.length()) {
-                    if (dates.getString(j) == today) {
-                        todayIdx = j
-                        break
-                    }
+                    if (dates.getString(j) == today) wasCompleted = true
+                    else next.put(dates.getString(j))
                 }
-                if (todayIdx >= 0) {
-                    dates.remove(todayIdx)
-                } else {
-                    dates.put(today)
-                }
-                o.put("completedDates", dates)
-                break
+                if (!wasCompleted) next.put(today)
+                habit.put("completedDates", next)
+                val queue = try { JSONArray(prefs.getString(KEY_PENDING_TOGGLES, "[]")) }
+                    catch (_: Exception) { JSONArray() }
+                queue.put(JSONObject().apply {
+                    put("eventId", UUID.randomUUID().toString())
+                    put("habitId", habitId)
+                    put("date", today)
+                    put("completed", !wasCompleted)
+                })
+                // Persist snapshot and event together before showing the new state.
+                prefs.edit().putString(KEY_WIDGET_HABITS, habits.toString())
+                    .putString(KEY_PENDING_TOGGLES, queue.toString()).commit()
+                return
             }
         }
-        prefs.edit().putString(KEY_WIDGET_HABITS, arr.toString()).apply()
-    }
-
-    /**
-     * 큐에 habitId 추가 — App 포그라운드 시 RN이 일괄 처리
-     */
-    private fun queuePendingToggle(context: Context, habitId: String) {
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val raw = prefs.getString(KEY_PENDING_TOGGLES, "[]") ?: "[]"
-        val arr = try { JSONArray(raw) } catch (e: Exception) { JSONArray() }
-        arr.put(habitId)
-        prefs.edit().putString(KEY_PENDING_TOGGLES, arr.toString()).apply()
     }
 
     // ─── 자정 자동 reload (AlarmManager) ───────────────────────────────────

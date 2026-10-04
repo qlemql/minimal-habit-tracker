@@ -1,0 +1,26 @@
+const { en: c } = require('./lib/renewal-copy.cjs');
+﻿const { chromium } = require('@playwright/test');
+const path = require('node:path');
+const output = path.resolve(__dirname, '../artifacts/renewal');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, locale: 'en-US' });
+  await page.goto(process.env.PREVIEW_URL || 'http://localhost:4173');
+  await page.getByRole('button', { name: c.sample, exact: true }).waitFor();
+  await page.screenshot({ path: path.join(output, 'welcome-desktop.png') });
+  await page.getByRole('button', { name: c.sample, exact: true }).click();
+  await page.getByText(c.reading, { exact: true }).waitFor();
+  await page.screenshot({ path: path.join(output, 'desktop.png') });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: path.join(output, 'mobile.png') });
+  await page.getByRole('button', { name: c.review, exact: true }).click();
+  await page.getByRole('radio', { name: c.adjust, exact: true }).click();
+  await page.screenshot({ path: path.join(output, 'review-mobile.png') });
+  await page.getByRole('button', { name: c.reflectSave, exact: true }).click();
+  await page.getByRole('button', { name: c.details, exact: true }).click();
+  await page.getByRole('button', { name: c.graduate, exact: true }).click();
+  await page.screenshot({ path: path.join(output, 'graduate-mobile.png') });
+  await page.getByRole('button', { name: c.graduateConfirm, exact: true }).click();
+  await page.screenshot({ path: path.join(output, 'journey-mobile.png') });
+  await browser.close();
+})();

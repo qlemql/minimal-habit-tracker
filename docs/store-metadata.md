@@ -1,6 +1,9 @@
 # 스토어 메타데이터
 
-> App Store / Google Play Store 등록 시 사용할 메타데이터
+> 구버전 보관 문서입니다. 2.0 출시에는 사용하지 마세요.
+> 현재 등록 문구는 [renewal-store-copy.md](./renewal-store-copy.md), 검증 상태는
+> [launch-preparation.md](./launch-preparation.md)를 사용합니다.
+> 아래의 무료 3개·정원·개인정보 설명은 리뉴얼의 신규 사용자 정책과 다릅니다.
 
 ---
 

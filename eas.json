@@ -4,10 +4,12 @@
   },
   "build": {
     "development": {
+      "node": "22.14.0",
       "developmentClient": true,
       "distribution": "internal"
     },
     "preview": {
+      "node": "22.14.0",
       "distribution": "internal",
       "ios": {
         "simulator": true
@@ -17,6 +19,7 @@
       }
     },
     "preview-device": {
+      "node": "22.14.0",
       "distribution": "internal",
       "ios": {
         "buildConfiguration": "Release"
@@ -26,6 +29,7 @@
       }
     },
     "production": {
+      "node": "22.14.0",
       "ios": {
         "buildConfiguration": "Release"
       },

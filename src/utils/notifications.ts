@@ -1,36 +1,15 @@
-import * as Notifications from 'expo-notifications';
-import i18n from '@/i18n';
-import { useSettingsStore } from '@/store/settingsStore';
-import { getToday } from '@/utils/date';
+﻿import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
+import { usePreferences } from '@/renewal/preferences';
+import { copies } from '@/renewal/copy';
+import { localDate } from '@/renewal/domain';
 
-// ────────────────────────────────────────────────────────────────────────────
-// 알림 액션 식별자 — 잠금화면/알림센터에서 "완료" 버튼이 눌렸을 때
-// ────────────────────────────────────────────────────────────────────────────
 export const HABIT_TOGGLE_CATEGORY = 'HABIT_TOGGLE';
 export const HABIT_TOGGLE_ACTION = 'toggle';
+const CHANNEL = 'ssak-practice';
+const queues = new Map<string, Promise<void>>();
+const copy = () => copies[usePreferences.getState().language];
 
-// 한 습관당 미리 등록하는 single-shot reminder 일수 — 그 후 reactivation 사다리
-// 3 habits × (7 reminders + 3 reactivation) = 30개 (iOS 64개 한도 안전)
-const REMINDER_DAYS_AHEAD = 7;
-
-// 복귀 알람 사다리 — 마지막 reminder 기준 +N일 (마지막 앱 실행일 기준 8/14/30일째)
-const REACTIVATION_STEPS = [
-  { offsetDays: 1, copyKey: 'week' },
-  { offsetDays: 7, copyKey: 'twoWeeks' },
-  { offsetDays: 23, copyKey: 'month' },
-] as const;
-
-// 알림 data payload kind 분류
-type NotificationKind = 'reminder' | 'reactivation';
-
-interface NotificationData {
-  habitId: string;
-  kind: NotificationKind;
-  date?: string; // 'YYYY-MM-DD' — reminder만 사용 (오늘 알림 cancel 시 매칭)
-  [key: string]: unknown;
-}
-
-// 알림 표시 정책
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -40,200 +19,90 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
-
-// 카테고리는 한 번만 등록되면 됨 — 앱 수명 동안 캐시
-let categoryRegistered = false;
-
-export async function setupNotificationCategories(): Promise<void> {
-  if (categoryRegistered) return;
+export const setupNotificationCategories = async (): Promise<void> => {
   await Notifications.setNotificationCategoryAsync(HABIT_TOGGLE_CATEGORY, [
     {
       identifier: HABIT_TOGGLE_ACTION,
-      buttonTitle: i18n.t('notifications.actionDone'),
-      options: {
-        // 액션 탭 시 앱을 깨우지 않음 — 잠금화면 그대로 유지
-        opensAppToForeground: false,
-      },
+      buttonTitle: copy().done,
+      options: { opensAppToForeground: true },
     },
   ]);
-  categoryRegistered = true;
-}
-
-// 알림 권한 요청
-export async function requestNotificationPermission(): Promise<boolean> {
-  const { status: existing } = await Notifications.getPermissionsAsync();
-  if (existing === 'granted') return true;
-
-  const { status } = await Notifications.requestPermissionsAsync();
-  return status === 'granted';
-}
-
-// ────────────────────────────────────────────────────────────────────────────
-// 내부 헬퍼
-// ────────────────────────────────────────────────────────────────────────────
-
-function toISODate(d: Date): string {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-}
-
-/** timeString HH:mm 기준으로 다음 N번의 fire Date 배열 (오늘 시간이 미래면 오늘 포함). */
-function getNextFireDates(timeString: string, count: number): Date[] {
-  const [hour, minute] = timeString.split(':').map(Number);
-  const now = new Date();
-  const first = new Date(now);
-  first.setHours(hour, minute, 0, 0);
-  if (first <= now) {
-    first.setDate(first.getDate() + 1);
-  }
-
-  const dates: Date[] = [];
-  const cursor = new Date(first);
-  for (let i = 0; i < count; i++) {
-    dates.push(new Date(cursor));
-    cursor.setDate(cursor.getDate() + 1);
-  }
-  return dates;
-}
-
-// ────────────────────────────────────────────────────────────────────────────
-// 알림 스케줄/취소
-// ────────────────────────────────────────────────────────────────────────────
-
-/**
- * 습관별 알림 스케줄 등록.
- * - 다음 7일치 single-shot reminder 등록
- * - 마지막 reminder 다음날 같은 시간에 reactivation 알람 1개 등록
- *   (사용자가 7일 동안 앱을 안 열면 끊김 → reactivation으로 복귀 유도)
- */
-export async function scheduleHabitReminder(
+};
+const setupChannel = async () => {
+  if (Platform.OS === 'android')
+    await Notifications.setNotificationChannelAsync(CHANNEL, {
+      name: copy().reminder,
+      importance: Notifications.AndroidImportance.DEFAULT,
+      sound: null,
+    });
+};
+export const requestNotificationPermission = async (): Promise<boolean> => {
+  await setupChannel();
+  if ((await Notifications.getPermissionsAsync()).status === 'granted') return true;
+  return (await Notifications.requestPermissionsAsync()).status === 'granted';
+};
+const cancelMatching = async (habitId: string, todayOnly = false) => {
+  const scheduled = await Notifications.getAllScheduledNotificationsAsync();
+  await Promise.all(
+    scheduled
+      .filter(
+        (item) =>
+          item.content.data?.habitId === habitId &&
+          (!todayOnly || item.content.data?.date === localDate()),
+      )
+      .map((item) => Notifications.cancelScheduledNotificationAsync(item.identifier)),
+  );
+};
+const enqueue = (id: string, operation: () => Promise<void>): Promise<void> => {
+  const next = (queues.get(id) ?? Promise.resolve()).catch(() => {}).then(operation);
+  queues.set(id, next);
+  void next
+    .finally(() => {
+      if (queues.get(id) === next) queues.delete(id);
+    })
+    .catch(() => {});
+  return next;
+};
+export const cancelHabitReminder = (habitId: string): Promise<void> =>
+  enqueue(habitId, () => cancelMatching(habitId));
+export const cancelTodayReminder = (habitId: string): Promise<void> =>
+  enqueue(habitId, () => cancelMatching(habitId, true));
+export const scheduleHabitReminder = (
   habitId: string,
   habitName: string,
-  timeString: string // HH:mm
-): Promise<void> {
-  const hasPermission = await requestNotificationPermission();
-  if (!hasPermission) return;
-
-  // 기존 알림 모두 취소 후 새로 등록 (일관성)
-  await cancelHabitReminder(habitId);
-
-  const lockScreenEnabled = useSettingsStore.getState().lockScreenActionEnabled;
-  if (lockScreenEnabled) {
+  timeString: string,
+): Promise<void> =>
+  enqueue(habitId, async () => {
+    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(timeString)) throw new Error('invalid-reminder');
+    await cancelMatching(habitId);
+    // Only the editor requests permission. Opening or restoring the app never prompts.
+    if ((await Notifications.getPermissionsAsync()).status !== 'granted') return;
+    await setupChannel();
     await setupNotificationCategories();
-  }
-
-  const fireDates = getNextFireDates(timeString, REMINDER_DAYS_AHEAD);
-
-  // 1) 정상 reminder N개
-  for (const fireDate of fireDates) {
-    const data: NotificationData = {
-      habitId,
-      kind: 'reminder',
-      date: toISODate(fireDate),
-    };
+    const { useHabitStore } = await import('@/store/habitStore');
+    const current = useHabitStore.getState().habits.find((habit) => habit.id === habitId);
+    if (!current || !useHabitStore.getState().canTrackHabit(habitId) || current.reminderTime !== timeString) return;
+    const [hour, minute] = timeString.split(':').map(Number);
     await Notifications.scheduleNotificationAsync({
+      identifier: `ssak-${habitId}-daily`,
       content: {
-        title: i18n.t('notifications.title'),
-        body: i18n.t('notifications.body', { habitName }),
-        data,
-        ...(lockScreenEnabled && { categoryIdentifier: HABIT_TOGGLE_CATEGORY }),
+        title: habitName,
+        body: current.minimum || copy().heroSub,
+        data: { habitId, kind: 'daily-reminder' },
+        categoryIdentifier: HABIT_TOGGLE_CATEGORY,
       },
       trigger: {
-        type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
-        year: fireDate.getFullYear(),
-        month: fireDate.getMonth() + 1,
-        day: fireDate.getDate(),
-        hour: fireDate.getHours(),
-        minute: fireDate.getMinutes(),
-        repeats: false,
+        type: Notifications.SchedulableTriggerInputTypes.DAILY,
+        hour, minute, channelId: CHANNEL,
       },
     });
-  }
-
-  // 2) reactivation 사다리 — 마지막 reminder 이후 +1/+7/+23일 같은 시간
-  //    (앱을 열면 전체 재예약되므로 사용 중엔 울리지 않음)
-  const lastReminder = fireDates[fireDates.length - 1];
-  for (const step of REACTIVATION_STEPS) {
-    const reactivationDate = new Date(lastReminder);
-    reactivationDate.setDate(reactivationDate.getDate() + step.offsetDays);
-    const reactivationData: NotificationData = {
-      habitId,
-      kind: 'reactivation',
-    };
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: i18n.t(`notifications.reactivation.${step.copyKey}.title`),
-        body: i18n.t(`notifications.reactivation.${step.copyKey}.body`, { habitName }),
-        data: reactivationData,
-        // reactivation은 액션 카테고리 X — 탭만으로 앱 launch
-      },
-      trigger: {
-        type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
-        year: reactivationDate.getFullYear(),
-        month: reactivationDate.getMonth() + 1,
-        day: reactivationDate.getDate(),
-        hour: reactivationDate.getHours(),
-        minute: reactivationDate.getMinutes(),
-        repeats: false,
-      },
-    });
-  }
-}
-
-/** 습관의 모든 알림(reminder + reactivation) 취소. */
-export async function cancelHabitReminder(habitId: string): Promise<void> {
-  const scheduled = await Notifications.getAllScheduledNotificationsAsync();
-  for (const notification of scheduled) {
-    const data = notification.content.data as unknown as NotificationData | undefined;
-    if (data?.habitId === habitId) {
-      await Notifications.cancelScheduledNotificationAsync(notification.identifier);
-    }
-  }
-}
-
-/**
- * 특정 습관의 "오늘 reminder만" 취소.
- * - toggleHabit 완료 시 호출 → 이미 완료한 날은 알림 안 옴
- * - 내일 이후 + reactivation은 유지
- */
-export async function cancelTodayReminder(habitId: string): Promise<void> {
-  const today = getToday();
-  const scheduled = await Notifications.getAllScheduledNotificationsAsync();
-  for (const notification of scheduled) {
-    const data = notification.content.data as unknown as NotificationData | undefined;
-    if (
-      data?.habitId === habitId &&
-      data?.kind === 'reminder' &&
-      data?.date === today
-    ) {
-      await Notifications.cancelScheduledNotificationAsync(notification.identifier);
-    }
-  }
-}
-
-/**
- * 모든 활성 습관 알림을 현재 설정으로 재등록.
- * - 앱 launch 시 호출 → 다음 N일치 보충 + reactivation 갱신
- * - 토글 변경 시 호출 → categoryIdentifier 재적용
- * - 오늘 이미 완료한 습관은 오늘 reminder는 cancel 처리
- */
-export async function rescheduleAllReminders(): Promise<void> {
-  // 순환 import 방지 — 런타임 require
-  const { useHabitStore } = require('@/store/habitStore');
-  const { habits, isHabitCompleted } = useHabitStore.getState();
-  const today = getToday();
-
+  });
+export const rescheduleAllReminders = async (): Promise<void> => {
+  const { useHabitStore } = await import('@/store/habitStore');
+  const habits = useHabitStore.getState().habits;
   for (const habit of habits) {
-    if (habit.isGraduated) continue;
-    if (!habit.reminderTime) continue;
-    await scheduleHabitReminder(habit.id, habit.name, habit.reminderTime);
-    if (isHabitCompleted(habit.id, today)) {
-      await cancelTodayReminder(habit.id);
-    }
+    if (!useHabitStore.getState().canTrackHabit(habit.id) || !habit.reminderTime) await cancelHabitReminder(habit.id);
+    else await scheduleHabitReminder(habit.id, habit.name, habit.reminderTime);
   }
-}
-
-/** rescheduleAllReminders의 alias — 앱 launch 의도를 더 명확히 표현. */
+};
 export const refreshHabitReminders = rescheduleAllReminders;

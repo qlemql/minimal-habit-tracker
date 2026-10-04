@@ -1,26 +1,29 @@
 {
   "expo": {
-    "name": "싹: 세 가지 습관",
+    "name": "Ssak: Habit Tracker",
     "slug": "minimal-habit-tracker",
-    "version": "1.2.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "automatic",
+    "web": { "favicon": "./assets/favicon.png" },
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "scheme": "minimal-habit-tracker",
     "locales": {
       "ko": "./locales/ios/ko.json",
-      "en": "./locales/ios/en.json"
+      "en": "./locales/ios/en.json",
+      "ja": "./locales/ios/ja.json",
+      "zh-TW": "./locales/ios/zh-TW.json"
     },
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FFF8F0"
+      "backgroundColor": "#F7F7F2"
     },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.qlemql.minimalhabittracker",
-      "buildNumber": "12",
+      "buildNumber": "13",
       "appleTeamId": "5R27CJ6382",
       "entitlements": {
         "com.apple.security.application-groups": [
@@ -29,21 +32,24 @@
       },
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "CFBundleDevelopmentRegion": "ko",
+        "CFBundleDevelopmentRegion": "en",
         "CFBundleLocalizations": [
           "ko",
-          "en"
+          "en",
+          "ja",
+          "zh-TW"
         ]
       }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFF8F0"
+        "backgroundColor": "#315E4C",
+        "monochromeImage": "./assets/monochrome-icon.png"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.qlemql.minimalhabittracker",
-      "versionCode": 10,
+      "versionCode": 11,
       "permissions": [
         "android.permission.POST_NOTIFICATIONS",
         "android.permission.SCHEDULE_EXACT_ALARM"
@@ -63,7 +69,14 @@
       "./plugins/withSharedDefaults",
       "./plugins/withAndroidWidget",
       "./plugins/withAppNameI18n",
-      "expo-localization"
+      "./plugins/withWindowsCmakePaths",
+      "expo-localization",
+      ["expo-splash-screen", {
+        "image": "./assets/splash-icon.png",
+        "imageWidth": 96,
+        "resizeMode": "contain",
+        "backgroundColor": "#F7F7F2"
+      }]
     ],
     "extra": {
       "eas": {

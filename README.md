@@ -1,5 +1,9 @@
 # Ssak: Three Habits
 
+> **Mobile walkthrough:** run `npm run review` and open http://localhost:4174/guide/ for the user-flow map, live phone-size preview, feature inventory, self-review and regional purchase plan. [Setup and decisions](docs/mobile-review.md). Generate screenshots with `node scripts/capture-review.cjs` after building and starting the review server.
+
+> **Renewal development preview (`feat/ssak-renewal`)**: this branch implements the new small-action → reflection → graduation experience. Run `npm ci`, `npm run build`, then `npm run preview` and open http://localhost:4173. [Product decisions (한국어)](docs/renewal-review.ko.md) · [Implementation and validation](docs/renewal-cycle.md). The description below documents the previous released product, not the renewal preview. Native store purchases require configuration and device validation.
+
 **English** · [한국어](README.ko.md)
 
 > Just 3 habits. 5 seconds a day. Miss a day? Your Flow keeps going.

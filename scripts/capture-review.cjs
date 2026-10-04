@@ -1,0 +1,53 @@
+﻿const { chromium } = require('@playwright/test');
+const path = require('node:path');
+const { ko: c, discoveryCopy, getHabitIdeas } = require('./lib/renewal-copy.cjs');
+const output = path.resolve(__dirname, '../artifacts/review');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, locale: 'ko-KR' });
+  const screenshot = async (name) => {
+    await page.screenshot({ path: path.join(output, `${name}.png`) });
+  };
+  await page.goto('http://localhost:4174/');
+  await page.getByRole('button', { name: '한국어', exact: true }).click();
+  await page.getByRole('button', { name: c.welcomeButton, exact: true }).waitFor();
+  await screenshot('welcome');
+  await page.getByRole('button', { name: c.welcomeButton, exact: true }).click();
+  await page.getByRole('button', { name: discoveryCopy.ko.own, exact: true }).waitFor();
+  await screenshot('discovery');
+  await page.getByRole('radio', { name: discoveryCopy.ko.categories[0], exact: true }).click();
+  await page.getByRole('button', { name: getHabitIdeas('ko').find(idea => idea.id === 'stretch').name, exact: true }).click();
+  await page.getByRole('textbox', { name: c.nameLabel, exact: true }).waitFor();
+  await screenshot('plan');
+  await page.getByRole('button', { name: c.save, exact: true }).click();
+  await page.getByRole('button', { name: c.done, exact: true }).waitFor();
+  await screenshot('today');
+  await page.getByRole('button', { name: c.tiny, exact: true }).click();
+  await page.getByRole('button', { name: c.review, exact: true }).click();
+  await page.getByRole('radio', { name: c.adjust, exact: true }).click();
+  await screenshot('reflection');
+  await page
+    .getByRole('textbox', { name: c.minimumField, exact: true })
+    .fill('어깨를 한 번 가볍게 돌리기');
+  await page.getByRole('button', { name: c.reflectSave, exact: true }).click();
+  await page.getByRole('button', { name: c.details, exact: true }).click();
+  await page.getByRole('button', { name: c.graduate, exact: true }).click();
+  await page.getByRole('button', { name: c.graduateConfirm, exact: true }).click();
+  await page.getByRole('tab', { name: c.journey, exact: true }).waitFor();
+  await screenshot('journey');
+  await page.getByRole('button', { name: c.plusCta, exact: true }).click();
+  await page.getByRole('button', { name: c.buy, exact: true }).waitFor();
+  await screenshot('plus');
+  await page.goto('http://localhost:4174/settings');
+  await page.getByRole('radio', { name: '한국어', exact: true }).waitFor();
+  await screenshot('settings');
+  await page.setViewportSize({ width: 1440, height: 1100 });
+  await page.goto('http://localhost:4174/guide/');
+  await page.getByRole('button', { name: /습관 발견/ }).waitFor();
+  await screenshot('overview');
+  await page.getByRole('tab', { name: '02 휴대폰 체험' }).click();
+  await page.frameLocator('#app-frame').getByRole('tab', { name: '오늘', exact: true }).waitFor();
+  await screenshot('phone-preview');
+  await browser.close();
+  console.log('Captured 8 real app screens and 2 guide views.');
+})();

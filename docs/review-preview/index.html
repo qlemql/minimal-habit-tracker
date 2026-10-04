@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ssak — 제품 둘러보기</title>
+    <link rel="stylesheet" href="/guide/style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a href="/guide/" class="brand"
+        ><span class="mark">s.</span> ssak<span class="muted"> / product walkthrough</span></a
+      ><a class="tag" href="/store/" target="_blank" rel="noopener">4개 언어 · 스토어 이미지 44장 ↗</a>
+    </header>
+    <main>
+      <div class="intro">
+        <div>
+          <p class="eyebrow">작은 시작부터, 나의 일상이 되기까지</p>
+          <h1>사용자의 하루에서<br />제품을 살펴보세요.</h1>
+          <p class="lead">
+            실제 화면으로 보는 전체 흐름, 직접 조작하는 휴대폰 프리뷰,<br
+              class="desktop-only"
+            />그리고 이번 개선에서 바꾼 판단을 한곳에 모았습니다.
+          </p>
+        </div>
+        <div class="summary">
+          <strong>6개 분야 · 18개 힌트</strong><span>직접 정하기는 언제나 가능</span
+          ><strong>습관 하나는 기간 제한 없이 무료</strong><span>필요할 때만 일회성 Plus 구매</span>
+        </div>
+      </div>
+      <div class="note">
+        <strong>출시 준비 업데이트</strong> · 환불 후 무료 습관 선택, 기록 보존,
+        반복 알림, 날짜가 있는 Android 위젯 기록을 반영했어요.
+        설정에서 개인정보·구매·환불 안내도 볼 수 있어요.
+        <a href="/policies/ko/privacy/" target="_blank" rel="noopener">공개 안내 페이지 초안 ↗</a>
+        실제 스토어 결제·실기기 검증과 문의처 등록은 아직 남아 있어요.
+      </div>
+      <nav class="tabs" aria-label="검토 항목" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="flow">01 사용자 흐름</button
+        ><button role="tab" aria-selected="false" data-tab="phone">02 휴대폰 체험</button
+        ><button role="tab" aria-selected="false" data-tab="features">03 기능별 정리</button
+        ><button role="tab" aria-selected="false" data-tab="feedback">04 자체 피드백</button
+        ><button role="tab" aria-selected="false" data-tab="payments">05 국가별 결제</button>
+      </nav>
+      <section id="flow" class="panel" role="tabpanel">
+        <div class="section-head">
+          <div>
+            <h2>처음 시작해서 기록을 마칠 때까지.</h2>
+            <p>카드를 누르면 실제 390px 화면과 해당 단계의 목적을 크게 볼 수 있어요.</p>
+          </div>
+          <span class="tag">실제 빌드 캡처 · 한국어</span>
+        </div>
+        <div class="flow-line">
+          시작 → 발견 → 계획 → 실천 → 조정 → 졸업 <span>↺ 필요하면 다시 연습</span>
+        </div>
+        <div class="cards" id="flow-cards"></div>
+        <div class="note">
+          매일의 경로는 <strong>오늘 → 실천 기록</strong> 두 단계예요. 돌아보기는 필요할 때, 결제는
+          추가 공간이 필요할 때만 만나요. 이 화면의 Plus 캡처는 상품 미설정 상태이며 실제 구매 완료
+          화면이 아닙니다.
+        </div>
+      </section>
+      <section id="phone" class="panel" role="tabpanel" hidden>
+        <div class="section-head">
+          <div>
+            <h2>휴대폰 크기로 직접 써보기.</h2>
+            <p>이미지가 아니라 현재 앱이 동작해요. 프레임 안에서 스크롤하고 눌러보세요.</p>
+          </div>
+        </div>
+        <div class="phone-layout">
+          <aside class="phone-info">
+            <p class="eyebrow">VIEWPORT</p>
+            <div class="devices">
+              <button data-width="390" data-height="844" aria-pressed="true">390 × 844</button
+              ><button data-width="375" data-height="812" aria-pressed="false">375 × 812</button
+              ><button data-width="360" data-height="800" aria-pressed="false">360 × 800</button>
+            </div>
+            <h3>추천 체험 순서</h3>
+            <ol>
+              <li>처음 화면에서 한국어를 선택해요.</li>
+              <li>내 습관 직접 정하기 또는 관심 분야를 골라요.</li>
+              <li>언제 할지, 바쁜 날에는 얼마나 할지 바꿔보세요.</li>
+              <li>오늘 기록 → 돌아보기 → 기록 마치기를 경험해요.</li>
+            </ol>
+            <button class="primary" id="open-phone">앱 첫 화면으로 이동</button>
+            <p class="small">
+              기록을 지우는 버튼이 아닙니다. 이 체험의 데이터는 4174번 주소의 브라우저 저장소에
+              남고, 기존 4173번 프리뷰와 분리됩니다.
+            </p>
+            <p class="small">
+              같은 React Native 앱의 웹 렌더링입니다. 네이티브 키보드·안전 영역·위젯·Dynamic
+              Island·결제창을 재현한 시뮬레이터는 아닙니다.
+            </p>
+          </aside>
+          <div id="phone-stage">
+            <div id="phone-scaler">
+              <div class="phone-frame">
+                <div class="phone-top">
+                  <span>9:41</span><span class="island" aria-hidden="true"></span><span>● ▰</span>
+                </div>
+                <iframe id="app-frame" title="Ssak 휴대폰 크기 실제 앱" src="about:blank"></iframe>
+                <div class="phone-bottom"><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="features" class="panel" role="tabpanel" hidden>
+        <div class="section-head">
+          <div>
+            <h2>무엇을 할 수 있나요?</h2>
+            <p>현재 동작하는 것과 기기에서 확인해야 할 것을 구분했어요.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>기능</th>
+                <th>사용자에게 하는 일</th>
+                <th>이용 범위</th>
+                <th>현재 상태</th>
+              </tr>
+            </thead>
+            <tbody id="feature-rows"></tbody>
+          </table>
+        </div>
+      </section>
+      <section id="feedback" class="panel" role="tabpanel" hidden>
+        <div class="section-head">
+          <div>
+            <h2>처음 쓰는 사람의 입장에서 다시 봤어요.</h2>
+            <p>선택지를 늘리는 데서 끝내지 않고, 선택의 부담과 오해도 함께 줄였습니다.</p>
+          </div>
+        </div>
+        <div id="feedback-cards" class="feedback-grid"></div>
+        <div class="note">
+          <strong>아직 증명하지 못한 것</strong>
+          <p>
+            18개 힌트가 세 개보다 실제 전환을 높이는지, Plus에 지불할 의사가 있는지는 사용자 검증이
+            필요합니다. 다음 관찰은 “설명 없이 자기 습관을 만들 수 있는가”에 집중합니다. 단순한 기능
+            개수를 성과로 보지 않습니다.
+          </p>
+        </div>
+      </section>
+      <section id="payments" class="panel" role="tabpanel" hidden>
+        <div class="section-head">
+          <div>
+            <h2>지역에 맞는 가격, 하나의 구매 경험.</h2>
+            <p>정책·가격 제안입니다. 스토어 상품 등록이나 실결제는 아직 하지 않았습니다.</p>
+          </div>
+          <span class="tag">일회성 구매 · 구독 없음</span>
+        </div>
+        <div class="payment-summary">
+          <article>
+            <h3>무료</h3>
+            <p>
+              활성 습관 1개 · 모든 힌트 · 작은 실천 · 돌아보기 · 졸업 및 재시작. 기간 제한 없음.
+            </p>
+          </article>
+          <article>
+            <h3>Ssak Plus</h3>
+            <p>최대 3개 동시 진행 · 백업 및 복원. 기존 사용자는 원래의 3개 슬롯 유지.</p>
+          </article>
+          <article>
+            <h3>스토어가 결제 처리</h3>
+            <p>iOS는 App Store, Android는 Google Play. RevenueCat은 구매 권한 확인·복원을 담당.</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>시장</th>
+                <th>목표 가격안</th>
+                <th>결제 방식</th>
+                <th>운영 판단</th>
+              </tr>
+            </thead>
+            <tbody id="price-rows"></tbody>
+          </table>
+        </div>
+        <p class="small">
+          모두 수요 검증 전 제안가이며 실시간 환산액·등록 완료 가격이 아닙니다. 제공되는 가격
+          포인트와 세금 표시를 각 콘솔에서 확인합니다. 언어·GPS가 아니라 스토어가 반환한 현지 가격을
+          표시합니다.
+        </p>
+        <div class="payment-summary">
+          <article>
+            <h3>구매 → 확인 → 해제</h3>
+            <p>
+              스토어 가격 불러오기 → 결제창 → ssak_plus 권한 확인 → Plus 활성화. 취소·실패·대기
+              중이면 임의로 권한을 주지 않아요.
+            </p>
+          </article>
+          <article>
+            <h3>복원과 기기 변경</h3>
+            <p>
+              같은 스토어 계정에서는 구매 복원. 현재 계정 없는 구조에서는 iOS↔Android 구매 공유를
+              보장하지 않아요. 구매 복원과 습관 데이터 복원은 별개입니다.
+            </p>
+          </article>
+          <article>
+            <h3>수익을 보는 기준</h3>
+            <p>
+              미국 $7.99, 수수료 15%만 가정하면 약 $6.79. 세금·환불·SDK 비용·운영 시간을 제외한
+              순익이 아니에요. 지역별 실제 정산액으로 판단합니다.
+            </p>
+          </article>
+        </div>
+        <div class="note">
+          <strong>출시 전 확인</strong>
+          <p>
+            각 스토어 상품·판매 지역·세금 및 정산 설정 → RevenueCat 연결 → 지역별 가격 표시 →
+            샌드박스 구매·취소·대기·재설치 복원·환불 검증. 지금 빌드에서는 구매 버튼이 비활성화되어
+            있어요.
+          </p>
+        </div>
+        <p class="sources">
+          공식 근거:
+          <a
+            href="https://developer.apple.com/help/app-store-connect/manage-in-app-purchases/set-a-price-for-an-in-app-purchase/"
+            target="_blank"
+            rel="noreferrer"
+            >Apple 지역별 가격</a
+          >
+          ·
+          <a
+            href="https://support.google.com/googleplay/android-developer/answer/1169947?hl=en"
+            target="_blank"
+            rel="noreferrer"
+            >Google 현지 통화</a
+          >
+          ·
+          <a
+            href="https://www.revenuecat.com/docs/getting-started/restoring-purchases"
+            target="_blank"
+            rel="noreferrer"
+            >구매 복원</a
+          >
+        </p>
+      </section>
+      <footer>
+        SSAK / A LITTLE EVERY DAY <span>실제 화면과 설계 판단을 연결하는 검토용 안내</span>
+      </footer>
+    </main>
+    <dialog id="detail">
+      <button id="close-detail" aria-label="상세 화면 닫기">✕</button>
+      <div class="detail-layout">
+        <img id="detail-image" alt="" />
+        <div>
+          <p class="eyebrow" id="detail-step"></p>
+          <h2 id="detail-title"></h2>
+          <p id="detail-body"></p>
+          <h3>다음 행동</h3>
+          <p id="detail-next"></p>
+          <button class="primary" id="detail-live">휴대폰으로 직접 체험</button>
+          <p class="small">왼쪽은 실제 앱 캡처입니다. 직접 조작은 휴대폰 체험에서 가능해요.</p>
+        </div>
+      </div>
+    </dialog>
+    <script src="/guide/guide.js"></script>
+  </body>
+</html>

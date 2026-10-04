@@ -25,7 +25,7 @@ function withWidgetManifest(config) {
       application.receiver.push({
         $: {
           'android:name': WIDGET_PROVIDER_NAME,
-          'android:exported': 'true',
+          'android:exported': 'false',
         },
         'intent-filter': [
           {
@@ -47,6 +47,8 @@ function withWidgetManifest(config) {
       });
     }
 
+    const provider = application.receiver.find((r) => r.$['android:name'] === WIDGET_PROVIDER_NAME);
+    if (provider) provider.$['android:exported'] = 'false';
     return config;
   });
 }
@@ -95,7 +97,7 @@ function withWidgetFiles(config) {
       // res/values/widget_strings.xml + res/values-en/widget_strings.xml
       // 위젯 전용 리소스만 별도 파일명(widget_strings.xml)으로 분리해 main app strings.xml과 충돌 방지.
       // values/는 한국어 기본값, values-en/는 영문 디바이스에서 자동 픽업.
-      for (const valuesDir of ['values', 'values-en']) {
+      for (const valuesDir of ['values', 'values-en', 'values-ko', 'values-ja', 'values-zh-rTW']) {
         const src = path.join(sourceDir, 'res', valuesDir, 'widget_strings.xml');
         if (fs.existsSync(src)) {
           copyFile(
