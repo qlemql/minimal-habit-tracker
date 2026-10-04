@@ -183,7 +183,7 @@ export const TextButton = ({
   onPress: () => void;
   danger?: boolean;
 }) => (
-  <Pressable accessibilityRole="button" onPress={onPress} style={s.textButton}>
+  <Pressable accessibilityRole="button" onPress={onPress} style={({ pressed }) => [s.textButton, pressed && s.pressed]}>
     <Text style={[s.textButtonText, danger && s.danger]}>{children}</Text>
   </Pressable>
 );
@@ -288,7 +288,7 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
           accessibilityLabel={tab.label}
           key={tab.path}
           onPress={() => router.replace(tab.path)}
-          style={[s.navItem, !wide && s.navItemMobile, path === tab.path && s.navActive]}
+          style={({ pressed }) => [s.navItem, !wide && s.navItemMobile, path === tab.path && s.navActive, pressed && s.pressed]}
         >
           <Icon name={tab.icon} color={path === tab.path ? palette.green : palette.soft} />
           <Text style={[s.navText, path === tab.path && s.navTextActive]}>{tab.label}</Text>
@@ -331,6 +331,7 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
           )}
           <ScrollView
             contentContainerStyle={[s.scroll, wide && s.scrollWide]}
+            overScrollMode="never"
             keyboardShouldPersistTaps="handled"
             automaticallyAdjustKeyboardInsets
           >

@@ -4,6 +4,7 @@ import { useHabitStore } from '@/store/habitStore';
 import { useProStore } from '@/store/proStore';
 import { trackableHabits } from './access';
 import { FreeHabitChoice } from './FreeHabitChoice';
+import { HabitAction } from './HabitAction';
 import { usePreferences, useCopy } from './preferences';
 import { completedDays, weeklyCount, hasReviewDue } from './domain';
 import { clearExample, loadExample } from './sample';
@@ -31,7 +32,7 @@ export const Today = () => {
   const today = useToday();
   const width = useWindowDimensions().width;
   const wide = width >= 1050;
-  const { habits, logs, checkIn, toggleHabit, legacyAccess, freeHabitId } = useHabitStore();
+  const { habits, logs, legacyAccess, freeHabitId } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
   const { language, welcomed, welcome, example, setLanguage } = usePreferences();
   const active = trackableHabits(habits, pro, legacyAccess, freeHabitId);
@@ -194,28 +195,7 @@ export const Today = () => {
                       </Text>
                     </View>
                     <View style={s.divider} />
-                    {log ? (
-                      <View style={s.gapSmall}>
-                        <View style={st.done}>
-                          <Icon name="check" size={22} />
-                          <Text style={st.doneText}>
-                            {log.effort === 'tiny' ? c.tinyCompleted : c.completed}
-                          </Text>
-                        </View>
-                        <TextButton onPress={() => toggleHabit(habit.id)}>{c.undo}</TextButton>
-                      </View>
-                    ) : (
-                      <View style={s.gapSmall}>
-                        <Button
-                          testID={`check-${habit.id}`}
-                          onPress={() => checkIn(habit.id, 'full')}
-                          icon="check"
-                        >
-                          {c.done}
-                        </Button>
-                        <TextButton onPress={() => checkIn(habit.id, 'tiny')}>{c.tiny}</TextButton>
-                      </View>
-                    )}
+                    <HabitAction habitId={habit.id} completed={Boolean(log)} tiny={log?.effort === 'tiny'} />
                   </View>
                 );
               })}
@@ -317,16 +297,6 @@ const st = StyleSheet.create({
   minimumLabel: { fontSize: 12, color: palette.muted, marginBottom: 5 },
   minimumText: { fontSize: 16, lineHeight: 24, color: palette.ink },
   count: { fontSize: 12, fontWeight: '600', color: palette.green },
-  done: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-    minHeight: 52,
-    backgroundColor: palette.pale,
-    borderRadius: 12,
-  },
-  doneText: { color: palette.green, fontSize: 16, fontWeight: '600', flexShrink: 1, textAlign: 'center' },
   quietNote: {
     flexDirection: 'row',
     gap: 14,
