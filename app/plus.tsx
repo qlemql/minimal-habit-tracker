@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { LocalizedText as Text } from '@/renewal/LocalizedText';
 import { useRouter } from 'expo-router';
 import { releaseCopy } from '@/renewal/releaseCopy';
 import { useHabitStore } from '@/store/habitStore';

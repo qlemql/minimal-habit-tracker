@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { View, Text, Linking, Platform } from 'react-native';
+import { View, Linking, Platform } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import { usePreferences } from './preferences';
 import { releaseCopy } from './releaseCopy';
 import { legalCopy } from './legalCopy';

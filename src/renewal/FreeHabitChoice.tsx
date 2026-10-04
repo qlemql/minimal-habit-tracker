@@ -1,4 +1,5 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import { useHabitStore } from '@/store/habitStore';
 import { useProStore } from '@/store/proStore';
 import { usePreferences } from './preferences';

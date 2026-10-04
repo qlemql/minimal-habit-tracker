@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,

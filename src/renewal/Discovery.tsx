@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import { usePreferences } from './preferences';
 import { categoryIds, discoveryCopy, getHabitIdeas } from './ideas';
 import type { Category, HabitIdea } from './ideas';

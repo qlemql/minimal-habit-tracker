@@ -1,15 +1,6 @@
 ﻿import { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Platform,
-  useWindowDimensions,
-  TextInput,
-  AppState,
-} from 'react-native';
+import { View, Pressable, ScrollView, StyleSheet, Platform, useWindowDimensions, TextInput, AppState } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { usePathname, useRouter } from 'expo-router';
 import Svg, { Path, Circle, Rect, Ellipse, G } from 'react-native-svg';
@@ -190,11 +181,14 @@ export const TextButton = ({
 export const Eyebrow = ({ children }: { children: ReactNode }) => (
   <Text style={s.eyebrow}>{children}</Text>
 );
-export const Title = ({ children }: { children: ReactNode }) => (
-  <Text accessibilityRole="header" style={s.title}>
-    {children}
-  </Text>
-);
+export const Title = ({ children }: { children: ReactNode }) => {
+  const { width } = useWindowDimensions();
+  return (
+    <Text accessibilityRole="header" textBreakStrategy="balanced" style={[s.title, width < 375 && s.titleCompact]}>
+      {children}
+    </Text>
+  );
+};
 export const Body = ({ children }: { children: ReactNode }) => (
   <Text style={s.body}>{children}</Text>
 );
@@ -426,6 +420,7 @@ export const s = StyleSheet.create({
     color: palette.ink,
   },
   body: { color: palette.muted, fontSize: 16, lineHeight: 25 },
+  titleCompact: { fontSize: 28, lineHeight: 37 },
   eyebrow: {
     fontSize: 10,
     color: palette.muted,
@@ -456,7 +451,7 @@ export const s = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: -0.4,
   },
-  small: { color: palette.muted, fontSize: 13, lineHeight: 20 },
+  small: { color: palette.muted, fontSize: 13, lineHeight: 20, flexShrink: 1 },
   divider: { height: 1, backgroundColor: palette.line },
   button: {
     backgroundColor: palette.green,

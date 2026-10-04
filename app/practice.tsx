@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { LocalizedText as Text } from '@/renewal/LocalizedText';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { completedDays } from '@/renewal/domain';

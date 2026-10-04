@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { View, Text, Pressable, StyleSheet, Platform } from 'react-native';
+import { View, Pressable, StyleSheet, Platform } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { useProStore } from '@/store/proStore';

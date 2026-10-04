@@ -1,4 +1,5 @@
-﻿import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
+﻿import { View, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { useProStore } from '@/store/proStore';
@@ -305,7 +306,7 @@ const st = StyleSheet.create({
     marginTop: 26,
   },
   noteLine: { height: 1, backgroundColor: palette.line, flex: 1 },
-  quietText: { fontSize: 11, color: palette.soft },
+  quietText: { fontSize: 11, color: palette.soft, flexShrink: 1, textAlign: 'center', lineHeight: 17 },
   panelTitle: {
     fontFamily: headingFont,
     fontSize: 28,

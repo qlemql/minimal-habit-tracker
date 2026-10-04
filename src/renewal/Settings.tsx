@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
+import { LocalizedText as Text } from './LocalizedText';
 import * as Clipboard from 'expo-clipboard';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
