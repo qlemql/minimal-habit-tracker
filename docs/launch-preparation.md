@@ -5,7 +5,79 @@
 
 ## 다음 세션 인수인계 — 2026-10-04 작업 저장
 
-사용자가 외출 전 오늘 작업 저장을 요청했다. 이 절을 읽고 이어서 진행한다.
+### 오늘 작업 최종 요약 — 2026-10-04
+
+- 브랜치: `feat/ssak-renewal`. 사용자 요청으로 오늘 작업을 기능별 커밋 후 origin에 푸시한다.
+- **브랜딩:** G3 / Soft Fold로 우선 진행. 브라운·크림·코랄, 흐르는 비대칭 S.
+  앱 아이콘·스플래시·Android adaptive/단색·favicon·Play 아이콘·앱 내부 로고 적용 완료.
+  원본 색상/곡선은 `assets/brand/design.json`, 재생성은 `npm run brand:assets`.
+- **스크롤/인터랙션:** 공통 화면의 Android 오버스크롤을 끔. 완료 체크 220ms 반응과
+  가벼운 햅틱, 완료/취소 140ms 페이드, 버튼/탭 눌림 표시. 동작 줄이기 설정 반영.
+- **다국어:** LocalizedText로 언어별 줄바꿈 정책 통일. 좁은 화면 제목 크기와 영어·일본어·
+  번체 제목의 의미 단위 줄바꿈 보완. 한국어는 웹/iOS 단어 경계를 우선하며 Android는
+  기본 고품질 줄바꿈과 제목 balanced를 사용한다. 모든 플랫폼이 같은 줄로 끊기지는 않는다.
+- **검증:** TypeScript, 웹 export, 최신 웹 흐름 8개, Android x86_64 release 빌드 통과.
+  인터랙션 변경 시 reduced-motion 흐름 1개도 통과. 웹 4개 언어 × 3개 폭(320/360/390px)
+  × 5개 화면 = 60개 조합의 가로 넘침 검사 및 주요 캡처 확인.
+- **설치 상태:** `Ssak_Pixel_API36`에 최신 x86_64 APK를 데이터 유지 업데이트했다.
+  내부 G3 로고와 한국어 오늘 화면을 실제 캡처로 확인. 기존 습관/기록 보존.
+  APK 경로는 `artifacts/android/ssak-x86_64-internal.apk`이며 테스트 서명이다.
+  ARM64 APK는 이전 디자인 상태로 갱신하지 않았다.
+- **로컬 증거:** `artifacts/android/brand-typography-build.log`, `brand-typography.png`,
+  `artifacts/typography/`, `artifacts/brand/g3/`. APK·생성 시안·캡처·로그는 Git에 넣지 않는다.
+- **다음 확인:** 4개 언어 전체 Android/iOS 화면, 확대 글꼴, 실제 기기에서 완료 동작·햅틱·
+  스크롤 체감 확인. iOS 빌드, ARM64 최신 빌드, 결제/환불·스토어 출시 검증은 별도 미완료.
+- 이전 테스트 기록(52개 단위/통합, 27개 웹 흐름)을 오늘 전체 재실행한 것으로 해석하지 않는다.
+
+### 오늘 진행 기록 — 아래는 각 작업 시점의 상태
+
+- 최신 후속: 누락됐던 앱 내부 공통 Brand도 G3 심볼과 브라운 벡터 워드마크로 교체.
+  `assets/brand/design.json`을 에셋 생성기와 앱이 공유한다.
+- 언어별 줄바꿈: `LocalizedText`에 웹 언어 태그·한국어 keep-all·CJK strict,
+  iOS 한국어 hangul-word/기타 standard, Android highQuality(제목 balanced) 적용.
+  375px 미만 제목은 28px/37px, 긴 보조 문구는 줄바꿈할 공간을 확보.
+  영어 첫 제목과 일본어 습관 선택/회고 제목을 짧게 다듬고 번체 Plus 제목을 의미 단위로 분리.
+- 웹 4개 언어 × 320/360/390px × 5개 화면(첫 화면·습관 선택·오늘·설정·Plus)
+  총 60개 조합 가로 넘침 검사 및 주요 캡처 확인. `artifacts/typography/` 참조.
+- TypeScript·웹 export·기존 웹 흐름 8개·Android x86_64 release 빌드 통과.
+  에뮬레이터에 `adb install -r`로 데이터 유지 업데이트 후 내부 로고/한국어 오늘 화면 확인.
+  `artifacts/android/brand-typography.png`, `brand-typography-build.log`에 증거 보관.
+  4개 언어 전체 네이티브 화면 및 iOS 실기기 줄바꿈 검증은 아직 남아 있다.
+
+- 절제된 인터랙션 추가: 완료 체크만 1 → 1.08 → 1 배율로 220ms 동안 반응,
+  완료·취소 영역은 140ms 페이드. 버튼·탭은 누르는 동안만 투명도 피드백.
+- `HabitAction`에서 직접 완료한 경우에만 네이티브 Light 햅틱 1회.
+  첫 진입 시 기존 완료 상태는 애니메이션을 재생하지 않고, 동작 줄이기 설정을 따른다.
+- TypeScript·웹 export·Android x86_64 release 빌드, 기존 웹 흐름 8개,
+  reduced-motion 환경의 완료/취소/유지 흐름 1개 통과.
+  빌드 로그: `artifacts/android/interaction-build.log`. 에뮬레이터용 APK 갱신.
+  실제 기기의 애니메이션·햅틱 체감 검증은 아직 하지 못했다.
+
+- 후속 스크롤 피드백: Android 에뮬레이터 전체 화면에서 위·아래로 튕기는 느낌.
+  공통 `Screen`의 `ScrollView`에 `overScrollMode="never"`를 적용해 Android 기본
+  stretch overscroll을 비활성화했다. TypeScript와 x86_64 release 빌드 통과.
+  APK는 아래와 같은 경로로 갱신. `artifacts/android/scroll-build.log` 참조.
+  adb 연결 기기가 없어 실제 증상 재현 및 수정 후 설치 검증은 아직 하지 못했다.
+
+- 사용자가 따뜻한 브라운·크림·코랄 색감과 단순 구성을 선호. 최종 대화에서
+  **G3 / Soft Fold로 우선 진행**에 동의했다. 아래의 ‘새 시안 미제작’ 상태는 이전 기록이다.
+- 흐르는 비대칭 S와 작은 코랄 포인트를 사용한다. G2의 정돈된 S는 원안의 개성을 잃어 제외.
+- `scripts/brand-assets.cjs`와 `app.json`에 적용. 재생성 명령은 `npm run brand:assets`.
+- `assets/brand/`에 SVG, 아이콘·Android 전경/단색·스플래시·favicon·Play 아이콘에 PNG 반영.
+- 목업과 실제 생성 에셋 미리보기는 `artifacts/brand/g3/`에 보관.
+- 최초 적용 시 내부 Brand는 누락됐으나 위 최신 후속에서 반영했다. UI 팔레트는 유지한다.
+- 검증: 에셋 재생성, 실제 에셋의 32/48/64px 및 원형·단색 미리보기, TypeScript,
+  웹 export, Android x86_64 release 빌드 통과. 로그: `artifacts/brand/g3/android-build.log`.
+- `artifacts/android/ssak-x86_64-internal.apk`는 G3로 갱신했다. 테스트 서명 APK다.
+  ARM64 APK는 이전 디자인이며 이번에 갱신하지 않았다.
+- 연결 기기가 없어 G3의 설치·콜드 스타트 실기기 검증은 미실시. iOS 빌드도 미실시.
+  아래 이전 APK·캡처 검증을 G3 검증으로 간주하지 않는다.
+- 첫 TypeScript 실행은 동시에 진행한 웹 export의 dist 교체와 충돌했다.
+  export 완료 후 단독 재실행해 통과했다.
+
+### 이전 인수인계 보관 — 오늘 작업 전 상태
+
+사용자가 외출 전 작업 저장을 요청했던 기록이다. 최신 결정과 설치 상태는 위 최종 요약을 따른다.
 
 - 현재 브랜치: `feat/ssak-renewal`. iOS/Android 글로벌 습관 앱 리뉴얼 중이며 공개 출시 전이다.
 - 사용자 목표: 광고 없이 일회성 Plus 구매로 작은 수익과 실제 사용자를 확보. 한국어·영어·일본어·번체중국어.
