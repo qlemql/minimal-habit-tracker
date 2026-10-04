@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { usePathname, useRouter } from 'expo-router';
-import Svg, { Path, Circle, Rect, Ellipse } from 'react-native-svg';
+import Svg, { Path, Circle, Rect, Ellipse, G } from 'react-native-svg';
+import brand from '../../assets/brand/design.json';
 import { useCopy, usePreferences } from './preferences';
 import { localDate, weekDays } from './domain';
 import type { ReactNode } from 'react';
@@ -126,16 +127,19 @@ export const TrailArt = ({ small = false }: { small?: boolean }) => (
   </Svg>
 );
 export const Brand = () => (
-  <View style={s.brandRow}>
-    <View style={s.brandMark}>
-      <Svg width={22} height={24} viewBox="0 0 22 24">
-        <Rect x={2} y={9} width={7} height={13} rx={3.5} fill={palette.white} />
-        <Rect x={12} y={2} width={7} height={20} rx={3.5} fill={palette.mint} />
-      </Svg>
-    </View>
-    <Text style={s.brand}>
-      ssak<Text style={s.brandDot}>.</Text>
-    </Text>
+  <View style={s.brandRow} accessible accessibilityLabel="ssak">
+    <Svg width={35} height={35} viewBox="0 0 512 512" accessible={false}>
+      <Rect width={512} height={512} rx={145} fill={brand.brown} />
+      <Path d={brand.contour} fill={brand.cream} />
+      <Path d={brand.tip} fill={brand.coral} />
+    </Svg>
+    <Svg width={94} height={35} viewBox="-4 -15 180 67" accessible={false}>
+      <G fill="none" stroke={brand.brown} strokeWidth={6.5} strokeLinecap="round" strokeLinejoin="round">
+        <Path d={brand.wordS} />
+        <Path d={brand.wordS} transform="translate(44 0)" />
+        <Path d="M120 24 C120 1 84 1 84 24 C84 48 120 48 120 24 M120 7 V42 M138 -9 V42 M165 8 L140 26 L168 42" />
+      </G>
+    </Svg>
   </View>
 );
 export const Button = ({
@@ -363,16 +367,6 @@ export const s = StyleSheet.create({
     borderRightColor: palette.line,
   },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  brandMark: {
-    width: 35,
-    height: 35,
-    backgroundColor: palette.green,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  brand: { color: palette.ink, fontSize: 33, fontWeight: '700', letterSpacing: -2 },
-  brandDot: { color: palette.orange },
   tagline: { color: palette.muted, fontSize: 12, lineHeight: 19, marginTop: 14 },
   sidebarBottom: { marginTop: 'auto', paddingTop: 60 },
   sidebarNote: { gap: 12, padding: 17, borderRadius: 14, backgroundColor: palette.pale },

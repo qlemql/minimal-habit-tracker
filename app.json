@@ -18,7 +18,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#F7F7F2"
+      "backgroundColor": "#FFF9EF"
     },
     "ios": {
       "supportsTablet": false,
@@ -44,7 +44,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#315E4C",
+        "backgroundColor": "#9C6842",
         "monochromeImage": "./assets/monochrome-icon.png"
       },
       "edgeToEdgeEnabled": true,
@@ -73,9 +73,9 @@
       "expo-localization",
       ["expo-splash-screen", {
         "image": "./assets/splash-icon.png",
-        "imageWidth": 96,
+        "imageWidth": 220,
         "resizeMode": "contain",
-        "backgroundColor": "#F7F7F2"
+        "backgroundColor": "#FFF9EF"
       }]
     ],
     "extra": {
