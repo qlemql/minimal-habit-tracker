@@ -33,9 +33,9 @@ for (const language of ['en', 'ko', 'ja', 'zh-TW'] as Language[]) {
     );
     await page.getByRole('button', { name: c.save, exact: true }).click();
     await expect(
-      page.getByText('My own connection habit', { exact: true }).filter({ visible: true }),
+      page.getByRole('button', { name: 'My own connection habit', exact: true }),
     ).toBeVisible();
-    await page.getByRole('button', { name: c.tiny, exact: true }).click();
+    await page.getByRole('button', { name: idea.minimum, exact: true }).click();
     await expect(
       page.getByText(c.tinyCompleted, { exact: true }).filter({ visible: true }),
     ).toBeVisible();
@@ -62,6 +62,6 @@ test('all hints can be browsed and a completely custom habit needs no hint', asy
     .fill('Draw one line');
   await page.getByRole('button', { name: copies.en.save, exact: true }).click();
   await expect(
-    page.getByText('Sketch my cat', { exact: true }).filter({ visible: true }),
+    page.getByRole('button', { name: 'Sketch my cat', exact: true }),
   ).toBeVisible();
 });

@@ -9,7 +9,7 @@ import { useCopy, usePreferences } from './preferences';
 import { Discovery } from './Discovery';
 import { discoveryCopy } from './ideas';
 import { releaseCopy } from './releaseCopy';
-import { Screen, Title, Body, Eyebrow, Button, TextButton, Field, Icon, Notice, s, palette } from './ui';
+import { Screen, Title, Body, Button, TextButton, Field, Notice, s, palette } from './ui';
 
 export const Editor = () => {
   const c = useCopy();
@@ -129,7 +129,6 @@ export const Editor = () => {
     <Screen detail key="plan">
       <View style={st.form}>
         <View style={s.header}>
-          <Eyebrow>{id ? c.edit : `02 / 02 · ${d.plan}`}</Eyebrow>
           <Title>{id ? c.editTitle : c.createTitle}</Title>
           <Body>{c.createSub}</Body>
         </View>
@@ -153,8 +152,6 @@ export const Editor = () => {
           onChangeText={setCue}
           maxLength={120}
         />
-        <View style={s.panel}>
-          <Icon name="spark" />
           <Field
             label={c.minimumField}
             placeholder={c.minimumPlaceholder}
@@ -162,7 +159,6 @@ export const Editor = () => {
             onChangeText={setMinimum}
             maxLength={120}
           />
-        </View>
         <View style={s.gap}>
           <Text style={s.fieldLabel}>{c.frequency}</Text>
           <View style={st.frequency}>
@@ -214,7 +210,7 @@ export const Editor = () => {
   );
 };
 const st = StyleSheet.create({
-  form: { maxWidth: 580, width: '100%', alignSelf: 'center', gap: 25 },
+  form: { maxWidth: 580, width: '100%', alignSelf: 'center', gap: 20 },
   frequency: { flexDirection: 'row', gap: 10 },
   frequencyOption: {
     flex: 1,
@@ -226,7 +222,7 @@ const st = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
   },
-  frequencySelected: { backgroundColor: palette.green, borderColor: palette.green },
+  frequencySelected: { backgroundColor: palette.pale, borderColor: palette.green },
   frequencyText: { color: palette.green, fontSize: 14 },
-  frequencyTextSelected: { color: palette.white },
+  frequencyTextSelected: { color: palette.green, fontWeight: '700' },
 });

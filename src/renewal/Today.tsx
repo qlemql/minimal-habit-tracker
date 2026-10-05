@@ -24,7 +24,6 @@ import {
   TrailArt,
   Week,
   useToday,
-  Notice,
 } from './ui';
 
 export const Today = () => {
@@ -86,7 +85,7 @@ export const Today = () => {
     );
   return (
     <Screen>
-      <View style={s.between}>
+      {width >= 850 && <View style={s.between}>
         <Eyebrow>
           {new Date(`${today}T12:00:00`)
             .toLocaleDateString(language, { weekday: 'long', month: 'long', day: 'numeric' })
@@ -103,7 +102,7 @@ export const Today = () => {
             <Text style={s.plusBadgeText}>SSAK PLUS</Text>
           </Pressable>
         )}
-      </View>
+      </View>}
       {example && (
         <View style={st.example}>
           <Text style={s.pillText}>{c.sampleLabel}</Text>
@@ -159,7 +158,8 @@ export const Today = () => {
                 );
                 const count = weeklyCount(habit.id, logs, today);
                 return (
-                  <View key={habit.id} style={[s.card, st.habitCard]}>
+                  <View key={habit.id} style={st.habitGroup}>
+                  <View style={[s.card, st.habitCard]}>
                     <View style={s.between}>
                       <View style={[s.row, s.flex]}>
                         <View style={s.iconBox}>
@@ -181,22 +181,17 @@ export const Today = () => {
                         <Icon name="arrow" size={19} />
                       </Pressable>
                     </View>
-                    <View style={st.minimum}>
-                      <Icon name="spark" size={18} />
-                      <View style={s.flex}>
-                        <Text style={st.minimumLabel}>{c.minimumLabel}</Text>
-                        <Text style={st.minimumText}>{habit.minimum ?? habit.name}</Text>
-                      </View>
-                    </View>
-                    <Week dates={completed} today={today} />
+                    <HabitAction habitId={habit.id} completed={Boolean(log)} tiny={log?.effort === 'tiny'} />
+                  </View>
+                  <View style={st.weekRecord}>
                     <View style={s.between}>
                       <Text style={s.small}>{c.intention}</Text>
                       <Text style={st.count}>
                         {count} / {habit.weeklyTarget ?? 7} {c.days}
                       </Text>
                     </View>
-                    <View style={s.divider} />
-                    <HabitAction habitId={habit.id} completed={Boolean(log)} tiny={log?.effort === 'tiny'} />
+                    <Week dates={completed} today={today} />
+                  </View>
                   </View>
                 );
               })}
@@ -209,7 +204,7 @@ export const Today = () => {
           </View>
         </View>
         <View style={[st.right, wide && st.rightWide]}>
-          <View style={s.panel}>
+          {wide && <View style={s.panel}>
             <View style={s.between}>
               <Icon name="path" size={22} />
               <Text style={st.weekNumber}>
@@ -225,7 +220,7 @@ export const Today = () => {
             <View style={st.miniArt}>
               <TrailArt small />
             </View>
-          </View>
+          </View>}
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={c.review}
@@ -262,7 +257,7 @@ const st = StyleSheet.create({
   languageActive: { backgroundColor: palette.pale },
   languageText: { fontSize: 12, color: palette.green },
   hero: { flexDirection: 'row', alignItems: 'center', marginTop: 25, marginBottom: 35, gap: 24 },
-  heroMobile: { marginTop: 4, marginBottom: 16 },
+  heroMobile: { marginTop: 4, marginBottom: 28 },
   heroSub: { maxWidth: 340, marginTop: 10 },
   columns: { gap: 24 },
   columnsWide: { flexDirection: 'row', alignItems: 'flex-start' },
@@ -285,18 +280,10 @@ const st = StyleSheet.create({
   },
   addText: { color: palette.green, fontSize: 12, fontWeight: '500' },
   habitCard: { gap: 16 },
+  habitGroup: { gap: 24 },
+  weekRecord: { gap: 16, paddingHorizontal: 4 },
   habitEmoji: { fontSize: 25 },
   detail: { width: 44, height: 44, flexShrink: 0, alignItems: 'center', justifyContent: 'center' },
-  minimum: {
-    flexDirection: 'row',
-    gap: 12,
-    alignItems: 'center',
-    backgroundColor: palette.paper,
-    borderRadius: 12,
-    padding: 15,
-  },
-  minimumLabel: { fontSize: 12, color: palette.muted, marginBottom: 5 },
-  minimumText: { fontSize: 16, lineHeight: 24, color: palette.ink },
   count: { fontSize: 12, fontWeight: '600', color: palette.green },
   quietNote: {
     flexDirection: 'row',
@@ -319,7 +306,7 @@ const st = StyleSheet.create({
   bigNumber: { fontFamily: headingFont, fontSize: 47, color: palette.green },
   metricLabel: { color: palette.muted, fontSize: 12, maxWidth: 125, lineHeight: 18 },
   miniArt: { alignSelf: 'flex-end', marginTop: -24, marginBottom: -10 },
-  reviewCard: { padding: 24, gap: 14, backgroundColor: palette.peach, borderRadius: 20 },
+  reviewCard: { padding: 20, gap: 12, borderLeftWidth: 3, borderLeftColor: palette.green },
   reviewDot: { height: 7, width: 7, borderRadius: 4, backgroundColor: palette.orange },
   reviewLink: { color: palette.green, fontSize: 13, fontWeight: '600' },
   example: {

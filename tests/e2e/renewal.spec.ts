@@ -15,7 +15,7 @@ test('first habit: validate, tiny action, persist, adjust, graduate and restart'
   await page.getByRole('button', { name: discoveryCopy.en.change, exact: true }).click();
   await page.getByRole('button', { name: en.reading, exact: true }).click();
   await page.getByRole('button', { name: en.save, exact: true }).click();
-  await page.getByRole('button', { name: en.tiny, exact: true }).click();
+  await page.getByRole('button', { name: en.readingMin, exact: true }).click();
   await expect(
     page.getByText(en.tinyCompleted, { exact: true }).filter({ visible: true }),
   ).toBeVisible();
@@ -24,7 +24,7 @@ test('first habit: validate, tiny action, persist, adjust, graduate and restart'
     page.getByText(en.tinyCompleted, { exact: true }).filter({ visible: true }),
   ).toBeVisible();
   await page.getByRole('button', { name: en.undo, exact: true }).click();
-  await page.getByRole('button', { name: en.done, exact: true }).click();
+  await page.getByRole('button', { name: en.reading, exact: true }).click();
   await page.getByRole('button', { name: en.review, exact: true }).click();
   await page.getByRole('radio', { name: en.adjust, exact: true }).click();
   await page.getByRole('textbox', { name: en.minimumField, exact: true }).fill('Read one sentence');
@@ -160,7 +160,7 @@ test('paid backup restore validates before changing existing data', async ({ pag
   await page.reload();
   await page.getByRole('tab', { name: en.today, exact: true }).click();
   await expect(
-    page.getByText('Restored reading', { exact: true }).filter({ visible: true }),
+    page.getByRole('button', { name: 'Restored reading', exact: true }),
   ).toBeVisible();
   await expect(page.getByText(en.sampleLabel, { exact: true })).toHaveCount(0);
 });

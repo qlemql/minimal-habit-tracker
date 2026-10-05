@@ -48,7 +48,7 @@ test('phone frame uses actual device widths and creates a real habit', async ({ 
     .getByRole('textbox', { name: c.minimumField, exact: true })
     .fill('One small action');
   await app.getByRole('button', { name: c.save, exact: true }).click();
-  await app.getByRole('button', { name: c.tiny, exact: true }).click();
+  await app.getByRole('button', { name: 'One small action', exact: true }).click();
   await expect(
     app.getByText(c.tinyCompleted, { exact: true }).filter({ visible: true }),
   ).toBeVisible();

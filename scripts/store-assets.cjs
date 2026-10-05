@@ -40,9 +40,9 @@ const capture = async (browser, platform, language, c, dir) => {
     await page.getByRole('textbox', { name: c.minLabel, exact: true }).fill(c.min);
     await screenshot(page, path.join(dir, '03-plan.png'));
     await button(c.save).click();
-    await button(c.done).waitFor();
+    await button(c.name).waitFor();
     await screenshot(page, path.join(dir, '01-today.png'));
-    await button(c.tiny).click();
+    await button(c.min).click();
     await button(c.review).click();
     await page.getByRole('radio', { name: c.adjust, exact: true }).click();
     await screenshot(page, path.join(dir, '04-reflect.png'));

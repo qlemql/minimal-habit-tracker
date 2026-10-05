@@ -22,6 +22,9 @@ interface HabitActionProps {
 
 export const HabitAction = ({ habitId, completed, tiny }: HabitActionProps) => {
   const c = useCopy();
+  const habit = useHabitStore((state) => state.habits.find((item) => item.id === habitId));
+  const minimum = habit?.minimum?.trim();
+  const hasAlternative = Boolean(minimum && minimum !== habit?.name.trim());
   const reducedMotion = useReducedMotion();
   const previousCompleted = useRef(completed);
   const scale = useSharedValue(1);
@@ -71,16 +74,25 @@ export const HabitAction = ({ habitId, completed, tiny }: HabitActionProps) => {
             </Animated.View>
             <Text style={styles.doneText}>{tiny ? c.tinyCompleted : c.completed}</Text>
           </View>
+          <Text style={styles.recordedAction}>{tiny ? minimum : habit?.name}</Text>
           <TextButton onPress={() => useHabitStore.getState().toggleHabit(habitId)}>
             {c.undo}
           </TextButton>
         </>
       ) : (
         <>
+          <View style={styles.prompt}>
+            <Text style={s.fieldLabel}>{c.checkInQuestion}</Text>
+            <Text style={s.small}>{c.checkInHint}</Text>
+          </View>
           <Button testID={`check-${habitId}`} onPress={() => complete('full')} icon="check">
-            {c.done}
+            {habit?.name}
           </Button>
-          <TextButton onPress={() => complete('tiny')}>{c.tiny}</TextButton>
+          {hasAlternative && (
+            <Button secondary testID={`check-tiny-${habitId}`} onPress={() => complete('tiny')}>
+              {habit?.minimum}
+            </Button>
+          )}
         </>
       )}
     </Animated.View>
@@ -88,6 +100,8 @@ export const HabitAction = ({ habitId, completed, tiny }: HabitActionProps) => {
 };
 
 const styles = StyleSheet.create({
+  prompt: { gap: 6, marginBottom: 10 },
+  recordedAction: { color: palette.muted, fontSize: 14, lineHeight: 22, textAlign: 'center' },
   done: {
     flexDirection: 'row',
     alignItems: 'center',

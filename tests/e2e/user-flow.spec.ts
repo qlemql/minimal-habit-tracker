@@ -29,11 +29,11 @@ for (const { code, label } of languages) {
       await expect(button(`${c.details}: ${idea.name}`)).toBeVisible();
     });
     await test.step('UF-03 record less, reload, undo and record the full habit', async () => {
-      await button(c.tiny).click();
+      await button('1').click();
       await page.reload();
       await expect(page.getByText(c.tinyCompleted, { exact: true }).filter({ visible: true })).toBeVisible();
       await button(c.undo).click();
-      await button(c.done).click();
+      await button(idea.name).click();
       await expect(button(c.undo)).toBeVisible();
       const logs = await page.evaluate(() => JSON.parse(localStorage.getItem('habit-store') || '{}').state.logs);
       expect(logs).toHaveLength(1);

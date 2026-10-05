@@ -11,15 +11,15 @@ import type { ReactNode } from 'react';
 import type { TextInputProps } from 'react-native';
 
 export const palette = {
-  paper: '#F7F7F2',
-  white: '#FFFFFF',
-  ink: '#233C35',
-  muted: '#56695F',
-  soft: '#5F6D64',
-  line: '#E2E7DF',
-  green: '#315E4C',
-  pale: '#EDF2E8',
-  mint: '#DDE9D6',
+  paper: '#FFF9EF',
+  white: '#FFFDF8',
+  ink: '#302A25',
+  muted: '#75695F',
+  soft: '#75695F',
+  line: '#E8DED2',
+  green: '#9C6842',
+  pale: '#F4EBDD',
+  mint: '#E8D8C3',
   orange: '#C37952',
   peach: '#F4E8DA',
   yellow: '#E8C884',
@@ -119,12 +119,12 @@ export const TrailArt = ({ small = false }: { small?: boolean }) => (
 );
 export const Brand = () => (
   <View style={s.brandRow} accessible accessibilityLabel="ssak">
-    <Svg width={35} height={35} viewBox="0 0 512 512" accessible={false}>
+    <Svg width={32} height={32} viewBox="0 0 512 512" accessible={false}>
       <Rect width={512} height={512} rx={145} fill={brand.brown} />
       <Path d={brand.contour} fill={brand.cream} />
       <Path d={brand.tip} fill={brand.coral} />
     </Svg>
-    <Svg width={94} height={35} viewBox="-4 -15 180 67" accessible={false}>
+    <Svg width={76} height={32} viewBox="-4 -15 180 67" accessible={false}>
       <G fill="none" stroke={brand.brown} strokeWidth={6.5} strokeLinecap="round" strokeLinejoin="round">
         <Path d={brand.wordS} />
         <Path d={brand.wordS} transform="translate(44 0)" />
@@ -267,7 +267,8 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
   const path = usePathname();
   const router = useRouter();
   const wide = useWindowDimensions().width >= 850;
-  const showPlus = path !== '/add' && path !== '/edit' && path !== '/plus';
+  const today = useToday();
+  const language = usePreferences((state) => state.language);
   const tabs: { label: string; path: '/' | '/stats' | '/settings'; icon: IconName }[] = [
     { label: c.today, path: '/', icon: 'sun' },
     { label: c.journey, path: '/stats', icon: 'path' },
@@ -282,7 +283,7 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
           accessibilityLabel={tab.label}
           key={tab.path}
           onPress={() => router.replace(tab.path)}
-          style={({ pressed }) => [s.navItem, !wide && s.navItemMobile, path === tab.path && s.navActive, pressed && s.pressed]}
+          style={({ pressed }) => [s.navItem, !wide && s.navItemMobile, wide && path === tab.path && s.navActive, pressed && s.pressed]}
         >
           <Icon name={tab.icon} color={path === tab.path ? palette.green : palette.soft} />
           <Text style={[s.navText, path === tab.path && s.navTextActive]}>{tab.label}</Text>
@@ -309,16 +310,11 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
           </View>
         )}
         <View style={s.main}>
-          {!wide && (
+          {!wide && !detail && (
             <View style={s.mobileHeader}>
               <Brand />
-              {showPlus && <Pressable
-                accessibilityRole="button"
-                accessibilityLabel={c.plusCta}
-                onPress={() => router.push('/plus')}
-                style={s.plusBadge}
-              >
-                <Icon name="spark" size={14} />
+              {path === '/' && <Text style={s.headerDate}>{new Date(`${today}T12:00:00`).toLocaleDateString(language, { month: 'short', day: 'numeric', weekday: 'short' })}</Text>}
+              {path !== '/' && <Pressable accessibilityRole="button" accessibilityLabel={c.plusCta} onPress={() => router.push('/plus')} style={s.plusBadge}>
                 <Text style={s.plusBadgeText}>PLUS</Text>
               </Pressable>}
             </View>
@@ -362,6 +358,7 @@ export const s = StyleSheet.create({
     borderRightColor: palette.line,
   },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  headerDate: { color: palette.muted, fontSize: 12, lineHeight: 18, flexShrink: 1, textAlign: 'right' },
   tagline: { color: palette.muted, fontSize: 12, lineHeight: 19, marginTop: 14 },
   sidebarBottom: { marginTop: 'auto', paddingTop: 60 },
   sidebarNote: { gap: 12, padding: 17, borderRadius: 14, backgroundColor: palette.pale },
@@ -415,16 +412,16 @@ export const s = StyleSheet.create({
     fontFamily: headingFont,
     fontSize: 30,
     lineHeight: 39,
-    fontWeight: '600',
+    fontWeight: '700',
     letterSpacing: -0.6,
     color: palette.ink,
   },
-  body: { color: palette.muted, fontSize: 16, lineHeight: 25 },
+  body: { color: palette.muted, fontSize: 15, lineHeight: 24 },
   titleCompact: { fontSize: 28, lineHeight: 37 },
   eyebrow: {
-    fontSize: 10,
+    fontSize: 13,
     color: palette.muted,
-    letterSpacing: 2,
+    letterSpacing: 0,
     fontWeight: '600',
     marginBottom: 14,
   },
@@ -437,10 +434,10 @@ export const s = StyleSheet.create({
   section: { marginTop: 28 },
   card: {
     backgroundColor: palette.white,
-    borderRadius: 20,
+    borderRadius: 24,
     borderWidth: 1,
     borderColor: palette.line,
-    padding: 24,
+    padding: 22,
     gap: 18,
   },
   panel: { backgroundColor: palette.pale, borderRadius: 20, padding: 24, gap: 16 },
@@ -464,7 +461,7 @@ export const s = StyleSheet.create({
     justifyContent: 'center',
     gap: 10,
   },
-  buttonSecondary: { backgroundColor: palette.pale, borderWidth: 1, borderColor: palette.line },
+  buttonSecondary: { backgroundColor: palette.white, borderWidth: 1, borderColor: palette.line },
   buttonText: { fontSize: 16, fontWeight: '600', color: palette.white, textAlign: 'center', flexShrink: 1 },
   buttonSecondaryText: { color: palette.green },
   disabled: { opacity: 0.45 },
