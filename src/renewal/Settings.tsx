@@ -31,7 +31,7 @@ export const Settings = () => {
   const router = useRouter();
   const { language, setLanguage, example } = usePreferences();
   const release = releaseCopy[language];
-  const { habits, logs, legacyAccess } = useHabitStore();
+  const { habits, logs } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
   const [restoring, setRestoring] = useState(false);
   const [backup, setBackup] = useState('');
@@ -59,7 +59,7 @@ export const Settings = () => {
     try {
       const data = parseBackup(backup);
       // Validate the full payload before any state mutation or notification cancellation.
-      if (data.habits.filter((habit) => !habit.isGraduated).length > (pro || legacyAccess ? 3 : 1))
+      if (data.habits.filter((habit) => !habit.isGraduated).length > (pro ? 3 : 1))
         throw new Error('limit');
       await Promise.all(habits.map((habit) => cancelHabitReminder(habit.id).catch(() => {})));
       useHabitStore.setState(data);
@@ -110,13 +110,12 @@ export const Settings = () => {
         <FreeHabitChoice always />
         <View style={s.panel}>
           <View style={s.between}>
-            <Text style={s.cardTitle}>{c.plusName}</Text>
+            <Text style={s.cardTitle}>{pro ? c.plusActive : c.freeStatus}</Text>
             <Icon name="spark" />
           </View>
-          <Body>{pro ? c.plusActive : c.plusText}</Body>
-          {legacyAccess && <Text style={s.small}>{c.legacy}</Text>}
+          <Body>{pro ? c.plusText : c.freeText}</Body>
           <Button secondary onPress={() => router.push('/plus')}>
-            {c.plusCta}
+            {pro ? c.plusDetails : c.plusCta}
           </Button>
         </View>
         <View style={s.card}>

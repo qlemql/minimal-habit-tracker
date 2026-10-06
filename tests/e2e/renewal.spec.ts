@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { en, ja, zh, ko } from '../../src/renewal/copy';
 import { discoveryCopy } from '../../src/renewal/ideas';
+import { releaseCopy } from '../../src/renewal/releaseCopy';
 
 test('first habit: validate, tiny action, persist, adjust, graduate and restart', async ({
   page,
@@ -51,7 +52,7 @@ test('first habit: validate, tiny action, persist, adjust, graduate and restart'
   expect(errors).toEqual([]);
 });
 
-test('old installation keeps records and three slots after hydration', async ({ page }) => {
+for (const version of [1, 2]) test(`v${version} installation keeps records with one free selection`, async ({ page }) => {
   const habits = [0, 1, 2].map((order) => ({
     id: `old-${order}`,
     name: `Old habit ${order}`,
@@ -63,14 +64,15 @@ test('old installation keeps records and three slots after hydration', async ({ 
     updatedAt: '2026-09-01T03:00:00Z',
   }));
   await page.addInitScript(
-    ({ habits }) => {
+    ({ habits, version }) => {
       if (!localStorage.getItem('habit-store'))
         localStorage.setItem(
           'habit-store',
           JSON.stringify({
-            version: 1,
+            version,
             state: {
               habits,
+              legacyAccess: true,
               logs: [
                 {
                   id: 'l',
@@ -84,21 +86,24 @@ test('old installation keeps records and three slots after hydration', async ({ 
           }),
         );
     },
-    { habits },
+    { habits, version },
   );
   await page.goto('/');
-  for (const habit of habits)
-    await expect(
-      page.getByRole('button', { name: `${en.details}: ${habit.name}`, exact: true }),
-    ).toBeVisible();
+  await expect(page.getByText(releaseCopy.en.choose, { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: `Old habit 1 · ${releaseCopy.en.chooseAction}`, exact: true }).click();
+  await expect(page.getByTestId('check-old-1')).toBeVisible();
+  await expect(page.getByTestId('check-old-0')).toHaveCount(0);
   await page.getByRole('tab', { name: en.settings, exact: true }).click();
-  await expect(page.getByText(en.legacy, { exact: true })).toBeVisible();
+  await expect(page.getByTestId('plan-status')).toHaveText(en.freeStatus);
   await page.reload();
   const data = await page.evaluate(() => JSON.parse(localStorage.getItem('habit-store') || '{}'));
-  expect(data.version).toBe(2);
+  expect(data.version).toBe(3);
   expect(data.state.logs).toHaveLength(1);
-  expect(data.state.habits).toHaveLength(3);
-  expect(data.state.legacyAccess).toBe(true);
+  expect(data.state.habits).toEqual(habits);
+  expect(data.state.legacyAccess).toBeUndefined();
+  expect(data.state.freeHabitId).toBe('old-1');
+  await page.goto('/');
+  await expect(page.getByTestId('check-old-1')).toBeVisible();
 });
 
 for (const width of [360, 375, 390, 1440]) {

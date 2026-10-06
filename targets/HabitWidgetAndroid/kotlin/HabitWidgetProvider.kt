@@ -22,7 +22,7 @@ import android.widget.RemoteViews
 import com.qlemql.minimalhabittracker.R
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.UUID
+import android.net.Uri
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -42,10 +42,10 @@ class HabitWidgetProvider : AppWidgetProvider() {
         private const val MIDNIGHT_REQUEST_CODE = 9001
 
         // 크림 톤 팔레트 — iOS HabitWidget.swift CreamTheme와 동일
-        private const val COLOR_TEXT_PRIMARY = "#233C35"
-        private const val COLOR_TEXT_SECONDARY = "#56695F"
-        private const val COLOR_ACCENT = "#315E4C"
-        private const val COLOR_FALLBACK_HABIT = "#315E4C"
+        private const val COLOR_TEXT_PRIMARY = "#302A25"
+        private const val COLOR_TEXT_SECONDARY = "#75695F"
+        private const val COLOR_ACCENT = "#9C6842"
+        private const val COLOR_FALLBACK_HABIT = "#9C6842"
 
         private fun dateFormatter(): SimpleDateFormat =
             SimpleDateFormat("yyyy-MM-dd", Locale.US)
@@ -70,7 +70,7 @@ class HabitWidgetProvider : AppWidgetProvider() {
         when (intent.action) {
             ACTION_TOGGLE -> {
                 val habitId = intent.getStringExtra(EXTRA_HABIT_ID) ?: return
-                recordToggle(context, habitId)
+                context.startActivity(openHabitIntent(context, habitId))
                 refreshAllWidgets(context)
             }
             ACTION_MIDNIGHT_REFRESH -> {
@@ -115,8 +115,14 @@ class HabitWidgetProvider : AppWidgetProvider() {
         val rowIds = listOf(R.id.widget_row_1, R.id.widget_row_2, R.id.widget_row_3)
         val checkIds = listOf(R.id.widget_check_1, R.id.widget_check_2, R.id.widget_check_3)
         val nameIds = listOf(R.id.widget_name_1, R.id.widget_name_2, R.id.widget_name_3)
-        val flowIds = listOf(R.id.widget_flow_1, R.id.widget_flow_2, R.id.widget_flow_3)
+        val weekIds = listOf(R.id.widget_week_1, R.id.widget_week_2, R.id.widget_week_3)
 
+        views.setOnClickPendingIntent(R.id.widget_title, PendingIntent.getActivity(
+            context, 0, openHabitIntent(context, null),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE))
+        views.setOnClickPendingIntent(R.id.widget_empty, PendingIntent.getActivity(
+            context, 0, openHabitIntent(context, null),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE))
         if (habits.isEmpty()) {
             views.setViewVisibility(R.id.widget_empty, View.VISIBLE)
             views.setViewVisibility(R.id.widget_progress_ring, View.GONE)
@@ -145,9 +151,9 @@ class HabitWidgetProvider : AppWidgetProvider() {
                     val habit = habits[i]
                     views.setViewVisibility(rowIds[i], View.VISIBLE)
 
-                    val habitColor = parseHabitColor(habit.color)
+                    val habitColor = Color.parseColor(COLOR_ACCENT)
                     val completedToday = habit.isCompletedToday(today)
-                    val flowDays = habit.currentFlowDays(today)
+                    val weekCount = habit.weeklyCount(today)
 
                     views.setImageViewBitmap(
                         checkIds[i],
@@ -164,26 +170,14 @@ class HabitWidgetProvider : AppWidgetProvider() {
                         views.setTextColor(nameIds[i], Color.parseColor(COLOR_TEXT_PRIMARY))
                     }
 
-                    if (flowDays > 0) {
-                        views.setTextViewText(
-                            flowIds[i],
-                            context.getString(R.string.widget_flow_days, flowDays)
-                        )
-                        views.setTextColor(flowIds[i], habitColor)
-                    } else {
-                        views.setTextViewText(flowIds[i], "")
-                    }
-
-                    val toggleIntent = Intent(context, HabitWidgetProvider::class.java).apply {
-                        action = ACTION_TOGGLE
-                        putExtra(EXTRA_HABIT_ID, habit.id)
-                    }
-                    val pi = PendingIntent.getBroadcast(
-                        context,
-                        habit.id.hashCode(),
-                        toggleIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                    )
+                    val week = context.getString(R.string.widget_weekly, weekCount, habit.target)
+                    val status = context.getString(if (habit.isTinyToday(today)) R.string.widget_tiny
+                        else if (completedToday) R.string.widget_done else R.string.widget_open)
+                    views.setTextViewText(weekIds[i], if (habit.isTinyToday(today)) "$week · $status" else week)
+                    views.setTextColor(weekIds[i], Color.parseColor(COLOR_TEXT_SECONDARY))
+                    views.setContentDescription(rowIds[i], "${habit.name}, $status, $week")
+                    val pi = PendingIntent.getActivity(context, 0, openHabitIntent(context, habit.id),
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
                     views.setOnClickPendingIntent(rowIds[i], pi)
                 } else {
                     views.setViewVisibility(rowIds[i], View.GONE)
@@ -215,7 +209,11 @@ class HabitWidgetProvider : AppWidgetProvider() {
                         name = o.getString("name"),
                         icon = o.optString("icon", ""),
                         color = o.optString("color", COLOR_FALLBACK_HABIT),
-                        completedDates = dates
+                        completedDates = dates,
+                        weeklyTarget = o.optInt("weeklyTarget", 7),
+                        tinyDates = o.optJSONArray("tinyDates")?.let { a ->
+                            (0 until a.length()).map { a.getString(it) }
+                        } ?: emptyList()
                     )
                 )
             }
@@ -225,43 +223,15 @@ class HabitWidgetProvider : AppWidgetProvider() {
         }
     }
 
-    /**
-     * 위젯 내부 상태에 즉시 반영 (낙관적 업데이트)
-     * completedDates 배열에 오늘 날짜 추가/제거.
-     * App 포그라운드 시 큐로 store와 동기화.
-     */
-    private fun recordToggle(context: Context, habitId: String) {
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        // The native module uses this same SharedPreferences instance as its lock.
-        synchronized(prefs) {
-            val habits = try { JSONArray(prefs.getString(KEY_WIDGET_HABITS, "[]")) }
-                catch (_: Exception) { return }
-            val today = todayKey()
-            for (i in 0 until habits.length()) {
-                val habit = habits.getJSONObject(i)
-                if (habit.optString("id") != habitId) continue
-                val dates = habit.optJSONArray("completedDates") ?: JSONArray()
-                val next = JSONArray()
-                var wasCompleted = false
-                for (j in 0 until dates.length()) {
-                    if (dates.getString(j) == today) wasCompleted = true
-                    else next.put(dates.getString(j))
-                }
-                if (!wasCompleted) next.put(today)
-                habit.put("completedDates", next)
-                val queue = try { JSONArray(prefs.getString(KEY_PENDING_TOGGLES, "[]")) }
-                    catch (_: Exception) { JSONArray() }
-                queue.put(JSONObject().apply {
-                    put("eventId", UUID.randomUUID().toString())
-                    put("habitId", habitId)
-                    put("date", today)
-                    put("completed", !wasCompleted)
-                })
-                // Persist snapshot and event together before showing the new state.
-                prefs.edit().putString(KEY_WIDGET_HABITS, habits.toString())
-                    .putString(KEY_PENDING_TOGGLES, queue.toString()).commit()
-                return
-            }
+    // Explicit app component and encoded ID; old broadcast PendingIntents also open this path.
+    private fun openHabitIntent(context: Context, habitId: String?): Intent {
+        val uri = Uri.Builder().scheme("minimal-habit-tracker").authority(
+            if (habitId == null) "" else "practice")
+        if (habitId != null) uri.appendQueryParameter("id", habitId)
+        else uri.path("/")
+        return Intent(Intent.ACTION_VIEW, uri.build()).apply {
+            setClassName(context.packageName, "${context.packageName}.MainActivity")
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
     }
 
@@ -318,14 +288,6 @@ class HabitWidgetProvider : AppWidgetProvider() {
 
     // ─── Bitmap 헬퍼 ────────────────────────────────────────────────────────
 
-    private fun parseHabitColor(hex: String): Int {
-        return try {
-            Color.parseColor(hex)
-        } catch (e: Exception) {
-            Color.parseColor(COLOR_FALLBACK_HABIT)
-        }
-    }
-
     private fun applyAlpha(color: Int, alpha: Float): Int {
         val a = (alpha.coerceIn(0f, 1f) * 255).toInt()
         return (a shl 24) or (color and 0x00FFFFFF)
@@ -342,7 +304,7 @@ class HabitWidgetProvider : AppWidgetProvider() {
 
         val center = sizePx / 2f
         val radius = sizePx / 2f - 1f
-        val habitColor = parseHabitColor(habit.color)
+        val habitColor = Color.parseColor(COLOR_ACCENT)
 
         val circlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = if (completed) habitColor else applyAlpha(habitColor, 0.15f)
@@ -438,33 +400,19 @@ data class WidgetHabit(
     val name: String,
     val icon: String,
     val color: String,
-    val completedDates: List<String>
+    val completedDates: List<String>,
+    val weeklyTarget: Int = 7,
+    val tinyDates: List<String> = emptyList()
 ) {
+    val target: Int get() = weeklyTarget.coerceIn(1, 7)
     fun isCompletedToday(today: String): Boolean = completedDates.contains(today)
-
-    /**
-     * 현재 흐름 일수 — streak.ts의 calculateFlow 포팅.
-     * 오늘부터 거꾸로 탐색, 2일 연속 미완료 시 끊김.
-     */
-    fun currentFlowDays(today: String): Int {
-        val completedSet = completedDates.toHashSet()
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        val cal = Calendar.getInstance().apply {
-            time = sdf.parse(today) ?: Date()
-        }
-        var flowDays = 0
-        var consecutiveMisses = 0
-        for (i in 0 until 365) {
-            val dateStr = sdf.format(cal.time)
-            if (completedSet.contains(dateStr)) {
-                flowDays++
-                consecutiveMisses = 0
-            } else {
-                consecutiveMisses++
-                if (consecutiveMisses >= 2) break
-            }
-            cal.add(Calendar.DAY_OF_MONTH, -1)
-        }
-        return flowDays
+    fun isTinyToday(today: String): Boolean = isCompletedToday(today) && tinyDates.contains(today)
+    fun weeklyCount(today: String): Int {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply { isLenient = false }
+        val cal = Calendar.getInstance().apply { time = sdf.parse(today) ?: return 0 }
+        val offset = (cal.get(Calendar.DAY_OF_WEEK) + 5) % 7
+        cal.add(Calendar.DAY_OF_MONTH, -offset)
+        val monday = sdf.format(cal.time)
+        return completedDates.toSet().count { it >= monday && it <= today }
     }
 }

@@ -19,7 +19,6 @@ type HabitUpdates = Partial<
 interface HabitStore {
   habits: Habit[];
   logs: HabitLog[];
-  legacyAccess: boolean;
   freeHabitId: string | null;
   selectFreeHabit: (id: string) => void;
   canTrackHabit: (id: string) => boolean;
@@ -44,7 +43,6 @@ export const useHabitStore = create<HabitStore>()(
     (set, get) => ({
       habits: [],
       logs: [],
-      legacyAccess: false,
       freeHabitId: null,
       widgetEventIds: [],
       selectFreeHabit: (id) => {
@@ -52,7 +50,7 @@ export const useHabitStore = create<HabitStore>()(
           set({ freeHabitId: id });
       },
       canTrackHabit: (id) => trackableHabits(
-        get().habits, useProStore.getState().isPro, get().legacyAccess, get().freeHabitId,
+        get().habits, useProStore.getState().isPro, get().freeHabitId,
       ).some((habit) => habit.id === id),
       applyWidgetEvent: (id, date, completed, eventId) => {
         if (eventId && get().widgetEventIds.includes(eventId)) return;
@@ -223,11 +221,11 @@ export const useHabitStore = create<HabitStore>()(
         get().logs.some((log) => log.habitId === id && log.date === date && log.completed),
       canAddHabit: () =>
         get().getActiveHabits().length <
-        (get().legacyAccess || useProStore.getState().isPro ? 3 : 1),
+        (useProStore.getState().isPro ? 3 : 1),
     }),
     {
       name: 'habit-store',
-      version: 2,
+      version: 3,
       storage: createJSONStorage(() => habitStorage),
       migrate: (state, version) => migrateHabitData(state, version),
     },

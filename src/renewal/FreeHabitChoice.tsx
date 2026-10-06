@@ -7,12 +7,12 @@ import { releaseCopy } from './releaseCopy';
 import { Body, Button, s } from './ui';
 
 export const FreeHabitChoice = ({ always = false }: { always?: boolean }) => {
-  const { habits, legacyAccess, freeHabitId, selectFreeHabit } = useHabitStore();
+  const { habits, freeHabitId, selectFreeHabit } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
   const language = usePreferences((state) => state.language);
   const c = releaseCopy[language];
   const active = habits.filter((habit) => !habit.isGraduated);
-  if (pro || legacyAccess || active.length <= 1 ||
+  if (pro || active.length <= 1 ||
       (!always && active.some((habit) => habit.id === freeHabitId))) return null;
   return <View style={s.card}>
     <Text style={s.cardTitle}>{c.choose}</Text>

@@ -7,6 +7,7 @@ import { completedDays } from '@/renewal/domain';
 import { useCopy, usePreferences } from '@/renewal/preferences';
 import { useProStore } from '@/store/proStore';
 import { releaseCopy } from '@/renewal/releaseCopy';
+import { HabitAction } from '@/renewal/HabitAction';
 import {
   Screen,
   Title,
@@ -38,6 +39,7 @@ export default function Practice() {
       </Screen>
     );
   const dates = completedDays(id, logs);
+  const todayLog = logs.find((log) => log.habitId === id && log.date === today && log.completed);
   if (confirm)
     return (
       <Screen detail>
@@ -69,6 +71,9 @@ export default function Practice() {
           <Title>{habit.name}</Title>
           <Body>{habit.cue ?? c.cueLabel}</Body>
         </View>
+        {!habit.isGraduated && useHabitStore.getState().canTrackHabit(id) && (
+          <HabitAction habitId={id} completed={Boolean(todayLog)} tiny={todayLog?.effort === 'tiny'} />
+        )}
         <View style={s.panel}>
           <Eyebrow>{c.minimumLabel}</Eyebrow>
           <Text style={s.cardTitle}>{habit.minimum ?? habit.name}</Text>

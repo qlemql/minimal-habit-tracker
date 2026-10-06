@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="widget_title">Today\'s Habits</string>
-    <string name="widget_all_completed">All done! 🎉</string>
+    <string name="widget_all_completed">Recorded for today</string>
     <string name="widget_progress_a11y">Progress</string>
     <string name="widget_check_a11y">Check</string>
     <string name="widget_empty">Add habits in the app</string>
-    <string name="widget_flow_days">%1$dd</string>
+    <string name="widget_weekly">This week %1$d/%2$d</string>
+    <string name="widget_tiny">Small version done</string>
+    <string name="widget_done">Done</string>
+    <string name="widget_open">Open to record</string>
 </resources>

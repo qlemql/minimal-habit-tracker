@@ -1,9 +1,8 @@
 "widget.title" = "今天的習慣";
-"widget.allCompleted" = "今天都完成了";
+"widget.allCompleted" = "今天已記錄";
 "widget.empty.small" = "新增習慣";
 "widget.empty.medium" = "到 App 新增習慣";
 "widget.empty.accessory" = "到 App 新增";
-"widget.flowDays" = "%d天";
 "widget.accessory.label" = "習慣";
 "widget.accessory.inline.empty" = "Ssak — 新增習慣";
 "widget.accessory.inline.allDone" = "Ssak 已完成 %1$d/%2$d";
@@ -13,3 +12,8 @@
 "widget.sample.water" = "喝水";
 "widget.sample.exercise" = "動一動";
 "widget.sample.reading" = "看書";
+
+"widget.weekly" = "本週 %1$d/%2$d";
+"widget.tiny" = "完成小目標";
+"widget.done" = "完成";
+"widget.open" = "到 App 記錄";

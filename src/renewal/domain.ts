@@ -83,16 +83,27 @@ const isLog = (value: unknown): value is HabitLog =>
 export interface HabitData {
   habits: Habit[];
   logs: HabitLog[];
-  legacyAccess: boolean;
+  freeHabitId: string | null;
+  widgetEventIds: string[];
 }
-export const migrateHabitData = (value: unknown, version: number): HabitData => {
-  if (!isRecord(value)) return { habits: [], logs: [], legacyAccess: false };
+export const migrateHabitData = (value: unknown, _version: number): HabitData => {
+  if (!isRecord(value)) return { habits: [], logs: [], freeHabitId: null, widgetEventIds: [] };
   const habits = Array.isArray(value.habits) ? value.habits.filter(isHabit) : [];
   const ids = new Set(habits.map((habit) => habit.id));
   const logs = Array.isArray(value.logs)
-    ? value.logs.filter(isLog).filter((log) => ids.has(log.habitId))
+    ? value.logs
+      .map((log) => isRecord(log) && log.completedAt === undefined
+        ? { ...log, completedAt: null } : log)
+      .filter(isLog).filter((log) => ids.has(log.habitId))
     : [];
-  return { habits, logs, legacyAccess: version < 2 || value.legacyAccess === true };
+  // Upgrade records without carrying over the retired legacy entitlement.
+  const freeHabitId = typeof value.freeHabitId === 'string' &&
+    habits.some((habit) => habit.id === value.freeHabitId && !habit.isGraduated)
+    ? value.freeHabitId : null;
+  const widgetEventIds = Array.isArray(value.widgetEventIds)
+    ? value.widgetEventIds.filter((id): id is string => typeof id === 'string').slice(-2000)
+    : [];
+  return { habits, logs, freeHabitId, widgetEventIds };
 };
 export const serializeBackup = (habits: Habit[], logs: HabitLog[]): string =>
   JSON.stringify(

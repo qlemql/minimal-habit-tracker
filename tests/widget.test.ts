@@ -15,12 +15,31 @@ vi.mock('../modules/shared-defaults', () => native);
 import { processPendingWidgetToggles, getWidgetData } from '../src/utils/widgetData';
 beforeEach(async () => {
   Platform.OS = 'android';
-  useHabitStore.setState({ habits: [], logs: [], legacyAccess: false, freeHabitId: null, widgetEventIds: [] });
+  useHabitStore.setState({ habits: [], logs: [], freeHabitId: null, widgetEventIds: [] });
   useProStore.setState({ isPro: true });
   await flushHabitStorage();
   vi.clearAllMocks();
 });
 describe('widget queue acknowledgement', () => {
+  it('exports the configured goal and distinguishes tiny records without double counting', () => {
+    const id = useHabitStore.getState().addHabit('Read', '📖', '#9C6842', { weeklyTarget: 3 })!;
+    const today = localDate();
+    useHabitStore.getState().checkIn(id, 'tiny');
+    const log = useHabitStore.getState().logs[0];
+    useHabitStore.setState({ logs: [log, { ...log, id: 'duplicate' },
+      { ...log, id: 'future', date: shiftDate(today, 1) }] });
+    expect(getWidgetData()[0]).toMatchObject({ weeklyTarget: 3, completedDates: [today], tinyDates: [today] });
+    useHabitStore.getState().toggleHabit(id);
+    expect(getWidgetData()[0]).toMatchObject({ completedDates: [], tinyDates: [] });
+    useHabitStore.getState().checkIn(id, 'full');
+    expect(getWidgetData()[0]).toMatchObject({ completedDates: [today], tinyDates: [] });
+  });
+  it('preserves the old default goal and excludes graduated habits', () => {
+    const id = useHabitStore.getState().addHabit('Read', '📖', '#9C6842')!;
+    expect(getWidgetData()[0].weeklyTarget).toBe(7);
+    useHabitStore.getState().graduateHabit(id);
+    expect(getWidgetData()).toEqual([]);
+  });
   it('imports dated events once during concurrent refresh and acknowledges only those IDs', async () => {
     const id = useHabitStore.getState().addHabit('Read', 'book', '#315E4C')!;
     await flushHabitStorage();

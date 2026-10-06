@@ -42,3 +42,47 @@ for (const language of ['en', 'ko', 'ja', 'zh-TW'] satisfies Language[]) {
     expect(logs[0].id).toBe('old');
   });
 }
+
+for (const language of ['en', 'ko', 'ja', 'zh-TW'] satisfies Language[]) {
+  for (const pro of [false, true]) {
+    test(`${language}: ${pro ? 'Plus' : 'free'} status survives deleting a habit`, async ({ page }) => {
+      const c = copies[language];
+      await page.setViewportSize({ width: 360, height: 800 });
+      await page.addInitScript(({ language, pro }) => {
+        if (localStorage.getItem('plan-fixture')) return;
+        localStorage.setItem('plan-fixture', '1');
+        localStorage.setItem('ssak-preferences', JSON.stringify({ state: { language, welcomed: true }, version: 0 }));
+        localStorage.setItem('pro-store', JSON.stringify({ state: { isPro: pro }, version: 2 }));
+        const habits = ['Reading', 'Walking'].map((name, i) => ({ id: `h${i}`, name, icon: '📖', color: '#315E4C', order: i, createdAt: '2026-10-01', updatedAt: '2026-10-01', reminderTime: null }));
+        localStorage.setItem('habit-store', JSON.stringify({ state: { habits, logs: [], freeHabitId: 'h0', widgetEventIds: [] }, version: 3 }));
+      }, { language, pro });
+      const label = pro ? c.plusActive : c.freeStatus;
+      await page.goto('/');
+      await expect(page.getByTestId('check-h0')).toBeVisible();
+      await expect(page.getByTestId('check-h1')).toHaveCount(pro ? 1 : 0);
+      await expect(page.getByTestId('plan-status')).toHaveCount(0);
+      for (const path of ['/stats', '/settings']) {
+        await page.goto(path);
+        await expect(page.getByTestId('plan-status')).toHaveText(label);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      }
+      if (language === 'ko') await page.screenshot({ path: `artifacts/renewal/plan-${pro ? 'plus' : 'free'}-ko.png` });
+      await page.goto('/practice?id=h0');
+      await page.getByRole('button', { name: c.delete, exact: true }).click();
+      await page.getByRole('button', { name: c.confirmDelete, exact: true }).click();
+      await page.goto('/stats');
+      await expect(page.getByTestId('plan-status')).toHaveText(label);
+      await page.reload();
+      await expect(page.getByTestId('plan-status')).toHaveText(label);
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await expect(page.getByTestId('plan-status')).toHaveText(label);
+      await page.getByTestId('plan-status').click();
+      if (pro) {
+        await expect(page.getByText(c.plusActive, { exact: true }).filter({ visible: true })).toBeVisible();
+        await expect(page.getByRole('button', { name: c.buy, exact: true })).toHaveCount(0);
+      } else {
+        await expect(page.getByRole('button', { name: c.buy, exact: true })).toBeVisible();
+      }
+    });
+  }
+}

@@ -18,7 +18,7 @@ export const Editor = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id?: string }>();
   const [stage, setStage] = useState<'choose' | 'plan'>(id ? 'plan' : 'choose');
-  const { habits, addHabit, updateHabit, legacyAccess } = useHabitStore();
+  const { habits, addHabit, updateHabit } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
   const habit = habits.find((item) => item.id === id);
   const [name, setName] = useState(habit?.name ?? '');
@@ -30,7 +30,7 @@ export const Editor = () => {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const activeCount = habits.filter((item) => !item.isGraduated).length;
-  const max = legacyAccess || pro ? 3 : 1;
+  const max = pro ? 3 : 1;
   const readOnly = Boolean(habit && !useHabitStore.getState().canTrackHabit(habit.id));
   const save = async () => {
     if (busy) return;

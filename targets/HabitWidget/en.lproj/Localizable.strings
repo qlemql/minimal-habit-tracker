@@ -1,14 +1,12 @@
 /* Widget header */
 "widget.title" = "Today's Habits";
-"widget.allCompleted" = "All done! 🎉";
+"widget.allCompleted" = "Recorded for today";
 
 /* Empty states */
 "widget.empty.small" = "Add a habit";
 "widget.empty.medium" = "Add habits in the app";
 "widget.empty.accessory" = "Add in the app";
 
-/* Flow days suffix — appears next to habit name */
-"widget.flowDays" = "%dd";
 
 /* Lock screen accessory */
 "widget.accessory.label" = "Habits";
@@ -24,3 +22,8 @@
 "widget.sample.water" = "Drink water";
 "widget.sample.exercise" = "Exercise";
 "widget.sample.reading" = "Read";
+
+"widget.weekly" = "This week %1$d/%2$d";
+"widget.tiny" = "Small version done";
+"widget.done" = "Done";
+"widget.open" = "Open to record";

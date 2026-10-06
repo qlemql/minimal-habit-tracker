@@ -32,11 +32,11 @@ export const Today = () => {
   const today = useToday();
   const width = useWindowDimensions().width;
   const wide = width >= 1050;
-  const { habits, logs, legacyAccess, freeHabitId } = useHabitStore();
+  const { habits, logs, freeHabitId } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
   const { language, welcomed, welcome, example, setLanguage } = usePreferences();
-  const active = trackableHabits(habits, pro, legacyAccess, freeHabitId);
-  const needsChoice = !pro && !legacyAccess && habits.some((habit) => !habit.isGraduated) && active.length === 0;
+  const active = trackableHabits(habits, pro, freeHabitId);
+  const needsChoice = !pro && habits.some((habit) => !habit.isGraduated) && active.length === 0;
   const dates = new Set(
     logs.filter((log) => log.completed && log.date <= today).map((log) => log.date),
   );
@@ -91,17 +91,6 @@ export const Today = () => {
             .toLocaleDateString(language, { weekday: 'long', month: 'long', day: 'numeric' })
             .toLocaleUpperCase(language)}
         </Eyebrow>
-        {width >= 850 && (
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel={c.plusCta}
-            onPress={() => router.push('/plus')}
-            style={s.plusBadge}
-          >
-            <Icon name="spark" size={13} />
-            <Text style={s.plusBadgeText}>SSAK PLUS</Text>
-          </Pressable>
-        )}
       </View>}
       {example && (
         <View style={st.example}>

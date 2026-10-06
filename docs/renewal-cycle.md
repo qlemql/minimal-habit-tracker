@@ -21,7 +21,7 @@ This is a differentiated execution hypothesis, not a claim of a unique invention
 6. Build Expo web for an immediately reviewable working version of the same React Native app. Run browser flows, persistence/migration tests and mobile-width visual checks.
 
 ## Business decision
-Replace the previous 14-day hard expiry with a permanently usable free journey. New installations: one active habit free, up to three with a one-time Ssak Plus purchase. Existing users keep their three active slots. Basic check-in, reflection and graduation remain free. Plus adds parallel journeys and portable backup. No subscription and no paid user acquisition assumed.
+Replace the previous 14-day hard expiry with a permanently usable free journey. New installations: one active habit free, up to three with a one-time Ssak Plus purchase. As of 2026-10-06, there is no legacy access exception; existing records remain readable. Basic check-in, reflection and graduation remain free. Plus adds parallel journeys and portable backup. No subscription and no paid user acquisition assumed.
 
 Test a US $7.99 lifetime price, localized through the store. It is a hypothesis, not a configured product or validated willingness to pay. The app displays the actual store price only when a matching lifetime offering is available.
 
@@ -38,11 +38,11 @@ Publish only after real-device notifications, native widgets, store purchase/res
 
 - Branch `feat/ssak-renewal`, based on main `7ae02eb`; no commit, push, release or store publication performed.
 - Four language dictionaries are type checked against the same keys. Existing habit text is user content and is not translated when switching UI language.
-- Persistence keeps `habit-store`, migrates to schema version 2, and preserves the original three slots for existing users. The old local development Pro switch is not treated as a receipt.
+- Persistence keeps `habit-store`, migrates to schema version 3, preserves records and free-habit selection, and removes legacy access. The old local development Pro switch is not treated as a receipt.
 - Reminder requests occur only in the editor. Native scheduling uses platform-independent date triggers, serializes operations per habit, omits completed days, and refreshes a seven-day window when the app returns. There is no escalating reactivation campaign. The window can expire if the app is not opened for a week; this is a known design limit.
 - Native explicit notification Done actions are idempotent and only apply to the notification's current local date. The existing native widget implementation is retained and requires device validation and visual alignment before release.
 - RevenueCat integration reads the current lifetime package, displays its store price, purchases, restores and checks the `ssak_plus` entitlement. Missing public SDK keys or missing products leave purchase disabled. Store calls are mocked in automated tests; no actual payment was made.
-- Backup validation rejects invalid dates, orphan records, duplicate habit/day entries and more than three active habits before replacement. A backup cannot grant Plus or legacy access.
+- Backup validation rejects invalid dates, orphan records, duplicate habit/day entries and more than three active habits before replacement. A backup cannot grant Plus access.
 
 ### Checks
 
@@ -79,6 +79,6 @@ For regular development use `npm run web`. The Babel config enables Expo SDK 54'
 
 ### Two final review passes
 
-Product review: no claim that minimum habits, reflection or graduation are unique. The differentiator is the whole low-pressure restart journey. Existing users retain their slots; new free users can finish a useful journey without payment. No retention or revenue claims are inferred from automated tests.
+Product review: no claim that minimum habits, reflection or graduation are unique. The differentiator is the whole low-pressure restart journey. Free users can finish a useful journey without payment; purchase entitlement alone enables three active habits. No retention or revenue claims are inferred from automated tests.
 
 Quality review: verified rollback on failed reminder edits, one record per habit/day, delayed reviews after restart, history retention on graduation, entitlement verification, safe restore validation, translation coverage and narrow-screen behavior. Remaining device/market/release work is explicitly separated from the locally completed prototype.

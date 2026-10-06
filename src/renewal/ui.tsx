@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'expo-router';
 import Svg, { Path, Circle, Rect, Ellipse, G } from 'react-native-svg';
 import brand from '../../assets/brand/design.json';
 import { useCopy, usePreferences } from './preferences';
+import { useProStore } from '@/store/proStore';
 import { localDate, weekDays } from './domain';
 import type { ReactNode } from 'react';
 import type { TextInputProps } from 'react-native';
@@ -262,6 +263,17 @@ export const Week = ({
     </View>
   );
 };
+export const PlanBadge = () => {
+  const c = useCopy();
+  const pro = useProStore((state) => state.isPro);
+  const router = useRouter();
+  const label = pro ? c.plusActive : c.freeStatus;
+  return <Pressable accessibilityRole="button" accessibilityLabel={label}
+    onPress={() => router.push('/plus')} style={s.plusBadge} testID="plan-status">
+    <Text style={s.plusBadgeText}>{label}</Text>
+  </Pressable>;
+};
+
 export const Screen = ({ children, detail = false }: { children: ReactNode; detail?: boolean }) => {
   const c = useCopy();
   const path = usePathname();
@@ -314,9 +326,7 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
             <View style={s.mobileHeader}>
               <Brand />
               {path === '/' && <Text style={s.headerDate}>{new Date(`${today}T12:00:00`).toLocaleDateString(language, { month: 'short', day: 'numeric', weekday: 'short' })}</Text>}
-              {path !== '/' && <Pressable accessibilityRole="button" accessibilityLabel={c.plusCta} onPress={() => router.push('/plus')} style={s.plusBadge}>
-                <Text style={s.plusBadgeText}>PLUS</Text>
-              </Pressable>}
+              {path !== '/' && <PlanBadge />}
             </View>
           )}
           <ScrollView
@@ -336,6 +346,7 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
                 <Text style={s.backText}>{c.back}</Text>
               </Pressable>
             )}
+            {wide && !detail && path !== '/' && <View style={{ alignItems: 'flex-end' }}><PlanBadge /></View>}
             {children}
             <View style={s.endSpace} />
           </ScrollView>

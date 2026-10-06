@@ -73,6 +73,12 @@ class SharedDefaultsModule : Module() {
                     if (previous.getString(k) != date) dates.put(previous.getString(k))
                 if (event.optBoolean("completed")) dates.put(date)
                 habit.put("completedDates", dates)
+                // Old widget taps always represented the full action, never the tiny alternative.
+                val previousTiny = habit.optJSONArray("tinyDates") ?: JSONArray()
+                val tinyDates = JSONArray()
+                for (k in 0 until previousTiny.length())
+                    if (previousTiny.getString(k) != date) tinyDates.put(previousTiny.getString(k))
+                habit.put("tinyDates", tinyDates)
             }
         }
         return habits.toString()

@@ -26,13 +26,22 @@ const log: HabitLog = {
   completedAt: '2026-10-02T03:00:00Z',
 };
 describe('existing records and portable backups', () => {
-  it('preserves v1 habit fields, logs and original three slots', () => {
+  it('preserves v1 habit fields and logs without granting purchase access', () => {
     const data = migrateHabitData({ habits: [habit], logs: [log] }, 1);
-    expect(data).toEqual({ habits: [habit], logs: [log], legacyAccess: true });
+    expect(data).toEqual({ habits: [habit], logs: [log], freeHabitId: null, widgetEventIds: [] });
   });
-  it('does not grant legacy access to a fresh or v2 installation', () => {
-    expect(migrateHabitData(null, 0).legacyAccess).toBe(false);
-    expect(migrateHabitData({ habits: [], logs: [] }, 2).legacyAccess).toBe(false);
+  it('drops v2 legacy access but preserves the free choice and event replay protection', () => {
+    const data = migrateHabitData({ habits: [habit], logs: [log], legacyAccess: true,
+      freeHabitId: habit.id, widgetEventIds: ['event-1'] }, 2);
+    expect(data).toEqual({ habits: [habit], logs: [log], freeHabitId: habit.id,
+      widgetEventIds: ['event-1'] });
+    expect(migrateHabitData(null, 0)).toEqual({ habits: [], logs: [], freeHabitId: null, widgetEventIds: [] });
+    expect(migrateHabitData({ habits: [habit], logs: [], freeHabitId: 'deleted' }, 2).freeHabitId).toBeNull();
+  });
+  it('preserves older records without completion timestamps', () => {
+    const { completedAt, ...oldLog } = log;
+    expect(migrateHabitData({ habits: [habit], logs: [oldLog] }, 2).logs)
+      .toEqual([{ ...oldLog, completedAt: null }]);
   });
   it('round trips graduation, adjustments and tiny actions without entitlements', () => {
     const graduated = {

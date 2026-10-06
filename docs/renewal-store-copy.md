@@ -52,7 +52,7 @@ Once you no longer need daily check-ins, you can stop tracking. Your history sta
 
 Track one habit at a time for free, with no time limit. Ssak Plus is a one-time purchase for up to three habits at once, backup and restore. No subscription, no ads, and no account required.
 
-Records are stored on your device and don’t sync automatically. iOS and Android purchases are separate. Existing users keep their original three habit slots.
+Records are stored on your device and don’t sync automatically. iOS and Android purchases are separate.
 
 ### 한국어 — 싹: 습관 기록
 
@@ -66,7 +66,7 @@ Records are stored on your device and don’t sync automatically. iOS and Androi
 
 습관 하나는 기간 제한 없이 무료로 기록할 수 있어요. Ssak Plus는 한 번 결제로 습관을 최대 3개까지 함께 기록하고, 백업과 복원을 쓸 수 있어요. 구독료와 광고는 없고, 가입하지 않아도 돼요.
 
-기록은 이 기기에 저장되며 자동으로 동기화되지 않아요. iOS와 Android 구매는 별도예요. 기존 사용자는 원래 쓰던 습관 3개를 계속 기록할 수 있어요.
+기록은 이 기기에 저장되며 자동으로 동기화되지 않아요. iOS와 Android 구매는 별도예요.
 
 ### 日本語 — Ssak：習慣記録
 

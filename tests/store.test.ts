@@ -11,7 +11,7 @@ const add = () =>
       weeklyTarget: 5,
     })!;
 beforeEach(() => {
-  useHabitStore.setState({ habits: [], logs: [], legacyAccess: false });
+  useHabitStore.setState({ habits: [], logs: [] });
   useProStore.setState({ isPro: false });
 });
 describe('complete habit lifecycle', () => {
@@ -45,9 +45,8 @@ describe('complete habit lifecycle', () => {
     expect(add()).toBeTypeOf('string');
     expect(useHabitStore.getState().restartHabit(id)).toBe(false);
   });
-  it.each(['legacy', 'pro'])('%s access allows three, never four active habits', (plan) => {
-    if (plan === 'legacy') useHabitStore.setState({ legacyAccess: true });
-    else useProStore.setState({ isPro: true });
+  it('purchased Plus allows three, never four active habits', () => {
+    useProStore.setState({ isPro: true });
     expect([add(), add(), add()].every(Boolean)).toBe(true);
     expect(add()).toBeNull();
   });

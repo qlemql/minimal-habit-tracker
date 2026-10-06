@@ -6,7 +6,7 @@ import { isTodaysReminder } from '../src/renewal/notificationAction';
 beforeEach(() => {
   vi.useFakeTimers();
   vi.setSystemTime(new Date('2026-10-04T10:00:00'));
-  useHabitStore.setState({ habits: [], logs: [], legacyAccess: false, freeHabitId: null });
+  useHabitStore.setState({ habits: [], logs: [], freeHabitId: null });
   useProStore.setState({ isPro: true });
 });
 afterEach(() => vi.useRealTimers());
@@ -34,12 +34,10 @@ describe('purchase access changes', () => {
     useProStore.getState().setPro(true);
     expect(useHabitStore.getState().canTrackHabit(one)).toBe(true);
   });
-  it('keeps legacy access and recovers when the selected habit is removed', () => {
+  it('recovers when the selected free habit is removed', () => {
     const one = add(); const two = add();
     useProStore.getState().setPro(false);
-    useHabitStore.setState({ legacyAccess: true });
-    expect(useHabitStore.getState().canTrackHabit(two)).toBe(true);
-    useHabitStore.setState({ legacyAccess: false });
+    expect(useHabitStore.getState().canTrackHabit(two)).toBe(false);
     useHabitStore.getState().selectFreeHabit(one);
     useHabitStore.getState().deleteHabit(one);
     expect(useHabitStore.getState().canTrackHabit(two)).toBe(true);

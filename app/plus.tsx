@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import { LocalizedText as Text } from '@/renewal/LocalizedText';
 import { useRouter } from 'expo-router';
 import { releaseCopy } from '@/renewal/releaseCopy';
-import { useHabitStore } from '@/store/habitStore';
 import { useProStore } from '@/store/proStore';
 import { useCopy, usePreferences } from '@/renewal/preferences';
 import { discoveryCopy } from '@/renewal/ideas';
@@ -33,7 +32,6 @@ export default function Plus() {
   const language = usePreferences((state) => state.language);
   const d = discoveryCopy[language];
   const pro = useProStore((state) => state.isPro);
-  const legacy = useHabitStore((state) => state.legacyAccess);
   const [item, setItem] = useState<PurchasesPackage | null>(null);
   const [busy, setBusy] = useState(false);
   const [pending, setPending] = useState(false);
@@ -124,7 +122,6 @@ export default function Plus() {
             </>
           )}
         </View>
-        {legacy && <Notice>{c.legacy}</Notice>}
         {message ? <Notice>{message}</Notice> : null}
         <Text style={s.small}>{d.scope}</Text>
         <Button

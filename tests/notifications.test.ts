@@ -57,7 +57,6 @@ beforeEach(() => {
       },
     ],
     logs: [],
-    legacyAccess: false,
   });
 });
 afterEach(() => {
