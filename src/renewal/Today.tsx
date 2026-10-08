@@ -9,7 +9,6 @@ import { HabitAction } from './HabitAction';
 import { usePreferences, useCopy } from './preferences';
 import { completedDays, weeklyCount, hasReviewDue } from './domain';
 import { clearExample, loadExample } from './sample';
-import { languages } from './copy';
 import {
   Screen,
   s,
@@ -34,7 +33,7 @@ export const Today = () => {
   const wide = width >= 1050;
   const { habits, logs, freeHabitId } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
-  const { language, welcomed, welcome, example, setLanguage } = usePreferences();
+  const { language, welcomed, welcome, example } = usePreferences();
   const active = trackableHabits(habits, pro, freeHabitId);
   const needsChoice = !pro && habits.some((habit) => !habit.isGraduated) && active.length === 0;
   const dates = new Set(
@@ -49,18 +48,6 @@ export const Today = () => {
     return (
       <Screen>
         <View style={st.welcome}>
-          <View style={st.languageRow}>
-            {languages.map((item) => (
-              <Pressable
-                key={item.code}
-                accessibilityRole="button"
-                onPress={() => setLanguage(item.code)}
-                style={[st.language, language === item.code && st.languageActive]}
-              >
-                <Text style={st.languageText}>{item.label}</Text>
-              </Pressable>
-            ))}
-          </View>
           <View style={st.welcomeArt}>
             <TrailArt />
           </View>
@@ -241,10 +228,6 @@ const st = StyleSheet.create({
   welcomeArt: { alignSelf: 'center', marginVertical: 5 },
   welcomeFeatures: { gap: 15, marginVertical: 10 },
   welcomeFooter: { fontSize: 11, color: palette.soft, textAlign: 'center', marginTop: 5 },
-  languageRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 6 },
-  language: { padding: 10, minHeight: 40, borderRadius: 10 },
-  languageActive: { backgroundColor: palette.pale },
-  languageText: { fontSize: 12, color: palette.green },
   hero: { flexDirection: 'row', alignItems: 'center', marginTop: 25, marginBottom: 35, gap: 24 },
   heroMobile: { marginTop: 4, marginBottom: 28 },
   heroSub: { maxWidth: 340, marginTop: 10 },

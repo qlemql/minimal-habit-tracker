@@ -217,6 +217,8 @@ Expo 44로 역행하는 `audit fix --force`는 적용하지 않았다.
 
 ## 결제·환불 운영 설정
 
+실제 콘솔 작업은 [iOS 및 Google Play 결제 설정 체크리스트](payment-setup.ko.md)를 따라 진행한다. 상품 ID, 플랫폼별 키, 환불 알림, 테스트 결과 기록란을 포함한다.
+
 1. App Store Connect에 **비소모성** 상품, Play Console에 **소비하지 않는 일회성** 상품을
    만든다. RevenueCat entitlement `ssak_plus`에 양쪽 상품을 연결하고 current offering의
    lifetime package에 넣는다. 구독 상품으로 등록하지 않는다.

@@ -36,6 +36,8 @@ test('identical actions appear once and changing UI language preserves the enter
   await expect(page.locator('[data-testid^="check-tiny-"]')).toHaveCount(0);
   await page.getByRole('tab', { name: en.settings, exact: true }).click();
   await page.getByRole('radio', { name: '한국어', exact: true }).click();
+  await page.reload();
+  await expect(page.getByRole('tab', { name: ko.settings, exact: true })).toBeVisible();
   await page.getByRole('tab', { name: ko.today, exact: true }).click();
   await expect(page.getByText(ko.checkInQuestion, { exact: true })).toBeVisible();
   await expect(page.getByText('After tea', { exact: true })).toBeVisible();
@@ -57,4 +59,18 @@ test('a day boundary clears yesterday completion without a reload', async ({ pag
   const dates = await page.evaluate(() => JSON.parse(localStorage.getItem('habit-store') || '{}').state.logs.map((log: {date: string}) => log.date));
   expect(dates).toContain('2026-10-04');
   expect(dates).toContain('2026-10-05');
+});
+
+
+test.describe('unsupported device language', () => {
+  test.use({ locale: 'fr-FR' });
+  test('starts in English and allows an explicit language change in Settings', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByRole('button', { name: en.welcomeButton, exact: true })).toBeVisible();
+    await page.getByRole('tab', { name: en.settings, exact: true }).click();
+    await page.getByRole('radio', { name: '한국어', exact: true }).click();
+    await page.reload();
+    await page.getByRole('tab', { name: ko.today, exact: true }).click();
+    await expect(page.getByRole('button', { name: ko.welcomeButton, exact: true })).toBeVisible();
+  });
 });

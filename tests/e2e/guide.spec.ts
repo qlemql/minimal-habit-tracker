@@ -30,7 +30,6 @@ test('phone frame uses actual device widths and creates a real habit', async ({ 
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(`${guide}#phone`);
   const app = page.frameLocator('#app-frame');
-  await app.getByRole('button', { name: 'English', exact: true }).click();
   for (const width of [375, 360, 390]) {
     await page.locator(`[data-width="${width}"]`).click();
     const frame = page.frames().find((frame) => frame.url() === 'http://localhost:4174/')!;

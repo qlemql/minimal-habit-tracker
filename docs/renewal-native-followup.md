@@ -149,3 +149,20 @@ Physical-device launch succeeded. Read back AsyncStorage after launch: schema v3
 ## Fresh-device test reset (2026-10-06 14:45 KST)
 
 User approved resetting this iPhone's test records for a new-user walkthrough. Backed up all AsyncStorage files and verified habit/log data plus file hashes at `/Users/daniel/.ssak-device-backups/2026-10-06-144453-before-clean-start`. The Library-wide copy encountered a protected OS SplashBoard snapshot; the dedicated AsyncStorage backup succeeded. Uninstalled only `com.qlemql.minimalhabittracker` and reinstalled the same signed app-only 2.0.0 (13) test build. Automatic launch was denied because the iPhone was locked; the user must unlock it and open the app. No production reset behavior was added. Evidence: `/tmp/ssak-clean-start-install.json`, `/tmp/ssak-clean-start-files.json`.
+
+## 2026-10-07 automatic initial language
+
+Plan: remove language controls from the welcome screen, retain the existing device-language default and Settings override, and verify first-run localization plus persistence before updating the iPhone test build. No country/GPS lookup is needed.
+
+Completed: welcome-screen language buttons and their unused styles removed. Existing `getLocales()` default remains: Korean, Japanese and Chinese (Traditional UI), otherwise English; Settings overrides remain persisted. Browser tests now start fresh under each supported device locale rather than clicking a welcome language button. Added an unsupported-locale fallback flow and verified a Settings language change survives reload.
+
+Validation: typecheck, web export and unsigned iPhone Release build passed. The 41-scenario browser suite had 40 passes and one new assertion failure because the web radio did not expose `aria-checked`; changed that assertion to the visible localized Settings tab and reran the affected scenario successfully. No app implementation change was required for that assertion.
+
+Device installation pending: the paired iPhone currently reports its tunnel as unavailable. Its records were not reset or modified for this change.
+
+## 2026-10-08 위젯 디자인 검토와 다음 작업
+
+- [iOS·Android 위젯 비교 시안](design/widget-comparison/index.html): 브라우저에서 파일을 열면 두 플랫폼을 나란히 비교하고 이미지를 확대할 수 있다. PNG는 생성형 디자인 시안이며 실제 기기 캡처가 아니다.
+- Dynamic Island는 사용자가 시작한 짧은 습관 세션을 표시하는 추가 아이디어다. 길게 눌러 진행 시간과 남은 시간을 확인 → ‘앱에서 기록’ → 앱에서 ‘작게 완료 / 완료’를 직접 선택하는 흐름으로 문구와 시안을 맞췄다. 기록 선택은 미리보기이며 실제 저장하지 않는다.
+- 비교 화면의 이미지 로딩·확대·Esc 닫기, 기록 선택·초기화와 320px 모바일 배치를 브라우저에서 검증했다. 네이티브 위젯이나 Live Activity 구현 완료를 의미하지 않는다.
+- 다음 순서: iOS 소형/중형/잠금 화면 디자인 반영 → App Groups 서명과 위젯 포함 실기기 검증 → Android 크기별 구성 → 결제 연결과 출시 검증. 진행 세션과 Live Activity는 기본 위젯 이후 별도 개발 범위다.
