@@ -77,11 +77,11 @@ function withWidgetFiles(config) {
         path.join(targetMain, 'res', 'xml', 'habit_widget_info.xml')
       );
 
-      // res/layout/habit_widget_medium.xml + habit_widget_row.xml
-      copyFile(
-        path.join(sourceDir, 'res', 'layout', 'habit_widget_medium.xml'),
-        path.join(targetMain, 'res', 'layout', 'habit_widget_medium.xml')
-      );
+      // Count-specific widget layouts and the one-habit gallery preview.
+      const layoutDir = path.join(sourceDir, 'res', 'layout');
+      for (const file of fs.readdirSync(layoutDir).filter((name) => name.endsWith('.xml'))) {
+        copyFile(path.join(layoutDir, file), path.join(targetMain, 'res', 'layout', file));
+      }
 
       // res/drawable (배경 등)
       const drawableDir = path.join(sourceDir, 'res', 'drawable');

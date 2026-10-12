@@ -9,4 +9,8 @@
     <string name="widget_tiny">Small version done</string>
     <string name="widget_done">Done</string>
     <string name="widget_open">Open to record</string>
+    <string name="widget_week_label">This week</string>
+    <string name="widget_tiny_compact">Small</string>
+    <string name="widget_sample_reading">Read a book</string>
+    <string name="widget_sample_minimum">Read one page</string>
 </resources>

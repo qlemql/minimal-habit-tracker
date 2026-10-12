@@ -9,4 +9,8 @@
     <string name="widget_tiny">작게 완료</string>
     <string name="widget_done">완료</string>
     <string name="widget_open">앱에서 기록하기</string>
+    <string name="widget_week_label">이번 주</string>
+    <string name="widget_tiny_compact">작게</string>
+    <string name="widget_sample_reading">독서하기</string>
+    <string name="widget_sample_minimum">책 한 페이지 읽기</string>
 </resources>

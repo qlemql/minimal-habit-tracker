@@ -17,6 +17,7 @@ export interface WidgetHabit {
   icon: string;
   color: string;
   weeklyTarget: number;
+  minimum?: string;
   tinyDates: string[];
   // 최근 HISTORY_WINDOW_DAYS 일간 완료한 날짜들 (YYYY-MM-DD, 오름차순).
   // 위젯 측이 표시 날짜로 오늘 상태와 주간 횟수를 재계산.
@@ -40,6 +41,7 @@ export function getWidgetData(): WidgetHabit[] {
       icon: habit.icon,
       color: habit.color,
       weeklyTarget: habit.weeklyTarget ?? 7,
+      minimum: habit.minimum?.trim() || undefined,
       tinyDates: [...new Set(logs.filter((log) => log.habitId === habit.id &&
         log.completed && log.effort === 'tiny' && log.date >= cutoff && log.date <= today)
         .map((log) => log.date))].sort(),

@@ -12,6 +12,7 @@ struct WidgetHabit: Codable, Identifiable {
     // Optional for snapshots written by the previous app version.
     let weeklyTarget: Int?
     let tinyDates: [String]?
+    var minimum: String? = nil
 
     init(id: String, name: String, icon: String, color: String,
          completedDates: [String], weeklyTarget: Int? = nil, tinyDates: [String]? = nil) {
@@ -92,24 +93,17 @@ struct HabitProvider: TimelineProvider {
               let data = jsonString.data(using: .utf8) else {
             return []
         }
-        return (try? JSONDecoder().decode([WidgetHabit].self, from: data)) ?? []
+        return Array(((try? JSONDecoder().decode([WidgetHabit].self, from: data)) ?? []).prefix(3))
     }
 
     private var sampleHabits: [WidgetHabit] {
-        let today = WidgetDate.todayKey()
-        let calendar = Calendar(identifier: .gregorian)
-        let yesterday = WidgetDate.formatter.string(
-            from: calendar.date(byAdding: .day, value: -1, to: Date())!
-        )
-        return [
-            WidgetHabit(id: "1", name: NSLocalizedString("widget.sample.water", comment: ""), icon: "💧", color: "#4A90D9",
-                        completedDates: [yesterday, today]),
-            WidgetHabit(id: "2", name: NSLocalizedString("widget.sample.exercise", comment: ""), icon: "🏃", color: "#FF6B6B",
-                        completedDates: [yesterday]),
-            WidgetHabit(id: "3", name: NSLocalizedString("widget.sample.reading", comment: ""), icon: "📖", color: "#7B68EE",
-                        completedDates: []),
-        ]
+        var habit = WidgetHabit(id: "preview-reading",
+            name: NSLocalizedString("widget.sample.reading", comment: ""), icon: "📖", color: "#9C6842",
+            completedDates: [], weeklyTarget: 5)
+        habit.minimum = NSLocalizedString("widget.sample.minimum", comment: "")
+        return [habit]
     }
+
 }
 
 // MARK: - Timeline Entry
@@ -140,80 +134,169 @@ enum CreamTheme {
     static let textPrimary = Color(hex: "#302A25")
     static let textSecondary = Color(hex: "#75695F")
     static let accent = Color(hex: "#9C6842")
+    static let line = Color(hex: "#E8DED2")
 }
 
 // MARK: - Widget Views
 
-struct HabitRowView: View {
-    let habit: WidgetHabit
-    let date: Date
+struct HabitWidgetSmallView: View {
+    let entry: HabitEntry
 
     var body: some View {
-        let completed = habit.isCompletedToday(now: date)
-        let status = NSLocalizedString(habit.isTinyToday(now: date) ? "widget.tiny" :
-            (completed ? "widget.done" : "widget.open"), comment: "")
-        let week = String.localizedStringWithFormat(
-            NSLocalizedString("widget.weekly", comment: ""), habit.weeklyCount(now: date), habit.target)
-        HStack(spacing: 8) {
-            ZStack {
-                Circle().fill(completed ? CreamTheme.accent : CreamTheme.accent.opacity(0.12))
-                if completed {
-                    Image(systemName: "checkmark").font(.system(size: 12, weight: .bold)).foregroundColor(.white)
-                } else {
-                    Text(habit.icon).font(.system(size: 13))
-                }
-            }.frame(width: 26, height: 26)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(habit.name).font(.system(size: 13, weight: .medium))
-                    .foregroundColor(CreamTheme.textPrimary).lineLimit(1)
-                HStack(spacing: 5) {
-                    Text(week)
-                    if habit.isTinyToday(now: date) { Text(NSLocalizedString("widget.tiny", comment: "")) }
-                }.font(.system(size: 10)).foregroundColor(CreamTheme.textSecondary).lineLimit(1)
+        VStack(spacing: 0) {
+            HStack(spacing: 6) {
+                Text(NSLocalizedString("widget.title", comment: ""))
+                    .font(.system(size: 12, weight: .semibold)).lineLimit(1)
+                Spacer(minLength: 0)
+                Text("\(entry.habits.filter { $0.isCompletedToday(now: entry.date) }.count)/\(entry.habits.count)")
+                    .foregroundColor(CreamTheme.textSecondary).font(.system(size: 12)).fixedSize()
             }
-            Spacer(minLength: 0)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(habit.name), \(status), \(week)")
+            if entry.habits.count > 1 {
+                VStack(spacing: 6) {
+                    ForEach(entry.habits) { habit in
+                        HStack(spacing: 7) {
+                            HabitCheck(habit: habit, date: entry.date, size: 17)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(habit.name).font(.system(size: 12, weight: .semibold)).lineLimit(1)
+                                HStack(spacing: 4) {
+                                    Text(weeklyText(habit, date: entry.date)).font(.system(size: 10)).lineLimit(1)
+                                    if habit.isTinyToday(now: entry.date) {
+                                        Text(NSLocalizedString("widget.tinyCompact", comment: "")).font(.system(size: 9)).fixedSize()
+                                    }
+                                }.foregroundColor(CreamTheme.textSecondary)
+                            }.frame(maxWidth: .infinity, alignment: .leading)
+                        }.frame(maxHeight: .infinity)
+                    }
+                }.padding(.top, 10).frame(maxHeight: .infinity)
+            } else if let habit = entry.habits.first {
+                VStack(spacing: 5) {
+                    Text(habit.icon.isEmpty ? "🌱" : habit.icon).font(.system(size: 24))
+                    Text(habit.name).font(.system(size: 14, weight: .semibold))
+                        .lineLimit(1).multilineTextAlignment(.center)
+                    Text(weeklyText(habit, date: entry.date))
+                        .font(.system(size: 11)).foregroundColor(CreamTheme.textSecondary).lineLimit(1)
+                }.frame(maxHeight: .infinity).padding(.vertical, 8)
+                Text(habit.isCompletedToday(now: entry.date) ? statusText(habit, date: entry.date)
+                    : habit.minimum.flatMap { $0.isEmpty ? nil : $0 } ?? NSLocalizedString("widget.open", comment: ""))
+                    .font(.system(size: 10)).foregroundColor(CreamTheme.textSecondary).lineLimit(1)
+                    .padding(.top, 7).frame(maxWidth: .infinity)
+                    .overlay(alignment: .top) { Rectangle().fill(CreamTheme.line).frame(height: 0.5) }
+            } else {
+                Text(NSLocalizedString("widget.empty.small", comment: ""))
+                    .font(.system(size: 13)).foregroundColor(CreamTheme.textSecondary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }.foregroundColor(CreamTheme.textPrimary)
     }
 }
 
-struct HabitWidgetSmallView: View {
-    let entry: HabitEntry
-    var body: some View { HabitListView(entry: entry, links: false) }
+private func weeklyText(_ habit: WidgetHabit, date: Date) -> String {
+    String.localizedStringWithFormat(NSLocalizedString("widget.weekly", comment: ""), habit.weeklyCount(now: date), habit.target)
 }
+
+private func statusText(_ habit: WidgetHabit, date: Date) -> String {
+    NSLocalizedString(habit.isTinyToday(now: date) ? "widget.tiny" : habit.isCompletedToday(now: date) ? "widget.done" : "widget.open", comment: "")
+}
+
+private struct HabitCheck: View {
+    let habit: WidgetHabit
+    let date: Date
+    let size: CGFloat
+
+    var body: some View {
+        Image(systemName: habit.isCompletedToday(now: date) ? "checkmark.circle.fill" : "circle")
+            .font(.system(size: size, weight: .light))
+            .foregroundColor(habit.isCompletedToday(now: date)
+                ? CreamTheme.accent.opacity(habit.isTinyToday(now: date) ? 0.65 : 1) : CreamTheme.textSecondary)
+            .frame(width: size).accessibilityHidden(true)
+    }
+}
+
 struct HabitWidgetMediumView: View {
     let entry: HabitEntry
-    var body: some View { HabitListView(entry: entry, links: true) }
-}
-struct HabitListView: View {
-    let entry: HabitEntry
-    let links: Bool
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(NSLocalizedString("widget.title", comment: ""))
-                    .font(.system(size: 12, weight: .semibold)).lineLimit(1)
-                Spacer(minLength: 4)
-                Text("\(entry.habits.filter { $0.isCompletedToday(now: entry.date) }.count)/\(entry.habits.count)")
-                    .font(.system(size: 11, weight: .semibold)).fixedSize()
-            }.foregroundColor(CreamTheme.textSecondary)
-            if entry.habits.isEmpty {
-                Spacer(minLength: 0)
-                Text(NSLocalizedString("widget.empty.medium", comment: ""))
-                    .font(.system(size: 12)).foregroundColor(CreamTheme.textSecondary)
+        Group {
+            if entry.habits.count == 1, let habit = entry.habits.first {
+                Link(destination: habit.actionURL) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack(spacing: 8) {
+                            Text(NSLocalizedString("widget.title", comment: ""))
+                                .font(.system(size: 13, weight: .semibold)).lineLimit(1)
+                            Spacer(minLength: 4)
+                            Text(statusText(habit, date: entry.date))
+                                .font(.system(size: 11)).foregroundColor(CreamTheme.textSecondary).lineLimit(1)
+                        }
+                        HStack(spacing: 16) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack(spacing: 8) {
+                                    Text(habit.icon.isEmpty ? "🌱" : habit.icon).font(.system(size: 28))
+                                    Text(habit.name).font(.system(size: 19, weight: .semibold)).lineLimit(2)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                Text(habit.minimum.flatMap { $0.isEmpty ? nil : $0 } ?? NSLocalizedString("widget.open", comment: ""))
+                                    .font(.system(size: 12)).foregroundColor(CreamTheme.textSecondary).lineLimit(2)
+                            }.frame(maxWidth: .infinity, alignment: .leading)
+                            VStack(spacing: 5) {
+                                Text("\(habit.weeklyCount(now: entry.date))/\(habit.target)")
+                                    .font(.system(size: 28, weight: .medium)).monospacedDigit().foregroundColor(CreamTheme.accent)
+                                Text(NSLocalizedString("widget.weekLabel", comment: ""))
+                                    .font(.system(size: 11)).foregroundColor(CreamTheme.textSecondary).lineLimit(1)
+                            }.frame(width: 65)
+                        }.frame(maxHeight: .infinity)
+                    }.frame(maxWidth: .infinity, maxHeight: .infinity).contentShape(Rectangle())
+                }.accessibilityElement(children: .ignore)
+                    .accessibilityLabel("\(habit.name), \(statusText(habit, date: entry.date)), \(weeklyText(habit, date: entry.date))")
             } else {
-                ForEach(entry.habits.prefix(3)) { habit in
-                    if links {
-                        Link(destination: habit.actionURL) { HabitRowView(habit: habit, date: entry.date) }
-                    } else {
-                        HabitRowView(habit: habit, date: entry.date)
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 6) {
+                        Text(NSLocalizedString("widget.title", comment: ""))
+                            .font(.system(size: 13, weight: .semibold)).lineLimit(1)
+                        Text("\(entry.habits.filter { $0.isCompletedToday(now: entry.date) }.count)/\(entry.habits.count)")
+                            .font(.system(size: 11)).foregroundColor(CreamTheme.textSecondary).fixedSize()
+                        Spacer(minLength: 4)
+                        if entry.habits.count == 3 {
+                            Text(NSLocalizedString("widget.weekLabel", comment: ""))
+                                .font(.system(size: 11)).foregroundColor(CreamTheme.textSecondary).fixedSize()
+                        }
                     }
-                }
+                    if entry.habits.isEmpty {
+                        Text(NSLocalizedString("widget.empty.medium", comment: ""))
+                            .font(.system(size: 13)).foregroundColor(CreamTheme.textSecondary)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    } else {
+                        VStack(spacing: 10) {
+                            ForEach(entry.habits) { habit in
+                                Link(destination: habit.actionURL) {
+                                    HStack(spacing: 9) {
+                                        HabitCheck(habit: habit, date: entry.date, size: 24)
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(habit.name).font(.system(size: entry.habits.count == 2 ? 15 : 14, weight: .medium)).lineLimit(1)
+                                            if entry.habits.count == 2 {
+                                                Text(weeklyText(habit, date: entry.date))
+                                                    .font(.system(size: 11)).foregroundColor(CreamTheme.textSecondary).lineLimit(1)
+                                            }
+                                        }.frame(maxWidth: .infinity, alignment: .leading)
+                                        if habit.isTinyToday(now: entry.date) {
+                                            Text(NSLocalizedString("widget.tinyCompact", comment: ""))
+                                                .font(.system(size: 10, weight: .medium)).foregroundColor(CreamTheme.accent)
+                                                .padding(.horizontal, 6).padding(.vertical, 4)
+                                                .background(CreamTheme.accent.opacity(0.10), in: Capsule()).fixedSize()
+                                        }
+                                        if entry.habits.count == 3 {
+                                            Text("\(habit.weeklyCount(now: entry.date))/\(habit.target)")
+                                                .font(.system(size: 12)).monospacedDigit().foregroundColor(CreamTheme.textSecondary)
+                                                .frame(minWidth: 28, alignment: .trailing).fixedSize()
+                                        }
+                                    }.frame(minHeight: 26, maxHeight: .infinity).contentShape(Rectangle())
+                                }.accessibilityElement(children: .ignore)
+                                    .accessibilityLabel("\(habit.name), \(statusText(habit, date: entry.date)), \(weeklyText(habit, date: entry.date))")
+                            }
+                        }.frame(maxHeight: .infinity)
+                    }
+                }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
-            Spacer(minLength: 0)
-        }
+        }.foregroundColor(CreamTheme.textPrimary)
     }
 }
 
@@ -232,12 +315,13 @@ struct HabitWidgetAccessoryCircularView: View {
 
     var body: some View {
         Gauge(value: progress) {
-            Text(NSLocalizedString("widget.accessory.label", comment: ""))
+            EmptyView()
         } currentValueLabel: {
             Text("\(completed)/\(total)")
                 .font(.system(size: 12, weight: .bold))
         }
-        .gaugeStyle(.accessoryCircular)
+        .gaugeStyle(.accessoryCircularCapacity)
+        .accessibilityLabel("\(NSLocalizedString("widget.accessory.label", comment: "")), \(completed)/\(total)")
     }
 }
 
@@ -249,38 +333,41 @@ struct HabitWidgetAccessoryRectangularView: View {
     var total: Int { entry.habits.count }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 4) {
-                Text(NSLocalizedString("widget.title", comment: ""))
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.secondary)
-                Spacer(minLength: 4)
-                if total > 0 {
-                    Text("\(completed)/\(total)")
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundStyle(.primary)
-                        .lineLimit(1)
-                        .fixedSize()
-                }
-            }
-
-            Spacer(minLength: 0)
-
-            if total == 0 {
-                Text(NSLocalizedString("widget.empty.accessory", comment: ""))
-                    .font(.system(size: 12, weight: .medium))
-                    .frame(maxWidth: .infinity, alignment: .center)
-            } else {
-                HStack(spacing: 5) {
-                    ForEach(entry.habits.prefix(3)) { habit in
+        Group {
+            if let habit = entry.habits.first, total == 1 {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(habit.name).font(.system(size: 13, weight: .semibold)).lineLimit(1)
+                    HStack(spacing: 6) {
                         Image(systemName: habit.isCompletedToday(now: entry.date) ? "checkmark.circle.fill" : "circle")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 13)).accessibilityHidden(true)
+                        Text(statusText(habit, date: entry.date)).font(.system(size: 11)).lineLimit(1)
                     }
-                    Spacer(minLength: 0)
+                    Text(weeklyText(habit, date: entry.date))
+                        .font(.system(size: 10)).foregroundStyle(.secondary).lineLimit(1)
+                }
+            } else if total > 1 {
+                VStack(alignment: .leading, spacing: total == 2 ? 8 : 5) {
+                    ForEach(entry.habits.prefix(3)) { habit in
+                        HStack(spacing: 6) {
+                            Image(systemName: habit.isCompletedToday(now: entry.date) ? "checkmark.circle.fill" : "circle")
+                                .font(.system(size: 13)).accessibilityHidden(true)
+                            Text(habit.name).font(.system(size: 12, weight: .medium)).lineLimit(1)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("\(habit.weeklyCount(now: entry.date))/\(habit.target)")
+                                .font(.system(size: 10)).foregroundStyle(.secondary).fixedSize()
+                        }.accessibilityElement(children: .ignore)
+                            .accessibilityLabel("\(habit.name), \(statusText(habit, date: entry.date)), \(weeklyText(habit, date: entry.date))")
+                    }
+                }
+            } else {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(NSLocalizedString("widget.title", comment: "")).font(.system(size: 11, weight: .semibold))
+                    Text(NSLocalizedString("widget.empty.accessory", comment: "")).font(.system(size: 12)).lineLimit(2)
                 }
             }
-        }
+        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
     }
+
 }
 
 @available(iOS 16.0, *)
@@ -294,14 +381,12 @@ struct HabitWidgetAccessoryInlineView: View {
         if total == 0 {
             Text(NSLocalizedString("widget.accessory.inline.empty", comment: ""))
         } else if completed == total {
-            Label(
-                String.localizedStringWithFormat(NSLocalizedString("widget.accessory.inline.allDone", comment: ""), completed, total),
-                systemImage: "checkmark.seal.fill"
+            Text(
+                String.localizedStringWithFormat(NSLocalizedString("widget.accessory.inline.allDone", comment: ""), completed, total)
             )
         } else {
-            Label(
-                String.localizedStringWithFormat(NSLocalizedString("widget.accessory.inline.progress", comment: ""), completed, total),
-                systemImage: "leaf.fill"
+            Text(
+                String.localizedStringWithFormat(NSLocalizedString("widget.accessory.inline.progress", comment: ""), completed, total)
             )
         }
     }
@@ -314,6 +399,11 @@ struct HabitWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
 
     var body: some View {
+        content.widgetURL(entry.habits.count == 1 && (family == .systemSmall || family == .systemMedium)
+            ? entry.habits.first?.actionURL : URL(string: "minimal-habit-tracker:///"))
+    }
+
+    @ViewBuilder private var content: some View {
         switch family {
         case .systemSmall:
             HabitWidgetSmallView(entry: entry)
@@ -375,7 +465,6 @@ struct HabitWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: HabitProvider()) { entry in
             HabitWidgetContainer { HabitWidgetEntryView(entry: entry) }
-                .widgetURL(URL(string: "minimal-habit-tracker:///"))
         }
         .configurationDisplayName(NSLocalizedString("widget.config.displayName", comment: ""))
         .description(NSLocalizedString("widget.config.description", comment: ""))

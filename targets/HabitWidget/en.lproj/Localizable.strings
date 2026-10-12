@@ -10,9 +10,9 @@
 
 /* Lock screen accessory */
 "widget.accessory.label" = "Habits";
-"widget.accessory.inline.empty" = "Ssak — no habits";
-"widget.accessory.inline.allDone" = "Ssak %1$d/%2$d done";
-"widget.accessory.inline.progress" = "Ssak today %1$d/%2$d";
+"widget.accessory.inline.empty" = "Add a habit";
+"widget.accessory.inline.allDone" = "Today %1$d/%2$d done";
+"widget.accessory.inline.progress" = "Today %1$d/%2$d";
 
 /* Widget gallery (configurationDisplayName / description) */
 "widget.config.displayName" = "Today's Habits";
@@ -27,3 +27,8 @@
 "widget.tiny" = "Small version done";
 "widget.done" = "Done";
 "widget.open" = "Open to record";
+
+"widget.weekLabel" = "This week";
+"widget.tinyCompact" = "Small";
+
+"widget.sample.minimum" = "Read one page";

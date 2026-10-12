@@ -10,9 +10,9 @@
 
 /* Lock screen accessory */
 "widget.accessory.label" = "습관";
-"widget.accessory.inline.empty" = "싹 — 습관 없음";
-"widget.accessory.inline.allDone" = "싹 %1$d/%2$d 모두 완료";
-"widget.accessory.inline.progress" = "싹 오늘 %1$d/%2$d";
+"widget.accessory.inline.empty" = "습관 추가";
+"widget.accessory.inline.allDone" = "%1$d/%2$d 완료";
+"widget.accessory.inline.progress" = "오늘 %1$d/%2$d";
 
 /* Widget gallery (configurationDisplayName / description) */
 "widget.config.displayName" = "오늘의 습관";
@@ -27,3 +27,8 @@
 "widget.tiny" = "작게 완료";
 "widget.done" = "완료";
 "widget.open" = "앱에서 기록하기";
+
+"widget.weekLabel" = "이번 주";
+"widget.tinyCompact" = "작게";
+
+"widget.sample.minimum" = "책 한 페이지 읽기";

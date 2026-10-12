@@ -9,4 +9,8 @@
     <string name="widget_tiny">完成小目標</string>
     <string name="widget_done">完成</string>
     <string name="widget_open">到 App 記錄</string>
+    <string name="widget_week_label">本週</string>
+    <string name="widget_tiny_compact">小步</string>
+    <string name="widget_sample_reading">看書</string>
+    <string name="widget_sample_minimum">讀一頁書</string>
 </resources>

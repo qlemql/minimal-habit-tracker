@@ -9,4 +9,8 @@
     <string name="widget_tiny">小さく実践</string>
     <string name="widget_done">完了</string>
     <string name="widget_open">アプリで記録</string>
+    <string name="widget_week_label">今週</string>
+    <string name="widget_tiny_compact">小さく</string>
+    <string name="widget_sample_reading">本を読む</string>
+    <string name="widget_sample_minimum">本を1ページ読む</string>
 </resources>
