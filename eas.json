@@ -30,6 +30,7 @@
     },
     "production": {
       "node": "22.14.0",
+      "environment": "production",
       "ios": {
         "buildConfiguration": "Release"
       },

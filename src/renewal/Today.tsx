@@ -1,4 +1,4 @@
-﻿import { View, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 import { LocalizedText as Text } from './LocalizedText';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
@@ -134,8 +134,7 @@ export const Today = () => {
                 );
                 const count = weeklyCount(habit.id, logs, today);
                 return (
-                  <View key={habit.id} style={st.habitGroup}>
-                  <View style={[s.card, st.habitCard]}>
+                  <View key={habit.id} testID={`today-habit-${habit.id}`} style={[s.card, st.habitCard]}>
                     <View style={s.between}>
                       <View style={[s.row, s.flex]}>
                         <View style={s.iconBox}>
@@ -158,16 +157,15 @@ export const Today = () => {
                       </Pressable>
                     </View>
                     <HabitAction habitId={habit.id} completed={Boolean(log)} tiny={log?.effort === 'tiny'} />
-                  </View>
-                  <View style={st.weekRecord}>
-                    <View style={s.between}>
-                      <Text style={s.small}>{c.intention}</Text>
-                      <Text style={st.count}>
-                        {count} / {habit.weeklyTarget ?? 7} {c.days}
-                      </Text>
+                    <View style={st.weekRecord}>
+                      <View style={s.between}>
+                        <Text style={s.small}>{c.intention}</Text>
+                        <Text style={st.count}>
+                          {count} / {habit.weeklyTarget ?? 7} {c.days}
+                        </Text>
+                      </View>
+                      <Week dates={completed} today={today} />
                     </View>
-                    <Week dates={completed} today={today} />
-                  </View>
                   </View>
                 );
               })}
@@ -252,8 +250,7 @@ const st = StyleSheet.create({
   },
   addText: { color: palette.green, fontSize: 12, fontWeight: '500' },
   habitCard: { gap: 16 },
-  habitGroup: { gap: 24 },
-  weekRecord: { gap: 16, paddingHorizontal: 4 },
+  weekRecord: { gap: 12, borderTopWidth: 1, borderTopColor: palette.line, paddingTop: 16 },
   habitEmoji: { fontSize: 25 },
   detail: { width: 44, height: 44, flexShrink: 0, alignItems: 'center', justifyContent: 'center' },
   count: { fontSize: 12, fontWeight: '600', color: palette.green },

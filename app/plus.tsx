@@ -7,11 +7,12 @@ import { useProStore } from '@/store/proStore';
 import { useCopy, usePreferences } from '@/renewal/preferences';
 import { discoveryCopy } from '@/renewal/ideas';
 import {
-  getLifetimePackage,
+  getLifetimeProduct,
   buyLifetime,
   restoreLifetime,
   billingAvailable,
-  PurchasePendingError,
+  BillingError,
+  type LifetimeProduct,
 } from '@/renewal/billing';
 import {
   Screen,
@@ -25,14 +26,13 @@ import {
   s,
   palette,
 } from '@/renewal/ui';
-import type { PurchasesPackage } from 'react-native-purchases';
 export default function Plus() {
   const c = useCopy();
   const router = useRouter();
   const language = usePreferences((state) => state.language);
   const d = discoveryCopy[language];
   const pro = useProStore((state) => state.isPro);
-  const [item, setItem] = useState<PurchasesPackage | null>(null);
+  const [item, setItem] = useState<LifetimeProduct | null>(null);
   const [busy, setBusy] = useState(false);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -44,7 +44,7 @@ export default function Plus() {
     let mounted = true;
     const load = async () => {
       try {
-        const result = await getLifetimePackage();
+        const result = await getLifetimeProduct();
         if (mounted) setItem(result);
       } catch {
         /* Store may be offline or not configured. */
@@ -65,17 +65,12 @@ export default function Plus() {
       const success = restore ? await restoreLifetime() : item ? await buyLifetime(item) : false;
       setMessage(success ? c.purchased : restore ? c.nothingRestore : c.purchaseError);
     } catch (error) {
-      if (error instanceof PurchasePendingError) {
+      if (error instanceof BillingError && error.code === 'pending') {
         setPending(true);
         setMessage(releaseCopy[language].purchasePending);
         return;
       }
-      if (!(
-        typeof error === 'object' &&
-        error !== null &&
-        'userCancelled' in error &&
-        error.userCancelled
-      ))
+      if (!(error instanceof BillingError && error.code === 'cancelled'))
         setMessage(c.purchaseError);
     } finally {
       setBusy(false);
@@ -112,7 +107,7 @@ export default function Plus() {
                 }}
                 icon="arrow"
               >
-                {item ? `${c.buy} · ${item.product.priceString}` : c.buy}
+                {item ? `${c.buy} · ${item.displayPrice}` : c.buy}
               </Button>
               {!item && !loading && (
                 <Text style={s.small}>

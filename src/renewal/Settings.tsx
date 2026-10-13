@@ -1,16 +1,13 @@
-import { useState } from 'react';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { LocalizedText as Text } from './LocalizedText';
-import * as Clipboard from 'expo-clipboard';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
 import { useProStore } from '@/store/proStore';
-import { cancelHabitReminder, refreshHabitReminders } from '@/utils/notifications';
 import { useCopy, usePreferences } from './preferences';
 import { languages } from './copy';
 import { FreeHabitChoice } from './FreeHabitChoice';
 import { releaseCopy } from './releaseCopy';
-import { serializeBackup, parseBackup } from './domain';
+import { BackupPanel } from './BackupPanel';
 import { clearExample, loadExample } from './sample';
 import {
   Screen,
@@ -18,9 +15,7 @@ import {
   Body,
   Eyebrow,
   Button,
-  Field,
   TextButton,
-  Notice,
   Icon,
   s,
   palette,
@@ -31,52 +26,8 @@ export const Settings = () => {
   const router = useRouter();
   const { language, setLanguage, example } = usePreferences();
   const release = releaseCopy[language];
-  const { habits, logs } = useHabitStore();
+  const { habits } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
-  const [restoring, setRestoring] = useState(false);
-  const [backup, setBackup] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const copy = async () => {
-    if (!pro) {
-      router.push('/plus');
-      return;
-    }
-    setError(false);
-    try {
-      const ok = await Clipboard.setStringAsync(serializeBackup(habits, logs));
-      setMessage(ok ? c.copied : c.clipboardError);
-    } catch {
-      setError(true);
-      setMessage(c.clipboardError);
-    }
-  };
-  const restore = async () => {
-    if (!pro || busy) return;
-    setError(false);
-    setBusy(true);
-    try {
-      const data = parseBackup(backup);
-      // Validate the full payload before any state mutation or notification cancellation.
-      if (data.habits.filter((habit) => !habit.isGraduated).length > (pro ? 3 : 1))
-        throw new Error('limit');
-      await Promise.all(habits.map((habit) => cancelHabitReminder(habit.id).catch(() => {})));
-      useHabitStore.setState(data);
-      usePreferences.getState().setExample(false);
-      setBackup('');
-      setRestoring(false);
-      setMessage(c.restored);
-      void refreshHabitReminders().catch(() => {});
-    } catch (failure) {
-      setError(true);
-      setMessage(
-        failure instanceof Error && failure.message === 'limit' ? c.backupLimit : c.backupError,
-      );
-    } finally {
-      setBusy(false);
-    }
-  };
   return (
     <Screen>
       <View style={st.content}>
@@ -97,7 +48,6 @@ export const Settings = () => {
                 key={item.code}
                 onPress={() => {
                   setLanguage(item.code);
-                  setMessage('');
                 }}
                 style={[st.language, item.code === language && st.selected]}
               >
@@ -118,51 +68,7 @@ export const Settings = () => {
             {pro ? c.plusDetails : c.plusCta}
           </Button>
         </View>
-        <View style={s.card}>
-          <View style={s.row}>
-            <Icon name="download" />
-            <Text style={s.cardTitle}>{c.backup}</Text>
-          </View>
-          <Body>{c.backupSub}</Body>
-          <Button
-            secondary
-            onPress={() => {
-              void copy();
-            }}
-          >
-            {c.export}
-          </Button>
-          <TextButton
-            onPress={() => {
-              if (!pro) router.push('/plus');
-              else setRestoring(!restoring);
-            }}
-          >
-            {c.restore}
-          </TextButton>
-          {restoring && (
-            <View style={s.gap}>
-              <Notice>{c.backupWarning}</Notice>
-              <Field
-                label={c.restore}
-                placeholder={c.backupPlaceholder}
-                value={backup}
-                onChangeText={setBackup}
-                multiline
-                maxLength={10000000}
-              />
-              <Button
-                disabled={!backup.trim() || busy}
-                onPress={() => {
-                  void restore();
-                }}
-              >
-                {c.restoreConfirm}
-              </Button>
-            </View>
-          )}
-          {message ? <Notice error={error}>{message}</Notice> : null}
-        </View>
+        <BackupPanel />
         <View style={st.privacy}>
           <Icon name="shield" size={28} />
           <Text style={s.fieldLabel}>{c.privacy}</Text>

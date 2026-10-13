@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { en, ja, zh, ko } from '../../src/renewal/copy';
 import { discoveryCopy } from '../../src/renewal/ideas';
+import { backupCopy } from '../../src/renewal/backupCopy';
 import { releaseCopy } from '../../src/renewal/releaseCopy';
 
 test('first habit: validate, tiny action, persist, adjust, graduate and restart', async ({
@@ -146,9 +147,9 @@ test('paid backup restore validates before changing existing data', async ({ pag
   await page.goto('/');
   await page.getByRole('button', { name: en.sample, exact: true }).click();
   await page.getByRole('tab', { name: en.settings, exact: true }).click();
-  await page.getByRole('button', { name: en.restore, exact: true }).click();
+  await page.getByRole('button', { name: backupCopy.en.paste, exact: true }).click();
   await page.getByRole('textbox', { name: en.restore, exact: true }).fill('{"bad": true}');
-  await page.getByRole('button', { name: en.restoreConfirm, exact: true }).click();
+  await page.getByRole('button', { name: backupCopy.en.preview, exact: true }).click();
   await expect(page.getByText(en.backupError, { exact: true })).toBeVisible();
   const before = await page.evaluate(
     () => JSON.parse(localStorage.getItem('habit-store') || '{}').state,
@@ -160,6 +161,8 @@ test('paid backup restore validates before changing existing data', async ({ pag
     .fill(
       JSON.stringify({ format: 'ssak-backup', version: 1, habits: [habit], logs: before.logs }),
     );
+  await page.getByRole('button', { name: backupCopy.en.preview, exact: true }).click();
+  await expect(page.getByTestId('backup-preview')).toBeVisible();
   await page.getByRole('button', { name: en.restoreConfirm, exact: true }).click();
   await expect(page.getByText(en.restored, { exact: true })).toBeVisible();
   await page.reload();

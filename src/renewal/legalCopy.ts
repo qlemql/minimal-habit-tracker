@@ -7,7 +7,7 @@ export const legalCopy: Record<Language, LegalContent> = {
       'Ssak stores your habit names, plans, check-ins, reviews and preferences on your device. We do not run a server for these records. Home-screen widgets read the habit information shared by the app on the same device.',
       'You can use Ssak without creating an account. There are no ads or advertising tracking. Local reminders use your device’s notification permission; we do not register you for remote push notifications.',
       'The App Store or Google Play handles payments. RevenueCat verifies purchases and manages Plus access using purchase history and an anonymous app identifier. It also provides purchase reporting. Habit names and notes are not sent to RevenueCat. We do not receive your card details.',
-      'Copying a backup puts your records on the clipboard. Keep that copy private and clear it after use. Device or system backups may also contain app data, depending on your settings. Ssak does not sync habit records between devices.',
+      'Exporting a backup saves or shares your records to the location or app you choose. Backup files are not encrypted by Ssak. Copying a text backup puts your records on the clipboard. Keep that copy private and clear it after use. Device or system backups may also contain app data, depending on your settings. Ssak does not sync habit records between devices.',
       'Delete a habit to remove its records from the app. Removing the app can remove local records; it does not delete copies you saved elsewhere or store transaction records. Purchase records are held by the store and RevenueCat under their own retention policies. Contact support for a purchase-data or privacy request. If you email us, we receive the address and details you choose to send and use them to answer your request.',
     ],
     terms: [
@@ -27,7 +27,7 @@ export const legalCopy: Record<Language, LegalContent> = {
       '습관 이름, 계획, 완료 기록, 돌아보기 내용과 설정은 기기에 저장됩니다. 이 기록을 저장하는 별도 서버는 운영하지 않습니다. 홈 화면 위젯은 같은 기기에서 앱이 공유한 습관 정보를 읽습니다.',
       '계정 없이 사용할 수 있고 광고나 광고 추적은 없습니다. 알림은 기기의 알림 권한을 이용하는 로컬 알림입니다. 원격 푸시 알림을 위한 등록은 하지 않습니다.',
       '결제는 App Store 또는 Google Play에서 처리합니다. RevenueCat은 구매 내역과 익명 앱 식별자로 구매를 확인하고 Plus 권한을 관리하며 구매 통계를 제공합니다. 습관 이름이나 메모는 RevenueCat에 보내지 않습니다. 카드 정보는 전달받지 않습니다.',
-      '백업을 복사하면 기록이 클립보드에 들어갑니다. 복사한 내용은 안전한 곳에 보관하고 사용 후 클립보드에서 지워주세요. 기기 설정에 따라 운영체제 백업에 앱 데이터가 포함될 수 있습니다. 싹은 기기 간 습관 기록을 자동으로 동기화하지 않습니다.',
+      '백업 파일은 사용자가 선택한 위치나 앱에 저장·공유됩니다. 싹은 백업 파일을 암호화하지 않습니다. 텍스트 백업을 복사하면 기록이 클립보드에 들어갑니다. 복사한 내용은 안전한 곳에 보관하고 사용 후 클립보드에서 지워주세요. 기기 설정에 따라 운영체제 백업에 앱 데이터가 포함될 수 있습니다. 싹은 기기 간 습관 기록을 자동으로 동기화하지 않습니다.',
       '습관을 삭제하면 해당 습관의 기록이 앱에서 삭제됩니다. 앱 삭제로 기기의 기록이 사라질 수 있지만, 별도로 보관한 백업이나 스토어 구매 내역까지 삭제되지는 않습니다. 구매 관련 정보는 스토어와 RevenueCat의 보관 정책에 따릅니다. 구매 정보나 개인정보 관련 요청은 문의처로 보내주세요. 이메일로 문의하면 보내주신 주소와 내용을 답변에 사용합니다.',
     ],
     terms: [
@@ -47,7 +47,7 @@ export const legalCopy: Record<Language, LegalContent> = {
       '習慣の名前、計画、達成記録、振り返り、設定は端末に保存されます。これらの記録を保存する専用サーバーは運営していません。ホーム画面のウィジェットは、同じ端末でアプリが共有した習慣の情報を読み取ります。',
       'アカウント登録は不要です。広告や広告目的の追跡はありません。通知は端末の許可を使うローカル通知です。リモートプッシュ通知への登録は行いません。',
       '支払いはApp StoreまたはGoogle Playが処理します。RevenueCatは購入履歴と匿名のアプリ識別子を使い、購入の確認、Plusの利用権限の管理、購入状況の集計を行います。習慣の名前やメモはRevenueCatに送信しません。カード情報は受け取りません。',
-      'バックアップをコピーすると、記録がクリップボードに入ります。安全な場所に保管し、使用後はクリップボードから消してください。端末の設定によっては、OSのバックアップにもアプリのデータが含まれます。習慣の記録は端末間で自動同期されません。',
+      'バックアップファイルは選択した保存先やアプリに保存・共有されます。Ssakはバックアップファイルを暗号化しません。テキストをコピーすると、記録がクリップボードに入ります。安全な場所に保管し、使用後はクリップボードから消してください。端末の設定によっては、OSのバックアップにもアプリのデータが含まれます。習慣の記録は端末間で自動同期されません。',
       '習慣を削除すると、その習慣の記録がアプリから削除されます。アプリの削除で端末内の記録が失われる場合がありますが、別に保存したコピーやストアの購入履歴は削除されません。購入情報の保存期間はストアとRevenueCatの方針に従います。購入情報や個人情報に関するご依頼はお問い合わせください。メールでいただいたアドレスと内容は、回答のために使用します。',
     ],
     terms: [
@@ -67,7 +67,7 @@ export const legalCopy: Record<Language, LegalContent> = {
       '習慣名稱、計畫、完成紀錄、回顧和設定都儲存在你的裝置。我們沒有用來儲存這些紀錄的獨立伺服器。主畫面小工具會讀取 App 在同一台裝置分享的習慣資料。',
       '不需要註冊帳號，也沒有廣告或廣告追蹤。提醒使用裝置的通知權限，屬於本機通知，不會註冊遠端推播服務。',
       '付款由 App Store 或 Google Play 處理。RevenueCat 使用購買紀錄和匿名 App 識別碼來確認購買、管理 Plus 權限及提供購買統計。我們不會將習慣名稱或筆記傳送給 RevenueCat，也不會收到你的信用卡資料。',
-      '複製備份會將紀錄放到剪貼簿，請妥善保管，使用後清除剪貼簿。視裝置設定而定，系統備份也可能包含 App 資料。Ssak 不會自動同步不同裝置的習慣紀錄。',
+      '備份檔案會儲存或分享到您選擇的位置或應用程式。Ssak不會加密備份檔案。複製文字備份會將紀錄放到剪貼簿，請妥善保管，使用後清除剪貼簿。視裝置設定而定，系統備份也可能包含 App 資料。Ssak 不會自動同步不同裝置的習慣紀錄。',
       '刪除習慣會移除 App 內該習慣的紀錄。移除 App 可能會刪除裝置上的紀錄，但不會刪除另外保存的備份或商店購買紀錄。購買資料的保存依商店與 RevenueCat 的政策辦理。如需處理購買資料或隱私權相關請求，請聯絡我們。來信的電子郵件地址和內容會用於回覆你的問題。',
     ],
     terms: [
