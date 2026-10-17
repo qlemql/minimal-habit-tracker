@@ -1,173 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/widget_background"
-    android:padding="14dp">
-
-    <!-- Header -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="10dp">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/widget_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/widget_title"
-                android:textColor="#8C7B6B"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/widget_all_completed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="@string/widget_all_completed"
-                android:textColor="#5B8C6A"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@drawable/widget_background" android:padding="14dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:id="@+id/widget_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/widget_title" android:textSize="13sp" android:textStyle="bold" android:maxLines="1" />
+        <TextView android:id="@+id/widget_progress" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:textSize="11sp" android:maxLines="1" />
+        <TextView android:id="@+id/widget_week_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/widget_week_label" android:textSize="11sp" android:maxLines="1" />
+    </LinearLayout>
+    <TextView android:id="@+id/widget_empty" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:gravity="center" android:text="@string/widget_empty" android:textSize="13sp" android:visibility="gone" />
+    <LinearLayout android:id="@+id/widget_row_1" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:minHeight="44dp" android:layout_marginTop="8dp" android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:id="@+id/widget_check_1" android:layout_width="24dp" android:layout_height="24dp" android:importantForAccessibility="no" />
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="9dp" android:layout_marginEnd="6dp" android:orientation="vertical">
+            <TextView android:id="@+id/widget_name_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="14sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/widget_detail_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textSize="11sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/widget_progress_ring"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/widget_progress_a11y" />
+        <TextView android:id="@+id/widget_status_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:paddingHorizontal="6dp" android:paddingVertical="4dp" android:textSize="10sp" android:maxLines="1" />
+        <TextView android:id="@+id/widget_flow_1" android:layout_width="wrap_content" android:minWidth="28dp" android:layout_height="wrap_content" android:gravity="end" android:textSize="12sp" android:maxLines="1" />
     </LinearLayout>
-
-    <!-- Row 1 -->
-    <LinearLayout
-        android:id="@+id/widget_row_1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingVertical="2dp">
-
-        <ImageView
-            android:id="@+id/widget_check_1"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/widget_check_a11y" />
-
-        <TextView
-            android:id="@+id/widget_name_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:textColor="#2D2016"
-            android:textSize="13sp"
-            android:singleLine="true"
-            android:ellipsize="end" />
-
-        <TextView
-            android:id="@+id/widget_flow_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#8C7B6B"
-            android:textSize="11sp"
-            android:textStyle="bold" />
+    <LinearLayout android:id="@+id/widget_row_2" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:minHeight="44dp" android:layout_marginTop="8dp" android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:id="@+id/widget_check_2" android:layout_width="24dp" android:layout_height="24dp" android:importantForAccessibility="no" />
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="9dp" android:layout_marginEnd="6dp" android:orientation="vertical">
+            <TextView android:id="@+id/widget_name_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="14sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/widget_detail_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textSize="11sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+        </LinearLayout>
+        <TextView android:id="@+id/widget_status_2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:paddingHorizontal="6dp" android:paddingVertical="4dp" android:textSize="10sp" android:maxLines="1" />
+        <TextView android:id="@+id/widget_flow_2" android:layout_width="wrap_content" android:minWidth="28dp" android:layout_height="wrap_content" android:gravity="end" android:textSize="12sp" android:maxLines="1" />
     </LinearLayout>
-
-    <!-- Row 2 -->
-    <LinearLayout
-        android:id="@+id/widget_row_2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingVertical="2dp">
-
-        <ImageView
-            android:id="@+id/widget_check_2"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/widget_check_a11y" />
-
-        <TextView
-            android:id="@+id/widget_name_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:textColor="#2D2016"
-            android:textSize="13sp"
-            android:singleLine="true"
-            android:ellipsize="end" />
-
-        <TextView
-            android:id="@+id/widget_flow_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#8C7B6B"
-            android:textSize="11sp"
-            android:textStyle="bold" />
+    <LinearLayout android:id="@+id/widget_row_3" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:minHeight="44dp" android:layout_marginTop="8dp" android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:id="@+id/widget_check_3" android:layout_width="24dp" android:layout_height="24dp" android:importantForAccessibility="no" />
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="9dp" android:layout_marginEnd="6dp" android:orientation="vertical">
+            <TextView android:id="@+id/widget_name_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="14sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/widget_detail_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textSize="11sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+        </LinearLayout>
+        <TextView android:id="@+id/widget_status_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:paddingHorizontal="6dp" android:paddingVertical="4dp" android:textSize="10sp" android:maxLines="1" />
+        <TextView android:id="@+id/widget_flow_3" android:layout_width="wrap_content" android:minWidth="28dp" android:layout_height="wrap_content" android:gravity="end" android:textSize="12sp" android:maxLines="1" />
     </LinearLayout>
-
-    <!-- Row 3 -->
-    <LinearLayout
-        android:id="@+id/widget_row_3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingVertical="2dp">
-
-        <ImageView
-            android:id="@+id/widget_check_3"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/widget_check_a11y" />
-
-        <TextView
-            android:id="@+id/widget_name_3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:textColor="#2D2016"
-            android:textSize="13sp"
-            android:singleLine="true"
-            android:ellipsize="end" />
-
-        <TextView
-            android:id="@+id/widget_flow_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#8C7B6B"
-            android:textSize="11sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <!-- Empty state (visible only when 0 habits) -->
-    <TextView
-        android:id="@+id/widget_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/widget_empty"
-        android:textColor="#8C7B6B"
-        android:textSize="13sp"
-        android:visibility="gone" />
 </LinearLayout>

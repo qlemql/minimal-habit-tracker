@@ -25,7 +25,7 @@ function withWidgetManifest(config) {
       application.receiver.push({
         $: {
           'android:name': WIDGET_PROVIDER_NAME,
-          'android:exported': 'true',
+          'android:exported': 'false',
         },
         'intent-filter': [
           {
@@ -47,6 +47,8 @@ function withWidgetManifest(config) {
       });
     }
 
+    const provider = application.receiver.find((r) => r.$['android:name'] === WIDGET_PROVIDER_NAME);
+    if (provider) provider.$['android:exported'] = 'false';
     return config;
   });
 }
@@ -75,11 +77,11 @@ function withWidgetFiles(config) {
         path.join(targetMain, 'res', 'xml', 'habit_widget_info.xml')
       );
 
-      // res/layout/habit_widget_medium.xml + habit_widget_row.xml
-      copyFile(
-        path.join(sourceDir, 'res', 'layout', 'habit_widget_medium.xml'),
-        path.join(targetMain, 'res', 'layout', 'habit_widget_medium.xml')
-      );
+      // Count-specific widget layouts and the one-habit gallery preview.
+      const layoutDir = path.join(sourceDir, 'res', 'layout');
+      for (const file of fs.readdirSync(layoutDir).filter((name) => name.endsWith('.xml'))) {
+        copyFile(path.join(layoutDir, file), path.join(targetMain, 'res', 'layout', file));
+      }
 
       // res/drawable (배경 등)
       const drawableDir = path.join(sourceDir, 'res', 'drawable');
@@ -95,7 +97,7 @@ function withWidgetFiles(config) {
       // res/values/widget_strings.xml + res/values-en/widget_strings.xml
       // 위젯 전용 리소스만 별도 파일명(widget_strings.xml)으로 분리해 main app strings.xml과 충돌 방지.
       // values/는 한국어 기본값, values-en/는 영문 디바이스에서 자동 픽업.
-      for (const valuesDir of ['values', 'values-en']) {
+      for (const valuesDir of ['values', 'values-en', 'values-ko', 'values-ja', 'values-zh-rTW']) {
         const src = path.join(sourceDir, 'res', valuesDir, 'widget_strings.xml');
         if (fs.existsSync(src)) {
           copyFile(

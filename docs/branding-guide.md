@@ -1,4 +1,41 @@
-# 브랜딩 가이드 — 새싹 아이콘 기반 통합 정리
+# 브랜딩 가이드 — Ssak 2.0
+
+2026-10-04 후속: 사용자가 **G3 / Soft Fold**로 우선 진행하는 데 동의했다.
+아래 새싹 제안과 두 막대 디자인은 구버전 기록이며 현재 에셋 기준이 아니다.
+
+## 현재 적용 — G3 / Soft Fold
+
+- 따뜻한 색감과 단순한 구성이 선택 기준. 흐르는 비대칭 S에 작은 코랄 끝부분.
+- G2처럼 균일한 글자 S로 정돈하지 않는다. 원래 G의 곡선과 비례를 유지한다.
+- 아이콘: 브라운 `#9C6842`, 크림 `#FFF5E5`, 코랄 `#FF8068`.
+- 스플래시: `#FFF9EF` 배경, 브라운 S와 코랄 포인트, 벡터 `ssak` 워드마크.
+- 생성 목업을 바탕으로 제작한 벡터 원본은 `assets/brand/`, 재생성은 `npm run brand:assets`.
+- 아이콘 1024px, Android 투명 전경·단색 아이콘, 스플래시 512px, favicon 64px,
+  Play 스토어 아이콘 512px를 함께 생성한다. Android 전경은 중앙 안전 영역 안에 배치한다.
+- 런처·스플래시·favicon·스토어 아이콘과 앱 내부 공통 Brand 로고에 적용했다.
+  `assets/brand/design.json`의 색상·곡선을 생성 스크립트와 내부 로고가 공유한다.
+  내부 로고의 `ssak` 워드마크도 브라운 벡터로 통일했다. 나머지 UI 팔레트는 유지한다.
+- 비교용 목업 원본: `artifacts/brand/g3/selected-concept.png`.
+  실제 생성 자산 미리보기: `artifacts/brand/g3/production-preview.png`.
+- 스플래시 이미지 폭은 220이며 이미지 내부 여백을 포함한다. 추가 대기 시간 없음.
+- 네이티브 빌드·설치 검증 결과는 `docs/launch-preparation.md`의 최신 절을 따른다.
+
+## 이전 두 막대 구현 기록
+
+- 앱 내부 Brand와 동일한 두 개의 둥근 막대. 초록 #315E4C, 흰색 #FFFFFF, 연초록 #DDE9D6.
+- iOS 아이콘: 1024px RGB, 불투명 전체 배경. 모서리는 OS가 처리한다.
+- Android: 투명 전경과 초록 배경을 분리하고 단색 테마 아이콘도 제공한다.
+- 스플래시: #F7F7F2 배경, 폭 96의 심볼. 슬로건·인위적인 대기 시간 없음.
+- `expo-splash-screen` SDK 54 플러그인으로 양 플랫폼에 적용한다.
+- Play 스토어 아이콘 512px, 웹 favicon도 같은 디자인이다.
+- 벡터 원본은 `assets/brand/`, 재생성은 `npm run brand:assets`.
+  예전 generate-icon.py / generate-icons.py / sync-adaptive-icon.py는 2.0 자산 생성에 사용하지 않는다.
+- Android release 빌드에서 확인한다. iOS 실제 시작 화면 검증은 EAS 빌드 후 진행한다.
+- 적용 확인: Android 16 에뮬레이터에 업데이트 설치 후 실제 홈 아이콘과 콜드 스타트
+  스플래시를 확인했다. 캡처는 `artifacts/android/brand-launcher.png`, `brand-start-1.png`.
+  TypeScript 및 웹 export 통과. 에뮬레이터 APK와 ARM64 APK에 반영한다.
+
+## 구버전 제안 보관
 
 > 확정된 아이콘: 따뜻한 크림 배경 + 녹색 새싹(잎 3장) + 체크마크
 > 핵심 메타포: 성장/자기계발, 작은 시작이 큰 변화로

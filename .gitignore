@@ -31,6 +31,9 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
+.env.*
+!.env.example
 .env*.local
 
 # typescript
@@ -53,3 +56,9 @@ modules/*/ios/build/
 
 # 작업용 mockup HTML — 임시 시각화, 커밋 대상 아님
 assets/proposal/
+
+# Local QA output
+artifacts/
+test-results/
+playwright-report/
+dist-native/

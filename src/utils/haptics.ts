@@ -2,7 +2,7 @@ import * as Haptics from 'expo-haptics';
 
 export function hapticImpact(style: Haptics.ImpactFeedbackStyle) {
   try {
-    Haptics.impactAsync(style);
+    void Haptics.impactAsync(style).catch(() => {});
   } catch {}
 }
 
