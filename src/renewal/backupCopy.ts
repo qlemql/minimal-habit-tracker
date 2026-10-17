@@ -1,6 +1,6 @@
 import type { Language } from './copy';
 
-export const backupCopy: Record<Language, Record<'description' | 'save' | 'share' | 'importFile' | 'paste' | 'preview' | 'previewTitle' | 'date' | 'unknownDate' | 'habits' | 'logs' | 'textName' | 'cancel' | 'saved' | 'shared' | 'downloaded' | 'exportError' | 'importError' | 'tooLarge' | 'privacy', string>> = {
+export const backupCopy: Record<Language, Record<'description' | 'save' | 'share' | 'importFile' | 'paste' | 'preview' | 'previewTitle' | 'date' | 'unknownDate' | 'habits' | 'logs' | 'textName' | 'cancel' | 'saved' | 'shared' | 'downloaded' | 'exportError' | 'importError' | 'restoreError' | 'tooLarge' | 'privacy', string>> = {
   "en": {
     "description": "Save a backup file to keep your habits and history, or move them to another device.",
     "save": "Save backup file",
@@ -20,6 +20,7 @@ export const backupCopy: Record<Language, Record<'description' | 'save' | 'share
     "shared": "Choose where to save the file and check that it is there. Closing the share sheet does not save a backup.",
     "exportError": "Could not export the backup. Please try again.",
     "importError": "Could not read this backup. Your current records were not changed.",
+    "restoreError": "Could not save the restored records. Free up storage space and try again.",
     "tooLarge": "This file is too large. Choose a Ssak backup under 10 MB.",
     "privacy": "Backup files contain your habit names and notes. Keep them somewhere private. Backups do not include your Plus purchase."
   },
@@ -42,6 +43,7 @@ export const backupCopy: Record<Language, Record<'description' | 'save' | 'share
     "shared": "파일을 보관할 곳을 선택하고 저장됐는지 확인해주세요. 공유창을 닫기만 하면 백업이 저장되지 않아요.",
     "exportError": "백업 파일을 내보내지 못했어요. 다시 시도해주세요.",
     "importError": "백업 파일을 읽지 못했어요. 현재 기록은 바뀌지 않았어요.",
+    "restoreError": "복원한 기록을 저장하지 못했어요. 저장 공간을 확인한 뒤 다시 시도해주세요.",
     "tooLarge": "파일이 너무 커요. 10 MB 미만의 싹 백업 파일을 선택해주세요.",
     "privacy": "백업 파일에는 습관 이름과 메모가 들어 있어요. 안전한 곳에 보관해주세요. Plus 구매 정보는 포함되지 않아요."
   },
@@ -64,6 +66,7 @@ export const backupCopy: Record<Language, Record<'description' | 'save' | 'share
     "shared": "保存先を選び、ファイルが保存されたことを確認してください。共有画面を閉じるだけでは保存されません。",
     "exportError": "バックアップを書き出せませんでした。もう一度お試しください。",
     "importError": "バックアップを読み込めませんでした。現在の記録は変更されていません。",
+    "restoreError": "復元した記録を保存できませんでした。空き容量を確認して、もう一度お試しください。",
     "tooLarge": "ファイルが大きすぎます。10 MB未満のSsakバックアップを選択してください。",
     "privacy": "バックアップには習慣名やメモが含まれます。安全な場所に保管してください。Plusの購入情報は含まれません。"
   },
@@ -86,6 +89,7 @@ export const backupCopy: Record<Language, Record<'description' | 'save' | 'share
     "shared": "請選擇儲存位置，並確認檔案已儲存。只關閉分享畫面不會儲存備份。",
     "exportError": "無法匯出備份，請再試一次。",
     "importError": "無法讀取備份。目前的紀錄未變更。",
+    "restoreError": "無法儲存還原的紀錄。請確認儲存空間後再試一次。",
     "tooLarge": "檔案太大，請選擇小於10 MB的Ssak備份。",
     "privacy": "備份包含習慣名稱與備註，請妥善保管。備份不包含Plus購買資訊。"
   }

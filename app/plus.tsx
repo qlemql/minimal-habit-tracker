@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { LocalizedText as Text } from '@/renewal/LocalizedText';
 import { useRouter } from 'expo-router';
@@ -31,15 +31,19 @@ export default function Plus() {
   const router = useRouter();
   const language = usePreferences((state) => state.language);
   const d = discoveryCopy[language];
+  const progressCopy = releaseCopy[language];
   const pro = useProStore((state) => state.isPro);
   const [item, setItem] = useState<LifetimeProduct | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [operation, setOperation] = useState<'purchase' | 'restore' | null>(null);
+  const busy = operation !== null;
+  const transactionRunning = useRef(false);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
   useEffect(() => {
-    if (pro) { setPending(false); setMessage(''); }
-  }, [pro]);
+    if (pro) setPending(false);
+    setMessage(pro ? c.purchased : '');
+  }, [pro, c.purchased]);
   useEffect(() => {
     let mounted = true;
     const load = async () => {
@@ -58,8 +62,9 @@ export default function Plus() {
     };
   }, []);
   const transact = async (restore: boolean) => {
-    if (busy) return;
-    setBusy(true);
+    if (transactionRunning.current) return;
+    transactionRunning.current = true;
+    setOperation(restore ? 'restore' : 'purchase');
     setMessage('');
     try {
       const success = restore ? await restoreLifetime() : item ? await buyLifetime(item) : false;
@@ -73,13 +78,19 @@ export default function Plus() {
       if (!(error instanceof BillingError && error.code === 'cancelled'))
         setMessage(c.purchaseError);
     } finally {
-      setBusy(false);
+      transactionRunning.current = false;
+      setOperation(null);
     }
   };
   return (
-    <Screen detail>
+    <Screen detail bounces={false} resetScrollKey={`${busy}:${pro}`}
+      processing={busy ? {
+        title: operation === 'restore' ? progressCopy.restoringPurchase : progressCopy.processingPurchase,
+        description: progressCopy.processingPurchaseDetail,
+      } : undefined}>
       <View style={st.content}>
         <Eyebrow>{c.plusName}</Eyebrow>
+        {!busy && (pro || message) ? <Notice>{message || c.plusActive}</Notice> : null}
         <Title>{c.plusTitle}</Title>
         <Body>{c.plusSub}</Body>
         <View style={s.card}>
@@ -117,7 +128,6 @@ export default function Plus() {
             </>
           )}
         </View>
-        {message ? <Notice>{message}</Notice> : null}
         <Text style={s.small}>{d.scope}</Text>
         <Button
           secondary

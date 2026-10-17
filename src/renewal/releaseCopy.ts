@@ -6,8 +6,18 @@ export const releaseCopy: Record<Language, {
   contactMissing: string; contact: string; refund: string;
   openError: string; selected: string;
   purchasePending: string;
+  processingPurchase: string; restoringPurchase: string; processingPurchaseDetail: string;
+  readOnlyLabel: string; trackableLabel: string; readOnlyListNote: string; changeHabit: string;
 }> = {
   en: {
+    processingPurchase: 'Completing your purchase…',
+    restoringPurchase: 'Restoring your purchase…',
+    processingPurchaseDetail: 'Please wait while the store confirms your purchase. This screen will update automatically. You do not need to tap again.',
+    readOnlyLabel: 'Read only',
+    trackableLabel: 'Tracking enabled',
+    readOnlyListNote: 'Read-only habits keep all their records. Choose which habit to track for free in Settings.',
+    changeHabit: 'Choose in Settings',
+
     choose: 'Choose one habit to keep tracking',
     chooseSub: 'Plus is not active. You can track one habit for free. All your other plans and records stay here. You can change your choice in Settings.',
     chooseAction: 'Track this habit',
@@ -20,6 +30,14 @@ export const releaseCopy: Record<Language, {
     purchasePending: 'Your payment is waiting for approval. Plus will be available after the store confirms it. You do not need to buy again.',
   },
   ko: {
+    processingPurchase: '구매를 진행하고 있어요',
+    restoringPurchase: '구매 내역을 복원하고 있어요',
+    processingPurchaseDetail: '스토어 확인에 시간이 걸릴 수 있어요. 확인이 끝나면 자동으로 알려드릴게요. 다시 누르지 않아도 돼요.',
+    readOnlyLabel: '읽기 전용',
+    trackableLabel: '기록 가능',
+    readOnlyListNote: '읽기 전용 습관도 기존 기록은 그대로 남아요. 무료로 기록할 습관은 설정에서 바꿀 수 있어요.',
+    changeHabit: '설정에서 습관 선택',
+
     choose: '계속 기록할 습관 하나를 골라주세요',
     chooseSub: '지금은 Plus를 사용하고 있지 않아요. 무료로 습관 하나를 기록할 수 있어요. 다른 습관의 계획과 기록도 그대로 남아요. 설정에서 언제든 다시 고를 수 있어요.',
     chooseAction: '이 습관 기록하기',
@@ -32,6 +50,14 @@ export const releaseCopy: Record<Language, {
     purchasePending: '결제 승인을 기다리고 있어요. 스토어에서 확인되면 Plus를 사용할 수 있어요. 다시 구매하지 않아도 돼요.',
   },
   ja: {
+    processingPurchase: '購入を処理しています…',
+    restoringPurchase: '購入を復元しています…',
+    processingPurchaseDetail: 'ストアでの確認に時間がかかる場合があります。確認が終わると画面が自動で切り替わります。もう一度押す必要はありません。',
+    readOnlyLabel: '閲覧のみ',
+    trackableLabel: '記録できます',
+    readOnlyListNote: '閲覧のみの習慣も記録はすべて残ります。無料で記録する習慣は設定で変更できます。',
+    changeHabit: '設定で習慣を選ぶ',
+
     choose: '記録を続ける習慣を1つ選んでください',
     chooseSub: '現在Plusは有効ではありません。無料で1つの習慣を記録できます。他の習慣の計画や記録も残ります。設定からいつでも選び直せます。',
     chooseAction: 'この習慣を記録する',
@@ -44,6 +70,14 @@ export const releaseCopy: Record<Language, {
     purchasePending: 'お支払いの承認を待っています。ストアで確認されるとPlusが使えるようになります。再購入は不要です。',
   },
   'zh-TW': {
+    processingPurchase: '正在處理購買…',
+    restoringPurchase: '正在恢復購買…',
+    processingPurchaseDetail: '商店確認可能需要一些時間。確認完成後，畫面會自動更新，不需要再次點選。',
+    readOnlyLabel: '唯讀',
+    trackableLabel: '可記錄',
+    readOnlyListNote: '唯讀習慣的既有紀錄都會保留。可以到設定更換免費記錄的習慣。',
+    changeHabit: '到設定選擇習慣',
+
     choose: '選一個繼續記錄的習慣',
     chooseSub: '目前沒有啟用 Plus。你可以免費記錄一個習慣，其他習慣的計畫和紀錄都會保留。隨時可以到設定重新選擇。',
     chooseAction: '記錄這個習慣',

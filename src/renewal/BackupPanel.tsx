@@ -11,6 +11,7 @@ import { serializeBackup } from './domain';
 import { backupCopy } from './backupCopy';
 import { backupFileName, previewBackup, type BackupPreview } from './backupPreview';
 import { pickBackupFile, saveBackupFile, shareBackupFile } from './backupFile';
+import { restoreBackup } from './restoreBackup';
 import { Body, Button, Field, Icon, Notice, TextButton, s } from './ui';
 
 export const BackupPanel = () => {
@@ -63,20 +64,15 @@ export const BackupPanel = () => {
     // Data was validated before preview. Recheck entitlement at the actual commit point.
     if (!useProStore.getState().isPro) return;
     const oldHabits = useHabitStore.getState().habits;
+    await restoreBackup(preview.data);
     await Promise.all(oldHabits.map((habit) => cancelHabitReminder(habit.id).catch(() => {})));
-    if (!useProStore.getState().isPro) {
-      void refreshHabitReminders().catch(() => {});
-      router.push('/plus');
-      return;
-    }
-    useHabitStore.setState({ ...preview.data, freeHabitId: null });
     usePreferences.getState().setExample(false);
     setPreview(null);
     setText('');
     setTextMode(false);
     setMessage(c.restored);
     void refreshHabitReminders().catch(() => {});
-  }, c.backupError);
+  }, b.restoreError);
 
   return <View style={s.card}>
     <View style={s.row}><Icon name="download" /><Text style={s.cardTitle}>{c.backup}</Text></View>

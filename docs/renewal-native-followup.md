@@ -1,5 +1,106 @@
 # 리뉴얼 후속 개발 — 2026-10-06
 
+## 2026-10-17 인계 — 10월 16일 스토어 등록 결과
+
+이 절이 아래 날짜별 작업 당시의 대기/미제출 기록보다 우선한다.
+
+### iOS: 메타데이터 수정 후 재제출 필요
+
+- **2.0.0 (16)**과 첫 비소모성 상품 **Ssak Plus Lifetime**을 같은 제출에 포함했다. 한국어·영어·일본어·중국어 번체의 소개와 스크린샷을 저장했다.
+- 10월 16일 Apple이 **2.3.10 Accurate Metadata**로 앱 버전을 거절했다. 심사 메시지의 구체적인 요구는 **앱 설명에서 Android 언급 제거**다. Plus는 `심사 준비됨`이며 별도로 거절된 것으로 확인되지 않았다.
+- 다음 작업: 네 언어의 **설명**을 수정하고, 업데이트 안내에도 다른 플랫폼 언급이 있는지 확인한다. 수정 문구는 `docs/renewal-store-copy.md`에 반영했다. 콘솔 수정 및 재제출 완료는 아직 확인하지 않았다.
+- 이번 지적은 설명 수정이므로 빌드 16을 유지해 재제출한다. 앱 버전과 Plus가 같은 제출에 포함됐는지 다시 확인한다. 승인/배포 완료 상태가 아니다.
+- 첫 IAP가 별도 제출 초안으로 들어갔을 때는 해당 초안에서 항목을 제거한 뒤, **앱 내 구입 목록 → 편집 → 상품 선택 → 심사에 추가 → 기존 앱 버전 초안 선택**으로 합쳤다. 상품 자체를 삭제하지 않는다.
+
+### Google Play: 계정 추가 정보 입력 대기
+
+- 기본 한국어와 영어(en-US)·일본어(ja-JP)·중국어 번체(zh-TW) 등록정보, 아이콘, 그래픽 이미지 및 언어별 스크린샷을 저장했다.
+- **프로덕션 2.0.0 / versionCode 14**에 AAB를 라이브러리에서 추가했다. 이미 업로드한 동일 버전 코드 파일은 재업로드할 필요가 없다.
+- 대한민국·미국·영국·캐나다·호주·뉴질랜드·일본·대만·홍콩·마카오, 총 10개 국가/지역을 선택하고 저장했다.
+- 게시 개요에서 **한국 개발자 계정 추가 정보** 미입력으로 검토 전송이 막혔다. 사용자는 통신판매업 신고를 신청했고 발급을 기다리고 있다.
+- 발급 후 실제 사업자 등록 번호·통신판매업 신고번호·발급기관을 계정 세부정보에 입력/저장하고 게시 개요에서 검토 전송한다. **아직 Google 심사에 제출하거나 공개하지 않았다.**
+
+### 이번 커밋 검증
+
+- 10월 17일 단위 테스트 90개, `launch.spec.ts`의 네 언어 E2E 12개, TypeScript 검사, 웹 export 통과. 새 캡처 스크립트 3개의 구문 검사와 `git diff --check`도 통과했다. 네이티브 결제창 실기기 검증을 대신하지 않는다.
+
+### 남은 검증 및 산출물
+
+- iOS 상품 화면의 달러 표시와 Apple 구매창의 원화 표시 차이, iOS 복원/환불, 양 플랫폼 서버 알림 수신은 미확인 항목으로 유지한다.
+- 빌드 16/14의 실제 기기에서 결제 진행 화면·스크롤 차단·결과 안내·파일 백업 복원 검증 완료는 아직 확인하지 않았다. Android의 이전 빌드 구매/복원/환불 후 무료 전환은 사용자 확인했다.
+- 빌드: `artifacts/purchase-progress-build-2026-10-15/`. 스토어 이미지: `artifacts/store-2.0-2026-10-14/`. 바이너리와 생성 이미지는 로컬 산출물이며 Git에는 제작 스크립트와 기록을 보관한다.
+
+## 2026-10-14 정책 검토 및 출시 범위 갱신
+
+- 사용자 확인: 구버전 실사용자가 없으므로 구형 완료 유형 호환은 출시 필수 작업에서 제외한다. 기존 호환 코드를 제거하지는 않는다.
+- 백업 저장 실패 대응은 보완했다. `restoreBackup.ts`가 영구 저장 완료까지 기다리고, 실패 시 원래 습관/기록/무료 선택을 되돌려 오류를 전달한다. 미리보기는 실패 시 유지해 재시도할 수 있고, 알림 취소와 복원 성공 안내는 저장 성공 뒤에 실행한다. 실패 메시지는 네 언어로 구분했다. 지연된 저장과 저장 공간 부족/복구 후 재시도 검사 포함 단위 테스트 85개, 타입 검사와 웹 export 통과.
+- 사용자는 전연령 대상을 고려 중이며 연령별 의무를 설명받은 뒤 결정한다. 대상 연령, 보호자 동의, 스토어 신고나 공개 정책은 임의로 확정/변경하지 않았다.
+
+### 연령 판단: 콘텐츠 등급, 실제 타깃, 법률 기준은 별개
+
+Google Play의 전체이용가 같은 콘텐츠 등급은 어린이 개인정보/결제 요건의 준수 인증이 아니다. 대상 연령은 실제로 설계한 이용자에 맞춰 신고한다. 누구나 다운로드할 수 있게 하려는 이유만으로 모든 연령을 선택하지 않는다. 어린이를 포함하면 광고가 없어도 Families 정책이 적용된다. 13–15/16–17세도 국가별로 아동에 포함될 수 있다. [Google 대상 연령 안내](https://support.google.com/googleplay/android-developer/answer/9867159?hl=en)
+
+| 연령/지역 | 조건과 싹에 대한 의미 |
+|---|---|
+| 한국 만 14세 미만 | 개인정보 처리에 법에 따른 동의가 필요한 경우 법정대리인의 동의 및 확인이 필요하다. 앱 실행 자체가 언제나 보호자 동의를 요구한다는 뜻은 아니다. [개인정보 보호법 제22조의2](https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1020398523) |
+| 미국 만 13세 미만 | COPPA 적용 대상 서비스의 아동 개인정보 수집에는 예외가 없는 한 검증 가능한 부모 동의가 필요하다. 이름/이메일 외 지속 식별자도 포함될 수 있다. 내부 운영만을 위한 제한적 식별자 예외를 현재 RC 구성에 적용할 수 있는지는 별도 확인한다. [FTC 안내](https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions) |
+| EU 제공 시 | 아동에게 직접 제공하는 온라인 서비스에서 동의를 처리 근거로 삼을 때 국가별 13–16세 기준이 적용된다. 단순히 모든 개인정보 처리에 부모 동의가 필요하다는 뜻은 아니다. [EU 안내](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data/are-there-any-specific-safeguards-data-about-children_en) |
+| 영국 제공 시 | 서비스 적용 범위에 해당하고 18세 미만이 이용할 가능성이 있으면 Children's Code를 검토한다. 성인용이라고 표시하는 것만으로 제외되지 않는다. [ICO 안내](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/introduction-to-the-childrens-code) |
+| 청소년의 구매 | 개인정보 동의 나이를 넘겨도 미성년자 계약/취소 문제는 별개다. 한국 민법의 성년 기준과 법정대리인 동의·취소 및 예외를 구분하며 일률적으로 환불 불가라고 고지하지 않는다. [민법 제5조](https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026990807) |
+
+### 전연령 출시 판단에 남은 구체 항목
+
+1. **RevenueCat/SDK 데이터 흐름**: 현재 `Runtime.tsx`는 시작 시 구매 동기화/리스너를 시작하며 `revenueCat.ts`는 익명 구성으로 SDK를 초기화한다. 결제 버튼을 누르기 전에도 실행되므로 ‘보호자가 구매할 때만 데이터가 처리된다’고 설명하면 안 된다. 앱 코드에 광고 SDK/광고 ID 수집 호출은 발견하지 않았고 기존 AAB에도 AD_ID 권한은 없지만, 전체 네트워크 트래픽을 검증한 것은 아니다. 아동 사용을 허용하는 SDK 조건, 실제 전송 항목, RC 대시보드 외부 연동을 확인해야 한다. RC가 무조건 아동용으로 금지됐다고 판단하지 않는다. RC 사이트의 18세 미만 조항을 앱 SDK 전체 금지로 오독하지 않는다. [Families 데이터 정책](https://support.google.com/googleplay/android-developer/answer/11043825?hl=en), [RC 익명 ID](https://www.revenuecat.com/docs/customers/identifying-customers)
+2. **보호자 흐름**: 구매 인증/Ask to Buy와 개인정보 수집 동의는 별개다. 보호자 안내나 간단한 성인 확인만으로 법정 동의 확인을 대체했다고 간주하지 않는다. 필요한 동의 또는 적법한 처리 근거를 정한 뒤 구현한다. 생년월일/부모 이메일을 불필요하게 수집하는 것도 피한다. 연령 구분을 쓰면 보호가 필요한 SDK 초기화보다 먼저 적용해야 한다.
+3. **Apple Kids 선택 시**: 일반 앱의 낮은 연령 등급과 Kids Category는 다르다. Kids에는 구매/외부 링크의 parental gate, 제3자 데이터/분석 제한이 추가된다. 현재 지원 메일, 환불 링크, 파일 공유와 구매 진입을 함께 검토한다. parental gate는 개인정보 부모 동의와 동일하지 않다. [Apple 1.3 및 5.1.4](https://developer.apple.com/app-store/review/guidelines/)
+4. **공개 개인정보 정책**: RC 처리, 문의 데이터, 보관/삭제 기준, 보안, 담당자와 아동/보호자의 요청 경로를 구체화한다. 현재 ‘각 업체 정책에 따른다’만으로 운영자의 보관·삭제 정책이 충분하다고 판정하지 않는다. 한국 대상 RC 국외 이전은 실제 이전 국가/수탁자/항목/목적/보관 및 적용 근거를 확인한 뒤 안내해야 한다. 임의 기간이나 동의 근거를 만들지 않는다. [Google 사용자 데이터 정책](https://support.google.com/googleplay/android-developer/answer/10144311?hl=en), [개인정보 보호법 제28조의8](https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1034292881)
+5. **콘솔 선언**: Data safety의 구매 내역 수집과 기능/분석 목적은 RC 공식 설명과 실제 구성에 맞춘다. RC가 처리 수탁자인 경우와 외부 광고/분석 연동이 있는 경우의 ‘공유’ 판정을 구별한다. 계정 생성이 없는 현재 앱에 계정 삭제 기능이 무조건 필요하다고 보지 않되 데이터 삭제 요청을 실제로 처리할 방법은 준비한다. [RC 신고 가이드](https://www.revenuecat.com/docs/platform-resources/google-platform-resources/google-plays-data-safety), [계정 삭제 적용 범위](https://support.google.com/googleplay/android-developer/answer/13327111?hl=en)
+6. **건강/콘텐츠 신고**: 산책·스트레칭·물 마시기·숨 고르기 등의 예시가 있으므로 건강 앱 선언의 실제 분류를 확인한다. 센서를 안 쓴다는 이유만으로 무조건 ‘건강 기능 없음’을 고르지 않는다. 의료 진단/치료 효능을 홍보하지 않으며 최종 기능/스토어 설명에 맞춰 신고한다. [Google 건강 정책](https://support.google.com/googleplay/android-developer/answer/16679511?hl=en)
+7. **권한 최소화**: 기존 AAB 13에 `SYSTEM_ALERT_WINDOW`가 포함됐지만 제품 코드에서 사용하는 기능은 찾지 못했다. 다음 빌드에서 제거 대상으로 둔다. `SCHEDULE_EXACT_ALARM`은 제한적인 `USE_EXACT_ALARM`과 다른 권한이므로 둘을 혼동하지 않는다. 이번 정책 검토에서 권한이나 타깃 연령을 자동 변경하지 않았다.
+
+현재 방향에서 확인된 장점은 광고/공개 채팅/사용자 계정이 없고 습관 내용이 기기 내부에 머무르며, 스토어 결제 및 일회성 가격/환불 안내가 있다는 점이다. 다만 이것만으로 전연령 적합 또는 법적 준수를 확정할 수는 없다. 실제 출시 국가 목록·Play Console 신고·SDK 연동·아동 데이터 처리 근거의 확인이 남아 있다. 국가별 모든 법률에 대한 검토 완료를 의미하지 않는다.
+
+## 2026-10-14 AAB 생성 전 2.0 출시 검토
+
+판정: Android 선출시는 가능하나 아래 코드 보완과 최종 기기/콘솔 확인을 먼저 진행한다. 이번 검토에서는 기능 코드 수정·새 빌드·스토어 업로드를 하지 않았다. 아래 상태가 이전 날짜의 미완료 기록보다 우선한다.
+
+### 재현한 코드 보완 사항
+
+1. **백업 복원 완료 안내가 영구 저장보다 빠름** — `src/renewal/BackupPanel.tsx:72`에서 `useHabitStore.setState` 후 저장 완료를 기다리지 않고 복원 성공과 미리보기 초기화를 수행한다. AsyncStorage에 `disk-full` 실패를 주입해도 성공 경로가 진행하고, `flushHabitStorage()`에서만 실패가 확인되는 것을 임시 Vitest 검사로 재현했다. 저장 실패 시 메모리와 재실행 후 데이터가 달라질 수 있다. 저장 완료 확인, 실패 안내 및 기존 데이터/재시도 경로를 보완해야 한다. 실제 기기 저장 공간을 채워 실험한 것은 아니다.
+2. **이전 완료 유형 변환 누락** — 기존 저장 형식의 `completionKind: 'small'` 로그가 `migrateHabitData`를 거치면 로그는 보존되지만 새 UI/위젯이 사용하는 `effort: 'tiny'`가 생기지 않는다. 실제 도메인 함수를 실행해 `retainedLogs=1, completionKind=small, effort=null`을 확인했다. 구형 필드를 변환하고 새 형식이 이미 있으면 우선 보존하는 회귀 검증이 필요하다. 이 형식이 현재 공개된 모든 구버전에 사용됐다는 뜻은 아니며, 로컬 구버전 구현에 존재하는 호환성 문제다.
+
+### 공개 안내 및 운영 확인
+
+- 공개 사이트 `https://ssak-habit-tracker.pages.dev/privacy-policy.en.html`은 아직 2026-04-02 정책이며 정보 수집이 없다고 안내한다. 연결된 약관에도 외부 서버 전송이 없다는 문장이 남아 있다. 앱 내부 2.0 안내와 달리 RevenueCat 구매 처리 내용이 반영되지 않았다. 새 정책을 공개하고 실제 Play Console 개인정보처리방침 URL을 대조한다. `/ko/privacy/`는 현재 정책 대신 지원 홈페이지를 반환한다. `release-public.json`도 아직 `policyStatus: draft`다.
+- Play 데이터 보안 신고는 콘솔에서 직접 확인하지 않았다. RevenueCat 구매 내역 수집을 포함해 SDK 사용과 일치하도록 확인한다. 공식 근거: https://www.revenuecat.com/docs/platform-resources/google-platform-resources/google-plays-data-safety 및 https://support.google.com/googleplay/android-developer/answer/10787469 .
+- `docs/renewal-store-copy.md:83,97`의 일본어/번체 초안에 기존 사용자는 계속 3개를 기록할 수 있다는 옛 문장이 남아 있다. 현재 무료 1개/Plus 3개 정책과 다르므로 복사해 제출하기 전에 정리한다. 실제 스토어 게시 문구에 같은 오류가 있는지는 미확인이다. 업데이트 안내에는 기존 기록 보존·무료 습관 선택·Plus 범위를 명시한다.
+- Android 결제·복원·재실행 후 권한 유지·환불 후 RC 및 앱 무료 복귀는 사용자 확인 완료. Google RTDN 연결 및 테스트 수신은 아직 확인하지 않았으며, 환불이 한 번 반영된 것만으로 연결 완료로 보지 않는다. iOS 은행 처리와 iOS 결제 검증은 Android 출시와 별도다.
+
+### 다음 AAB 설치 후 확인
+
+- 기존 설치를 삭제하지 않고 업데이트: 습관·과거 기록·무료 선택·구매 권한 보존.
+- 실제 파일 앱에서 백업 저장/공유 → 파일 선택 → 교체 확인 → 복원 → 앱 재실행 후 기록 비교. 잘못된 파일/취소 시 원본 유지.
+- 환불 상태의 읽기 전용 배지, 기록할 습관 변경, Plus 복귀를 Android에서 확인. 현재 배지는 기존 AAB 13에 포함되지 않는다.
+- Android 알림/위젯의 권한 거부, 재실행, 날짜 변경 및 환불 상태 동기화와 큰 글자/좁은 화면을 최종 확인. 자동 테스트만으로 네이티브 동작 완료로 판단하지 않는다.
+- 새 AAB의 버전 코드·서명·상품 가격, 최종 스토어 이미지/문구/데이터 보안 신고 확인 후 공개 여부 결정.
+
+### 이번 검증 결과
+
+- TypeScript 통과, 기존 단위 테스트 83개 통과.
+- 앱 E2E 51개 통과. 가이드 3개는 전용 미리보기 서버 미실행으로 처음 실패했으며 서버 실행 후 3개 모두 통과(총 54개). 앱 결함으로 집계하지 않는다.
+- 복원 저장 실패 경계 임시 검사 1개 통과(문제 재현); 검사 파일은 제거했다.
+- `release:check`는 24개 중 7개 통과/17개 BLOCK. 수동 증빙 파일 및 정책 검토 상태를 요구하고 iOS도 포함하므로 17개의 실제 앱 결함을 뜻하지 않는다. 기존 문서와 증빙을 최신 확인 결과로 정리해야 한다.
+- `npm audit --omit=dev`: moderate 5/high 22/critical 0. 상위 의존성 전파가 포함된 숫자이며, 확인한 braces/node-forge/source-map-js 경로는 Expo CLI/Metro 빌드 도구다. 앱 실행 중 취약점 27개로 해석하지 않는다. 호환 패치 검토를 별도 유지하고 강제 major 변경/다운그레이드는 수행하지 않았다.
+
+## 2026-10-14 환불 후 읽기 전용 습관 구분
+
+- 사용자 확인: Android 환불이 RC에 반영됐고 에뮬레이터에서도 무료 상태·구매 버튼으로 전환됐다. iOS 은행 정보는 아직 대기 중이다.
+- 전체 습관 목록에서 기록 가능한 습관과 읽기 전용 습관을 배지로 구분한다. 읽기 전용에는 잠금 아이콘·차분한 배경/숫자 색상을 적용하며, 상세와 과거 기록은 계속 열 수 있다.
+- 읽기 전용 습관의 계획 수정 진입 버튼은 숨기고, 목록 위에 기록 보존 안내와 설정의 습관 선택으로 이동하는 버튼을 제공한다. 오늘 탭은 기존처럼 기록 가능한 습관만 표시한다.
+- 설정에서 기록할 습관 변경과 Plus 재활성화에 따라 표시가 바뀐다. 졸업 습관에는 읽기 전용 배지를 붙이지 않는다.
+- 검증: TypeScript, 웹 export, 네 언어의 환불/선택 변경/기록 보존/Plus 복귀 및 기존 상태 테스트 12개 통과. 360px 화면 카드 캡처를 확인했다(`artifacts/read-only-2026-10-14/`).
+- 이번 수정은 아직 새 IPA/AAB로 만들지 않았다. 이전 Android 13 / iOS 15에는 포함되지 않는다. 실제 기기 확인은 다음 빌드 설치 후 진행한다.
+
 ## 2026-10-13 파일 백업 및 오늘 탭 개선
 
 - [x] 습관별 주간 기록을 해당 습관 카드 안에 배치. 같은 카드 안에서 행동 버튼 아래 구분선으로 분리하고 습관별 목표·요일별 기록을 유지했다.
@@ -333,6 +434,21 @@ Completed: welcome-screen language buttons and their unused styles removed. Exis
 Validation: typecheck, web export and unsigned iPhone Release build passed. The 41-scenario browser suite had 40 passes and one new assertion failure because the web radio did not expose `aria-checked`; changed that assertion to the visible localized Settings tab and reran the affected scenario successfully. No app implementation change was required for that assertion.
 
 Device installation pending: the paired iPhone currently reports its tunnel as unavailable. Its records were not reset or modified for this change.
+
+## 2026-10-15 최신 테스트용 IPA/AAB 생성 완료
+
+- iOS **2.0.0 (16)**: EAS `e76a7e7a-37ef-44c4-bb17-d2f0d4e8de1a`, App Store 배포용 IPA 생성 완료. Xcode 26/iOS 26 SDK, 앱·위젯 서명과 버전/App Groups, 실제 iOS SDK 키, 파일 선택·공유 모듈, 결제 진행 UI 코드 포함 확인.
+- Android **2.0.0 (14)**: EAS `f30523f6-72e1-460f-8fec-a4b7e584e32a`, production AAB 생성 완료. bundletool 검증, 기존 업로드 인증서 일치, targetSdk 36, BILLING 권한, 64비트 라이브러리 40개 16KB 정렬, 실제 Android SDK 키와 결제 진행 UI 코드 포함 확인.
+- 산출물 및 SHA256/검증 기록: `artifacts/purchase-progress-build-2026-10-15/`. 이전 산출물은 보존했다. 새 빌드에는 결제 진행 표시·스크롤 잠금, 읽기 전용 습관 구분, 파일 백업·복원과 오늘 탭 개선이 포함된다.
+- **스토어 업로드·기기 설치는 아직 하지 않음.** TestFlight/Play 내부 테스트에서 구매·복원 대기 화면, 완료 안내, 파일 저장·불러오기와 읽기 전용 상태를 확인할 것. 빌드 성공은 출시 승인이나 실제 결제 회귀 검증 완료를 의미하지 않는다.
+
+## 2026-10-15 결제 대기 화면 개선
+
+- 실기기 TestFlight에서 구매 버튼은 달러, Apple 구매 확인창은 ₩4,900으로 표시됨. 사용자가 테스트 구매 성공을 확인했으나, 처리 중 피드백이 없어 앱을 종료했고 스크롤로 빈 화면도 보였다고 보고함.
+- 구매·복원 시작 즉시 화면에 고정된 로딩 표시와 4개 언어 안내를 표시한다. 처리 중 배경 터치와 스크롤을 막고, Plus 화면의 iOS 바운스를 끈다.
+- 구매·복원 종료와 Plus 권한 변경 시 화면을 위로 맞추고 결과 안내를 상단에 배치한다. 연속 터치에 대한 동기 가드로 중복 요청을 막는다.
+- 지연 구매, 연속 터치, 성공, 취소, 실패, 승인 대기, 복원에 대한 컴포넌트 회귀 테스트를 추가함. 전체 90개 테스트 통과.
+- 새 TestFlight 빌드에서 실제 Apple 구매창을 닫은 뒤 진행 표시, 스크롤, 완료 안내를 재확인해야 함. 이 변경은 기존 설치 빌드에 아직 반영되지 않음. 달러 상품 표시 문제는 별도 미해결 항목이다.
 
 ## 2026-10-08 위젯 디자인 검토와 다음 작업
 

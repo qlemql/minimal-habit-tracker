@@ -1,5 +1,5 @@
-﻿import { useEffect, useState } from 'react';
-import { View, Pressable, ScrollView, StyleSheet, Platform, useWindowDimensions, TextInput, AppState } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, View, Pressable, ScrollView, StyleSheet, Platform, useWindowDimensions, TextInput, AppState } from 'react-native';
 import { LocalizedText as Text } from './LocalizedText';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { usePathname, useRouter } from 'expo-router';
@@ -47,8 +47,10 @@ type IconName =
   | 'shield'
   | 'clock'
   | 'close'
-  | 'download';
+  | 'download'
+  | 'lock';
 const paths: Record<IconName, string> = {
+  lock: 'M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5V10m7 4v3',
   sun: 'M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5',
   path: 'M5 20V7a3 3 0 0 1 6 0v10a3 3 0 0 0 6 0V4m-3 3 3-3 3 3',
   settings: 'M4 7h16M4 17h16M8 4v6m8 4v6',
@@ -274,7 +276,17 @@ export const PlanBadge = () => {
   </Pressable>;
 };
 
-export const Screen = ({ children, detail = false }: { children: ReactNode; detail?: boolean }) => {
+export const Screen = ({ children, detail = false, processing, resetScrollKey, bounces = true }: {
+  children: ReactNode;
+  detail?: boolean;
+  processing?: { title: string; description: string };
+  resetScrollKey?: string;
+  bounces?: boolean;
+}) => {
+  const scroll = useRef<ScrollView>(null);
+  useEffect(() => {
+    if (resetScrollKey !== undefined) scroll.current?.scrollTo({ y: 0, animated: false });
+  }, [resetScrollKey]);
   const c = useCopy();
   const path = usePathname();
   const router = useRouter();
@@ -306,7 +318,10 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
   );
   return (
     <SafeAreaView style={s.safe} edges={['top', 'left', 'right', 'bottom']}>
-      <View style={[s.appFrame, wide && s.appFrameWide]}>
+      <View style={[s.appFrame, wide && s.appFrameWide]}
+        pointerEvents={processing ? 'none' : 'auto'}
+        accessibilityElementsHidden={!!processing}
+        importantForAccessibility={processing ? 'no-hide-descendants' : 'auto'}>
         {wide && (
           <View style={s.sidebar}>
             <Brand />
@@ -330,6 +345,9 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
             </View>
           )}
           <ScrollView
+            ref={scroll}
+            scrollEnabled={!processing}
+            bounces={bounces}
             contentContainerStyle={[s.scroll, wide && s.scrollWide]}
             overScrollMode="never"
             keyboardShouldPersistTaps="handled"
@@ -353,11 +371,22 @@ export const Screen = ({ children, detail = false }: { children: ReactNode; deta
           {!wide && !detail && <View style={s.bottomNav}>{nav}</View>}
         </View>
       </View>
+      {processing && (
+        <View style={s.processingOverlay} accessibilityViewIsModal testID="billing-progress">
+          <View style={s.processingCard}>
+            <ActivityIndicator size="large" color={palette.green} accessibilityLabel={processing.title} />
+            <Text style={s.cardTitle} accessibilityRole="header" accessibilityLiveRegion="polite">{processing.title}</Text>
+            <Text style={s.body}>{processing.description}</Text>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
 
 export const s = StyleSheet.create({
+  processingOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(255,249,239,0.94)', justifyContent: 'center', alignItems: 'center', padding: 24 },
+  processingCard: { width: '100%', maxWidth: 420, padding: 24, gap: 20, borderRadius: 24, backgroundColor: palette.white, borderWidth: 1, borderColor: palette.line },
   safe: { flex: 1, backgroundColor: palette.paper },
   appFrame: { flex: 1, width: '100%', maxWidth: 1440, alignSelf: 'center' },
   appFrameWide: { flexDirection: 'row' },
