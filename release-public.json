@@ -3,5 +3,9 @@
   "supportEmail": "taehyun_fe@naver.com",
   "siteUrl": "https://ssak-habit-tracker.pages.dev",
   "policyStatus": "content-updated",
-  "policyUpdatedAt": "2026-10-17"
+  "policyUpdatedAt": "2026-10-17",
+  "iosStoreUrl": "https://apps.apple.com/app/id6762334017",
+  "iosPublicVersion": "2.0.0",
+  "iosVerifiedAt": "2026-10-18",
+  "iosVerifiedStorefronts": ["kr"]
 }

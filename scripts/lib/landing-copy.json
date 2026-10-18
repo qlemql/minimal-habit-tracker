@@ -1,40 +1,318 @@
 {
   "en": {
-    "title":"Ssak — A habit that fits your day",
-    "description":"Start with one habit. Choose an easier option for busy days, and keep track at your own pace.",
-    "skip":"Skip to content","language":"Language","heading":"A little today.<br>A habit that stays.","cta":"Meet Ssak","noaccount":"One habit, free. No account needed.",
-    "example":"A READING HABIT","read":"Read a little","after":"After my morning coffee","usual":"On a regular day","ten":"Read for 10 minutes","busy":"On a busy day","one":"Read one sentence","caption":"An example plan, not an app screenshot.","note":"That counts, too.",
-    "ribbon":["No ads","No subscription","At your own pace"],"how":"Make room for<br>the days you actually have.",
-    "steps":[["Pick one thing.","Reading, walking, journaling. Choose something you want to do and decide when it fits into your day."],["Give busy days an option.","Set a smaller goal in advance. Ten minutes when you can, one sentence when you can’t. Record either."],["Adjust as you go.","Change a plan that feels too much. When you no longer need daily check-ins, stop tracking and keep your history."]],
-    "plansTitle":"One is a good place to start.","plansIntro":"Begin for free. Add more when you need to.","free":"FREE","freeTitle":"One habit. No time limit.","freeText":"Keep one habit going at a time.","freeItems":["A regular goal and an easier option","Daily check-ins and your history","No account required"],"plusTitle":"More room, one purchase.","plusText":"Ssak Plus is a one-time purchase.","plusItems":["Track up to three habits at once","Backup and restore your records","No recurring subscription"],"device":"Records stay on your device and do not sync automatically. Plus pricing will be shown in the app when available.",
-    "questions":"A few things to know.","faq":[["Do I have to do the full goal every day?","No. Choose an easier option for busy days and record it when that is what you can do."],["What happens if I stop tracking?","Your history stays. You can start tracking again when you want to."],["Is my data synced between devices?","No automatic sync is provided. Plus includes backup and restore. Purchase processing uses RevenueCat and the platform store."]],
-    "startTitle":"Your next habit can start small.","availability":"Ssak 2.0 is preparing for release. Follow along for launch updates.","soon":"Coming soon","follow":"Follow @ssak.app","footer":"A habit tracker for real life.","contact":"Contact"
+    "title": "Ssak — A habit that fits your day",
+    "description": "Start with one habit. Choose an easier option for busy days, and keep track at your own pace.",
+    "skip": "Skip to content",
+    "language": "Language",
+    "heading": "A little today.<br>A habit that stays.",
+    "cta": "Meet Ssak",
+    "noaccount": "One habit, free. No account needed.",
+    "example": "A READING HABIT",
+    "read": "Read a little",
+    "after": "After my morning coffee",
+    "usual": "On a regular day",
+    "ten": "Read for 10 minutes",
+    "busy": "On a busy day",
+    "one": "Read one sentence",
+    "caption": "An example plan, not an app screenshot.",
+    "note": "That counts, too.",
+    "ribbon": [
+      "No ads",
+      "No subscription",
+      "At your own pace"
+    ],
+    "how": "Make room for<br>the days you actually have.",
+    "steps": [
+      [
+        "Pick one thing.",
+        "Reading, walking, journaling. Choose something you want to do and decide when it fits into your day."
+      ],
+      [
+        "Give busy days an option.",
+        "Set a smaller goal in advance. Ten minutes when you can, one sentence when you can’t. Record either."
+      ],
+      [
+        "Adjust as you go.",
+        "Change a plan that feels too much. When you no longer need daily check-ins, stop tracking and keep your history."
+      ]
+    ],
+    "plansTitle": "One is a good place to start.",
+    "plansIntro": "Begin for free. Add more when you need to.",
+    "free": "FREE",
+    "freeTitle": "One habit. No time limit.",
+    "freeText": "Keep one habit going at a time.",
+    "freeItems": [
+      "A regular goal and an easier option",
+      "Daily check-ins and your history",
+      "No account required"
+    ],
+    "plusTitle": "More room, one purchase.",
+    "plusText": "Ssak Plus is a one-time purchase.",
+    "plusItems": [
+      "Track up to three habits at once",
+      "Backup and restore your records",
+      "No recurring subscription"
+    ],
+    "device": "Records stay on your device and do not sync automatically. Plus pricing will be shown in the app when available.",
+    "questions": "A few things to know.",
+    "faq": [
+      [
+        "Do I have to do the full goal every day?",
+        "No. Choose an easier option for busy days and record it when that is what you can do."
+      ],
+      [
+        "What happens if I stop tracking?",
+        "Your history stays. You can start tracking again when you want to."
+      ],
+      [
+        "Is my data synced between devices?",
+        "No automatic sync is provided. Plus includes backup and restore. Purchase processing uses RevenueCat and the platform store."
+      ]
+    ],
+    "startTitle": "Your next habit can start small.",
+    "availability": "Ssak 2.0 is now on the App Store. Android is coming soon. Availability varies by country or region.",
+    "soon": "Coming soon",
+    "follow": "Follow @ssak.app",
+    "footer": "A habit tracker for real life.",
+    "contact": "Contact",
+    "download": "Download on the App Store",
+    "available": "Available on iOS"
   },
   "ko": {
-    "title":"싹 — 할 수 있는 만큼부터 시작하는 습관",
-    "description":"하고 싶은 습관 하나부터. 바쁜 날 할 일도 미리 정하고, 내 속도로 기록해요.","skip":"본문으로 이동","language":"언어 선택","heading":"오늘은 이만큼.<br>습관은 조금씩.","cta":"싹 만나보기","noaccount":"습관 하나는 무료. 가입 없이 시작해요.",
-    "example":"책 읽기 계획","read":"책 조금 읽기","after":"아침 커피를 마신 뒤","usual":"평소에는","ten":"10분 읽기","busy":"바쁜 날에는","one":"한 문장 읽기","caption":"습관 계획의 예시이며 실제 앱 화면은 아니에요.","note":"이만큼도 기록해요.",
-    "ribbon":["광고 없이","구독료 없이","내 속도에 맞게"],"how":"여유 있는 날도,<br>바쁜 날도 있으니까.","steps":[["하나만 골라봐요.","책 읽기, 산책, 일기 쓰기. 하고 싶었던 일을 하나 골라 언제 할지 정해요."],["바쁜 날 할 일도 정해요.","여유가 있으면 10분, 시간이 없으면 한 문장. 미리 정해둔 만큼 하고 기록할 수 있어요."],["해보면서 바꿔요.","버겁다면 할 일을 줄여봐요. 매일 체크할 필요가 없어지면 기록을 마쳐도 이전 기록은 남아요."]],
-    "plansTitle":"처음에는 하나면 충분해요.","plansIntro":"무료로 시작하고, 필요할 때 더해보세요.","free":"무료","freeTitle":"습관 하나, 기간 제한 없이.","freeText":"한 번에 습관 하나를 기록해요.","freeItems":["평소 목표와 바쁜 날 할 일","매일 체크와 지난 기록","회원가입 없이 사용"],"plusTitle":"한 번 결제로, 조금 더.","plusText":"Ssak Plus는 일회성 구매예요.","plusItems":["습관을 최대 3개까지 함께 기록","기록 백업과 복원","매달 내는 구독료 없음"],"device":"기록은 기기에 저장되며 자동으로 동기화되지 않아요. Plus 가격은 이용 가능한 앱 구매 화면에서 확인할 수 있어요.",
-    "questions":"궁금할 수 있는 것들.","faq":[["매일 평소 목표를 다 해야 하나요?","바쁜 날 할 일을 미리 정할 수 있어요. 그날 할 수 있는 만큼 했다면 그것도 기록할 수 있어요."],["기록을 마치면 이전 기록이 사라지나요?","이전 기록은 남아요. 필요하면 다시 기록을 시작할 수 있어요."],["다른 기기와 자동으로 동기화되나요?","자동 동기화는 제공하지 않아요. Plus에서 백업과 복원을 사용할 수 있어요. 구매 처리에는 RevenueCat과 플랫폼 스토어가 사용돼요."]],
-    "startTitle":"다음 습관은 가볍게 시작해요.","availability":"싹 2.0 출시를 준비하고 있어요. Instagram에서 출시 소식을 만나보세요.","soon":"출시 준비 중","follow":"@ssak.app 소식 보기","footer":"일상에 맞춰가는 습관 트래커.","contact":"문의하기"
+    "title": "싹 — 할 수 있는 만큼부터 시작하는 습관",
+    "description": "하고 싶은 습관 하나부터. 바쁜 날 할 일도 미리 정하고, 내 속도로 기록해요.",
+    "skip": "본문으로 이동",
+    "language": "언어 선택",
+    "heading": "오늘은 이만큼.<br>습관은 조금씩.",
+    "cta": "싹 만나보기",
+    "noaccount": "습관 하나는 무료. 가입 없이 시작해요.",
+    "example": "책 읽기 계획",
+    "read": "책 조금 읽기",
+    "after": "아침 커피를 마신 뒤",
+    "usual": "평소에는",
+    "ten": "10분 읽기",
+    "busy": "바쁜 날에는",
+    "one": "한 문장 읽기",
+    "caption": "습관 계획의 예시이며 실제 앱 화면은 아니에요.",
+    "note": "이만큼도 기록해요.",
+    "ribbon": [
+      "광고 없이",
+      "구독료 없이",
+      "내 속도에 맞게"
+    ],
+    "how": "여유 있는 날도,<br>바쁜 날도 있으니까.",
+    "steps": [
+      [
+        "하나만 골라봐요.",
+        "책 읽기, 산책, 일기 쓰기. 하고 싶었던 일을 하나 골라 언제 할지 정해요."
+      ],
+      [
+        "바쁜 날 할 일도 정해요.",
+        "여유가 있으면 10분, 시간이 없으면 한 문장. 미리 정해둔 만큼 하고 기록할 수 있어요."
+      ],
+      [
+        "해보면서 바꿔요.",
+        "버겁다면 할 일을 줄여봐요. 매일 체크할 필요가 없어지면 기록을 마쳐도 이전 기록은 남아요."
+      ]
+    ],
+    "plansTitle": "처음에는 하나면 충분해요.",
+    "plansIntro": "무료로 시작하고, 필요할 때 더해보세요.",
+    "free": "무료",
+    "freeTitle": "습관 하나, 기간 제한 없이.",
+    "freeText": "한 번에 습관 하나를 기록해요.",
+    "freeItems": [
+      "평소 목표와 바쁜 날 할 일",
+      "매일 체크와 지난 기록",
+      "회원가입 없이 사용"
+    ],
+    "plusTitle": "한 번 결제로, 조금 더.",
+    "plusText": "Ssak Plus는 일회성 구매예요.",
+    "plusItems": [
+      "습관을 최대 3개까지 함께 기록",
+      "기록 백업과 복원",
+      "매달 내는 구독료 없음"
+    ],
+    "device": "기록은 기기에 저장되며 자동으로 동기화되지 않아요. Plus 가격은 이용 가능한 앱 구매 화면에서 확인할 수 있어요.",
+    "questions": "궁금할 수 있는 것들.",
+    "faq": [
+      [
+        "매일 평소 목표를 다 해야 하나요?",
+        "바쁜 날 할 일을 미리 정할 수 있어요. 그날 할 수 있는 만큼 했다면 그것도 기록할 수 있어요."
+      ],
+      [
+        "기록을 마치면 이전 기록이 사라지나요?",
+        "이전 기록은 남아요. 필요하면 다시 기록을 시작할 수 있어요."
+      ],
+      [
+        "다른 기기와 자동으로 동기화되나요?",
+        "자동 동기화는 제공하지 않아요. Plus에서 백업과 복원을 사용할 수 있어요. 구매 처리에는 RevenueCat과 플랫폼 스토어가 사용돼요."
+      ]
+    ],
+    "startTitle": "다음 습관은 가볍게 시작해요.",
+    "availability": "싹 2.0을 App Store에서 만나보세요. Android는 출시 준비 중이에요. 국가 또는 지역에 따라 이용 가능 여부가 다를 수 있어요.",
+    "soon": "출시 준비 중",
+    "follow": "@ssak.app 소식 보기",
+    "footer": "일상에 맞춰가는 습관 트래커.",
+    "contact": "문의하기",
+    "download": "App Store에서 다운로드",
+    "available": "iOS 출시"
   },
   "ja": {
-    "title":"Ssak — できることから始める習慣",
-    "description":"まずは習慣をひとつ。忙しい日にやることも決めて、自分のペースで記録しましょう。","skip":"本文へ移動","language":"言語","heading":"今日は、できる分だけ。<br>習慣は、少しずつ。","cta":"Ssakについて","noaccount":"習慣ひとつは無料。登録は不要です。",
-    "example":"読書のプラン","read":"少し本を読む","after":"朝のコーヒーを飲んだ後に","usual":"普段の日は","ten":"10分読む","busy":"忙しい日は","one":"1行読む","caption":"習慣プランの例です。実際のアプリ画面ではありません。","note":"それも、記録に。",
-    "ribbon":["広告なし","月額料金なし","自分のペースで"],"how":"余裕のある日も、<br>忙しい日も。","steps":[["ひとつ選ぶ。","読書、散歩、日記。続けたいことをひとつ選び、いつやるか決めましょう。"],["忙しい日の分も決める。","時間がある日は10分、忙しい日は1行。少なめに決めた分でも記録できます。"],["やりながら調整する。","大変なら、やることを減らしてみましょう。毎日のチェックを終えても、これまでの記録は残ります。"]],
-    "plansTitle":"まずは、ひとつから。","plansIntro":"無料で始めて、必要になったら追加できます。","free":"無料","freeTitle":"習慣ひとつ、期限なく。","freeText":"一度にひとつの習慣を記録できます。","freeItems":["普段の目標と忙しい日にやること","毎日のチェックと過去の記録","アカウント登録不要"],"plusTitle":"買い切りで、もう少し。","plusText":"Ssak Plusは一度の購入で使えます。","plusItems":["同時に最大3つの習慣を記録","記録のバックアップと復元","月額のサブスクリプションなし"],"device":"記録は端末に保存され、自動では同期されません。Plusの価格は提供開始後のアプリ内購入画面で確認できます。",
-    "questions":"よくある質問。","faq":[["毎日、普段の目標を達成する必要がありますか？","忙しい日にやることを決めておけます。その日にできた分を記録しましょう。"],["記録を終了すると、履歴は消えますか？","これまでの記録は残ります。必要になったら、また記録を始められます。"],["別の端末と自動で同期できますか？","自動同期はありません。Plusではバックアップと復元が使えます。購入処理にはRevenueCatと各プラットフォームのストアを利用します。"]],
-    "startTitle":"次の習慣は、できることから。","availability":"Ssak 2.0はリリース準備中です。Instagramで最新のお知らせをお届けします。","soon":"公開準備中","follow":"@ssak.appをフォロー","footer":"毎日の暮らしに合わせる習慣トラッカー。","contact":"お問い合わせ"
+    "title": "Ssak — できることから始める習慣",
+    "description": "まずは習慣をひとつ。忙しい日にやることも決めて、自分のペースで記録しましょう。",
+    "skip": "本文へ移動",
+    "language": "言語",
+    "heading": "今日は、できる分だけ。<br>習慣は、少しずつ。",
+    "cta": "Ssakについて",
+    "noaccount": "習慣ひとつは無料。登録は不要です。",
+    "example": "読書のプラン",
+    "read": "少し本を読む",
+    "after": "朝のコーヒーを飲んだ後に",
+    "usual": "普段の日は",
+    "ten": "10分読む",
+    "busy": "忙しい日は",
+    "one": "1行読む",
+    "caption": "習慣プランの例です。実際のアプリ画面ではありません。",
+    "note": "それも、記録に。",
+    "ribbon": [
+      "広告なし",
+      "月額料金なし",
+      "自分のペースで"
+    ],
+    "how": "余裕のある日も、<br>忙しい日も。",
+    "steps": [
+      [
+        "ひとつ選ぶ。",
+        "読書、散歩、日記。続けたいことをひとつ選び、いつやるか決めましょう。"
+      ],
+      [
+        "忙しい日の分も決める。",
+        "時間がある日は10分、忙しい日は1行。少なめに決めた分でも記録できます。"
+      ],
+      [
+        "やりながら調整する。",
+        "大変なら、やることを減らしてみましょう。毎日のチェックを終えても、これまでの記録は残ります。"
+      ]
+    ],
+    "plansTitle": "まずは、ひとつから。",
+    "plansIntro": "無料で始めて、必要になったら追加できます。",
+    "free": "無料",
+    "freeTitle": "習慣ひとつ、期限なく。",
+    "freeText": "一度にひとつの習慣を記録できます。",
+    "freeItems": [
+      "普段の目標と忙しい日にやること",
+      "毎日のチェックと過去の記録",
+      "アカウント登録不要"
+    ],
+    "plusTitle": "買い切りで、もう少し。",
+    "plusText": "Ssak Plusは一度の購入で使えます。",
+    "plusItems": [
+      "同時に最大3つの習慣を記録",
+      "記録のバックアップと復元",
+      "月額のサブスクリプションなし"
+    ],
+    "device": "記録は端末に保存され、自動では同期されません。Plusの価格は提供開始後のアプリ内購入画面で確認できます。",
+    "questions": "よくある質問。",
+    "faq": [
+      [
+        "毎日、普段の目標を達成する必要がありますか？",
+        "忙しい日にやることを決めておけます。その日にできた分を記録しましょう。"
+      ],
+      [
+        "記録を終了すると、履歴は消えますか？",
+        "これまでの記録は残ります。必要になったら、また記録を始められます。"
+      ],
+      [
+        "別の端末と自動で同期できますか？",
+        "自動同期はありません。Plusではバックアップと復元が使えます。購入処理にはRevenueCatと各プラットフォームのストアを利用します。"
+      ]
+    ],
+    "startTitle": "次の習慣は、できることから。",
+    "availability": "Ssak 2.0はApp Storeで公開中です。Androidは公開準備中です。提供状況は国や地域によって異なります。",
+    "soon": "公開準備中",
+    "follow": "@ssak.appをフォロー",
+    "footer": "毎日の暮らしに合わせる習慣トラッカー。",
+    "contact": "お問い合わせ",
+    "download": "App Storeでダウンロード",
+    "available": "iOSで公開中"
   },
   "zh-TW": {
-    "title":"Ssak — 從做得到的事開始養成習慣",
-    "description":"先選一個習慣，也為忙碌的日子設定基本目標。照自己的步調記錄。","skip":"跳至主要內容","language":"語言","heading":"今天，做得到就好。<br>習慣，慢慢來。","cta":"認識 Ssak","noaccount":"一個習慣免費記錄，不用註冊。",
-    "example":"閱讀計畫","read":"看一點書","after":"喝完早上的咖啡後","usual":"平常的目標","ten":"看書 10 分鐘","busy":"忙的時候","one":"只看一句","caption":"這是習慣計畫範例，並非實際 App 畫面。","note":"這樣也算完成。",
-    "ribbon":["沒有廣告","不用訂閱","照自己的步調"],"how":"有空的日子，<br>忙碌的日子，都可以。","steps":[["先選一件事。","看書、散步、寫日記。選一件想做的事，再想好什麼時候開始。"],["設定忙碌時的基本目標。","有空看書 10 分鐘，沒時間就只看一句。做到事先設定的基本目標，也能留下紀錄。"],["邊做邊調整。","覺得負擔太重，就少做一點。不需要每天打卡時可以停止追蹤，過去的紀錄都會保留。"]],
-    "plansTitle":"先從一個習慣開始。","plansIntro":"免費開始，需要時再增加。","free":"免費","freeTitle":"一個習慣，沒有期限。","freeText":"一次追蹤一個習慣。","freeItems":["平常目標與忙碌時的基本目標","每日打卡與過去的紀錄","不用註冊帳號"],"plusTitle":"付費一次，多一點選擇。","plusText":"Ssak Plus 採一次性購買。","plusItems":["同時追蹤最多 3 個習慣","紀錄備份與還原","沒有每月訂閱費"],"device":"紀錄儲存在裝置上，不會自動同步。Plus 價格可在推出後的 App 購買畫面確認。",
-    "questions":"你可能想知道。","faq":[["每天都要完成平常的目標嗎？","你可以先設定忙碌時的基本目標。當天做到這個目標，也能記錄。"],["停止追蹤後，紀錄會消失嗎？","過去的紀錄都會保留，需要時可以重新開始追蹤。"],["可以在不同裝置間自動同步嗎？","目前沒有自動同步。Plus 提供備份與還原功能。購買處理使用 RevenueCat 與各平台商店。"]],
-    "startTitle":"下一個習慣，從做得到的事開始。","availability":"Ssak 2.0 正在準備推出。歡迎到 Instagram 關注上線消息。","soon":"準備推出","follow":"追蹤 @ssak.app","footer":"配合日常生活的習慣追蹤 App。","contact":"聯絡我們"
+    "title": "Ssak — 從做得到的事開始養成習慣",
+    "description": "先選一個習慣，也為忙碌的日子設定基本目標。照自己的步調記錄。",
+    "skip": "跳至主要內容",
+    "language": "語言",
+    "heading": "今天，做得到就好。<br>習慣，慢慢來。",
+    "cta": "認識 Ssak",
+    "noaccount": "一個習慣免費記錄，不用註冊。",
+    "example": "閱讀計畫",
+    "read": "看一點書",
+    "after": "喝完早上的咖啡後",
+    "usual": "平常的目標",
+    "ten": "看書 10 分鐘",
+    "busy": "忙的時候",
+    "one": "只看一句",
+    "caption": "這是習慣計畫範例，並非實際 App 畫面。",
+    "note": "這樣也算完成。",
+    "ribbon": [
+      "沒有廣告",
+      "不用訂閱",
+      "照自己的步調"
+    ],
+    "how": "有空的日子，<br>忙碌的日子，都可以。",
+    "steps": [
+      [
+        "先選一件事。",
+        "看書、散步、寫日記。選一件想做的事，再想好什麼時候開始。"
+      ],
+      [
+        "設定忙碌時的基本目標。",
+        "有空看書 10 分鐘，沒時間就只看一句。做到事先設定的基本目標，也能留下紀錄。"
+      ],
+      [
+        "邊做邊調整。",
+        "覺得負擔太重，就少做一點。不需要每天打卡時可以停止追蹤，過去的紀錄都會保留。"
+      ]
+    ],
+    "plansTitle": "先從一個習慣開始。",
+    "plansIntro": "免費開始，需要時再增加。",
+    "free": "免費",
+    "freeTitle": "一個習慣，沒有期限。",
+    "freeText": "一次追蹤一個習慣。",
+    "freeItems": [
+      "平常目標與忙碌時的基本目標",
+      "每日打卡與過去的紀錄",
+      "不用註冊帳號"
+    ],
+    "plusTitle": "付費一次，多一點選擇。",
+    "plusText": "Ssak Plus 採一次性購買。",
+    "plusItems": [
+      "同時追蹤最多 3 個習慣",
+      "紀錄備份與還原",
+      "沒有每月訂閱費"
+    ],
+    "device": "紀錄儲存在裝置上，不會自動同步。Plus 價格可在推出後的 App 購買畫面確認。",
+    "questions": "你可能想知道。",
+    "faq": [
+      [
+        "每天都要完成平常的目標嗎？",
+        "你可以先設定忙碌時的基本目標。當天做到這個目標，也能記錄。"
+      ],
+      [
+        "停止追蹤後，紀錄會消失嗎？",
+        "過去的紀錄都會保留，需要時可以重新開始追蹤。"
+      ],
+      [
+        "可以在不同裝置間自動同步嗎？",
+        "目前沒有自動同步。Plus 提供備份與還原功能。購買處理使用 RevenueCat 與各平台商店。"
+      ]
+    ],
+    "startTitle": "下一個習慣，從做得到的事開始。",
+    "availability": "Ssak 2.0 已於 App Store 上架，Android 版本準備中。供應情況可能因國家或地區而異。",
+    "soon": "準備推出",
+    "follow": "追蹤 @ssak.app",
+    "footer": "配合日常生活的習慣追蹤 App。",
+    "contact": "聯絡我們",
+    "download": "到 App Store 下載",
+    "available": "iOS 已上架"
   }
 }
