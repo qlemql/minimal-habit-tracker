@@ -1,0 +1,8 @@
+Prepared 2026-10-19 for Disquiet review correction.
+These three files are unedited screenshots of the actual Ssak web application, captured during the 2026-10-17 Korean demo recording. Fresh isolated browser, example reading habit, 430x860 viewport. They are not mockups, logo cards, or native-iOS screenshots.
+
+01-actual-ui-plan.png: configure reading habit, action cue, easier option and five-day weekly plan.
+02-actual-ui-today.png: actual Today screen before completion.
+03-actual-ui-done.png: actual Today screen after the easier option is completed, 1/5 days.
+
+Sources: workspace/ssak-instagram-launch/demo-ko/01-plan.png, 02-today.png, 03-done.png. Capture method documented in workspace/ssak-marketing-tools/record-demo.cjs and demo-ko/capture.json. Mobile appearance may differ.
