@@ -1,0 +1,33 @@
+Reel PUBLISHED 2026-10-19 (KST).
+https://www.instagram.com/ssak.app/reel/DerVsGzt311/
+Published file: reel-03-simple.mp4 (7.1 seconds), caption-simple.txt.
+9:16; sound on; cover selected at about 68% (5/5 days). User attached video manually. Instagram completion dialog and public profile/detail verified.
+Story and feed alternatives remain UNPUBLISHED.
+
+Latest revision approved by user: simple 7.1-second actual-app demo.
+Use reel-03-simple.mp4 + simple-cover.jpg + caption-simple.txt.
+Starts immediately with actual app footage, shows Wednesday blank and the Saturday easier-option tap, ends on 5/5 days. No logo-only end card or in-video release pitch. Both music and silent versions are ready. The original 10.6-second version below is an archived alternative.
+QA: full decode and volume checks in simple-verification.json; simple-preview.jpg visually checked.
+
+Recommended today:
+1. Reel: reel-03-missed-day-ios.mp4 (original music included).
+2. Cover: cover-1080x1920.jpg. If the web editor cannot upload a separate cover, choose the frame after the tap (about 4 seconds), which shows Your week still counts and 5/5 days.
+3. Caption: caption-reel.txt. Keep the 9:16 crop and audio enabled.
+4. Story: story-6s.mp4 OR story-1080x1920.jpg. Upload only one. On mobile, optionally add a link sticker to https://ssak-habit-tracker.pages.dev/landing/ or share the published reel to the story instead.
+
+Feed alternative, prepared but not recommended in addition to the same-topic reel today:
+feed-01-1080x1350.jpg, feed-02-1080x1350.jpg, feed-03-1080x1350.jpg in that order, with caption-feed.txt. Save for a later post or use instead of the reel. Add the relevant descriptions from alt-text.txt.
+
+Original audio: procedurally synthesized lo-fi music, no external samples.
+Video: 10.6 seconds, 1080x1920, 30fps, H.264 + AAC. Music and silent versions available. Source is the existing 2026-10-17 actual web example recording, reused with current iOS release text and @ssak.app. No new native-device recording is claimed.
+Story video: 6 seconds, 1080x1920, H.264 + AAC; static story card with original music.
+QA: reel fully decoded with volume analysis (verification.json); story fully decoded (story-verification.txt). Preview strips and all code-native card layouts visually checked. App card crops preserve actual pixels.
+
+Comment decision:
+- Existing GIF comment on Deltg0lNgD2: Your AI slop bores me. No substantive feature question; do not reply today, delete, or argue.
+- External engagement: spend about 10 minutes on recent English reading/journaling/habit posts; leave 2-3 specific replies only where there is a real question or shared experience to discuss. Read each post first. No pasted generic praise, product links, or unsolicited app pitch. Do not claim personal experiences the developer has not supplied.
+- Two Instagram comments published from @ssak.app after user authorization on 2026-10-19. See comments-published.txt for exact text and direct links. Both verified at their direct comment URLs. No further engagement needed today unless a reply arrives.
+
+Observed account state 2026-10-19:
+6 posts, 1 follower. Latest reel: https://www.instagram.com/ssak.app/reel/DennBaPN3ft/ (published 10/18).
+No new Instagram post published today as of inspection. Current notification list shows the existing GIF comment, a story like, and a follower notification. Views, saves, shares, and installs were not verified.

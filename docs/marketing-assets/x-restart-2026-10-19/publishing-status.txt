@@ -1,0 +1,14 @@
+Main video published 2026-10-19:
+https://x.com/Ssakhabit/status/2112163709875568771
+Meme image reply published by user; verified on the public thread:
+https://x.com/Ssakhabit/status/2112163805656662048
+User attached video and meme manually after browser upload authority was declined. Both posts are now published.
+
+1. Publish post.txt with missed-day-demo.mp4 as the main post.
+2. Reply to that post from @Ssakhabit with reply.txt and reading-missed-day-meme.png.
+3. Add alt-text.txt as the meme image's alternative text.
+
+Video: 1080x1920, 30 fps, 10.6 seconds, H.264 + AAC stereo. Real Ssak web build recording using built-in example data; mobile appearance may differ. Wednesday is blank; Saturday's easier option brings the week from 4/5 to 5/5. Source capture: 2026-10-17, reused with updated iOS release text and X handle.
+Audio: original procedurally synthesized lo-fi music, no external samples.
+Meme: original AI-generated illustration using built-in image_gen. Prompt saved in image-prompt.txt.
+Verification: preview.jpg visually checked; full video decode and audio volume checks in verification.json.

@@ -1,0 +1,7 @@
+Use case: illustration-story. Asset type: original relatable English meme to be posted as the reply to a habit-tracker app's real demo video on X.
+Create a finished landscape two-panel comic, approximately 1536x1024, equal panels side by side divided by a thin black line. Intentionally simple expressive ink doodle on warm off-white paper, charcoal outlines with a little muted orange. Bold readable black sans-serif captions at the top of each panel, ample padding, phone-feed legibility. Understated internet comic humor, not a glossy advertisement.
+LEFT panel exact caption: "Me after missing one day of reading:"
+Underneath, a small original orange cat in a spectacular but harmless melodramatic slump on a sofa, one paw draped over its forehead, head thrown back as if all is lost. A small closed book with a visible bookmark sits on the side table.
+RIGHT panel exact caption: "My book, still on page 42:"
+Underneath, a quiet close view of that same book on that same side table, bookmark still in place, peacefully waiting. A tiny simple friendly face on the book. One small speech balloon from the book with exact text: "hey."
+The joke is the contrast between the reader's overreaction and the patient, unchanged book. Keep the mood warm and dry, not preachy. No app UI, no logos, no watermarks, no extra text, no copyrighted characters. Spelling and punctuation must be exact.

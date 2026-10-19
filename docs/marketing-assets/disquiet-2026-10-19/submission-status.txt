@@ -1,0 +1,13 @@
+2026-10-19: user resubmitted the product after adding actual UI screenshots.
+https://disquiet.io/products/ssak
+
+Verified on the product page:
+- Approval pending message (승인 대기중입니다).
+- Three product images; first image is the real Korean habit-plan screen.
+- Post writing remains disabled until product approval.
+
+Earlier rejection: marketing cards/logo did not show actual product UI.
+Correction: actual web-app screenshots of plan, today and completion screens prepared; user attached and resubmitted.
+Approval has not been granted yet. Do not cancel or submit again while pending.
+
+Next: check status from 2026-10-20 onward; publish launch-post-draft.txt after approval. No scheduled reminder configured.
