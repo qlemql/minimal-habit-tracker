@@ -1,0 +1,58 @@
+{
+  "status": "PUBLISHED",
+  "visual_review": "All four PNGs inspected; form crop adjusted to preserve label margins.",
+  "files": [
+    {
+      "file": "x\\post-1600x1000.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "bytes": 60076,
+      "sha256": "28b9ad6010105c91d34237c58a9fcb42bb7c2b0f71c014b3032a54eb24e840bd"
+    },
+    {
+      "file": "instagram\\01-1080x1350.png",
+      "size": [
+        1080,
+        1350
+      ],
+      "bytes": 59798,
+      "sha256": "f3799c429eba0f6e112bf1fec05a590cef8b4d45d0fce08a3a69f171ce9a165a"
+    },
+    {
+      "file": "instagram\\02-1080x1350.png",
+      "size": [
+        1080,
+        1350
+      ],
+      "bytes": 58126,
+      "sha256": "d4080f4ed01dd14ce8cd7542a4945a9dc5246a3861dc3e6f99cdc2ef12f33e92"
+    },
+    {
+      "file": "instagram\\03-1080x1350.png",
+      "size": [
+        1080,
+        1350
+      ],
+      "bytes": 61398,
+      "sha256": "8b3b2d9ff1e04a9bf22cf26fad3ce95e4b1ce0954656620a0d78931d6e5a79d6"
+    }
+  ],
+  "x_caption_characters": 141,
+  "checks": [
+    "PNG decode",
+    "Exact dimensions",
+    "UTF-8 captions",
+    "App pixels preserved",
+    "No external posting"
+  ],
+  "source": "sources/provenance.json",
+  "x_url": "https://x.com/Ssakhabit/status/2112509639598514218",
+  "instagram_url": "https://www.instagram.com/ssak.app/p/DetwJTtFL-6/",
+  "public_verification": [
+    "X success toast and public image with ALT",
+    "Instagram share-complete dialog and public caption",
+    "Instagram 3 cards checked before share, individual alt text saved"
+  ]
+}
