@@ -1,0 +1,116 @@
+<div id="ssak-plan-concepts">
+  <style>
+    #ssak-plan-concepts [hidden]{display:none!important}
+    #ssak-plan-concepts .ssak-stage{min-height:1080px;padding:24px 14px;display:flex;align-items:flex-start;justify-content:center}
+    #ssak-plan-concepts .ssak-app{--ssak-paper:light-dark(#fff9ef,#29231e);--ssak-ink:light-dark(#382d25,#f7ebdb);--ssak-muted:light-dark(#75685c,#c4b6a7);--ssak-line:light-dark(#e3d8c8,#57493d);--ssak-surface:light-dark(#fffdf8,#342b24);--ssak-soft:light-dark(#f2e7d6,#413327);--ssak-brown:light-dark(#895735,#e3b387);--ssak-onbrown:light-dark(#fffdf8,#29231e);width:100%;max-width:390px;background:var(--ssak-paper);color:var(--ssak-ink);border:1px solid var(--ssak-line);border-radius:26px;padding:24px;box-sizing:border-box;font:400 15px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;box-shadow:0 12px 35px light-dark(#54371a12,#00000025)}
+    #ssak-plan-concepts .ssak-app *{box-sizing:border-box}
+    #ssak-plan-concepts .ssak-app h2{font-family:inherit;font-size:27px;font-weight:500;line-height:1.35;letter-spacing:-1px;margin:15px 0 10px}
+    #ssak-plan-concepts .ssak-app h3{font-size:18px;font-weight:500;margin:0 0 8px;letter-spacing:-.4px}
+    #ssak-plan-concepts .ssak-app p{margin:0 0 12px}
+    #ssak-plan-concepts .ssak-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+    #ssak-plan-concepts .ssak-word{font-size:24px;font-weight:500;letter-spacing:-1.5px;color:var(--ssak-brown)}
+    #ssak-plan-concepts .ssak-kicker{font-size:12px;color:var(--ssak-muted);letter-spacing:.8px}
+    #ssak-plan-concepts .ssak-muted{color:var(--ssak-muted)}
+    #ssak-plan-concepts .ssak-lead{color:var(--ssak-muted);margin-bottom:24px!important}
+    #ssak-plan-concepts .ssak-section{margin-top:22px}
+    #ssak-plan-concepts .ssak-field{display:block;margin-bottom:17px;font-weight:500}
+    #ssak-plan-concepts .ssak-input{display:block;width:100%;min-width:0;margin-top:7px;padding:12px 13px;border:1px solid var(--ssak-line);border-radius:10px;background:var(--ssak-surface);color:var(--ssak-ink);font-family:inherit;font-size:16px;font-weight:400;line-height:1.5;min-height:48px}
+    #ssak-plan-concepts .ssak-input::placeholder{color:var(--ssak-muted);opacity:1}
+    #ssak-plan-concepts .ssak-app button{font-family:inherit;font-size:14px;font-weight:400;line-height:1.5;cursor:default;white-space:normal;overflow-wrap:anywhere}
+    #ssak-plan-concepts .ssak-app button:focus-visible,#ssak-plan-concepts .ssak-input:focus-visible{outline:2px solid var(--ssak-brown);outline-offset:4px}
+    #ssak-plan-concepts .ssak-primary{display:flex;width:100%;justify-content:center;align-items:center;gap:10px;min-height:50px;padding:13px 16px;background:var(--ssak-brown);color:var(--ssak-onbrown);border:0;border-radius:11px;margin-top:20px}
+    #ssak-plan-concepts .ssak-secondary{display:block;width:100%;padding:12px;min-height:48px;border:1px solid var(--ssak-line);border-radius:11px;background:var(--ssak-surface);color:var(--ssak-ink);margin-top:10px}
+    #ssak-plan-concepts .ssak-back{display:flex;align-items:center;justify-content:center;padding:0;min-width:44px;min-height:44px;background:transparent;border:0;color:var(--ssak-muted)}
+    #ssak-plan-concepts .ssak-context{padding:18px;background:var(--ssak-soft);border-radius:13px;margin:24px 0 18px}
+    #ssak-plan-concepts .ssak-context p{margin:0;font-size:14px}
+    #ssak-plan-concepts .ssak-context h3{font-size:16px}
+    #ssak-plan-concepts .ssak-help{font-size:13px;color:var(--ssak-muted);margin-top:9px!important}
+    #ssak-plan-concepts .ssak-examples{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+    #ssak-plan-concepts .ssak-example{background:var(--ssak-surface);color:var(--ssak-brown);border:1px solid var(--ssak-line);border-radius:22px;padding:9px 13px;min-height:42px}
+    #ssak-plan-concepts .ssak-frequency{display:flex;gap:8px}
+    #ssak-plan-concepts .ssak-frequency button{flex:1;min-height:44px;border:1px solid var(--ssak-line);border-radius:9px;color:var(--ssak-muted);background:var(--ssak-surface)}
+    #ssak-plan-concepts .ssak-frequency button[aria-pressed=true]{border-color:var(--ssak-brown);color:var(--ssak-brown);background:var(--ssak-soft)}
+    #ssak-plan-concepts .ssak-divider{height:1px;background:var(--ssak-line);margin:24px 0}
+    #ssak-plan-concepts .ssak-summary-row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--ssak-line)}
+    #ssak-plan-concepts .ssak-summary-row span:first-child{color:var(--ssak-muted);flex-shrink:0}
+    #ssak-plan-concepts .ssak-summary-row span:last-child{text-align:right;overflow-wrap:anywhere}
+    #ssak-plan-concepts .ssak-step-body{min-height:536px}
+    #ssak-plan-concepts .ssak-step[hidden],#ssak-plan-concepts .ssak-editor[hidden],#ssak-plan-concepts .ssak-today[hidden]{display:none}
+    #ssak-plan-concepts .ssak-label{font-weight:500;display:block;margin-top:20px;margin-bottom:7px}
+    #ssak-plan-concepts .ssak-feedback{color:var(--ssak-brown);margin-top:16px!important}
+    @media(max-width:420px){#ssak-plan-concepts .ssak-stage{padding:12px 0;min-height:1220px}#ssak-plan-concepts .ssak-app{padding:20px;border-radius:18px}}
+  </style>
+  <div class="viz-carousel viz-dotted-background" aria-label="습관 계획 흐름 시안" data-previous-label="이전 시안" data-next-label="다음 시안">
+    <section data-variant="한 화면에서 맥락 더하기" aria-label="한 화면에서 맥락 더하기">
+      <div class="ssak-stage"><div class="ssak-app" data-design="context" aria-label="한 화면 계획 입력">
+        <header class="ssak-top"><span class="ssak-word">ssak</span><span class="ssak-kicker">습관 정하기</span></header>
+        <div class="ssak-editor">
+          <h2>내 생활에 맞게<br>계획해볼까요?</h2>
+          <p class="ssak-lead">하고 싶은 일부터 적어보세요.</p>
+          <label class="ssak-field">어떤 일을 하고 싶나요?<input class="ssak-input" data-field="habit" value="책 10분 읽기" maxlength="80"></label>
+          <label class="ssak-field">무엇을 한 뒤에 할까요?<input class="ssak-input" data-field="cue" value="아침 커피를 마신 뒤" maxlength="120"></label>
+          <section class="ssak-context"><h3>계획대로 하기 어려운 날도 있어요.</h3><p>시간이나 기운이 부족한 날에도 해볼 만한 행동을 하나 정해두세요.</p></section>
+          <label class="ssak-field">그런 날에는 무엇을 해볼까요?<input class="ssak-input" data-field="alternative" placeholder="예: 책 한 문장 읽기" maxlength="120"></label>
+          <div class="ssak-examples" data-examples><button class="ssak-example cursor-interaction" type="button" data-example="책 한 문장 읽기">한 문장 읽기</button><button class="ssak-example cursor-interaction" type="button" data-example="책 한 페이지 읽기">한 페이지 읽기</button></div>
+          <p class="ssak-help">예시보다 적어도 괜찮아요.<br>내가 해볼 수 있겠다고 느끼는 만큼으로 정해요.</p>
+          <div class="ssak-divider"></div>
+          <span class="ssak-label">일주일에 며칠 해볼까요?</span>
+          <div class="ssak-frequency" role="group" aria-label="주간 실천 일수"><button type="button" aria-pressed="false" data-days="3">3일</button><button type="button" aria-pressed="true" data-days="5">5일</button><button type="button" aria-pressed="false" data-days="7">7일</button></div>
+          <p class="ssak-help">계획은 해보면서 바꿔도 돼요.</p>
+          <button class="ssak-primary cursor-interaction" type="button" data-preview>이 계획으로 오늘 보기 <i data-lucide="arrow-right" aria-hidden="true"></i></button>
+          <p class="ssak-feedback" role="alert" hidden></p>
+        </div>
+        <div class="ssak-today" hidden aria-live="polite"></div>
+      </div></div>
+    </section>
+    <section data-variant="대안을 따로 생각하기" aria-label="대안을 따로 생각하기" hidden>
+      <div class="ssak-stage"><div class="ssak-app" data-design="guided" aria-label="단계별 계획 입력">
+        <header class="ssak-top"><button class="ssak-back cursor-interaction" type="button" data-back aria-label="이전 단계"><i data-lucide="arrow-left" aria-hidden="true"></i></button><span class="ssak-word">ssak</span><span class="ssak-kicker" data-progress>계획 2 / 3</span></header>
+        <div class="ssak-editor">
+          <section class="ssak-step" data-step="1" hidden>
+            <div class="ssak-step-body"><h2>어떤 일을<br>이어가고 싶나요?</h2><p class="ssak-lead">내 생활에서 해보고 싶은 일 하나부터.</p>
+            <label class="ssak-field">하고 싶은 일<input class="ssak-input" data-field="habit" value="책 10분 읽기" maxlength="80"></label>
+            <label class="ssak-field">무엇을 한 뒤에 할까요?<input class="ssak-input" data-field="cue" value="아침 커피를 마신 뒤" maxlength="120"></label></div>
+            <button class="ssak-primary cursor-interaction" type="button" data-next>계획대로 하기 어려운 날도 생각해보기 <i data-lucide="arrow-right" aria-hidden="true"></i></button>
+          </section>
+          <section class="ssak-step" data-step="2">
+            <div class="ssak-step-body"><h2>계획대로 하기<br>어려운 날에는요?</h2><p class="ssak-lead">시간이 없거나 피곤한 날에도<br>해볼 만한 행동을 정해두세요.</p>
+            <section class="ssak-context"><span class="ssak-kicker">내가 하고 싶은 일</span><h3 data-habit-echo>책 10분 읽기</h3></section>
+            <label class="ssak-field">그런 날에도 해볼 수 있는 일<input class="ssak-input" data-field="alternative" placeholder="예: 책 한 문장 읽기" maxlength="120"></label>
+            <div class="ssak-examples" data-examples><button class="ssak-example cursor-interaction" type="button" data-example="책 한 문장 읽기">한 문장 읽기</button><button class="ssak-example cursor-interaction" type="button" data-example="책 한 페이지 읽기">한 페이지 읽기</button></div>
+            <p class="ssak-help">이 정도면 해볼 수 있겠다는 만큼.<br>해보고 버거우면 다시 줄여도 돼요.</p></div>
+            <button class="ssak-primary cursor-interaction" type="button" data-next>내 계획 확인하기 <i data-lucide="arrow-right" aria-hidden="true"></i></button>
+          </section>
+          <section class="ssak-step" data-step="3" hidden>
+            <div class="ssak-step-body"><h2>이렇게<br>이어가볼까요?</h2><p class="ssak-lead">오늘 실제로 한 행동을 기록해요.</p>
+            <div class="ssak-summary" aria-live="polite"></div>
+            <span class="ssak-label">일주일에 며칠 해볼까요?</span><div class="ssak-frequency" role="group" aria-label="주간 실천 일수"><button type="button" aria-pressed="false" data-days="3">3일</button><button type="button" aria-pressed="true" data-days="5">5일</button><button type="button" aria-pressed="false" data-days="7">7일</button></div>
+            <p class="ssak-help">두 행동 중 하나를 실천한 날을 세어요.<br>둘 다 해야 하는 계획은 아니에요.</p></div>
+            <button class="ssak-primary cursor-interaction" type="button" data-preview>이 계획으로 오늘 보기 <i data-lucide="arrow-right" aria-hidden="true"></i></button>
+          </section>
+          <p class="ssak-feedback" role="alert" hidden></p>
+        </div>
+        <div class="ssak-today" hidden aria-live="polite"></div>
+      </div></div>
+    </section>
+  </div>
+  <script>
+    (()=>{
+      const root=document.getElementById('ssak-plan-concepts');
+      const settings={showExamples:true};
+      const saved=window.openai?.widgetState?.modelContent;
+      const models={context:{habit:'책 10분 읽기',cue:'아침 커피를 마신 뒤',alternative:'',days:5,step:2},guided:{habit:'책 10분 읽기',cue:'아침 커피를 마신 뒤',alternative:'',days:5,step:2}};
+      function restore(value){if(!value?.plans)return;for(const key of ['context','guided']){const v=value.plans[key];if(!v)continue;for(const f of ['habit','cue','alternative'])if(typeof v[f]==='string')models[key][f]=v[f].slice(0,120);if([3,5,7].includes(v.days))models[key].days=v.days;if([1,2,3].includes(v.step))models[key].step=v.step}}
+      restore(saved);
+      function persist(){window.openai?.setWidgetState?.({modelContent:{plans:models}})?.catch(()=>{})}
+      function textNode(tag,text){const n=document.createElement(tag);n.textContent=text;return n}
+      function rows(el,model){el.replaceChildren();for(const [label,value] of [['할 시점',model.cue],['하고 싶은 일',model.habit],['어려운 날의 대안',model.alternative]]){const row=document.createElement('div');row.className='ssak-summary-row';row.append(textNode('span',label),textNode('span',value));el.append(row)}}
+      function update(app){const m=models[app.dataset.design];for(const input of app.querySelectorAll('[data-field]'))input.value=m[input.dataset.field];app.querySelectorAll('[data-days]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.days)===m.days)));app.querySelectorAll('[data-examples]').forEach(e=>e.hidden=!settings.showExamples);app.querySelectorAll('[data-step]').forEach(e=>e.hidden=Number(e.dataset.step)!==m.step);const progress=app.querySelector('[data-progress]');if(progress)progress.textContent=`계획 ${m.step} / 3`;const echo=app.querySelector('[data-habit-echo]');if(echo)echo.textContent=m.habit;const summary=app.querySelector('.ssak-summary');if(summary)rows(summary,m)}
+      function error(app,message){const e=app.querySelector('.ssak-feedback');e.textContent=message;e.hidden=!message}
+      function today(app){const m=models[app.dataset.design];if(!m.habit.trim()||!m.cue.trim()||!m.alternative.trim()){error(app,'하고 싶은 일과 할 시점, 어려운 날의 대안을 적어주세요.');return}error(app,'');app.querySelector('.ssak-editor').hidden=true;const target=app.querySelector('.ssak-today');target.hidden=false;target.replaceChildren();target.append(textNode('h2','오늘은 무엇을 해볼까요?'),textNode('p',m.cue));const context=document.createElement('section');context.className='ssak-context';context.append(textNode('h3',m.habit),textNode('p',`이번 주 ${m.days}일 · 두 행동 중 실제로 한 쪽을 기록해요.`));target.append(context);const note=textNode('p','시간이나 기운이 부족한 날에는 정해둔 대안을 선택해요.');note.className='ssak-help';target.append(note);const status=textNode('p','');status.className='ssak-feedback';status.setAttribute('aria-live','polite');for(const [i,value] of [m.habit,m.alternative].entries()){const b=textNode('button',value);b.type='button';b.className=(i?'ssak-secondary':'ssak-primary')+' cursor-interaction';b.onclick=()=>{status.textContent=`오늘 한 일: ${value}`};target.append(b)}target.append(status);const back=textNode('button','계획 다시 다듬기');back.type='button';back.className='ssak-secondary cursor-interaction';back.onclick=()=>{target.hidden=true;app.querySelector('.ssak-editor').hidden=false;update(app)};target.append(back);persist()}
+      for(const app of root.querySelectorAll('.ssak-app')){const m=models[app.dataset.design];update(app);app.addEventListener('input',e=>{if(e.target.dataset.field){m[e.target.dataset.field]=e.target.value;const echo=app.querySelector('[data-habit-echo]');if(echo)echo.textContent=m.habit;persist()}});app.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.example){m.alternative=b.dataset.example;update(app);error(app,'');persist()}if(b.dataset.days){m.days=Number(b.dataset.days);update(app);persist()}if(b.hasAttribute('data-next')){if(m.step===1&&(!m.habit.trim()||!m.cue.trim())){error(app,'하고 싶은 일과 할 시점을 적어주세요.');return}if(m.step===2&&!m.alternative.trim()){error(app,'내가 해볼 만한 대안을 적거나 예시를 골라주세요.');return}m.step=Math.min(3,m.step+1);error(app,'');update(app);persist()}if(b.hasAttribute('data-back')){if(!app.querySelector('.ssak-today').hidden){app.querySelector('.ssak-today').hidden=true;app.querySelector('.ssak-editor').hidden=false}else m.step=Math.max(1,m.step-1);error(app,'');update(app);persist()}if(b.hasAttribute('data-preview'))today(app)})}
+      window.addEventListener('openai:set_globals',e=>{restore(e.detail?.globals?.widgetState?.modelContent);root.querySelectorAll('.ssak-app').forEach(update)});
+      if(globalThis.Tweak){const t=new Tweak({container:root,onChange:()=>root.querySelectorAll('.ssak-app').forEach(update)});t.addToggle(settings,'showExamples',{label:'대안 예시 표시'});}
+    })();
+  </script>
+</div>
