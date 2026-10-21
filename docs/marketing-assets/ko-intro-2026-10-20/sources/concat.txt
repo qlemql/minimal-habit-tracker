@@ -1,0 +1,3 @@
+file 'C:/Users/TaeHyun/Desktop/workspace/minimal-habit-tracker/docs/marketing-assets/ko-intro-2026-10-20/sources/segment-0.mp4'
+file 'C:/Users/TaeHyun/Desktop/workspace/minimal-habit-tracker/docs/marketing-assets/ko-intro-2026-10-20/sources/segment-1.mp4'
+file 'C:/Users/TaeHyun/Desktop/workspace/minimal-habit-tracker/docs/marketing-assets/ko-intro-2026-10-20/sources/segment-2.mp4'

@@ -1,0 +1,5 @@
+01: ?Ten minutes sounded fine. A stretch after brushing your teeth.? Ssak web demo shows a habit with a ten-minute option and a one-minute option.
+
+02: ?Then it got late. There?s a one-minute option, too.? The same real app card shows both options. Text below says ?You picked it before you needed it.? No completion is claimed.
+
+03: ?Make room for both. Set the usual plan and an easier one.? Real app form shows Stretch for 10 minutes, After I brush my teeth, and Stretch for 1 minute. Footer says Ssak is available on iOS, link in bio.

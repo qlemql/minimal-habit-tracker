@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-20",
+  "scope": "Read-only domestic channel review; no external replies or promotion sent",
+  "checks": [
+    {
+      "id": "disquiet-check-20261020",
+      "date": "2026-10-20",
+      "channel": "disquiet",
+      "text": "실제 UI 이미지 3장 유지·승인 대기중 표시·글쓰기 비활성 확인. 댓글 0, 알림 없음. https://disquiet.io/products/ssak"
+    },
+    {
+      "id": "vibe-check-20261020",
+      "date": "2026-10-20",
+      "channel": "vibecrew",
+      "text": "점검 시 조회 21·댓글 1·좋아요 4·읽지 않은 알림 0. Kai 10/20 09:14: 작은 대안이 현실적이라는 평가, 차별점을 첫 화면부터 보여주면 좋겠다는 제안. 답변 초안 준비·미게시. https://vibecrew.kr/ship/10986#comment_11095"
+    },
+    {
+      "id": "zero-check-20261020",
+      "date": "2026-10-20",
+      "channel": "zerolaunch",
+      "text": "모집 중, 테스트 0·수락 0·대기 0, 잔액 4크레딧. 받은 피드백·새 알림 없음. 모집 설정·크레딧 변경 없음. https://zerolaunch.studio4any.com/ko/my-apps"
+    },
+    {
+      "id": "threads-check-20261020",
+      "date": "2026-10-20",
+      "channel": "threads",
+      "text": "비로그인 홈에서 Instagram으로 계속하기·ssak.app 표시 확인. 기존 로그인 시도 후 문제가 발생했습니다 안내와 로그인 화면으로 돌아옴. 공식 계정 로그인 성공 미확인. 새 계정·비밀번호 변경·게시 없음."
+    }
+  ],
+  "feedback_source": "https://vibecrew.kr/ship/10986#comment_11095",
+  "next_priority": "VibeCrew feedback response draft, then Disquiet approval check; next weekly check 2026-10-25"
+}

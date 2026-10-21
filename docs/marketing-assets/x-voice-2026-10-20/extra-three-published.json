@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-20",
+  "status": "PUBLISHED",
+  "count": 3,
+  "daily_comment_total": 5,
+  "verification": "All three own reply bodies and public URLs observed; screenshots saved. No app promotion, fabricated personal experience, or further replies posted.",
+  "items": [
+    {
+      "id": "x-extra-writing-20261020",
+      "topic": "글쓰기 재시작",
+      "recipient": "Catstell_",
+      "parent": "https://x.com/Catstell_/status/2112509619855937856",
+      "reply": "https://x.com/Ssakhabit/status/2112511334445457772",
+      "text": "no exam clock ticking in the background this time 😭",
+      "meaning": "이번에는 뒤에서 시험 시계가 재촉하지 않네요.",
+      "context": "시험 이후 글쓰기를 다시 하니 자유롭고 창의적이라는 원문. 최근 글과 공개 답글 탭을 읽고 시험의 시간 제한 소재를 짧게 받음.",
+      "proof": "writing-comment.png"
+    },
+    {
+      "id": "x-extra-study-20261020",
+      "topic": "공부",
+      "recipient": "sixlitersofgin",
+      "parent": "https://x.com/sixlitersofgin/status/2112293578516947446",
+      "reply": "https://x.com/Ssakhabit/status/2112511646317113731",
+      "text": "Latin literature straight into biology is a rough gear change 😭",
+      "meaning": "라틴 문학에서 바로 생물로 넘어가다니, 머리 전환이 만만치 않겠네요.",
+      "context": "방과 후 공부로 피곤하다는 원글과 과목·교육 과정 답글까지 읽음. 라틴 문학과 생물을 공부했다는 작성자 답글에 직접 연결.",
+      "proof": "study-comment.png"
+    },
+    {
+      "id": "x-extra-cleaning-20261020",
+      "topic": "방 정리",
+      "recipient": "kemychael",
+      "parent": "https://x.com/kemychael/status/2112406029023814058",
+      "reply": "https://x.com/Ssakhabit/status/2112511881164529731",
+      "text": "that playlist earned its keep 😂",
+      "meaning": "그 플레이리스트가 제 몫을 톡톡히 했네요.",
+      "context": "방 정리 완료 글 아래에서 음악을 들으며 한 번에 끝냈다는 작성자 답글을 확인. 최근 글과 기존 대화를 읽고 음악의 역할에 짧게 반응.",
+      "proof": "cleaning-comment.png"
+    }
+  ]
+}

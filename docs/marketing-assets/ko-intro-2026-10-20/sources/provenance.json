@@ -1,0 +1,27 @@
+{
+  "capture_date": "2026-10-17",
+  "source_recording": "C:\\Users\\TaeHyun\\Desktop\\workspace\\ssak-instagram-launch\\demo-ko\\recording.webm",
+  "source_capture": {
+    "trim": 0.841,
+    "duration": 13.5,
+    "source": "Local Ssak web build at 127.0.0.1:4173",
+    "data": "Fresh isolated browser with example reading habit",
+    "native": false
+  },
+  "trim_starts": [
+    2.841,
+    6.041,
+    9.540999999999999
+  ],
+  "durations": [
+    2.5,
+    3.5,
+    3.5
+  ],
+  "total_seconds": 9.5,
+  "native_recording": false,
+  "example_data": true,
+  "ui_pixels": "Unchanged app recording and screenshots; crops and scaling only",
+  "examples_image": "Illustrative custom habit examples, not a screenshot or preset list",
+  "music": "Existing original procedural composition ssak-soft-steps-original.wav"
+}
