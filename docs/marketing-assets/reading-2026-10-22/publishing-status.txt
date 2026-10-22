@@ -1,0 +1,10 @@
+2026-10-22 KST
+X 설명 글 게시 완료: https://x.com/Ssakhabit/status/2113276394553930105
+X 독서 밈 답글 게시 완료: https://x.com/Ssakhabit/status/2113277540681089319
+Instagram 독서 밈 게시 완료: https://www.instagram.com/p/DezNBg4FHUw/
+사용자가 Instagram과 X에 이미지를 직접 첨부했다. Instagram 자동 첨부는 브라우저 권한 단계에서 거부되어 재시도·우회하지 않았다.
+Instagram 원본 3:2 비율·원본 필터·짧은 영문 캡션·대체 텍스트·AI 콘텐츠 표시 확인. 프로필 게시물 10개 확인.
+X 답글의 이미지·영문 문구·ALT·Made with AI 표시와 부모 글 연결 확인.
+증빙: x-published.png, x-meme-published.png, instagram-published.png.
+새 외부 질문 없음. X 기존 독서 답글의 좋아요 알림 확인. Instagram 기존 알림 확인. 새 외부 댓글은 이번 작업에서 게시하지 않았다.
+게시 직후 성과 미판단. 24시간·7일 경과 시 같은 기준으로 확인 제안, 자동 알림 미설정.
