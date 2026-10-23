@@ -3,6 +3,7 @@ import { en, ja, zh, ko } from '../../src/renewal/copy';
 import { discoveryCopy } from '../../src/renewal/ideas';
 import { backupCopy } from '../../src/renewal/backupCopy';
 import { releaseCopy } from '../../src/renewal/releaseCopy';
+import { reviewCopy } from '../../src/renewal/reviewCopy';
 
 test('first habit: validate, tiny action, persist, adjust, graduate and restart', async ({
   page,
@@ -28,17 +29,17 @@ test('first habit: validate, tiny action, persist, adjust, graduate and restart'
   await page.getByRole('button', { name: en.undo, exact: true }).click();
   await page.getByRole('button', { name: en.reading, exact: true }).click();
   await page.getByRole('button', { name: en.review, exact: true }).click();
-  await page.getByRole('radio', { name: en.adjust, exact: true }).click();
+  await page.getByRole('button', { name: reviewCopy.en.adjust, exact: true }).click();
   await page.getByRole('textbox', { name: en.minimumField, exact: true }).fill('Read one sentence');
-  await page
-    .getByRole('textbox', { name: `${en.note} · ${en.optional}`, exact: true })
-    .fill('A page felt too big this week.');
-  await page.getByRole('button', { name: en.reflectSave, exact: true }).click();
+  await page.getByRole('textbox', { name: en.cueField, exact: true }).fill('After lunch');
+  await page.getByRole('radio', { name: '3 days', exact: true }).click();
+  await page.getByRole('button', { name: en.saveChanges, exact: true }).click();
+  await expect(page.getByText(reviewCopy.en.saved, { exact: true })).toBeVisible();
   await page.getByRole('button', { name: en.details, exact: true }).click();
   await expect(
     page.getByText('Read one sentence', { exact: true }).filter({ visible: true }),
   ).toBeVisible();
-  await expect(page.getByText('A page felt too big this week.', { exact: true })).toBeVisible();
+  await expect(page.getByText('After lunch', { exact: true }).filter({ visible: true })).toBeVisible();
   await page.getByRole('button', { name: en.graduate, exact: true }).click();
   await page.getByRole('button', { name: en.graduateConfirm, exact: true }).click();
   await page.getByRole('button', { name: new RegExp(en.reading) }).click();

@@ -1,0 +1,112 @@
+<div id="ssak-simple-review" class="viz-dotted-background" lang="en">
+  <div class="ssak-simple-stage">
+    <section class="ssak-simple-phone" aria-label="Ssak 2.1 weekly reflection concept">
+      <header class="ssak-simple-top"><span class="ssak-simple-brand">ssak</span><span class="ssak-simple-caption">2.1 concept · Sample data</span></header>
+      <p class="ssak-simple-kicker">Read for 10 minutes</p>
+      <h2>Does this plan<br>fit your life?</h2>
+      <p class="ssak-simple-sub">Take a moment to see what worked for you.</p>
+
+      <section class="ssak-simple-week" aria-label="Last week's summary">
+        <p class="ssak-simple-caption">Last week · Oct 12–18</p>
+        <p class="ssak-simple-count">You read on 5 days.</p>
+        <p class="ssak-simple-breakdown">Full goal <span>2 days</span><span class="ssak-simple-divider" aria-hidden="true">·</span>Small step <span>3 days</span></p>
+      </section>
+
+      <p class="ssak-simple-prompt">Keep what works.<br>Adjust what feels like too much.</p>
+
+      <div data-choices class="ssak-simple-actions">
+        <button type="button" class="ssak-simple-primary cursor-interaction" data-action="keep">Keep my plan</button>
+        <button type="button" class="ssak-simple-secondary cursor-interaction" data-action="edit" aria-expanded="false" aria-controls="ssak-simple-form">Adjust my plan</button>
+      </div>
+
+      <form id="ssak-simple-form" hidden>
+        <div class="ssak-simple-editor">
+          <label for="ssak-simple-minimum">A small step for busy days</label>
+          <input id="ssak-simple-minimum" name="minimum" value="Read one page" maxlength="120" required>
+          <label for="ssak-simple-cue">When would it fit?</label>
+          <input id="ssak-simple-cue" name="cue" value="After my morning coffee" maxlength="120">
+          <label for="ssak-simple-target">How many days a week?</label>
+          <select id="ssak-simple-target" name="target" class="cursor-interaction">
+            <option value="1">1 day a week</option><option value="2">2 days a week</option><option value="3">3 days a week</option><option value="4">4 days a week</option><option value="5" selected>5 days a week</option><option value="6">6 days a week</option><option value="7">7 days a week</option>
+          </select>
+          <p class="ssak-simple-caption ssak-simple-history">Your past records stay as they are.</p>
+        </div>
+        <div class="ssak-simple-actions">
+          <button type="button" class="ssak-simple-primary cursor-interaction" data-action="save">Save changes</button>
+          <button type="button" class="ssak-simple-text cursor-interaction" data-action="cancel">Cancel</button>
+        </div>
+      </form>
+      <p class="ssak-simple-message" role="status" aria-live="polite" hidden></p>
+    </section>
+  </div>
+</div>
+<style>
+#ssak-simple-review { color-scheme:light dark; font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif; }
+#ssak-simple-review * { box-sizing:border-box; }
+#ssak-simple-review [hidden] { display:none !important; }
+#ssak-simple-review .ssak-simple-stage { padding:26px 12px; display:flex; align-items:flex-start; justify-content:center; }
+#ssak-simple-review .ssak-simple-phone { --ssak-paper:light-dark(#FFF9EF,#28231f); --ssak-card:light-dark(#FFFDF8,#332c26); --ssak-ink:light-dark(#302A25,#f7ecdf); --ssak-muted:light-dark(#75695F,#c1b2a3); --ssak-line:light-dark(#E8DED2,#55473b); --ssak-brown:light-dark(#9C6842,#e3b98e); --ssak-on-brown:light-dark(#FFFDF8,#2d2118); --ssak-pale:light-dark(#F4EBDD,#403326); --ssak-space:24px; width:390px; max-width:100%; background:var(--ssak-paper); color:var(--ssak-ink); border:1px solid var(--ssak-line); border-radius:27px; padding:26px; box-shadow:0 10px 32px #00000008; overflow-wrap:anywhere; }
+#ssak-simple-review .ssak-simple-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:38px; }
+#ssak-simple-review .ssak-simple-brand { font-size:27px; font-weight:500; color:var(--ssak-brown); letter-spacing:-1.5px; }
+#ssak-simple-review .ssak-simple-caption { font-size:11px; font-weight:400; color:var(--ssak-muted); line-height:1.6; margin:0; }
+#ssak-simple-review .ssak-simple-kicker { font-size:12px; color:var(--ssak-brown); margin:0 0 12px; }
+#ssak-simple-review h2 { font-size:28px; font-weight:500; line-height:1.35; letter-spacing:-1.1px; margin:0 0 12px; }
+#ssak-simple-review .ssak-simple-sub { color:var(--ssak-muted); font-size:13px; line-height:1.6; margin:0; }
+#ssak-simple-review .ssak-simple-week { margin-top:var(--ssak-space); padding:20px; background:var(--ssak-card); border:1px solid var(--ssak-line); border-radius:17px; }
+#ssak-simple-review .ssak-simple-count { font-size:20px; font-weight:500; margin:11px 0 10px; letter-spacing:-.5px; }
+#ssak-simple-review .ssak-simple-breakdown { margin:0; font-size:12px; line-height:1.8; color:var(--ssak-muted); display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
+#ssak-simple-review .ssak-simple-breakdown span:not(.ssak-simple-divider) { color:var(--ssak-ink); font-weight:500; }
+#ssak-simple-review .ssak-simple-divider { padding:0 3px; }
+#ssak-simple-review .ssak-simple-prompt { margin:var(--ssak-space) 0; font-size:13px; line-height:1.8; color:var(--ssak-muted); }
+#ssak-simple-review .ssak-simple-actions { display:grid; gap:10px; }
+#ssak-simple-review button { font-family:inherit; font-size:14px; font-weight:500; min-height:48px; border-radius:12px; padding:12px; }
+#ssak-simple-review .ssak-simple-primary { width:100%; background:var(--ssak-brown); color:var(--ssak-on-brown); border:1px solid transparent; }
+#ssak-simple-review .ssak-simple-secondary { width:100%; background:transparent; color:var(--ssak-brown); border:1px solid var(--ssak-line); }
+#ssak-simple-review .ssak-simple-text { color:var(--ssak-muted); border:0; background:transparent; }
+#ssak-simple-review .ssak-simple-editor { padding-top:0; margin-bottom:20px; }
+#ssak-simple-review label { display:block; margin:18px 0 7px; color:var(--ssak-muted); font-size:12px; }
+#ssak-simple-review label:first-child { margin-top:0; }
+#ssak-simple-review input, #ssak-simple-review select { display:block; width:100%; min-height:47px; padding:11px 12px; color:var(--ssak-ink); background:var(--ssak-card); border:1px solid var(--ssak-line); border-radius:11px; font:400 16px/1.4 system-ui,-apple-system,"Malgun Gothic",sans-serif; }
+#ssak-simple-review .ssak-simple-history { margin-top:12px; }
+#ssak-simple-review .ssak-simple-message { margin:18px 0 0; padding:13px 14px; color:var(--ssak-brown); background:var(--ssak-pale); border-radius:11px; font-size:13px; line-height:1.65; }
+@media(max-width:380px) { #ssak-simple-review .ssak-simple-stage{padding:18px 6px} #ssak-simple-review .ssak-simple-phone{padding:23px 20px} #ssak-simple-review .ssak-simple-week{padding:17px} }
+</style>
+<script>
+(() => {
+  const root=document.getElementById('ssak-simple-review');
+  const phone=root.querySelector('.ssak-simple-phone');
+  const choices=root.querySelector('[data-choices]');
+  const form=root.querySelector('#ssak-simple-form');
+  const message=root.querySelector('[role="status"]');
+  const edit=root.querySelector('[data-action="edit"]');
+  const minimum=root.querySelector('#ssak-simple-minimum');
+  const cue=root.querySelector('#ssak-simple-cue');
+  const target=root.querySelector('#ssak-simple-target');
+  const state={minimum:'Read one page',cue:'After my morning coffee',target:'5',space:24};
+  const saved=window.openai?.widgetState?.privateContent?.simpleReviewEn;
+  function restore(value){if(!value)return;for(const key of ['minimum','cue'])if(typeof value[key]==='string')state[key]=value[key];if(['1','2','3','4','5','6','7'].includes(String(value.target)))state.target=String(value.target);}
+  function render(){minimum.value=state.minimum;cue.value=state.cue;target.value=state.target;phone.style.setProperty('--ssak-space',state.space+'px');}
+  function persist(){if(window.openai?.setWidgetState)window.openai.setWidgetState({modelContent:{proposal:'English weekly reflection with a brief summary and two choices',plan:{minimum:state.minimum,cue:state.cue,target:Number(state.target)}},privateContent:{simpleReviewEn:{minimum:state.minimum,cue:state.cue,target:state.target}}}).catch(()=>{});}
+  function editing(open){form.hidden=!open;choices.hidden=open;edit.setAttribute('aria-expanded',String(open));message.hidden=true;if(open)render();}
+  function savePlan(){
+    if(!minimum.value.trim()){minimum.setCustomValidity('Add a small step for busy days.');minimum.reportValidity();return;}
+    state.minimum=minimum.value.trim();state.cue=cue.value.trim();state.target=target.value;
+    editing(false);message.textContent=`Your plan: ${state.target} ${state.target==='1'?'day':'days'} a week. Busy-day step: ${state.minimum.replace(/[.!?]+$/,'')}.`;message.hidden=false;persist();
+  }
+  root.addEventListener('click',event=>{
+    const button=event.target.closest('button[data-action]');if(!button)return;
+    if(button.dataset.action==='edit')editing(true);
+    if(button.dataset.action==='cancel'){editing(false);render();}
+    if(button.dataset.action==='keep'){message.textContent='Your plan stays the same.';message.hidden=false;persist();}
+    if(button.dataset.action==='save')savePlan();
+  });
+  form.addEventListener('submit',event=>{
+    event.preventDefault();
+    savePlan();
+  });
+  minimum.addEventListener('input',()=>minimum.setCustomValidity(''));
+  window.addEventListener('openai:set_globals',event=>{restore(event.detail?.globals?.widgetState?.privateContent?.simpleReviewEn);if(form.hidden)render();});
+  restore(saved);render();
+  if(globalThis.Tweak){const tweak=new Tweak({container:phone,onChange:()=>phone.style.setProperty('--ssak-space',state.space+'px')});tweak.addSlider(state,'space',{label:'Section spacing',min:18,max:30,unit:'px'});}
+})();
+</script>

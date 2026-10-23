@@ -15,6 +15,25 @@ beforeEach(() => {
   useProStore.setState({ isPro: false });
 });
 describe('complete habit lifecycle', () => {
+  it('adjusts the whole plan atomically and preserves old reviews, daily records and backups', async () => {
+    const id = add();
+    useHabitStore.getState().checkIn(id, 'tiny');
+    useHabitStore.getState().reviewHabit(id, { feeling: 'easy', minimum: 'One page', note: 'Old note' });
+    const oldReview = useHabitStore.getState().habits[0].reviews![0];
+    const oldLogs = useHabitStore.getState().logs;
+    useHabitStore.getState().reviewHabit(id, {
+      feeling: 'adjust', minimum: ' One sentence ', cue: ' After lunch ', weeklyTarget: 3, note: '',
+    });
+    const { habits, logs } = useHabitStore.getState();
+    expect(habits[0]).toMatchObject({ minimum: 'One sentence', cue: 'After lunch', weeklyTarget: 3 });
+    expect(habits[0].reviews![0]).toEqual(oldReview);
+    expect(habits[0].reviews![1]).toMatchObject({ minimum: 'One sentence', cue: 'After lunch', weeklyTarget: 3 });
+    expect(logs).toBe(oldLogs);
+    const { serializeBackup, parseBackup } = await import('../src/renewal/domain');
+    expect(parseBackup(serializeBackup(habits, logs))).toEqual({ habits, logs });
+    useHabitStore.getState().reviewHabit(id, { feeling: 'adjust', minimum: ' ', cue: 'After lunch', weeklyTarget: 3, note: '' });
+    expect(useHabitStore.getState().habits).toBe(habits);
+  });
   it('undo restores the reminder for an unfinished habit', async () => {
     const id = add();
     await useHabitStore.getState().updateHabit(id, { reminderTime: '23:59' });

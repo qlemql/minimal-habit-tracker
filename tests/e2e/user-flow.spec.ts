@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { copies, languages } from '../../src/renewal/copy';
 import { discoveryCopy, getHabitIdeas } from '../../src/renewal/ideas';
+import { reviewCopy } from '../../src/renewal/reviewCopy';
 
 for (const { code } of languages) {
   test.describe(`device language ${code}`, () => {
@@ -49,14 +50,41 @@ for (const { code } of languages) {
         await page.reload();
         await expect(button(`${c.details}: ${idea.name} ✓`)).toBeVisible();
       });
-      await test.step('UF-05 review, make the busy-day action easier, and save a note', async () => {
+      await test.step('UF-05 review, cancel a draft, adjust the plan and preserve records', async () => {
+        const r = reviewCopy[code];
         await button(c.review).click();
-        await page.getByRole('radio', { name: c.adjust, exact: true }).click();
+        for (const width of [360, 375, 390]) {
+          await page.setViewportSize({ width, height: 844 });
+          await expect(page.getByText(r.title, { exact: true })).toBeVisible();
+          expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        }
+        const summary = await page.getByTestId('review-week-summary').textContent();
+        await button(r.adjust).click();
+        await page.getByRole('textbox', { name: c.minimumField, exact: true }).fill('Discard this');
+        await button(c.cancel).click();
+        await button(r.adjust).click();
+        await expect(page.getByRole('textbox', { name: c.minimumField, exact: true })).toHaveValue('1');
         await page.getByRole('textbox', { name: c.minimumField, exact: true }).fill('');
-        await expect(button(c.reflectSave)).toBeDisabled();
+        await expect(button(c.saveChanges)).toBeDisabled();
         await page.getByRole('textbox', { name: c.minimumField, exact: true }).fill(idea.minimum);
-        await page.getByRole('textbox', { name: `${c.note} · ${c.optional}`, exact: true }).fill('✓');
-        await button(c.reflectSave).click();
+        await page.getByRole('textbox', { name: c.cueField, exact: true }).fill('After lunch ✓');
+        await page.getByRole('radio', { name: `3 ${c.days}`, exact: true }).click();
+        for (const width of [360, 375, 390]) {
+          await page.setViewportSize({ width, height: 844 });
+          expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        }
+        await button(c.saveChanges).click();
+        await expect(page.getByText(r.saved, { exact: true })).toBeVisible();
+        await expect(page.getByTestId('review-week-summary')).toHaveText(summary!);
+        await page.screenshot({ path: `artifacts/review-2.1/${code}-saved.png`, fullPage: true });
+        await page.reload();
+        await button(r.keep).click();
+        await expect(page.getByText(r.kept, { exact: true })).toBeVisible();
+        await expect(button(r.keep)).toBeDisabled();
+        const state = await page.evaluate(() => JSON.parse(localStorage.getItem('habit-store') || '{}').state);
+        expect(state.habits[0]).toMatchObject({ minimum: idea.minimum, cue: 'After lunch ✓', weeklyTarget: 3 });
+        expect(state.logs).toHaveLength(1);
+        expect(state.logs[0].effort).toBe('full');
         await button(c.details).click();
       });
       await test.step('UF-06 cancel stopping first, then stop and preserve history', async () => {
@@ -70,7 +98,7 @@ for (const { code } of languages) {
         const state = await page.evaluate(() => JSON.parse(localStorage.getItem('habit-store') || '{}').state);
         expect(state.habits[0].isGraduated).toBe(true);
         expect(state.logs).toHaveLength(1);
-        expect(state.habits[0].reviews).toHaveLength(1);
+        expect(state.habits[0].reviews).toHaveLength(2);
       });
       await test.step('UF-07 restart and keep today’s completion', async () => {
         await button(c.restart).click();

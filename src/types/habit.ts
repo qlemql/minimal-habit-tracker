@@ -30,6 +30,8 @@ export interface HabitReview {
   feeling: 'easy' | 'adjust' | 'ready';
   note: string;
   minimum: string;
+  cue?: string;
+  weeklyTarget?: number;
 }
 
 export interface HabitLog {

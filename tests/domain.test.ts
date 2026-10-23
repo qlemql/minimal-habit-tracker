@@ -6,6 +6,7 @@ import {
   weeklyCount,
   weekDays,
   hasReviewDue,
+  previousWeekSummary,
 } from '../src/renewal/domain';
 import type { Habit, HabitLog } from '../src/types/habit';
 const habit: Habit = {
@@ -81,6 +82,19 @@ describe('existing records and portable backups', () => {
   });
 });
 describe('calendar and review intent', () => {
+  it('summarizes the completed previous week across the year boundary without duplicate days', () => {
+    const entry = (date: string, effort?: 'full' | 'tiny'): HabitLog => ({ ...log, date, effort });
+    expect(previousWeekSummary('old', [
+      entry('2026-12-21'), entry('2026-12-22', 'full'), entry('2026-12-22', 'tiny'),
+      { ...entry('2026-12-23'), completed: false },
+      entry('2026-12-27', 'tiny'), entry('2026-12-28'),
+      { ...entry('2026-12-24'), habitId: 'other' },
+    ], '2027-01-01')).toEqual({ start: '2026-12-21', end: '2026-12-27', total: 3, full: 1, tiny: 2 });
+    expect(previousWeekSummary('old', [], '2026-03-09')).toEqual({
+      start: '2026-03-02', end: '2026-03-08', total: 0, full: 0, tiny: 0,
+    });
+    expect(previousWeekSummary('old', [], '2026-10-25').start).toBe('2026-10-12');
+  });
   it('keeps a Monday-based week across month/year and DST boundaries', () => {
     expect(weekDays('2027-01-01')).toEqual([
       '2026-12-28',

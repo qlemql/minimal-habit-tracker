@@ -17,6 +17,15 @@ export const weeklyCount = (id: string, logs: HabitLog[], today = localDate()): 
   const dates = completedDays(id, logs);
   return weekDays(today).filter((day) => day <= today && dates.has(day)).length;
 };
+export const previousWeekSummary = (id: string, logs: HabitLog[], today = localDate()) => {
+  const days = weekDays(shiftDate(weekDays(today)[0], -1));
+  const entries = new Map<string, HabitLog>();
+  logs.filter((log) => log.habitId === id && days.includes(log.date))
+    .forEach((log) => entries.set(log.date, log));
+  const completed = [...entries.values()].filter((log) => log.completed);
+  const tiny = completed.filter((log) => log.effort === 'tiny').length;
+  return { start: days[0], end: days[6], total: completed.length, full: completed.length - tiny, tiny };
+};
 export const hasReviewDue = (habit: Habit, today = localDate()): boolean => {
   const started = localDate(new Date(habit.restartedAt ?? habit.createdAt));
   const last = [started, habit.reviews?.at(-1)?.date ?? started].sort().at(-1) ?? started;
@@ -38,7 +47,10 @@ const isReview = (value: unknown): boolean =>
   isDate(value.date) &&
   ['easy', 'adjust', 'ready'].includes(String(value.feeling)) &&
   isText(value.note) &&
-  isText(value.minimum, 120);
+  isText(value.minimum, 120) &&
+  (value.cue === undefined || isText(value.cue, 120)) &&
+  (value.weeklyTarget === undefined ||
+    (typeof value.weeklyTarget === 'number' && [1, 2, 3, 4, 5, 6, 7].includes(value.weeklyTarget)));
 const isHabit = (value: unknown): value is Habit =>
   isRecord(value) &&
   isText(value.id, 100) &&

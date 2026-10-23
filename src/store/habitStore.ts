@@ -156,16 +156,24 @@ export const useHabitStore = create<HabitStore>()(
       },
       reviewHabit: (id, review) => {
         if (!get().canTrackHabit(id)) return;
+        if (!review.minimum.trim() || review.minimum.length > 120 ||
+            (review.cue !== undefined && (!review.cue.trim() || review.cue.length > 120)) ||
+            (review.weeklyTarget !== undefined && ![1, 2, 3, 4, 5, 6, 7].includes(review.weeklyTarget))) return;
+        const plan = {
+          minimum: review.minimum.trim(),
+          ...(review.cue !== undefined ? { cue: review.cue.trim() } : {}),
+          ...(review.weeklyTarget !== undefined ? { weeklyTarget: review.weeklyTarget } : {}),
+        };
         set((state) => ({
           habits: state.habits.map((habit) =>
             habit.id === id
               ? {
                   ...habit,
-                  minimum: review.minimum.trim(),
+                  ...plan,
                   updatedAt: new Date().toISOString(),
                   reviews: [
                     ...(habit.reviews ?? []),
-                    { ...review, id: generateId(), date: localDate() },
+                    { ...review, ...plan, id: generateId(), date: localDate() },
                   ],
                 }
               : habit,
