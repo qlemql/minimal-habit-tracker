@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-24",
+  "status": "published",
+  "images": [
+    {
+      "file": "01-autumn-reading-promo-ja.png",
+      "kind": "AI-generated fictional promotion illustration",
+      "size": [
+        1672,
+        940
+      ],
+      "sha256": "fd55c011a97064ef15432ffc7a52b92ac8866943e3ec4d8df8f67e2f04a7db62"
+    },
+    {
+      "file": "02-actual-app-ja.png",
+      "kind": "Actual Japanese web app screenshot with example data",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "dd7bbf36220a503372c05de4edcc4e24a6953edbe6f6b51ee3c2aed3f00bd60f"
+    }
+  ],
+  "imageGenerationTool": "built-in image_gen",
+  "promptFile": "imagegen-prompt.txt",
+  "briefFile": "creative-brief-ko.txt",
+  "screenshotSavedDate": "2026-10-05",
+  "screenshotUIAltered": false,
+  "visualReview": "Promo Japanese copy matches requested lines; character and colors consistent. Actual app screenshot copied byte-for-byte.",
+  "upload": "User manually attached both files. Agent saved the edit and verified both images on the public page.",
+  "editor": "Saved with AI illustration and actual Japanese web screenshot source disclosure.",
+  "publishedUrl": "https://tsukutta.app/apps/dc121a13-a7d7-41a2-819d-1c3f8470b3d8",
+  "proof": "published-proof.jpg"
+}

@@ -1,0 +1,5 @@
+01: Cream Ssak card headed “10 minutes. Or one page.” Two text blocks compare the usual plan, “Read for 10 minutes”, and the busy-day option, “Read one page”. Closing line: “Set both in advance. Then record what you did.” This slide is an explanatory layout, not app UI.
+
+02: “Plan both. Before life happens.” An unchanged crop of the Ssak English web demo shows the example habit Read for 10 minutes, after my morning coffee. Two recording buttons read “Read for 10 minutes” and “Read one page”. Neither is recorded yet. The weekly plan shows 0 of 5 days. Web demo with example data, not a native screenshot.
+
+03: “Read one page. Record one page.” An unchanged crop of the same web demo after the smaller option is selected shows “That counts too”, “Read one page”, an Undo action, and 1 of 5 days in the weekly plan. The check marks one recorded day, not ten minutes of reading. One habit free on iOS, link in bio. Example data, not a real user's result.

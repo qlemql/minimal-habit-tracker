@@ -1,0 +1,14 @@
+Title: I made a habit tracker with a smaller option for busy days. Looking for feedback from iPhone readers.
+
+I'm the developer of Ssak, a small iPhone habit tracker. You set a regular reading goal, such as ten minutes, and a smaller option, such as one page, before a busy day happens. Then you record what you actually did. Your weekly plan can include days off.
+
+I'm looking for three readers who'd like to try one free habit for a week. I'd like to learn whether the two choices make sense and what makes you want to return—or stop using it.
+
+One habit is free with no time limit. There are no ads, subscriptions or account sign-up. Tracking up to three habits and file backup/restore are a separate one-time Plus purchase. You don't need Plus for this.
+
+App: https://apps.apple.com/app/id6762334017
+Overview: https://ssak-habit-tracker.pages.dev/landing/
+
+If you'd like to take part, reply here. Honest criticism is welcome; no App Store rating or review is requested. I'll only follow up with people who agree.
+
+STATUS: DRAFT_UNPUBLISHED. Reddit is logged out. Confirm subreddit rules, flair, account eligibility and recent duplicate submissions before publishing. Do not place in a web-app-only testing thread. Do not post in communities prohibiting app promotion or recruiting.

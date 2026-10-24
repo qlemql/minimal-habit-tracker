@@ -1,0 +1,38 @@
+{
+  "videos": [
+    {
+      "id": "01-busy-day-demo",
+      "encoded_stream": [
+        "Duration: 00:00:09.00, start: 0.000000, bitrate: 234 kb/s",
+        "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt470bg/unknown/unknown, progressive), 1080x1920, 231 kb/s, 30 fps, 30 tbr, 15360 tbn (default)"
+      ],
+      "visual_review": "Inspected contact sheet and first reel full-size; no text/footer overlap."
+    },
+    {
+      "id": "02-reading-pov",
+      "encoded_stream": [
+        "Duration: 00:00:09.00, start: 0.000000, bitrate: 65 kb/s",
+        "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 61 kb/s, 30 fps, 30 tbr, 15360 tbn (default)"
+      ],
+      "visual_review": "Inspected contact sheet and first reel full-size; no text/footer overlap."
+    },
+    {
+      "id": "03-record-what-you-read",
+      "encoded_stream": [
+        "Duration: 00:00:09.00, start: 0.000000, bitrate: 141 kb/s",
+        "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 137 kb/s, 30 fps, 30 tbr, 15360 tbn (default)"
+      ],
+      "visual_review": "Inspected contact sheet and first reel full-size; no text/footer overlap."
+    },
+    {
+      "id": "04-weekly-plan",
+      "encoded_stream": [
+        "Duration: 00:00:09.03, start: 0.000000, bitrate: 259 kb/s",
+        "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt470bg/unknown/unknown, progressive), 1080x1920, 256 kb/s, 30 fps, 30 tbr, 15360 tbn (default)"
+      ],
+      "visual_review": "Inspected contact sheet and first reel full-size; no text/footer overlap."
+    }
+  ],
+  "automated_checks": "H.264, 1080x1920, 30fps; durations from encoded files.",
+  "external_samples": false
+}

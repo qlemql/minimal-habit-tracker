@@ -1,0 +1,79 @@
+{
+  "start_date_kst": "2026-10-23",
+  "window_end_date_kst": "2026-11-05",
+  "external_followers_baseline": {
+    "instagram": 0,
+    "x": 0
+  },
+  "instagram_displayed_followers": 1,
+  "instagram_owner_follow_excluded": true,
+  "recruitment_target": 3,
+  "confirmed_participants": [],
+  "post_measurements": [
+    {
+      "id": "01-busy-day-demo",
+      "channel": "instagram",
+      "url": "https://www.instagram.com/reel/De1kY_Ntqis/",
+      "status": "published; 24h measurement not due",
+      "views": null,
+      "store_visits": null,
+      "confirmed_installs": null
+    },
+    {
+      "id": "reader-recruitment",
+      "channel": "x",
+      "url": "https://x.com/Ssakhabit/status/2113609637534871863",
+      "status": "published; participants not yet confirmed"
+    },
+    {
+      "id": "app-shelf-recruitment",
+      "channel": "reddit",
+      "url": "https://www.reddit.com/r/iosapps/comments/1wvvq6p/comment/19rj80bj0lgw4/",
+      "status": "posted; no human participant confirmed",
+      "external_reactions": null
+    }
+  ],
+  "measurement_points": [
+    "24 hours after publication",
+    "7 days after publication"
+  ],
+  "metrics": [
+    "elapsed_hours",
+    "views",
+    "accounts_reached",
+    "non_follower_reach",
+    "average_watch_time_seconds",
+    "completion_or_retention_if_available",
+    "shares",
+    "saves",
+    "profile_visits",
+    "link_clicks",
+    "store_visits",
+    "confirmed_installs",
+    "actual_feedback"
+  ],
+  "missing_value": null,
+  "missing_value_rule": "Unavailable and unchecked are null, never assumed zero.",
+  "decision_rule": "Low exposure means insufficient evidence. If exposure exists but viewers leave early, revise the opening. If people watch/share but do not visit the profile, review product relevance. If visits occur but no trial follows, inspect the store explanation and ask willing participants. No fixed universal performance thresholds.",
+  "experiment_type": "exploratory; formats and dates differ; not randomized A/B testing",
+  "automatic_publication_or_reminders": false,
+  "instagram_account_baseline": {
+    "window": "last 30 days as displayed on Oct 23 after business conversion",
+    "views": 222,
+    "accounts_reached": 177,
+    "non_follower_view_percentage": 89.2,
+    "interactions": 2,
+    "engaged_accounts": 2,
+    "profile_visits": 1,
+    "displayed_followers": 1,
+    "external_followers": 0,
+    "limitations": "Includes owner and agent activity where counted. Not per-post attribution or new user installs."
+  },
+  "posts_notes": "X self-reply and Reddit app-store-review bot reply are not recruited users or independent human feedback.",
+  "recruitment_platforms": [
+    "iOS",
+    "Android"
+  ],
+  "latest_status_file": "../reading-recruitment-2026-10-24/status.json",
+  "recruitment_update_url": "https://x.com/Ssakhabit/status/2113840772256837749"
+}

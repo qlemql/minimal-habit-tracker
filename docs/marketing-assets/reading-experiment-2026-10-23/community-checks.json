@@ -1,0 +1,33 @@
+{
+  "checked_date_kst": "2026-10-23",
+  "reddit_account_status": "ssak_habit_tracker confirmed; fresh own-profile tab works; unresponsive signup tab closed. Google-linked account; no verify-email prompt visible in account settings.",
+  "published_on_reddit": true,
+  "candidates": [
+    {
+      "community": "r/iosapps",
+      "rules_url": "https://www.reddit.com/mod/iosapps/rules/",
+      "main_feed": "Do not post: 10 local karma plus Trust/Transparency requirements.",
+      "allowed_destination": "https://www.reddit.com/r/iosapps/comments/1wvvq6p/megathread_the_app_shelf_october_2026/",
+      "requirements": [
+        "ABC: problem solved, named competing alternative and specific advantage, cost and App Store link",
+        "promotion at most once per developer in 30 days, including removed submissions",
+        "disclose developer relationship",
+        "no affiliate or shortened links"
+      ],
+      "filter_warning_from_thread": [
+        "Unverified email may be filtered",
+        "Promotional first interaction may be filtered"
+      ],
+      "status": "Posted once in the explicitly allowed monthly App Shelf. Do not promote again in this community within 30 days, including if later removed."
+    },
+    {
+      "community": "r/SideProject",
+      "community_url": "https://www.reddit.com/r/SideProject/",
+      "status": "Candidate only; description welcomes side project feedback. Full posting eligibility not confirmed.",
+      "excluded_thread": "https://www.reddit.com/r/SideProject/comments/1xd4f1t/drop_your_side_projects_below_ill_test_them_and/",
+      "exclusion_reason": "Tester explicitly focuses on macOS web apps; Ssak is currently an iPhone app."
+    }
+  ],
+  "comment_url": "https://www.reddit.com/r/iosapps/comments/1wvvq6p/comment/19rj80bj0lgw4/",
+  "verification": "Comment posted toast; permalink reopened; full ABC text and automated app-store-review reply visible; no removal notice on own comment. Anonymous web fetch unavailable, so separate logged-out visibility was not verified."
+}

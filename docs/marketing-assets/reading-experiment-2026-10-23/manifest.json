@@ -1,0 +1,61 @@
+{
+  "status": "VISUALLY_REVIEWED; ONE_PUBLISHED_THREE_READY",
+  "posts": [
+    {
+      "id": "01-busy-day-demo",
+      "planned_date_kst": "2026-10-23",
+      "status": "PUBLISHED",
+      "format": "Comparison and real recording",
+      "hook": "Your reading plan needs a busy-day option.",
+      "duration_seconds": 9,
+      "path": "C:\\Users\\TaeHyun\\Desktop\\workspace\\minimal-habit-tracker\\docs\\marketing-assets\\reading-experiment-2026-10-23\\01-busy-day-demo\\reel.mp4",
+      "source": "Existing Ssak English web demo; example data; October 17 capture",
+      "native_capture": false,
+      "instagram_url": "https://www.instagram.com/reel/De1kY_Ntqis/",
+      "instagram_mode": "Standard reel; web composer exposed no Trial toggle.",
+      "x_url": "https://x.com/Ssakhabit/status/2113610428215656837"
+    },
+    {
+      "id": "02-reading-pov",
+      "planned_date_kst": "2026-10-27",
+      "status": "READY_UNPUBLISHED",
+      "format": "Fictional POV with typography",
+      "hook": "The plan: one chapter.",
+      "duration_seconds": 9,
+      "path": "C:\\Users\\TaeHyun\\Desktop\\workspace\\minimal-habit-tracker\\docs\\marketing-assets\\reading-experiment-2026-10-23\\02-reading-pov\\reel.mp4",
+      "source": "Original geometric illustration",
+      "native_capture": false
+    },
+    {
+      "id": "03-record-what-you-read",
+      "planned_date_kst": "2026-10-30",
+      "status": "READY_UNPUBLISHED",
+      "format": "One small action, accurately recorded",
+      "hook": "One page. Recorded as one page.",
+      "duration_seconds": 9,
+      "path": "C:\\Users\\TaeHyun\\Desktop\\workspace\\minimal-habit-tracker\\docs\\marketing-assets\\reading-experiment-2026-10-23\\03-record-what-you-read\\reel.mp4",
+      "source": "Existing Ssak English web demo; example data; October 17 capture",
+      "native_capture": false
+    },
+    {
+      "id": "04-weekly-plan",
+      "planned_date_kst": "2026-11-03",
+      "status": "READY_UNPUBLISHED",
+      "format": "Weekly example with a missed day",
+      "hook": "A day off. Still a reading week.",
+      "duration_seconds": 9.1,
+      "path": "C:\\Users\\TaeHyun\\Desktop\\workspace\\minimal-habit-tracker\\docs\\marketing-assets\\reading-experiment-2026-10-23\\04-weekly-plan\\reel.mp4",
+      "source": "Existing Ssak English web demo; example data; October 17 capture",
+      "native_capture": false
+    }
+  ],
+  "plan": "Four exploratory posts over two weeks; dates are planning targets, not scheduled publication. Adapt remaining posts after feedback.",
+  "audio": "Silent; all information is visible; no third-party music.",
+  "method": "Same reading audience, different formats. Not a randomized A/B test.",
+  "source_hashes": {
+    "docs\\marketing-assets\\reading-experiment-2026-10-23\\sources\\reading\\recording.webm": "c62363bc11532a889b0173797c0a5c0adc5541ea837cd6f7827a4f1af26a3566",
+    "docs\\marketing-assets\\reading-experiment-2026-10-23\\sources\\reading\\01-today.png": "789e1e6f06e307ebfccb7fc158046ae0a7a717be4ec1260794d0c38633538617",
+    "docs\\marketing-assets\\reading-experiment-2026-10-23\\sources\\reading\\02-counts.png": "286834886b9b3a760fde6ac393a9d80c33a125679bc1cb1f884fa2e593b652da",
+    "docs\\marketing-assets\\x-restart-2026-10-19\\recording.webm": "d6272b80f3a2fc5c571024772aed8e316a303a1cadda7183cdccb550149ffa0b"
+  }
+}

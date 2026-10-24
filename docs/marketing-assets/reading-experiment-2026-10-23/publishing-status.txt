@@ -1,0 +1,19 @@
+2026-10-23 KST · verified execution
+
+Instagram: Business / 앱 페이지 전환 완료. 공개 연락처 추가 없음.
+첫 릴스: https://www.instagram.com/reel/De1kY_Ntqis/
+표준 릴스 게시. 웹 작성기에 Trial Reels 토글이 노출되지 않았음. 모바일 가능 여부는 미확인.
+나머지 3편: 준비 완료 / 미게시 / 자동 예약 없음. 10/27·10/30·11/3은 계획 후보일.
+
+X 초기 독서 사용자 3명 모집: https://x.com/Ssakhabit/status/2113609637534871863
+X 실제 데모와 스토어 링크 답글: https://x.com/Ssakhabit/status/2113610428215656837
+
+Reddit: 사용자가 u/ssak_habit_tracker 가입 완료. 기존 응답 없는 탭을 닫고 새 탭의 정상 프로필·로그인 상태 확인.
+월간 App Shelf ABC 소개/모집: https://www.reddit.com/r/iosapps/comments/1wvvq6p/comment/19rj80bj0lgw4/
+댓글 게시됨 안내·직접 링크·본문·자동 앱 정보 답글 확인. 별도 비로그인 접근은 웹 도구에서 읽지 못했음. 게시 후 필터 상태는 이후 반응 점검 때 확인.
+동일 커뮤니티 30일 홍보 제한 적용. 재게시하지 않음.
+
+인사이트 기준: 최근 30일 조회222·도달 계정177·비팔로워 조회89.2%·반응2·프로필 방문1.
+Instagram 표시 팔로워1은 사용자 본인. Instagram·X 외부 팔로워0.
+실제 모집 참가자0명 확인 상태. 본인 답글·봇 답글은 참가자/실제 피드백에 포함하지 않음.
+24시간·7일 측정은 실제 경과 후 수집. 자동 알림·DM·광고 집행 없음.

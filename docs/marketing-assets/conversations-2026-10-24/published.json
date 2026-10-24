@@ -1,0 +1,35 @@
+{
+  "date_kst": "2026-10-24",
+  "account": "@Ssakhabit",
+  "status": "3 replies published; public text and direct URLs verified",
+  "replies": [
+    {
+      "parent": "https://x.com/DaughtrEarth/status/2113812038216544354",
+      "published": "https://x.com/Ssakhabit/status/2113845501842112706",
+      "context": "오랜만의 독서 재시작을 부끄러워해야 하는지 묻는 글. 주변 글에 현재 읽는 책을 밝혔으므로 중복 질문하지 않음.",
+      "text": "The books weren’t taking attendance 🙂 You get to come back just because something sounds good."
+    },
+    {
+      "parent": "https://x.com/grimxiaoo/status/2113828997704655111",
+      "published": "https://x.com/Ssakhabit/status/2113845348397621665",
+      "context": "Daybreak를 끝내고 독서 슬럼프에서 벗어났다는 글. Read·2.5점 첨부 이미지 확인 후 다음 책 선택 질문.",
+      "text": "What’s the next read after that escape—something completely different? 😭"
+    },
+    {
+      "parent": "https://x.com/lpastrys/status/2113809575547711898",
+      "published": "https://x.com/Ssakhabit/status/2113845507579859066",
+      "context": "하루100쪽 넘게 읽고 슬럼프가 끝났다고 해도 될지 묻는 글. 한 챕터 더 읽다 길어진 장면에 가벼운 반응.",
+      "text": "That sounds like “one more chapter” got out of hand 😂"
+    }
+  ],
+  "app_links_sent": 0,
+  "direct_messages_sent": 0,
+  "confirmed_participants": 0,
+  "recipient_responses": null,
+  "reddit": {
+    "url": "https://www.reddit.com/r/getdisciplined/new/",
+    "status": "read only; no comment posted",
+    "reason": "Sidebar rules include No AI-Generated Content, no links and account-age/karma restrictions. Did not use this community for generated comments."
+  },
+  "note": "Conversation participation is not a recruited user or installation. No fabricated reading experience, book review or claim of having used a product. Emoji may be represented as images in extracted page text."
+}

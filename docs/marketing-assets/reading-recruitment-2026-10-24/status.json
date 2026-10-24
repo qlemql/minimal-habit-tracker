@@ -1,0 +1,51 @@
+{
+  "checked_date_kst": "2026-10-24",
+  "target_participants_total": 3,
+  "platforms": [
+    "iOS",
+    "Android"
+  ],
+  "confirmed_participants": [],
+  "x": {
+    "parent_url": "https://x.com/Ssakhabit/status/2113609637534871863",
+    "android_followup_url": "https://x.com/Ssakhabit/status/2113840772256837749",
+    "published_at_kst": "2026-10-24T12:51:00+09:00",
+    "status": "published and reopened",
+    "parent_views_before_update": 4,
+    "external_replies_observed": 0,
+    "self_replies_after_update": 2,
+    "likes_before_update": 0
+  },
+  "instagram": {
+    "url": "https://www.instagram.com/reel/De1kY_Ntqis/",
+    "status": "existing caption updated; verified after reload",
+    "comments_before_update": 0,
+    "views": null,
+    "shares": null,
+    "saves": null
+  },
+  "reddit": {
+    "url": "https://www.reddit.com/r/iosapps/comments/1wvvq6p/comment/19rj80bj0lgw4/",
+    "human_replies_observed": 0,
+    "bot_replies_observed": 1,
+    "status": "existing iOS-specific listing retained; no new promotion"
+  },
+  "app_store_baseline": {
+    "period_start_utc": "2026-07-25",
+    "period_end_utc": "2026-10-22",
+    "product_page_views": 44,
+    "first_time_downloads": 8,
+    "impressions": 457,
+    "daily_average_conversion_rate_displayed_percent": 2.44,
+    "recent_window": {
+      "start_utc": "2026-10-18",
+      "end_utc": "2026-10-22",
+      "product_page_views": 7,
+      "first_time_downloads": 2
+    },
+    "limitations": "Not unique page visitors; downloads are not attributed to this campaign. Does not cover Oct 23 recruitment. First-time downloads are not opt-in completed installation counts."
+  },
+  "measurement_status": "Less than 24 hours since Oct 23 publication; not a 24-hour measurement.",
+  "next": "Respond to voluntary interest. Record expected use before installation and first habit setup feedback. Ask follow-up questions in the same conversation about a week after confirmed start, only with consent.",
+  "automatic_messages_or_reminders": false
+}

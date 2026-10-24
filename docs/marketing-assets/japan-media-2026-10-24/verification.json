@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-24",
+  "status": "email-sent-confirmed",
+  "sendAuthorization": "사용자가 수신처와 준비한 일본어 본문·공개 링크의 첨부 없는 발송을 명시 승인함.",
+  "priorityRecipient": {
+    "name": "アプリオ編集部",
+    "address": "pr@appllio.com",
+    "source": "https://appllio.com/contact-support",
+    "reason": "서비스 출시 정보 접수를 공식 명시. 독서 전문 매체나 설치 전환 검증을 뜻하지 않음."
+  },
+  "sources": [
+    {
+      "url": "https://appllio.com/contact-support",
+      "finding": "출시 정보 접수·원칙적 무회신·기사광고 미접수"
+    },
+    {
+      "url": "https://app-liv.jp/lifestyle/all/3811/",
+      "finding": "2026-10-08 갱신 표시의 습관 앱 비교 글"
+    },
+    {
+      "url": "https://app-liv.jp/contact/",
+      "finding": "일반 문의 폼, 무료 개발자 리뷰 제출 경로 불명확"
+    },
+    {
+      "url": "https://app-liv.jp/media_contact/",
+      "finding": "해당 매체가 다른 미디어에 정보를 제공하는 창구. 개발자 제보창으로 사용하지 않음"
+    },
+    {
+      "url": "https://www.appbank.net/2011/08/01/iphone-news/282433.php",
+      "finding": "신제품·새 정보 접수, 별도 기사문의 폼 영업메일 금지"
+    },
+    {
+      "url": "https://www.tsukutta.app/guide",
+      "finding": "무료 가입·공개와 네이티브 스토어 URL 허용. 계정 미개설"
+    },
+    {
+      "url": "https://app-library.com/review",
+      "finding": "개인 개발 무료 리뷰 접수 안내"
+    },
+    {
+      "url": "https://app-library.com/",
+      "finding": "최신 리뷰 2019년 표시, 현재 활동 근거 부족으로 제외"
+    }
+  ],
+  "verification": {
+    "videoDecodeExit": 0,
+    "durationSeconds": 12,
+    "dimensions": [
+      1440,
+      1080
+    ],
+    "codec": "H.264",
+    "fps": 30,
+    "audio": false,
+    "visualQA": "3장 전체 미리보기와 첫 장 원본 크기를 직접 확인. 문구·화면·출처 표기 겹침 없음."
+  },
+  "limitations": [
+    "설명 영상은 기존 일본어 웹 화면을 엮은 정지 화면 시퀀스이며 신규 조작 녹화가 아님",
+    "화면은 2026-10-05 저장 자료·예시 데이터. 현행 스토어판 화면과 다를 수 있음",
+    "공개 스토어 이미지 다운로드는 승인 거절되어 중단. 우회 다운로드 없음",
+    "SNS 신규 게시·계정 생성·유료 신청 없음. 편집부 제보 메일1건 발송 완료"
+  ],
+  "next": "다음 주간 검토에서 회신·게재 여부 확인. 자동 재발송·새 일정 없음.",
+  "sendRecord": "sent.json"
+}

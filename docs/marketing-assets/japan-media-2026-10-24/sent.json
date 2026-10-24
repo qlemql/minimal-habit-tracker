@@ -1,0 +1,26 @@
+{
+  "status": "sent-confirmed-in-sent-folder",
+  "sentAt": "2026-10-24T13:47:00+09:00",
+  "timePrecision": "minute, from Naver sent message display",
+  "from": "taehyun_fe@naver.com",
+  "to": [
+    "pr@appllio.com"
+  ],
+  "cc": [],
+  "bcc": [],
+  "subject": "【情報提供】忙しい日の小さな代案も決められる習慣アプリ「Ssak」／iOS・Android",
+  "bodySource": "appllio-email-ja.txt (body after To/Subject headers)",
+  "attachments": [],
+  "sentMessageUrl": "https://mail.naver.com/v2/read/1/12272",
+  "verification": [
+    "Naver displayed successful send confirmation",
+    "One new message shown in sent folder at 13:47",
+    "Sent message body matches prepared Japanese text and four public links",
+    "Sender and recipient visible in sent message header"
+  ],
+  "delivery": "Naver send confirmed; recipient delivery/read not verified",
+  "reply": null,
+  "coverage": null,
+  "installs": null,
+  "next": "次回の週次確認で返信・掲載の有無を確認。自動追送・自動通知なし。"
+}

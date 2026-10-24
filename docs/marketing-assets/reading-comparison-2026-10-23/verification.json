@@ -1,0 +1,28 @@
+{
+  "images": [
+    {
+      "file": "01-two-kinds-of-days.png",
+      "size": [
+        1080,
+        1350
+      ]
+    },
+    {
+      "file": "02-plan-both.png",
+      "size": [
+        1080,
+        1350
+      ]
+    },
+    {
+      "file": "03-record-one-page.png",
+      "size": [
+        1080,
+        1350
+      ]
+    }
+  ],
+  "x_caption_characters": 212,
+  "status": "VISUALLY_REVIEWED_READY_UNPUBLISHED",
+  "visual_review": "All three slides inspected after reducing UI crops to prevent footer/CTA overlap."
+}

@@ -1,0 +1,64 @@
+{
+  "checked_date_kst": "2026-10-24",
+  "scope": "Read-only check of existing channels. No posts, replies, resubmissions, paid placements or account recovery.",
+  "vibecrew": {
+    "url": "https://vibecrew.kr/ship/10986",
+    "views_displayed": 48,
+    "previous_views_oct23": 47,
+    "comments_total": 2,
+    "external_comments": 1,
+    "owner_replies": 1,
+    "new_comments": 0,
+    "likes_displayed": 4,
+    "unread_notifications": 0,
+    "note": "Existing Kai feedback dated Oct20 and owner reply unchanged. Additional view may include this inspection; not a new user."
+  },
+  "zerolaunch": {
+    "url": "https://zerolaunch.studio4any.com/ko/my-apps",
+    "recruitment": "open",
+    "tests": 0,
+    "accepted": 0,
+    "pending": 0,
+    "credits": 4,
+    "feedback_inbox": "No pending or accepted feedback"
+  },
+  "disquiet": {
+    "url": "https://disquiet.io/products/ssak",
+    "approval": "pending",
+    "comments": 0,
+    "recommendations": 0,
+    "followers": 0,
+    "notifications": "No notifications",
+    "new_product_post": "disabled until approved"
+  },
+  "indieapps": {
+    "url": "https://indie-apps.com/apps/ssak-habit-tracker-334017",
+    "listing": "public",
+    "user_traffic": null,
+    "store_clicks": null,
+    "note": "Page reports crawler reads by Perplexity, ChatGPT, Amazon and others on 5 of last 30 days; not human feedback or downloads."
+  },
+  "nosubscription": {
+    "urls": [
+      "https://www.no-subscription.com/apps/ssak-habit-tracker/",
+      "https://www.kein-abo.de/apps/ssak-habit-tracker/"
+    ],
+    "listing": "Both language listings public",
+    "user_traffic": null,
+    "store_clicks": null,
+    "note": "Same directory operator; do not count as two independent endorsements. No visible user feedback or click metrics."
+  },
+  "trymyapp": {
+    "url": "https://trymy.app/",
+    "visible_directory_total": 170,
+    "matching_ssak_listing": false,
+    "approval_result": "unconfirmed",
+    "email_checked": false,
+    "note": "Public loaded directory contains no Ssak listing. This does not establish rejection or an explicit pending status; email not checked."
+  },
+  "getindieapps": {
+    "status": "Not reopened; prior decision to pause account recovery and Android update retained"
+  },
+  "confirmed_new_users_from_these_channels": null,
+  "limitations": "Public listing is not a measured acquisition. Missing traffic or downloads are unknown, not zero."
+}

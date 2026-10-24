@@ -1,0 +1,20 @@
+초기 독서 사용자 실험 · iPhone / Android · 총 3명 목표
+
+10/23 시작한 실험의 대상 OS를 10/24 확대했다. OS별 3명이 아니라 전체 3명이다. 참여는 자발적이며 구매·별점·후기를 요구하지 않는다.
+
+참여 의사를 밝힌 사람에게만 같은 대화에서 안내:
+Thanks for offering to try it! I’m the developer. Both downloads are here: https://ssak-habit-tracker.pages.dev/landing/
+Before installing, what would you expect Ssak to help you do from the store page? There’s no right answer.
+You can try one free reading habit with a regular goal and a smaller option for busy days. No need to buy Plus. Would it be okay if I check back here in about a week? You can stop whenever you like.
+
+설치·첫 습관 설정 이후 질문:
+Were you able to set up your first reading habit? What, if anything, felt unclear?
+
+후속 연락 동의를 받은 사람에게 실제 시작일 약 7일 뒤 같은 대화에서:
+1. Did the regular goal and busy-day option make sense? Did you use either?
+2. What made you open Ssak again, or stop using it?
+3. If you could change one thing, what would it be?
+
+기록: 공개 대화 링크, 참여 의사, 본인이 알려준 OS·시작일, 설치/첫 기록 확인 근거, 후속 질문 동의·예정일·실제 답변. 기기 간 자동 동기화는 제공하지 않는다. 민감한 독서 기록·연락처·스크린샷은 요구하지 않는다. 외부 인용은 별도 동의를 받는다.
+
+현재 확인된 참가자 0명. 동의 없이 DM·후속 질문을 보내거나 자동 알림을 만들지 않았다. 모집 게시물을 올린 사실·봇 답글·본인 답글은 참가자나 실제 설치로 집계하지 않는다.

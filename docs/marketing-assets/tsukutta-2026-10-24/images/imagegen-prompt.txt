@@ -1,0 +1,16 @@
+Use case: ads-marketing. Create ONE finished premium Japanese campaign cover for the habit app Ssak. Landscape 16:9, ideally 1536x864, opaque background. Image 1 is CHARACTER AND ILLUSTRATION STYLE REFERENCE ONLY, not an edit target: preserve the recognizable young adult with loose messy dark bun, flyaways, oversized cream T-shirt, understated warm face, lively black ink lines and cozy watercolor/paper texture. Do NOT copy its two-panel meme, English text or bed composition.
+Audience/situation: an adult reader in Japan in late October, the familiar seasonal idea 「読書の秋」; a book bought with good intentions waits for a quiet moment after a tiring day. A humane everyday scene, not a national stereotype. No flags, temples, kimono, cherry blossoms or tourist imagery.
+Scene: in the right half, the same recognizable character sits comfortably at a compact home reading table near a small warm lamp in a contemporary apartment, with a small modest stack of 2 unread plain Japanese bunko-size paperbacks, muted coral and kraft covers, an unbranded kraft bookshop paper bag folded aside, a plain mug. One book is open in their hands; they quietly return to a single page, tired but gently interested, no triumphant before/after and no shame. A window hints at cool dusk and a few muted autumn leaves, understated. Books carry no publisher, real book title or readable prose. Natural coherent hands.
+Design: warm cream #FFF9EF, brown #9C6842, deep ink #3A2A21, restrained coral #FF8068. A quiet Japanese bookshop editorial poster, sophisticated typesetting and generous ma (negative space), warm character illustration matching the reference, not anime advertising exaggeration. Text at left, scene at right, both inside generous safe margins at least 7%; entire hero must remain meaningful in a center 16:9 crop. No dense paragraphs, app mockups, fake phone or fake UI.
+Exact Japanese text, typeset correctly and verbatim with excellent Japanese glyphs, large enough for a directory card. Left headline 3 lines:
+「読書の秋。
+買った本が、
+まだ待っている。」
+Do NOT print quote marks. Elegant bold Japanese Mincho headline, readable warm dark brown, not calligraphy.
+Below headline, smaller but clearly readable:
+「忙しい夜は、1ページから。」
+No quote marks.
+Bottom left subtle signature:
+「Ssak｜習慣1つは無料」
+No quote marks.
+Only those Japanese lines and Ssak branding; no extra words, no invented product claims, no stars, badges or testimonials. Single continuous composition, no panels. This is a fictional AI-generated brand illustration, not a real user result or app screenshot.

@@ -1,0 +1,31 @@
+{
+  "status": "READY_UNPUBLISHED",
+  "created_date": "2026-10-23",
+  "capture_date": "2026-10-17",
+  "sources": [
+    {
+      "file": "01-today.png",
+      "source": "C:\\Users\\TaeHyun\\Desktop\\workspace\\ssak-instagram-launch\\reel-en-01-busy\\01-today.png",
+      "sha256": "789e1e6f06e307ebfccb7fc158046ae0a7a717be4ec1260794d0c38633538617"
+    },
+    {
+      "file": "02-counts.png",
+      "source": "C:\\Users\\TaeHyun\\Desktop\\workspace\\ssak-instagram-launch\\reel-en-01-busy\\02-counts.png",
+      "sha256": "286834886b9b3a760fde6ac393a9d80c33a125679bc1cb1f884fa2e593b652da"
+    },
+    {
+      "file": "capture.json",
+      "source": "C:\\Users\\TaeHyun\\Desktop\\workspace\\ssak-instagram-launch\\reel-en-01-busy\\capture.json",
+      "sha256": "cfe0e0506f9227960881a64faf00052e4993d0d486229ad777b8319f035618b7"
+    }
+  ],
+  "native_capture": false,
+  "example_data": true,
+  "ui_changes": "Crop and resize only; app text, actions and recorded progress unchanged.",
+  "format": "3-slide carousel, 1080x1350",
+  "ai_generated_visuals": false,
+  "target": "English-speaking readers whose available time varies",
+  "purpose": "Explain the regular and busy-day choices and recording, then invite profile/store interest.",
+  "hook": "10 minutes. Or one page.",
+  "limitation": "Reuses the Oct 17 web demo; not a new native recording or a user outcome."
+}

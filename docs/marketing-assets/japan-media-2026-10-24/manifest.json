@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-24",
+  "status": "prepared-not-sent-not-published",
+  "recipientCandidate": "pr@appllio.com",
+  "format": "3 still-screen slides, 1440x1080, 12 seconds, H.264, 30 fps, silent",
+  "sourceKind": "Archived actual Japanese web app screenshots; sample data; not a new native capture or an interaction recording",
+  "sourceSavedDate": "2026-10-05 (source file timestamps; screen date is also Oct 5)",
+  "uiEdits": "Screens resized only. No text or controls inside screenshots altered. Japanese explanatory layout added around intact screenshots.",
+  "sources": [
+    {
+      "file": "sources/ja-plan.png",
+      "source": "artifacts/review/soft-fold/ja-plan.png",
+      "sha256": "548d12d1c7eaf3c141661f263c7357f0228cbf2691ffd26012b62b60e84e4849",
+      "captureScript": "scripts/capture-soft-fold.cjs"
+    },
+    {
+      "file": "sources/ja-today.png",
+      "source": "artifacts/review/soft-fold/ja-today.png",
+      "sha256": "dd7bbf36220a503372c05de4edcc4e24a6953edbe6f6b51ee3c2aed3f00bd60f",
+      "captureScript": "scripts/capture-soft-fold.cjs"
+    }
+  ],
+  "existingEnglishSocialAccounts": "unchanged",
+  "aiGeneratedVisuals": false,
+  "outcomes": null
+}

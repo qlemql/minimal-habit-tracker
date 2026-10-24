@@ -1,0 +1,33 @@
+タイトル
+Ssak：習慣トラッカー
+
+ひとこと紹介
+普段は10分、忙しい日は1ページ。読書の計画に、小さな代案を。
+
+説明
+読書を続けたいけれど、毎日同じ時間は取れない。そんな日の分も、先に決めておける習慣アプリです。
+
+Ssakでは、普段の目標と忙しい日の小さな代案を一緒に設定します。たとえば「10分読書」と「1ページ読む」。その日に実際に行ったほうを選んで記録できます。読書のほか、散歩や日記など自分の習慣にも使えます。
+
+・習慣1つは期限なく無料
+・日本語対応、iOS／Androidで公開中
+・広告、アカウント登録、月額料金なし
+・Ssak Plusは買い切り。同時に最大3つの習慣とファイルのバックアップ・復元に対応
+・記録は端末内に保存。端末間の自動同期はありません
+
+個人で開発しています。説明や最初の設定でわかりにくいところがあれば、教えていただけるとうれしいです。
+
+App Store
+https://apps.apple.com/jp/app/id6762334017
+
+Google Play
+https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker&hl=ja&gl=JP
+
+日本語紹介
+https://ssak-habit-tracker.pages.dev/landing/ja/
+
+日本語サポート
+https://ssak-habit-tracker.pages.dev/ja/support/
+
+タグ候補
+習慣化、読書、生活

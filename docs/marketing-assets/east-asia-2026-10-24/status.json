@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-24",
+  "japanesePost": {
+    "status": "deleted-by-user",
+    "url": "https://x.com/Ssakhabit/status/2113848918731870574",
+    "account": "@Ssakhabit",
+    "textFile": "x-ja.txt",
+    "deletionEvidence": "2026-10-24 사용자 직접 삭제 완료 보고. 별도 웹 재확인 없음."
+  },
+  "taiwanDraft": {
+    "status": "draft-not-posted-not-scheduled",
+    "textFile": "x-zh-TW-draft.txt"
+  },
+  "userConcern": "기존 영어 중심 X 계정에 일본어 글을 섞으면 운영 방향이 흐려짐. 추가 외국어 게시 중단.",
+  "next": "기존 X·Instagram 영어 중심 유지. 일본어 데모와 관련 독자에게 도달할 외부 배포처 검토. 대만 초안 보류.",
+  "threads": "blocked-report-not-submitted",
+  "storeChecks": {
+    "apple": [
+      "jp",
+      "tw",
+      "hk"
+    ],
+    "googlePlayPageParameters": [
+      "JP/ja",
+      "TW/zh_TW",
+      "HK/zh_HK"
+    ],
+    "scope": "현지어 웹 상세 공개 확인. 현지 계정 설치·결제 검증 아님."
+  },
+  "outcomes": {
+    "reach": null,
+    "humanReplies": null,
+    "installs": null
+  }
+}

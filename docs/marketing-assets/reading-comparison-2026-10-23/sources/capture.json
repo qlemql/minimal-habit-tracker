@@ -1,0 +1,8 @@
+{
+  "trim": 0.96,
+  "tapAt": 2.636,
+  "screenSeconds": 7,
+  "source": "Local Ssak web build at 127.0.0.1:4173 (English UI)",
+  "data": "Fresh isolated browser with built-in example habit",
+  "native": false
+}

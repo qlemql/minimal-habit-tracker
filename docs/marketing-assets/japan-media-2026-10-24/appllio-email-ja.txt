@@ -1,0 +1,31 @@
+To: pr@appllio.com
+Subject: 【情報提供】忙しい日の小さな代案も決められる習慣アプリ「Ssak」／iOS・Android
+
+アプリオ編集部 ご担当者様
+
+個人で習慣アプリ「Ssak」を開発しているHyunと申します。
+読書などを続けたいけれど、日によって使える時間が違う方に向けたアプリとして、情報提供いたします。
+
+Ssakでは、普段の目標と忙しい日の小さな代案を先に決めておきます。たとえば「10分読書」と「1ページ読む」。その日に実際に行ったほうを選んで記録できます。
+小さな目標だけを固定するのではなく、普段と忙しい日の両方を用意しておける点が特徴です。
+
+【基本情報】
+・アプリ名：Ssak：習慣トラッカー
+・対応：iOS／Android、日本語対応
+・料金：習慣1つは期限なく無料。Ssak Plusは買い切りで、同時に最大3つの習慣とファイルのバックアップ・復元に対応
+・広告、月額料金、アカウント登録なし
+・記録は端末内に保存。端末間の自動同期はありません
+
+【確認用リンク】
+日本語の紹介：https://ssak-habit-tracker.pages.dev/landing/ja/
+App Store：https://apps.apple.com/jp/app/id6762334017
+Google Play：https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker&hl=ja&gl=JP
+日本語サポート：https://ssak-habit-tracker.pages.dev/ja/support/
+
+「忙しい日の読書計画」や、登録不要の習慣アプリを扱う際の候補になりましたら幸いです。
+掲載の可否や評価は編集部のご判断にお任せします。有料掲載の申し込みではありません。
+
+ご確認いただき、ありがとうございます。
+
+Hyun / Ssak 開発者
+taehyun_fe@naver.com
