@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-24",
+  "pngs": 36,
+  "languages": [
+    "ko",
+    "ja",
+    "zh-TW",
+    "en"
+  ],
+  "screenshotsPerLanguagePerStore": 4,
+  "dimensionsAndRGB": "passed",
+  "sourceHashes": "16 source files verified",
+  "visualReview": "contact sheets of both store sizes, first-screen comparison, feature graphic",
+  "storeUploaded": false,
+  "nativeSource": false,
+  "separateNativeAcceptanceTests": "waived by user, not passed"
+}

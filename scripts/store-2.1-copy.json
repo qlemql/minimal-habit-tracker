@@ -1,0 +1,42 @@
+{
+  "ko": {
+    "label": "한국어", "angle": "거창한 목표의 부담보다, 오늘 할 수 있는 행동", "accent": "#C97B61",
+    "slides": [
+      {"id":"01-today","eyebrow":"내 생활에 맞는 습관","title":["오늘은 작게 해도,","이어갈 수 있게."],"sub":["평소에는 10분, 바쁜 날에는 한 페이지.","두 가지 실천을 모두 기록해요."]},
+      {"id":"02-plan","eyebrow":"익숙한 일상 다음에","title":["아침 커피 다음,","책 한 페이지."],"sub":["이미 하는 일 다음에 붙여보세요.","언제 할지도 내 생활에 맞게."]},
+      {"id":"03-review","eyebrow":"해본 만큼 돌아보기","title":["잘 맞는 계획인지,","지난주를 보며."],"sub":["평소 행동도, 작은 대안도 함께.","괜찮았다면 이대로 이어가요."]},
+      {"id":"04-adjust","eyebrow":"계획은 바꿔도 괜찮아요","title":["버거운 계획은","조금 가볍게."],"sub":["작은 대안 · 실행 시점 · 주간 목표를 조정해요.","바꿔도 지난 기록은 그대로 남아요."]}
+    ],
+    "feature":["오늘 할 수 있는 만큼,","나의 속도로."],"featureSub":"작은 대안이 있는 습관 기록"
+  },
+  "ja": {
+    "label": "日本語", "angle": "바쁜 날에도 선택할 수 있는 구체적인 작은 대안", "accent": "#A47650",
+    "slides": [
+      {"id":"01-today","eyebrow":"暮らしに合わせる習慣づくり","title":["忙しい日は、","1ページでも。"],"sub":["いつもは10分、時間がない日は1ページ。","どちらも、できた分を記録できます。"]},
+      {"id":"02-plan","eyebrow":"いつもの行動を、きっかけに","title":["朝のコーヒーの後、","本を開こう。"],"sub":["毎日の行動の後に、読みたい本を。","やるタイミングも決めておけます。"]},
+      {"id":"03-review","eyebrow":"先週を、少し振り返る","title":["この計画、","生活に合ってる？"],"sub":["いつもの行動も、小さな行動も。","できた日を見て、続け方を考えよう。"]},
+      {"id":"04-adjust","eyebrow":"続け方は、変えていい","title":["大変なら、","計画を軽く。"],"sub":["やること、タイミング、週の目安を見直す。","計画を変えても、過去の記録は残ります。"]}
+    ],
+    "feature":["暮らしに合わせて、","少しずつ。"],"featureSub":"忙しい日の小さな行動も決められる習慣アプリ"
+  },
+  "zh-TW": {
+    "label": "繁體中文", "angle": "대만 중심 · 바쁜 생활에서도 자기 속도로 실천", "accent": "#647C68",
+    "slides": [
+      {"id":"01-today","eyebrow":"用自己的步調，養成習慣","title":["忙碌的日子，","也留一點給自己。"],"sub":["有空讀十分鐘，忙的時候讀一頁。","做了多少，就記下多少。"]},
+      {"id":"02-plan","eyebrow":"接在每天都會做的事後面","title":["喝完咖啡，","翻開一頁書。"],"sub":["把想做的事，接進熟悉的日常。","先想好什麼時候做。"]},
+      {"id":"03-review","eyebrow":"看看這一週，怎麼做最剛好","title":["這個計畫，","適合你的生活嗎？"],"sub":["平常的行動、小小的行動，都算數。","回顧上週，再決定怎麼繼續。"]},
+      {"id":"04-adjust","eyebrow":"照自己的步調調整","title":["覺得吃力，","就調整一下。"],"sub":["調整基本目標、開始時機和每週天數。","過去的紀錄，都會保留。"]}
+    ],
+    "feature":["留一點時間，","給想做的事。"],"featureSub":"忙碌時，也有做得到的基本目標"
+  },
+  "en": {
+    "label": "English", "angle": "완벽한 연속 기록보다 생활에 맞게 조정하는 꾸준함", "accent": "#C97B61",
+    "slides": [
+      {"id":"01-today","eyebrow":"HABITS THAT FIT YOUR LIFE","title":["Make room for","your busy days."],"sub":["Ten minutes when you can. One page when you can't.","Record either one."]},
+      {"id":"02-plan","eyebrow":"BUILD ON YOUR EVERYDAY","title":["Coffee first.","Then one page."],"sub":["Give your habit a place in your day.","Pick something you already do as your cue."]},
+      {"id":"03-review","eyebrow":"LOOK BACK, WITHOUT THE PRESSURE","title":["A plan that","fits your life."],"sub":["See last week's full goals and small steps.","Keep what works for you."]},
+      {"id":"04-adjust","eyebrow":"YOUR PLAN CAN CHANGE","title":["Too much?","Make it smaller."],"sub":["Adjust your small step, cue, and weekly goal.","Your past records stay as they are."]}
+    ],
+    "feature":["Small steps.","Room for real life."],"featureSub":"Plan an easier option for your busy days."
+  }
+}

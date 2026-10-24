@@ -1,0 +1,779 @@
+{
+  "release": "2.1.0",
+  "date": "2026-10-24",
+  "status": "design-complete-native-source-replacement-pending",
+  "uploaded": false,
+  "source": "Real local Ssak web app, built-in localized sample data, captured via browser UI. Not iOS or Android screenshots.",
+  "uiPixels": "Only proportional image scaling; no generated or translated UI pixels.",
+  "native": false,
+  "assetCount": 36,
+  "assets": [
+    {
+      "file": "ios/1320x2868/ko/01-today.png",
+      "platform": "ios",
+      "language": "ko",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "01-today",
+      "title": [
+        "오늘은 작게 해도,",
+        "이어갈 수 있게."
+      ],
+      "source": "sources\\ko\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "3f92879cbb2af29095ea56ca6a930864ddfef9be1fb5d27424ac76c9991cd274"
+    },
+    {
+      "file": "ios/1320x2868/ko/02-plan.png",
+      "platform": "ios",
+      "language": "ko",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "02-plan",
+      "title": [
+        "아침 커피 다음,",
+        "책 한 페이지."
+      ],
+      "source": "sources\\ko\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "5352589abf1a1ec7e12ac95383e5da8732b4b395b57f97d1766358301211dc81"
+    },
+    {
+      "file": "ios/1320x2868/ko/03-review.png",
+      "platform": "ios",
+      "language": "ko",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "03-review",
+      "title": [
+        "잘 맞는 계획인지,",
+        "지난주를 보며."
+      ],
+      "source": "sources\\ko\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "7f85d064b0ed2f2cddd0e0176aa6f74750cf2f7879432757fc00bc195c1afb54"
+    },
+    {
+      "file": "ios/1320x2868/ko/04-adjust.png",
+      "platform": "ios",
+      "language": "ko",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "버거운 계획은",
+        "조금 가볍게."
+      ],
+      "source": "sources\\ko\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "32466824ae8391c6e59a4f9231b6c4dcbe9c3a8708dedf11c09f695c8957c1de"
+    },
+    {
+      "file": "ios/1320x2868/ja/01-today.png",
+      "platform": "ios",
+      "language": "ja",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "01-today",
+      "title": [
+        "忙しい日は、",
+        "1ページでも。"
+      ],
+      "source": "sources\\ja\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "69a5fa5cd3b803694ef2eae4ede5475d973eeec196d8764545f7eeffe5d41351"
+    },
+    {
+      "file": "ios/1320x2868/ja/02-plan.png",
+      "platform": "ios",
+      "language": "ja",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "02-plan",
+      "title": [
+        "朝のコーヒーの後、",
+        "本を開こう。"
+      ],
+      "source": "sources\\ja\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "e68093c486e6eabcab5c9914d135abbbc384e777b58a4f7510b156b294f5c8e2"
+    },
+    {
+      "file": "ios/1320x2868/ja/03-review.png",
+      "platform": "ios",
+      "language": "ja",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "03-review",
+      "title": [
+        "この計画、",
+        "生活に合ってる？"
+      ],
+      "source": "sources\\ja\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "b686825c5bb08c896cf028a709fc0850a6944e37b5375a91ab4dd52a24414e66"
+    },
+    {
+      "file": "ios/1320x2868/ja/04-adjust.png",
+      "platform": "ios",
+      "language": "ja",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "大変なら、",
+        "計画を軽く。"
+      ],
+      "source": "sources\\ja\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "c37c5551dc8e784860a49c21b6b8d56d0171c7a3b9dfbb400a698510d9bf5a8d"
+    },
+    {
+      "file": "ios/1320x2868/zh-TW/01-today.png",
+      "platform": "ios",
+      "language": "zh-TW",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "01-today",
+      "title": [
+        "忙碌的日子，",
+        "也留一點給自己。"
+      ],
+      "source": "sources\\zh-TW\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "00619a0fecfac42aa522f40ec454a8dc21279621470baf2df58bbd278000d7d7"
+    },
+    {
+      "file": "ios/1320x2868/zh-TW/02-plan.png",
+      "platform": "ios",
+      "language": "zh-TW",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "02-plan",
+      "title": [
+        "喝完咖啡，",
+        "翻開一頁書。"
+      ],
+      "source": "sources\\zh-TW\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "c5a79431c97cbd0ecec8e2e989982ce47324d0aff7ca135ba30d0f2f362f545c"
+    },
+    {
+      "file": "ios/1320x2868/zh-TW/03-review.png",
+      "platform": "ios",
+      "language": "zh-TW",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "03-review",
+      "title": [
+        "這個計畫，",
+        "適合你的生活嗎？"
+      ],
+      "source": "sources\\zh-TW\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "9e639376e4f7215833d0e361459f470ec62ca6bdeb147cc383a010fde66b0a70"
+    },
+    {
+      "file": "ios/1320x2868/zh-TW/04-adjust.png",
+      "platform": "ios",
+      "language": "zh-TW",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "覺得吃力，",
+        "就調整一下。"
+      ],
+      "source": "sources\\zh-TW\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "48f5b821d8ab87b5a13ceed41bc63fd427eaa347d12a91182a90215ba878837c"
+    },
+    {
+      "file": "ios/1320x2868/en/01-today.png",
+      "platform": "ios",
+      "language": "en",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "01-today",
+      "title": [
+        "Make room for",
+        "your busy days."
+      ],
+      "source": "sources\\en\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "d2e40df6159ce78cdded37a222a1a9eed1258728aa25df9f8fbfa414a98c4180"
+    },
+    {
+      "file": "ios/1320x2868/en/02-plan.png",
+      "platform": "ios",
+      "language": "en",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "02-plan",
+      "title": [
+        "Coffee first.",
+        "Then one page."
+      ],
+      "source": "sources\\en\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "4d9a9abbe8cf3831c4bec6bdfadfda47d7851da70611efa61b616cfc8ce029f3"
+    },
+    {
+      "file": "ios/1320x2868/en/03-review.png",
+      "platform": "ios",
+      "language": "en",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "03-review",
+      "title": [
+        "A plan that",
+        "fits your life."
+      ],
+      "source": "sources\\en\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "b3acb3349be243931ccd4c84c4770dcdd3b535dbb13c5218e4fccd511b00f3b2"
+    },
+    {
+      "file": "ios/1320x2868/en/04-adjust.png",
+      "platform": "ios",
+      "language": "en",
+      "size": [
+        1320,
+        2868
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "Too much?",
+        "Make it smaller."
+      ],
+      "source": "sources\\en\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "66f6011562f2c1f389c8045b29070346978718cb14c10e848e2fbe878fda60fb"
+    },
+    {
+      "file": "android/1080x1920/ko/01-today.png",
+      "platform": "android",
+      "language": "ko",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "01-today",
+      "title": [
+        "오늘은 작게 해도,",
+        "이어갈 수 있게."
+      ],
+      "source": "sources\\ko\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "bfb6f5d1888da59aa1d797e3ab8a25abf944fa98ea2634d0282abbd6f64ae598"
+    },
+    {
+      "file": "android/1080x1920/ko/02-plan.png",
+      "platform": "android",
+      "language": "ko",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "02-plan",
+      "title": [
+        "아침 커피 다음,",
+        "책 한 페이지."
+      ],
+      "source": "sources\\ko\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "1043a877319d3a0e2251eb0fc4b2a70bd83e6e1db917ad1b37595a5240d716e1"
+    },
+    {
+      "file": "android/1080x1920/ko/03-review.png",
+      "platform": "android",
+      "language": "ko",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "03-review",
+      "title": [
+        "잘 맞는 계획인지,",
+        "지난주를 보며."
+      ],
+      "source": "sources\\ko\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "12886539ba5a7c566b4809c19bd73d09e41fc77a6c4a8509ac0862f923e6c310"
+    },
+    {
+      "file": "android/1080x1920/ko/04-adjust.png",
+      "platform": "android",
+      "language": "ko",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "버거운 계획은",
+        "조금 가볍게."
+      ],
+      "source": "sources\\ko\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "b93b609c242962cea9e7a7455b9e6a7713d9c103d498064d266b2e6aa904b5a2"
+    },
+    {
+      "file": "android/1080x1920/ja/01-today.png",
+      "platform": "android",
+      "language": "ja",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "01-today",
+      "title": [
+        "忙しい日は、",
+        "1ページでも。"
+      ],
+      "source": "sources\\ja\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "2062fced5837b97777d90b445486fa55e1e224341072ab86b67fe4f6c4d35824"
+    },
+    {
+      "file": "android/1080x1920/ja/02-plan.png",
+      "platform": "android",
+      "language": "ja",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "02-plan",
+      "title": [
+        "朝のコーヒーの後、",
+        "本を開こう。"
+      ],
+      "source": "sources\\ja\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "09b60370f4c9d6e13c7711f880e00d64d996e1e22a3960d807b0b7dac6890fb8"
+    },
+    {
+      "file": "android/1080x1920/ja/03-review.png",
+      "platform": "android",
+      "language": "ja",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "03-review",
+      "title": [
+        "この計画、",
+        "生活に合ってる？"
+      ],
+      "source": "sources\\ja\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "583d192fe9a166786b281bca29414386198bb16e4ab46b2bfa393c1ad1ab7a5f"
+    },
+    {
+      "file": "android/1080x1920/ja/04-adjust.png",
+      "platform": "android",
+      "language": "ja",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "大変なら、",
+        "計画を軽く。"
+      ],
+      "source": "sources\\ja\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "af9488de7260f47c3590716c53c1356b909af329bc1ec2501926eaf97f077b59"
+    },
+    {
+      "file": "android/1080x1920/zh-TW/01-today.png",
+      "platform": "android",
+      "language": "zh-TW",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "01-today",
+      "title": [
+        "忙碌的日子，",
+        "也留一點給自己。"
+      ],
+      "source": "sources\\zh-TW\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "3bc9cf9a9f6e9a3454dbc07706f75a3549f931c530553fc939150f81cb0a31cc"
+    },
+    {
+      "file": "android/1080x1920/zh-TW/02-plan.png",
+      "platform": "android",
+      "language": "zh-TW",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "02-plan",
+      "title": [
+        "喝完咖啡，",
+        "翻開一頁書。"
+      ],
+      "source": "sources\\zh-TW\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "dd416bc52c14e9d37a3087fc0c3d34879d390c08b3f6b04a28b11722d7e4f17a"
+    },
+    {
+      "file": "android/1080x1920/zh-TW/03-review.png",
+      "platform": "android",
+      "language": "zh-TW",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "03-review",
+      "title": [
+        "這個計畫，",
+        "適合你的生活嗎？"
+      ],
+      "source": "sources\\zh-TW\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "60304e97231a96a0352fa39a3014762d5c2620895dd36cbe4432558d10ddb20c"
+    },
+    {
+      "file": "android/1080x1920/zh-TW/04-adjust.png",
+      "platform": "android",
+      "language": "zh-TW",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "覺得吃力，",
+        "就調整一下。"
+      ],
+      "source": "sources\\zh-TW\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "6cd59786150caee175221fcd70bac6c28a4411fe9d781925970d5efebe8cf8b1"
+    },
+    {
+      "file": "android/1080x1920/en/01-today.png",
+      "platform": "android",
+      "language": "en",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "01-today",
+      "title": [
+        "Make room for",
+        "your busy days."
+      ],
+      "source": "sources\\en\\01-today.jpg",
+      "uiFabricated": false,
+      "sha256": "d70c1a8cf40e0d9292eec72b3cb51abc1b9a6dbaf0d15159da69cd82e21f12f2"
+    },
+    {
+      "file": "android/1080x1920/en/02-plan.png",
+      "platform": "android",
+      "language": "en",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "02-plan",
+      "title": [
+        "Coffee first.",
+        "Then one page."
+      ],
+      "source": "sources\\en\\02-plan.jpg",
+      "uiFabricated": false,
+      "sha256": "95e00a018ca5e61f966144e646d8a648480fb8dcd47a3ebc5e49ebf7e041092a"
+    },
+    {
+      "file": "android/1080x1920/en/03-review.png",
+      "platform": "android",
+      "language": "en",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "03-review",
+      "title": [
+        "A plan that",
+        "fits your life."
+      ],
+      "source": "sources\\en\\03-review.jpg",
+      "uiFabricated": false,
+      "sha256": "b00a7f06ebdaea219c157336304bb9533015a19d636db7e1fc2218cd3a924215"
+    },
+    {
+      "file": "android/1080x1920/en/04-adjust.png",
+      "platform": "android",
+      "language": "en",
+      "size": [
+        1080,
+        1920
+      ],
+      "scene": "04-adjust",
+      "title": [
+        "Too much?",
+        "Make it smaller."
+      ],
+      "source": "sources\\en\\04-adjust.jpg",
+      "uiFabricated": false,
+      "sha256": "0d80306029bb46437f70092df4900afe9565ef18563f5cb3f5c9202e6dec6e08"
+    },
+    {
+      "file": "android/feature-graphic/ko.png",
+      "platform": "android",
+      "language": "ko",
+      "size": [
+        1024,
+        500
+      ],
+      "type": "feature-graphic",
+      "containsAppUI": false,
+      "sha256": "afa17636216b8d5e24e5788ebb65c2bfdb0d35ced29735c3c3c75ba0d5656a77"
+    },
+    {
+      "file": "android/feature-graphic/ja.png",
+      "platform": "android",
+      "language": "ja",
+      "size": [
+        1024,
+        500
+      ],
+      "type": "feature-graphic",
+      "containsAppUI": false,
+      "sha256": "58318009e6e758ea9da95ddcaa28e8e8ccd84694e24d014ac09b5f3dbd846a35"
+    },
+    {
+      "file": "android/feature-graphic/zh-TW.png",
+      "platform": "android",
+      "language": "zh-TW",
+      "size": [
+        1024,
+        500
+      ],
+      "type": "feature-graphic",
+      "containsAppUI": false,
+      "sha256": "1959ee8b52272ee627701edeff8881f0727777bfef26af8c33a54fc80fa9d961"
+    },
+    {
+      "file": "android/feature-graphic/en.png",
+      "platform": "android",
+      "language": "en",
+      "size": [
+        1024,
+        500
+      ],
+      "type": "feature-graphic",
+      "containsAppUI": false,
+      "sha256": "19835017881146e65fdbaa4c264623545cb0da9ee64f312e2b78c7c9891f5303"
+    }
+  ],
+  "sources": [
+    {
+      "file": "sources\\ko\\01-today.jpg",
+      "sha256": "52965b34a67c586b72feda9c175b2e396cc6dab614dd40d4cd641a7032f5d408",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\ko\\02-plan.jpg",
+      "sha256": "4f42d6f5f0fe4b8950766223a427c24286d4ab557dfbbb69ba41b010c5cf967f",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\ko\\03-review.jpg",
+      "sha256": "0d1e3fbd6184f084ee018ffb512a3bc007dd4f52e4ec9b37893fc464df11ca56",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\ko\\04-adjust.jpg",
+      "sha256": "60fcdf8787e66bd2f35eca4f704981cfbb1808f879714c7b0bc96c7129fc1822",
+      "size": [
+        414,
+        1100
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\ja\\01-today.jpg",
+      "sha256": "d3aa6094ee09b7979ad758dbe48a6e9b13f643b0b2747f7b5ff2987f6dec7983",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\ja\\02-plan.jpg",
+      "sha256": "01ae9cb57896aa52ed5ea64ce374a9c609aafc4182b1bca202e6c7d0c62ba6a5",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\ja\\03-review.jpg",
+      "sha256": "6fec6935b34fa8bbbe35b8e2dcb9aaba809dca1b1abb8e8686237fac1a00174d",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\ja\\04-adjust.jpg",
+      "sha256": "da37952dc9aaa3f115eafaf2d49471eec4a82e5242946fb9043fd9f5c2a2a742",
+      "size": [
+        414,
+        1100
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\zh-TW\\01-today.jpg",
+      "sha256": "3c6e1103dd7b6a0b8d8f92ed6e0528be7f3851df7afe32c9ed3913edd077473d",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\zh-TW\\02-plan.jpg",
+      "sha256": "a35ada1708165fbff873c9de2e29d184fedc02a01e00645e11f15cfd2d2ba93a",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\zh-TW\\03-review.jpg",
+      "sha256": "d8a86c82af91fe5800112608fb58f65196e44c7d344dd24e0bc108fe632347bb",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\zh-TW\\04-adjust.jpg",
+      "sha256": "11c955ab5cbca44b1810d20e1fd413611861afe73573051703ebd92fad2dd377",
+      "size": [
+        414,
+        1100
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\en\\01-today.jpg",
+      "sha256": "345c764f9fd13d643ddf855b17e0263d751f84552c920ac9e792ff6294a5a384",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\en\\02-plan.jpg",
+      "sha256": "3269a8388e8610c997280826288ac011c015a68478577e15ac13310606fb1dac",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\en\\03-review.jpg",
+      "sha256": "404fc8e6292b332c4c0f53e1dad2579133531182db0364afe4bb3da56359b5d3",
+      "size": [
+        414,
+        896
+      ],
+      "native": false,
+      "ui_modified": false
+    },
+    {
+      "file": "sources\\en\\04-adjust.jpg",
+      "sha256": "e606c8a9ee9f5d77200b5449bfac6b38b0e990ccdf1aa83f4bc3e22a6a8f18cd",
+      "size": [
+        414,
+        1100
+      ],
+      "native": false,
+      "ui_modified": false
+    }
+  ],
+  "copyFile": "../../../scripts/store-2.1-copy.json",
+  "regenerate": "python scripts/render-store-2.1.py",
+  "officialSpecs": [
+    "https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications",
+    "https://support.google.com/googleplay/android-developer/answer/9866151?hl=en"
+  ],
+  "review": {
+    "dimensions": "checked",
+    "rgbNoAlpha": "checked",
+    "copy": "All 32 screenshots reviewed on contact sheets; four first screens and Japanese feature graphic reviewed separately. No native app acceptance test claimed.",
+    "nativeUI": "Pending native screenshot replacement; ready design, not native submission screenshots.",
+    "nativeAcceptanceTesting": "user chose not to run separate native acceptance tests; not marked passed"
+  }
+}

@@ -1,0 +1,56 @@
+Ssak 2.1.0 · 네 언어 스토어 이미지 / 2026-10-24
+
+현재 상태
+- 네 언어의 문구·레이아웃 제작 완료. 실제 로컬 웹 앱의 예시 화면으로 구성.
+- iOS/Android 네이티브 캡처가 아니므로 현재 PNG를 최종 제출본으로 오인하지 말 것.
+- 별도의 네이티브 인수 검증을 실행하지 않고 출시한다는 사용자 결정과,
+  스토어에 넣을 실제 네이티브 화면 촬영은 구분한다. 테스트 통과로 표시하지 않았다.
+- 빌드, 심사 제출, 스토어 업로드는 이번 작업에서 실행하지 않았다.
+
+파일
+- ios/1320x2868/{ko,ja,zh-TW,en}/01-today.png ~ 04-adjust.png
+- android/1080x1920/{ko,ja,zh-TW,en}/01-today.png ~ 04-adjust.png
+- android/feature-graphic/{ko,ja,zh-TW,en}.png (1024×500)
+- first-screens.jpg: 네 언어 첫 이미지 비교
+- overview-ios.jpg / overview-android.jpg: 전체 이미지 검토
+- index.html: 언어·스토어 필터가 있는 갤러리
+- manifest.json: 파일 규격, 출처, 원본 해시, 미업로드 상태
+
+공통 순서
+01: 바쁜 날의 작은 대안 / 오늘 화면
+02: 익숙한 일상 뒤에 실천 / 습관 상세 화면의 실행 시점
+03: 지난주 실천을 보고 계획 유지 / 새 회고 화면
+04: 작은 대안·실행 시점·주간 목표 수정 / 회고의 계획 바꾸기 화면
+
+Mac / Android 캡처 인계
+실제 2.1.0 후보에서 각 언어로 앱의 '예시 보기'를 연다.
+1. 오늘 화면을 01-today.png로 저장
+2. 독서 습관의 자세히 화면을 처음부터 열어 02-plan.png로 저장
+3. 계획 돌아보기 화면을 03-review.png로 저장
+4. 계획 바꾸기를 눌러 수정 필드가 보이는 화면을 04-adjust.png로 저장
+소스에 없는 OS UI를 추가하거나 캡처 안의 앱 문구를 이미지 편집으로 바꾸지 않는다.
+개인 데이터 대신 예시 데이터를 사용하고 플랫폼별 실제 화면을 구분한다.
+
+캡처 폴더 예:
+native/ios/ko/01-today.png
+native/ios/ko/02-plan.png
+native/ios/ko/03-review.png
+native/ios/ko/04-adjust.png
+다른 언어 ja, zh-TW, en과 android도 같은 구조.
+
+캡처를 이 Windows 작업공간으로 가져온 뒤:
+python scripts/render-store-2.1.py --native-root native --output docs/store-assets/2.1.0-native
+Pillow와 Windows 시스템 글꼴을 사용한다. 원본 디자인은 덮어쓰지 않는다.
+네이티브 원본이 누락되면 웹 이미지로 자동 대체하지 않고 실패한다.
+
+업로드
+최종 네이티브 출력에서 스토어·언어에 맞는 01→04 순서로 올린다.
+App Store에 Google Play 그래픽이나 다른 플랫폼 이름을 넣지 않는다.
+기존 iOS 스크린샷 슬롯은 콘솔에서 실제 요구 규격을 확인하고 맞는 슬롯에 등록한다.
+지원하지 않는 iPad·태블릿 이미지는 제작하지 않았다.
+Google Play 대표 그래픽에는 앱 UI가 없으며, 웹 캡처 교체 없이 사용할 수 있는 디자인이다.
+앱 아이콘은 이번 범위에서 변경하지 않았다.
+
+공식 규격 참고 (2026-10-24 확인)
+https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications
+https://support.google.com/googleplay/android-developer/answer/9866151?hl=en
