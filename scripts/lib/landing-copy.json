@@ -70,8 +70,7 @@
       ]
     ],
     "startTitle": "Your next habit can start small.",
-    "availability": "Ssak 2.0 is now on the App Store. Android is coming soon. Availability varies by country or region.",
-    "soon": "Coming soon",
+    "availability": "Ssak is now on the App Store and Google Play. Availability varies by country or region.",
     "follow": "Follow @ssak.app",
     "footer": "A habit tracker for real life.",
     "contact": "Contact",
@@ -84,7 +83,10 @@
     "howLink": "See how it works",
     "usualAmount": "10 min",
     "busyAmount": "1 min",
-    "goalAction": "Stretching"
+    "goalAction": "Stretching",
+    "androidCta": "Download for Android",
+    "androidDownload": "Get it on Google Play",
+    "androidAvailable": "Available on Android"
   },
   "ko": {
     "title": "싹 — 바쁜 날의 작은 대안까지 정하는 습관 앱",
@@ -157,8 +159,7 @@
       ]
     ],
     "startTitle": "다음 습관은 가볍게 시작해요.",
-    "availability": "싹 2.0을 App Store에서 만나보세요. Android는 출시 준비 중이에요. 국가 또는 지역에 따라 이용 가능 여부가 다를 수 있어요.",
-    "soon": "출시 준비 중",
+    "availability": "App Store와 Google Play에서 싹을 만나보세요. 국가 또는 지역에 따라 이용 가능 여부가 다를 수 있어요.",
     "follow": "@ssak.app 소식 보기",
     "footer": "일상에 맞춰가는 습관 트래커.",
     "contact": "문의하기",
@@ -171,7 +172,10 @@
     "howLink": "사용 방법 보기",
     "usualAmount": "10분",
     "busyAmount": "1분",
-    "goalAction": "스트레칭"
+    "goalAction": "스트레칭",
+    "androidCta": "Android 앱 다운로드",
+    "androidDownload": "Google Play에서 다운로드",
+    "androidAvailable": "Android 출시"
   },
   "ja": {
     "title": "Ssak — 忙しい日の小さな代案も決める習慣アプリ",
@@ -244,8 +248,7 @@
       ]
     ],
     "startTitle": "次の習慣は、できることから。",
-    "availability": "Ssak 2.0はApp Storeで公開中です。Androidは公開準備中です。提供状況は国や地域によって異なります。",
-    "soon": "公開準備中",
+    "availability": "SsakはApp StoreとGoogle Playで公開中です。国や地域によって利用できない場合があります。",
     "follow": "@ssak.appをフォロー",
     "footer": "毎日の暮らしに合わせる習慣トラッカー。",
     "contact": "お問い合わせ",
@@ -258,7 +261,10 @@
     "howLink": "使い方を見る",
     "usualAmount": "10分",
     "busyAmount": "1分",
-    "goalAction": "ストレッチ"
+    "goalAction": "ストレッチ",
+    "androidCta": "Google Playでダウンロード",
+    "androidDownload": "Google Playでダウンロード",
+    "androidAvailable": "Androidで公開中"
   },
   "zh-TW": {
     "title": "Ssak — 先為忙碌的日子想好小替代方案",
@@ -331,8 +337,7 @@
       ]
     ],
     "startTitle": "下一個習慣，從做得到的事開始。",
-    "availability": "Ssak 2.0 已於 App Store 上架，Android 版本準備中。供應情況可能因國家或地區而異。",
-    "soon": "準備推出",
+    "availability": "Ssak 已在 App Store 和 Google Play 上架。供應情況可能因國家或地區而異。",
     "follow": "追蹤 @ssak.app",
     "footer": "配合日常生活的習慣追蹤 App。",
     "contact": "聯絡我們",
@@ -345,6 +350,9 @@
     "howLink": "看看怎麼用",
     "usualAmount": "10分鐘",
     "busyAmount": "1分鐘",
-    "goalAction": "伸展"
+    "goalAction": "伸展",
+    "androidCta": "在 Google Play 下載",
+    "androidDownload": "在 Google Play 下載",
+    "androidAvailable": "Android 已上架"
   }
 }

@@ -7,5 +7,12 @@
   "iosStoreUrl": "https://apps.apple.com/app/id6762334017",
   "iosPublicVersion": "2.0.0",
   "iosVerifiedAt": "2026-10-18",
-  "iosVerifiedStorefronts": ["kr"]
+  "iosVerifiedStorefronts": [
+    "kr"
+  ],
+  "androidStoreUrl": "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker",
+  "androidVerifiedAt": "2026-10-24",
+  "androidVerifiedStorefronts": [
+    "kr"
+  ]
 }
