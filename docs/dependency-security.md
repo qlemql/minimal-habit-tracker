@@ -1,5 +1,14 @@
 # 의존성 보안 검토 — 2026-10-04
 
+## 2026-10-25 보안 수정 — 아래 과거 기록보다 우선
+
+- Vitest / @vitest/mocker 4.1.12, Vite 8.3.5, source-map-js 1.2.2, undici 6.29.1로 패치 업데이트했다. Expo SDK의 메이저 버전은 변경하지 않았다.
+- `node-forge`는 registry 최신 버전도 1.4.0이며 공식 수정 릴리스가 없다. [공개 수정안 #1152](https://github.com/digitalbazaar/forge/pull/1152)을 참고해 중첩 DigestAlgorithm 안의 미소비 요소를 거부하는 최소 변경을 `patches/node-forge+1.4.0.patch`로 적용했다. 상위 프로젝트에 아직 병합되지 않은 수정안의 로컬 백포트임을 구분한다.
+- `scripts/check-forge-security.cjs`에서 정상 SHA-256/384/512 서명, 다른 해시, NULL 생략/포함 정상 인코딩, 중첩 garbage 인코딩 거부를 확인한다. `postinstall`에서 patch-package 적용 직후 이 검사를 실행하며 실패하면 설치도 실패한다. 버전 번호를 위조하거나 audit 경고를 숨기지 않았다.
+- `npm ci` 재설치와 3개 패치 자동 적용·서명 검사를 통과했다. `npm audit`는 9개(상 7·중 2)에서 4개(상 4)로 줄었다. 남은 항목은 node-forge 1.4.0과 이를 사용하는 expo / @expo/cli / @expo/code-signing-certificates의 버전 기반 경고다. 취약 코드 패치는 적용했지만 공식 수정 버전이 나올 때까지 audit 경고 자체는 남는다.
+- 패치 전후 audit 원본은 `artifacts/security/audit-2026-10-25.json`, `audit-fixed-2026-10-25.json`이다. 기존 테스트에 회귀 검사를 더해 16개 파일·109개 테스트 통과, 타입 검사·웹 export·iOS/Android Hermes JavaScript export 통과. 실제 서명 IPA/AAB 생성·기기 설치·스토어 재제출은 이번 수정에서 하지 않았다.
+- node-forge가 정식 수정 버전을 배포하면 패치 제거와 의존성 업데이트를 함께 수행하고 서명 검사를 유지한다. `npm audit fix --force`가 제안하는 Expo 44 역행은 적용하지 않는다.
+
 ## 적용한 수정
 
 | 경로 | 변경 | 호환성 확인 |
