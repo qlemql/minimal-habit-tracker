@@ -1,0 +1,18 @@
+export const startupCopy = {
+  ko: { loading: '기록을 불러오고 있어요.', title: '기록을 불러오지 못했어요.',
+    detail: '저장된 기록은 삭제하지 않았어요. 다시 시도하거나 복구를 위해 원본 파일을 보관해주세요.',
+    retry: '다시 불러오기', export: '원본 파일 보관', exported: '원본 파일의 저장 또는 공유 창을 열었어요.',
+    exportError: '원본 파일을 보관하지 못했어요. 저장 공간을 확인하고 다시 시도해주세요.' },
+  en: { loading: 'Loading your records.', title: 'Your records could not be loaded.',
+    detail: 'Your stored records have not been deleted. Try again, or keep a copy of the original data for recovery.',
+    retry: 'Try loading again', export: 'Keep original data', exported: 'The save or share dialog has opened.',
+    exportError: 'The original data could not be exported. Check your storage space and try again.' },
+  ja: { loading: '記録を読み込んでいます。', title: '記録を読み込めませんでした。',
+    detail: '保存された記録は削除していません。再試行するか、復旧に備えて元のデータを保存してください。',
+    retry: 'もう一度読み込む', export: '元のデータを保存', exported: '保存または共有の画面を開きました。',
+    exportError: '元のデータを保存できませんでした。空き容量を確認して再試行してください。' },
+  'zh-TW': { loading: '正在讀取紀錄。', title: '無法讀取紀錄。',
+    detail: '儲存的紀錄尚未刪除。請重試，或保留原始資料供復原使用。',
+    retry: '重新讀取', export: '保留原始資料', exported: '已開啟儲存或分享畫面。',
+    exportError: '無法匯出原始資料。請確認儲存空間後重試。' },
+};

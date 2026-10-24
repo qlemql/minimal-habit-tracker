@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LocalizedText as Text } from '@/renewal/LocalizedText';
@@ -8,6 +8,7 @@ import { useCopy, usePreferences } from '@/renewal/preferences';
 import { previousWeekSummary } from '@/renewal/domain';
 import { releaseCopy } from '@/renewal/releaseCopy';
 import { reviewCopy } from '@/renewal/reviewCopy';
+import { saveReview } from '@/renewal/saveReview';
 import { Screen, Title, Body, Eyebrow, Button, TextButton, Field, Notice, useToday, s, palette } from '@/renewal/ui';
 
 export default function Review() {
@@ -17,13 +18,16 @@ export default function Review() {
   useProStore((state) => state.isPro);
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { habits, logs, reviewHabit } = useHabitStore();
+  const { habits, logs } = useHabitStore();
   const habit = habits.find((item) => item.id === id);
   const [editing, setEditing] = useState(false);
   const [minimum, setMinimum] = useState(habit?.minimum ?? habit?.name ?? '');
   const [cue, setCue] = useState(habit?.cue ?? '');
   const [target, setTarget] = useState(habit?.weeklyTarget ?? 7);
   const [message, setMessage] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(false);
+  const saving = useRef(false);
   const today = useToday();
   if (!habit || habit.isGraduated)
     return <Screen detail><Notice>{c.notFound}</Notice></Screen>;
@@ -40,15 +44,25 @@ export default function Review() {
     setCue(habit.cue ?? '');
     setTarget(habit.weeklyTarget ?? 7);
   };
-  const keep = () => {
-    reviewHabit(id, { feeling: 'easy', note: '', minimum: habit.minimum ?? habit.name });
-    setMessage(r.kept);
-  };
-  const save = () => {
-    if (!minimum.trim() || !cue.trim()) return;
-    reviewHabit(id, { feeling: 'adjust', note: '', minimum, cue, weeklyTarget: target });
-    setEditing(false);
-    setMessage(r.saved);
+  const persistReview = async (adjust: boolean) => {
+    if (saving.current || (adjust && (!minimum.trim() || !cue.trim()))) return;
+    saving.current = true;
+    setBusy(true);
+    setError(false);
+    setMessage('');
+    try {
+      await saveReview(id, adjust
+        ? { feeling: 'adjust', note: '', minimum, cue, weeklyTarget: target }
+        : { feeling: 'easy', note: '', minimum: habit.minimum ?? habit.name });
+      setEditing(false);
+      setMessage(adjust ? r.saved : r.kept);
+    } catch {
+      setError(true);
+      setMessage(r.saveError);
+    } finally {
+      saving.current = false;
+      setBusy(false);
+    }
   };
 
   return (
@@ -67,30 +81,30 @@ export default function Review() {
         <Body>{r.prompt}</Body>
         {editing ? (
           <View style={s.gap}>
-            <Field label={c.minimumField} value={minimum} onChangeText={setMinimum} maxLength={120} />
-            <Field label={c.cueField} value={cue} onChangeText={setCue} maxLength={120} />
+            <Field label={c.minimumField} value={minimum} onChangeText={setMinimum} maxLength={120} editable={!busy} />
+            <Field label={c.cueField} value={cue} onChangeText={setCue} maxLength={120} editable={!busy} />
             <Text style={s.fieldLabel}>{c.frequency}</Text>
             <View style={st.frequency}>
               {[...new Set([3, 5, 7, target])].sort((a, b) => a - b).map((value) => (
                 <Pressable key={value} accessibilityRole="radio"
                   accessibilityState={{ checked: target === value }} accessibilityLabel={`${value} ${c.days}`}
-                  onPress={() => setTarget(value)} style={[st.option, target === value && st.selected]}>
+                  disabled={busy} onPress={() => setTarget(value)} style={[st.option, target === value && st.selected]}>
                   <Text style={st.optionText}>{value} {c.days}</Text>
                 </Pressable>
               ))}
             </View>
             <Text style={s.small}>{r.history}</Text>
-            <Button onPress={save} disabled={!minimum.trim() || !cue.trim()}>{c.saveChanges}</Button>
-            <TextButton onPress={() => { resetDraft(); setEditing(false); }}>{c.cancel}</TextButton>
+            <Button onPress={() => { void persistReview(true); }} disabled={busy || !minimum.trim() || !cue.trim()}>{busy ? r.saving : c.saveChanges}</Button>
+            {!busy && <TextButton onPress={() => { resetDraft(); setEditing(false); setMessage(''); }}>{c.cancel}</TextButton>}
           </View>
         ) : (
           <View style={s.gap}>
-            <Button onPress={keep} disabled={Boolean(message)}>{r.keep}</Button>
-            <Button secondary onPress={() => { resetDraft(); setMessage(''); setEditing(true); }}>{r.adjust}</Button>
+            <Button onPress={() => { void persistReview(false); }} disabled={busy || (!error && Boolean(message))}>{busy ? r.saving : r.keep}</Button>
+            <Button secondary disabled={busy} onPress={() => { resetDraft(); setMessage(''); setError(false); setEditing(true); }}>{r.adjust}</Button>
           </View>
         )}
-        {message ? <Notice>{message}</Notice> : null}
-        <TextButton onPress={() => router.replace({ pathname: '/practice', params: { id } })}>{c.details}</TextButton>
+        {message ? <Notice error={error}>{message}</Notice> : null}
+        {!busy && <TextButton onPress={() => router.replace({ pathname: '/practice', params: { id } })}>{c.details}</TextButton>}
       </View>
     </Screen>
   );

@@ -1,8 +1,9 @@
 ﻿import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { habitStorage } from '@/renewal/storage';
+import { observeHydration } from '@/renewal/persistenceHealth';
 import { trackableHabits } from '@/renewal/access';
-import { localDate, migrateHabitData } from '@/renewal/domain';
+import { localDate, migrateHabitData, type HabitData } from '@/renewal/domain';
 import {
   cancelHabitReminder,
   cancelTodayReminder,
@@ -39,7 +40,7 @@ interface HabitStore {
   canAddHabit: () => boolean;
 }
 export const useHabitStore = create<HabitStore>()(
-  persist(
+  persist<HabitStore, [], [], HabitData>(
     (set, get) => ({
       habits: [],
       logs: [],
@@ -179,10 +180,6 @@ export const useHabitStore = create<HabitStore>()(
               : habit,
           ),
         }));
-        const current = get().habits.find((habit) => habit.id === id);
-        if (current?.reminderTime && !current.isGraduated) {
-          void scheduleHabitReminder(id, current.name, current.reminderTime).catch(() => {});
-        }
       },
       getActiveHabits: () => get().habits.filter((habit) => !habit.isGraduated),
       getGraduatedHabits: () =>
@@ -234,6 +231,7 @@ export const useHabitStore = create<HabitStore>()(
     {
       name: 'habit-store',
       version: 3,
+      onRehydrateStorage: observeHydration('habit-store'),
       storage: createJSONStorage(() => habitStorage),
       migrate: (state, version) => migrateHabitData(state, version),
     },

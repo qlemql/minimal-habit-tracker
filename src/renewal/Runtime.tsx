@@ -12,6 +12,7 @@ import { syncPurchase, listenToPurchaseUpdates } from './billing';
 import { useProStore } from '@/store/proStore';
 import { isTodaysReminder } from './notificationAction';
 import { usePreferences } from './preferences';
+import { completeReminder } from './completeReminder';
 
 export const Runtime = () => {
   const language = usePreferences((state) => state.language);
@@ -46,7 +47,7 @@ export const Runtime = () => {
         return;
       }
       // An explicit Done action is idempotent, including replay after a cold start.
-      useHabitStore.getState().checkIn(id, 'full');
+      await completeReminder(id);
       await Notifications.clearLastNotificationResponseAsync();
       await syncWidgetData();
     };

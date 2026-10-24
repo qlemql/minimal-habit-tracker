@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLocales } from 'expo-localization';
 import { copies } from './copy';
 import type { Language } from './copy';
+import { observeHydration } from './persistenceHealth';
 const code = getLocales()[0]?.languageCode;
 const initial: Language = code === 'ko' || code === 'ja' ? code : code === 'zh' ? 'zh-TW' : 'en';
 interface Preferences {
@@ -15,7 +16,7 @@ interface Preferences {
   setExample: (value: boolean) => void;
 }
 export const usePreferences = create<Preferences>()(
-  persist(
+  persist<Preferences>(
     (set) => ({
       language: initial,
       welcomed: false,
@@ -24,7 +25,8 @@ export const usePreferences = create<Preferences>()(
       welcome: () => set({ welcomed: true }),
       setExample: (example) => set({ example }),
     }),
-    { name: 'ssak-preferences', storage: createJSONStorage(() => AsyncStorage) },
+    { name: 'ssak-preferences', storage: createJSONStorage(() => AsyncStorage),
+      onRehydrateStorage: observeHydration('ssak-preferences') },
   ),
 );
 export const useCopy = () => copies[usePreferences((state) => state.language)];
