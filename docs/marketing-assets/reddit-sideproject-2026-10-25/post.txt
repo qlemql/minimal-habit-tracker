@@ -1,0 +1,19 @@
+I built a habit tracker with two plans for one habit: ten minutes on a normal day, one page on a busy one
+
+I'm the developer of Ssak, a small habit tracker for iOS and Android.
+
+The question behind it is: what do you record when the usual plan doesn't fit today?
+
+For reading, you set a regular goal such as ten minutes and a smaller busy-day alternative such as one page. Both are decided in advance. At check-in, you choose the option you actually did; the smaller action isn't recorded as ten minutes. Your weekly plan can also include days off.
+
+The design choice I'm testing is whether having two options ready is more useful than a single done/not-done checkbox. Apple Reminders can already handle a simple reading checklist; Ssak puts the regular goal, smaller alternative and weekly record together.
+
+One habit is free with no time limit. Optional Plus is a one-time purchase for up to three habits and backup file export/import. No ads, subscriptions or account sign-up. Records stay on your device; there is no automatic sync between devices.
+
+Short demo: https://www.instagram.com/ssak.app/reel/De66MVQNLQr/
+The note is a digital illustration. App footage uses actual web captures with example data from October 17; mobile appearance may differ. This isn't a user's result.
+
+iOS: https://apps.apple.com/app/id6762334017
+Android: https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker
+
+Does choosing between a regular and smaller plan feel useful to you, or would you rather record an exact amount? I'd appreciate feedback on that trade-off. No purchase or rating needed.

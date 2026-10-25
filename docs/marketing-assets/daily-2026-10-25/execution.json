@@ -1,7 +1,7 @@
 {
   "date_kst": "2026-10-25",
   "account": "@Ssakhabit",
-  "status": "five-contextual-replies-published; first-paper-reel-published-on-instagram-and-x",
+  "status": "daily-publication-and-followup-records-complete; responses-pending",
   "replies": [
     {
       "parent": "https://x.com/bookmarworld/status/2114272249783914669",
@@ -56,5 +56,21 @@
   "instagram_published_at_kst": "2026-10-25T23:21:20+09:00",
   "instagram_schedule_note": "User requested immediate publication; October 27 candidate was brought forward to October 25. Do not repost the same reel on October 27.",
   "x_main_published_url": "https://x.com/Ssakhabit/status/2114364487134597244",
-  "x_main_published_at_kst": "2026-10-25T23:32:31+09:00"
+  "x_main_published_at_kst": "2026-10-25T23:32:31+09:00",
+  "new_reddit_posts": 1,
+  "reddit_sideproject": {
+    "url": "https://www.reddit.com/r/SideProject/comments/1xf481p/i_built_a_habit_tracker_with_two_plans_for_one/",
+    "published_at_kst": "2026-10-25T23:45:55.862+09:00",
+    "status_file": "../reddit-sideproject-2026-10-25/status.json",
+    "visibility": "Logged-in feed and direct permalink verified; no removal notice observed; independent visibility not verified"
+  },
+  "domestic_and_reddit_reaction_check": "domestic-reddit-check.json",
+  "closeout_totals": {
+    "instagram_reels": 1,
+    "x_main_posts": 1,
+    "x_external_replies": 5,
+    "reddit_sideproject_posts": 1,
+    "new_confirmed_participants": 0,
+    "paid_spend": 0
+  }
 }

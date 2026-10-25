@@ -1,0 +1,43 @@
+{
+  "date_kst": "2026-10-25",
+  "account": "u/ssak_habit_tracker",
+  "community": "r/SideProject",
+  "status": "posted; logged-in feed and permalink verified",
+  "url": "https://www.reddit.com/r/SideProject/comments/1xf481p/i_built_a_habit_tracker_with_two_plans_for_one/",
+  "published_at_utc": "2026-10-25T14:45:55.862Z",
+  "published_at_kst": "2026-10-25T23:45:55.862+09:00",
+  "title": "I built a habit tracker with two plans for one habit: ten minutes on a normal day, one page on a busy one",
+  "body_file": "post.txt",
+  "proof": "published.jpg",
+  "format": "Text post with one design-tradeoff question, existing Instagram demo link and two direct store links. No file uploaded.",
+  "disclosures": [
+    "Author is the developer",
+    "One habit free without time limit; optional one-time Plus for up to three habits and backup export/import",
+    "No ads, subscriptions or account signup; local records without automatic sync",
+    "Digital note illustration and actual Oct17 web captures with example data; mobile may differ; not a user result"
+  ],
+  "verification": [
+    "User menu confirmed u/ssak_habit_tracker before submission",
+    "Community description welcomes sharing and constructive feedback on side projects",
+    "No subreddit-specific rule or account threshold displayed in sidebar or composer inspected",
+    "Submitted once; new post appeared in community feed",
+    "Direct permalink showed correct title, full body, three links and DOM publication time",
+    "No removal or review-pending notice observed in checked logged-in page"
+  ],
+  "separate_logged_out_visibility_verified": false,
+  "comments_at_initial_check": 0,
+  "displayed_views_at_initial_check": 1,
+  "displayed_score_at_initial_check": 1,
+  "owner_upvote_excluded": true,
+  "external_human_feedback": null,
+  "attributed_installs": null,
+  "measurement_due_24h_kst": "2026-10-26T23:45:55+09:00",
+  "measurement_due_7d_kst": "2026-11-01T23:45:55+09:00",
+  "automatic_schedules_created": false,
+  "other_channels": {
+    "iosapps": "No new promotion. Existing App Shelf 30-day restriction maintained.",
+    "androidapps": "Current rule prohibits self-promotion, testing requests, app ideas and feedback requests; directs to r/droidappshowcase.",
+    "droidappshowcase": "Not posted. Current rules require 24+ hour account, 2+ combined karma and verified email, limit one app post per week per account, disallow obvious promo-only accounts, and direct testing requests to r/droidapptesters. Account eligibility not yet verified."
+  },
+  "limitations": "Initial own-feed and own-page visibility is not proof of independent exposure or lasting moderator approval. Own upvote and page inspection are not user acquisition. No crossposts, private messages, paid promotion or repeat submission."
+}

@@ -1,0 +1,56 @@
+{
+  "checked_date_kst": "2026-10-25",
+  "scope": "Existing domestic channels and Reddit recruitment comment, read-only. No new posts, replies, resubmissions, paid requests or listing edits.",
+  "vibecrew": {
+    "url": "https://vibecrew.kr/ship/10986",
+    "views_displayed": 55,
+    "previous_views_oct24": 48,
+    "comments_total": 2,
+    "new_comments": 0,
+    "external_comments": 1,
+    "owner_replies": 1,
+    "unread_notifications": 0,
+    "likes_checked_today": false,
+    "notes": "The Oct20 Kai feedback and Hyun reply remain unchanged. Displayed view increase may include owner or agent inspections and is not unique-user acquisition. Body still says Android coming soon."
+  },
+  "zerolaunch": {
+    "url": "https://zerolaunch.studio4any.com/ko/my-apps",
+    "recruitment": "open",
+    "tests": 0,
+    "accepted": 0,
+    "pending": 0,
+    "credits": 4,
+    "feedback_url": "https://zerolaunch.studio4any.com/ko/feedback",
+    "feedback_inbox": "No pending or accepted feedback",
+    "notification_menu_checked": false
+  },
+  "disquiet": {
+    "url": "https://disquiet.io/products/ssak",
+    "approval": "pending",
+    "recommendations": 0,
+    "followers": 0,
+    "comments": 0,
+    "notifications_url": "https://disquiet.io/notifications",
+    "notifications": "No notifications",
+    "new_product_posts": "disabled until approval",
+    "notes": "Existing iOS description unchanged. Did not cancel or resubmit."
+  },
+  "reddit": {
+    "comment_url": "https://www.reddit.com/r/iosapps/comments/1wvvq6p/comment/19rj80bj0lgw4/",
+    "comment_body": "Existing ABC recruitment comment remains visible in current logged-in view; no removal notice observed",
+    "replies_after_expansion": 1,
+    "bot_replies": 1,
+    "human_replies": 0,
+    "bot": "app-store-review",
+    "notifications_checked": true,
+    "notifications": "Achievement notification and existing app-store-review reply; no new human reply shown",
+    "private_messages_checked": false,
+    "separate_logged_out_visibility_checked": false,
+    "score_displayed": 1,
+    "score_notes": "Own default upvote is not independent user interest",
+    "promotion_rule": "Thread visibly states that promotion counts toward 30-day limit. No repost or Android promotion added."
+  },
+  "new_actionable_human_feedback_in_checked_surfaces": 0,
+  "attributed_installs": null,
+  "followup": "Include existing-channel replies and approval states in closeout checks. Update the VibeCrew Android coming-soon wording in a separate concrete edit task; do not cancel Disquiet approval submission merely to refresh copy."
+}
