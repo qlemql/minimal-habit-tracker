@@ -1,0 +1,61 @@
+{
+  "created_at_kst": "2026-10-25",
+  "status": "published",
+  "candidate_publish_date_kst": "2026-10-27",
+  "published_url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
+  "format": "Original digital paper diagram, archived actual web recording, one closing question",
+  "duration_seconds": 14.5,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "audio": "silent; all information is presented on screen",
+  "source": "Actual English web demo, example data, Oct 17, 2026; mobile appearance may differ",
+  "paper_visual": "Programmatically drawn digital note; not physical filming or handwriting footage",
+  "source_sha256": {
+    "recording.webm": "c62363bc11532a889b0173797c0a5c0adc5541ea837cd6f7827a4f1af26a3566",
+    "02-counts.png": "286834886b9b3a760fde6ac393a9d80c33a125679bc1cb1f884fa2e593b652da"
+  },
+  "verification": [
+    "full decode passed",
+    "encoded QA frames extracted",
+    "Encoded contact sheet visually reviewed: all five scenes; text and source disclosures visible",
+    "Instagram reel shared success confirmation",
+    "Profile post count increased from 11 to 12",
+    "Direct public reel page verified with correct video, full caption and source disclosures"
+  ],
+  "measurement": {
+    "published_at": "2026-10-25T23:21:20+09:00",
+    "24h": null,
+    "7d": null,
+    "due_24h_kst": "2026-10-26T23:21:20+09:00",
+    "due_7d_kst": "2026-11-01T23:21:20+09:00"
+  },
+  "published_at_kst": "2026-10-25T23:21:20+09:00",
+  "publication_mode": "Standard reel; 9:16; original first-frame cover; silent; complete English caption",
+  "upload": "Automated file upload denied; user manually attached the video; subsequent editing and publication completed.",
+  "publication_time_evidence": {
+    "post_link_datetime_utc": "2026-10-25T14:21:20.000Z",
+    "caption_datetime_utc": "2026-10-25T14:21:18.000Z",
+    "note": "Two visible DOM time elements differ by two seconds; post link used as measurement origin."
+  },
+  "publication_proof": "instagram-published.jpg",
+  "x_publication": {
+    "status": "published",
+    "url": "https://x.com/Ssakhabit/status/2114364487134597244",
+    "published_at_kst": "2026-10-25T23:32:31+09:00",
+    "text": "I?m building Ssak around a small question: what?s the plan when your usual plan doesn?t fit today?\n\nFor reading: ten minutes usually, one page on busy days. Set both ahead of time, then record what you actually did.\n\nWhat tends to get in the way of your reading plans?",
+    "video": "reel.mp4",
+    "proof": "x-main-published.jpg",
+    "upload": "Automated upload denied; user manually attached the same video. Ready status and video first frame verified before posting.",
+    "verification": [
+      "Your post was sent confirmation",
+      "Profile count 40 to 41",
+      "Direct post body, attached video and DOM publication time verified"
+    ],
+    "due_24h_kst": "2026-10-26T23:32:31+09:00",
+    "due_7d_kst": "2026-11-01T23:32:31+09:00",
+    "metrics_24h": null,
+    "metrics_7d": null,
+    "automatic_reminders": false
+  }
+}

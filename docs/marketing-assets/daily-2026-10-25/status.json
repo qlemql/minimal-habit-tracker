@@ -1,0 +1,64 @@
+{
+  "observed_at_kst": "2026-10-25T22:44:00+09:00",
+  "status": "reaction-check-complete; public-execution-scope-pending",
+  "instagram": {
+    "url": "https://www.instagram.com/reel/De1kY_Ntqis/",
+    "insights_url": "https://www.instagram.com/insights/media/4014274689688316076/",
+    "views": 5,
+    "viewers_displayed": 5,
+    "non_follower_view_percentage": 100,
+    "likes": 0,
+    "comments": 0,
+    "saves": 0,
+    "shares": 0,
+    "profile_activity": 0,
+    "follows": 0,
+    "average_watch_time_seconds": null,
+    "retention": null,
+    "store_visits": null,
+    "attributed_installs": null,
+    "measurement_window": "cumulative as observed, roughly 49 hours after publication; not an exact 24-hour measurement",
+    "displayed_followers": 1,
+    "owner_follow_excluded": true
+  },
+  "x": {
+    "url": "https://x.com/Ssakhabit/status/2113609637534871863",
+    "views": 11,
+    "likes": 0,
+    "reposts": 0,
+    "replies": 2,
+    "self_replies": 2,
+    "external_replies": 0,
+    "demo_reply_views": 8,
+    "android_followup_views": 5,
+    "notifications": "Visible latest notifications remain Oct 22, Oct 20 and Oct 18; no new recruitment response shown."
+  },
+  "tsukutta": {
+    "url": "https://tsukutta.app/apps/dc121a13-a7d7-41a2-819d-1c3f8470b3d8",
+    "views_displayed": 9,
+    "use_button_clicks_displayed": 2,
+    "useful_reactions_displayed": 1,
+    "reaction_origin": "unknown",
+    "external_human_feedback": null,
+    "attributed_installs": null,
+    "notes": "Two published images and source disclosure remain visible. Views are not unique people. Use counts are button clicks, not completed app use; at least one historical owner store check is recorded."
+  },
+  "trymyapp": {
+    "url": "https://trymy.app/",
+    "directory_count_displayed": 177,
+    "ssak_found_in_displayed_directory": false,
+    "approval_email_checked": false,
+    "decision": "not found publicly; approval or rejection remains unknown; no duplicate submission"
+  },
+  "participants": {
+    "new_participants_confirmed_in_checked_x_and_instagram_threads": 0,
+    "reddit_rechecked_today": false,
+    "inboxes_rechecked_today": false
+  },
+  "decision": "Keep the reading experiment and Oct 27, Oct 30, Nov 3 candidate dates. Insufficient exposure to judge content effectiveness. Prioritize contextual conversations over another duplicate recruitment post, subject to user-selected public scope.",
+  "new_public_posts": 0,
+  "new_public_replies": 0,
+  "paid_spend": 0,
+  "automatic_schedules_created": false,
+  "limitations": "Owner and agent checks may contribute to displayed metrics. Missing metrics remain null. No store-install attribution or overall participant total inferred from these checks."
+}

@@ -1,0 +1,60 @@
+{
+  "date_kst": "2026-10-25",
+  "account": "@Ssakhabit",
+  "status": "five-contextual-replies-published; first-paper-reel-published-on-instagram-and-x",
+  "replies": [
+    {
+      "parent": "https://x.com/bookmarworld/status/2114272249783914669",
+      "published": "https://x.com/Ssakhabit/status/2114357647369769137",
+      "text": "What got you back into it—a particular book, or finally having the headspace?",
+      "context": "Reading restart after a couple of months. Profile, recent posts and existing conversation read. No book title given in checked surrounding posts.",
+      "proof": "../paper-reading-2026-10-25/x-reading-reply.jpg"
+    },
+    {
+      "parent": "https://x.com/oursonisu/status/2114311764917502075",
+      "published": "https://x.com/Ssakhabit/status/2114358011020062986",
+      "text": "The desk is ready. The chair appears to have other plans.",
+      "context": "Tidied desk photo with plush toy occupying chair. Image, replies, author description and recent posts read. Brief visual joke, no app pitch.",
+      "proof": "../paper-reading-2026-10-25/x-desk-reply.jpg"
+    },
+    {
+      "parent": "https://x.com/musiaholic/status/2114355445724836323",
+      "published": "https://x.com/Ssakhabit/status/2114360379484897551",
+      "text": "Does course reading leave you with no energy for books you chose yourself, or is starting anything the hard part right now?",
+      "context": "English literature student discussing a reading slump in an existing book recommendation conversation. Parent chain, author description, recent posts and new reply read. Reply UI includes original participant @curlyfermin.",
+      "proof": "../paper-reading-2026-10-25/x-course-reading-reply.jpg"
+    },
+    {
+      "parent": "https://x.com/aquamoonlitpool/status/2114351843186770254",
+      "published": "https://x.com/Ssakhabit/status/2114360382731251817",
+      "text": "The Kindle accidentally came with a writing side quest. Was it a particular book that got you writing again?",
+      "context": "Reading more after getting a Kindle and restarting writing. Original GIF, author description, recent posts and conversation checked. No claim of personal Kindle or book use.",
+      "proof": "../paper-reading-2026-10-25/x-kindle-writing-reply.jpg"
+    },
+    {
+      "parent": "https://x.com/dionyjinsus/status/2114349521400684669",
+      "published": "https://x.com/Ssakhabit/status/2114360384924860803",
+      "text": "Is it too many books to choose from, or nothing quite catching your attention? The yellow fabric has clearly won its audition, at least.",
+      "context": "Indecision about next reading choice while making a bag. Yellow fabric and paper pattern photo, author description, recent posts and conversation checked.",
+      "proof": "../paper-reading-2026-10-25/x-choosing-book-reply.jpg"
+    }
+  ],
+  "verification": "Each reply appeared as a new @Ssakhabit article in its parent conversation with exact body and unique direct status link; screenshots saved. No duplicate submissions observed.",
+  "new_public_replies": 5,
+  "new_main_x_posts": 1,
+  "new_instagram_posts": 1,
+  "app_links_sent": 0,
+  "direct_messages_sent": 0,
+  "paid_spend": 0,
+  "new_participants_confirmed": 0,
+  "recipient_responses": null,
+  "note": "Five operator replies are five outreach actions, not five conversations with responses or five user insights. Responses and actual product interest require later checking.",
+  "instagram_asset": "../paper-reading-2026-10-25/manifest.json",
+  "instagram_candidate_publish_date_kst": "2026-10-27",
+  "automatic_publication_or_reminders": false,
+  "instagram_published_url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
+  "instagram_published_at_kst": "2026-10-25T23:21:20+09:00",
+  "instagram_schedule_note": "User requested immediate publication; October 27 candidate was brought forward to October 25. Do not repost the same reel on October 27.",
+  "x_main_published_url": "https://x.com/Ssakhabit/status/2114364487134597244",
+  "x_main_published_at_kst": "2026-10-25T23:32:31+09:00"
+}
