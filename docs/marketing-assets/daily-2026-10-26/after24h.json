@@ -1,0 +1,32 @@
+{
+  "observed_at_kst": "2026-10-26T23:41:25.000+09:00",
+  "measurement_window": "First observation after 24h; delayed checkpoint, not exactly 24:00.",
+  "instagram": {
+    "url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
+    "elapsed_minutes": 1460,
+    "views": 7,
+    "viewers_displayed": 7,
+    "non_follower_view_percentage": 100,
+    "likes": 0,
+    "comments": 0,
+    "saves": 0,
+    "shares": 0,
+    "profile_activity": 0,
+    "follows": 0,
+    "average_watch_time_seconds": null,
+    "retention": null,
+    "attributed_installs": null,
+    "proof": "instagram-after24h.png"
+  },
+  "x": {
+    "url": "https://x.com/Ssakhabit/status/2114364487134597244",
+    "elapsed_minutes": 1449,
+    "views": 5,
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0,
+    "proof": "x-after24h.png"
+  },
+  "limitations": "Own checks may contribute to displayed views. Insufficient exposure to judge format or hook. No attribution to today's comments. Reddit checkpoint not included."
+}

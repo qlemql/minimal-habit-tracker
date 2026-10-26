@@ -1,0 +1,12 @@
+Use case: illustration-story / ads-marketing. Create ONE original portrait 4:5 social feed illustration for Ssak, ideally 1080x1350.
+Input image 1 is a CHARACTER AND ART STYLE REFERENCE ONLY. It is not an edit target. Preserve the recognizable fictional young adult character with dark messy loose bun and flyaways, oversized plain cream T-shirt, understated expressive face. Preserve warm textured cream paper, confident black ink outlines, muted brown and coral, cozy ordinary interior. Do not copy the laptop scene or two-panel layout.
+This is a founder-note illustration about the developer's confirmed original problem: doing less than the planned goal, then omitting the record. Warm, candid, reflective. Do not ridicule a small action, and do not imply the illustration is a real photograph or real user result.
+Composition: one unified portrait editorial illustration, generous readable typography in the upper third and footer, central cozy desk scene. Character has an open small coral paperback beside a plain paper habit journal. One hand rests on the open book, the other loosely holds a pen above a blank journal entry. The character has a quiet, thoughtful tiny half-smile, not despair or shame. A warm desk lamp and the same simple cat mug from the reference support continuity. This is an ordinary paper notebook, NOT an app interface. The notebook contains only a few abstract short lines and empty boxes, NO words or numbers. No laptop or smartphone.
+Exact headline at top, large, carefully hand lettered, dark brown/black, three short lines:
+"I did less.
+So I logged
+nothing."
+Exact footer at bottom, smaller but very legible with ample safe margin:
+"That’s why I made Ssak."
+The founder words are editorial text outside the scene, not a speech bubble. Spell Ssak exactly. Make the core headline readable on a phone. Use cream #FFF9EF, brown #9C6842 and restrained coral #FF8068 accents. Fully opaque cream background.
+No additional text, logos, watermark, download buttons, store badges, invented UI, speech bubbles, extra panels, chart, medical claim, success promise, or fabricated testimonial. Keep an elegant quiet layout and the original character style.

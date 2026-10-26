@@ -1,0 +1,96 @@
+{
+  "date_kst": "2026-10-26",
+  "observation_window_kst": "22:39–22:45",
+  "measurement_window": "Cumulative before 24 hours; these are not the scheduled 24-hour measurements.",
+  "instagram": {
+    "url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
+    "views": 7,
+    "viewers_displayed": 7,
+    "non_follower_view_percentage": 100,
+    "likes": 0,
+    "comments": 0,
+    "saves": 0,
+    "shares": 0,
+    "profile_activity": 0,
+    "follows": 0,
+    "average_watch_time_seconds": null,
+    "retention": null,
+    "attributed_installs": null,
+    "notifications": "Visible activity remains Oct18 GIF comment and Oct17 activity; no new feedback shown.",
+    "due_24h_kst": "2026-10-26T23:21:20+09:00"
+  },
+  "x": {
+    "url": "https://x.com/Ssakhabit/status/2114364487134597244",
+    "views": 4,
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0,
+    "notifications": "Latest visible notifications remain Oct22, Oct20 and Oct18; no new reply shown.",
+    "due_24h_kst": "2026-10-26T23:32:31+09:00"
+  },
+  "reddit_sideproject": {
+    "url": "https://www.reddit.com/r/SideProject/comments/1xf481p/i_built_a_habit_tracker_with_two_plans_for_one/",
+    "views_first_observed": 195,
+    "views_after_own_checks": 198,
+    "score_displayed": 1,
+    "comments_displayed_before_reply": 3,
+    "comments_displayed_after_reply": 4,
+    "external_feedback_comments_read": 1,
+    "unread_comment_contents": "Two other comments implied by the counter were not exposed in the inspected thread, including after changing sort; do not infer their authors or contents.",
+    "feedback_url": "https://www.reddit.com/r/SideProject/comments/1xf481p/comment/19rmyg00c2lpe/",
+    "feedback_author": "DoughnutAvailable574",
+    "feedback_summary": "Reports skipping tracking when unable to hit the full goal; says the two-level plan addresses that problem. Actual Ssak use is unconfirmed.",
+    "reply_status": "published; direct permalink verified",
+    "reply_url": "https://www.reddit.com/r/SideProject/comments/1xf481p/comment/19ronemf3iaud/",
+    "reply_text": "That’s what got me started on Ssak too. When I couldn’t hit the full goal, I’d skip tracking altogether. I wanted a way to record the smaller thing I actually did. If you have any other feedback, I’d love to hear it.",
+    "reply_authorization": "User approved empathy about their shared original problem, then explicitly agreed to publication and requested an invitation for further feedback.",
+    "proof": "reddit-reply-published.png",
+    "due_24h_kst": "2026-10-26T23:45:55+09:00",
+    "attributed_installs": null
+  },
+  "reddit_iosapps": {
+    "url": "https://www.reddit.com/r/iosapps/comments/1wvvq6p/comment/19rj80bj0lgw4/",
+    "human_replies_visible": 0,
+    "automated_replies_visible": 1,
+    "new_promotion": false
+  },
+  "vibecrew": {
+    "views": 55,
+    "comments": 2,
+    "unread_notifications": 0,
+    "new_feedback": 0,
+    "android_copy_stale": true
+  },
+  "zerolaunch": {
+    "tests": 0,
+    "accepted": 0,
+    "pending": 0,
+    "credits": 4,
+    "feedback_inbox": "No pending or accepted feedback"
+  },
+  "disquiet": {
+    "url": "https://disquiet.io/products/ssak",
+    "recommendations": 0,
+    "followers": 0,
+    "comments": 0,
+    "notifications": "No notifications",
+    "state_change": "Previously recorded pending banner absent; Write link exposed. Approval notification and submit eligibility not independently verified; no post submitted."
+  },
+  "new_confirmed_trial_participants": 0,
+  "new_public_posts": 0,
+  "new_public_replies": 1,
+  "paid_spend_krw": 0,
+  "automatic_schedules_created": false,
+  "decision": "Prioritize the existing feedback conversation. Keep Oct30 opening-variant candidate and Nov2 review; do not repost the Oct25 reel or X explanation.",
+  "limitations": "Own visits may contribute to counts. Comment text is problem feedback, not proof of app use, retention or an install. Unavailable metrics are null. Store consoles, DMs, mail and Japan directories not rechecked.",
+  "social_execution": "social-execution.json",
+  "after24h": "after24h.json",
+  "daily_total_public_replies_including_social": 6,
+  "founder_note": "../founder-note-2026-10-26/manifest.json",
+  "daily_total_new_main_posts": 2,
+  "founder_note_published_urls": [
+    "https://x.com/Ssakhabit/status/2114731342265266243",
+    "https://www.instagram.com/ssak.app/p/De9iiXJjw5e/"
+  ]
+}
