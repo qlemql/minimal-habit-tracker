@@ -1,0 +1,34 @@
+{
+  "created_at_kst": "2026-10-27",
+  "status": "ready; visual QA passed; unpublished",
+  "candidate_publish_date_kst": "2026-10-30",
+  "published_url": null,
+  "format": "Original digital paper diagram, archived actual web recording, one closing question",
+  "duration_seconds": 14.5,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "audio": "silent; all information is presented on screen",
+  "source": "Actual English web demo, example data, Oct 17, 2026; mobile appearance may differ",
+  "paper_visual": "Programmatically drawn digital note; not physical filming or handwriting footage",
+  "source_sha256": {
+    "recording.webm": "c62363bc11532a889b0173797c0a5c0adc5541ea837cd6f7827a4f1af26a3566",
+    "02-counts.png": "286834886b9b3a760fde6ac393a9d80c33a125679bc1cb1f884fa2e593b652da"
+  },
+  "verification": [
+    "full decode passed",
+    "encoded QA frames extracted",
+    "Five encoded QA frames visually inspected",
+    "Every decoded frame after 2.5 seconds matches baseline",
+    "Caption bytes identical to baseline"
+  ],
+  "measurement": {
+    "published_at": null,
+    "24h": null,
+    "7d": null
+  },
+  "baseline_url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
+  "changed_variable": "First 2.5 seconds only: present usual and busy-day plans together",
+  "body_frame_sha256": "a192d747d26f35b366c3d261b619ed440a53f2cc1da6be59d974e1b9cf3457d5",
+  "reel_sha256": "4a826d2583e9d55f1337a751916aa5c22ffc99e2f6f3e0e55b6dd79407d8c373"
+}
