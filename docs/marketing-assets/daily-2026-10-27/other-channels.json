@@ -1,0 +1,50 @@
+{
+  "date_kst": "2026-10-27",
+  "scope": "Existing overseas listings and media submission follow-up; read-only",
+  "tsukutta": {
+    "url": "https://tsukutta.app/apps/dc121a13-a7d7-41a2-819d-1c3f8470b3d8",
+    "published": true,
+    "views": 12,
+    "previous_oct25_views": 9,
+    "usage_button_clicks": 2,
+    "convenient_reactions": 1,
+    "visible_comments": 0,
+    "note": "Views are not unique people; button clicks are not installs or completed usage. Owner checks may be counted. Reaction and clicks unchanged from Oct25."
+  },
+  "indie_apps": {
+    "url": "https://indie-apps.com/apps/ssak-habit-tracker-334017",
+    "published": true,
+    "crawler_activity_days_last30": 7,
+    "note": "AI crawler activity is not human traffic or installs."
+  },
+  "no_subscription": {
+    "urls": ["https://www.no-subscription.com/apps/ssak-habit-tracker/", "https://www.kein-abo.de/apps/ssak-habit-tracker/"],
+    "published_both_languages": true,
+    "note": "Same operator, two language editions. Public pages have no visible traffic or conversion metrics; iOS listing. German page verified in browser after web fetch failed."
+  },
+  "get_indie_apps": {
+    "url": "https://getindieapps.com/app/ssak-habit-tracker",
+    "published": true,
+    "platform": "iOS",
+    "note": "Read public page only. Previous pause on account recovery and Android update retained. No visible performance metrics."
+  },
+  "trymyapp": {
+    "url": "https://trymy.app/",
+    "public_listing_found": false,
+    "listed_apps_total": 177,
+    "approval_email_checked": false,
+    "note": "No Ssak match in public full page. This does not establish rejection. Homepage example dashboard is not Ssak data. No duplicate submission."
+  },
+  "appllio": {
+    "search": "site:appllio.com Ssak",
+    "search_results_found": false,
+    "publication_confirmed": false,
+    "reply_checked": false,
+    "note": "Search absence is not proof of no publication. Naver Mail redirected to login; reply status unknown. Oct24 tip not resent."
+  },
+  "naver_mail": {"status": "skipped_by_user", "replies_unknown": ["Appllio", "TryMy.App"], "note": "User requested skipping Naver Mail. Excluded from remaining work; no login request or follow-up email check."},
+  "threads": {"status": "previous_login_problem_on_hold", "retested_today": false},
+  "new_submissions": 0,
+  "messages_sent": 0,
+  "attributed_installs": null
+}

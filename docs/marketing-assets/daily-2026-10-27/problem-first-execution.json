@@ -1,0 +1,54 @@
+{
+  "date_kst": "2026-10-27",
+  "executed_at_utc": "2026-10-27T11:13:18.680Z",
+  "authorization": "After discussing the problem-first strategy, user explicitly instructed execution. This is a focused follow-up invitation beyond the earlier five social replies, not a daily quota increase.",
+  "target_problem": "People who read less than planned and leave the tracking record blank",
+  "x": {
+    "url": "https://x.com/Ssakhabit/status/2115038810233012529",
+    "text": "Last time you read less than you planned, what did you put in your tracker: the amount you read, a checkmark, or nothing?\n\nI’m the developer of Ssak. I’d like to understand what you actually do on those days.",
+    "status": "published; Your post was sent and direct permalink author/body/time verified",
+    "published_time_displayed_kst": "2026-10-27 20:12",
+    "proof": "x-problem-question-published.png",
+    "purpose": "Obtain a concrete past recording behavior; one question, developer disclosed",
+    "initial_human_replies": 0,
+    "installs_attributed": null
+  },
+  "reddit": {
+    "parent": "https://www.reddit.com/r/SideProject/comments/1xf481p/comment/19rmyg00c2lpe/",
+    "url": "https://www.reddit.com/r/SideProject/comments/1xf481p/comment/19rq8vnvtjtr8/",
+    "text": "If you’d like to try it, one habit is free on iPhone or Android. No purchase or rating needed. If the first check-in feels unclear, you’re welcome to tell me here — I’m happy to help.",
+    "status": "deleted after user pointed out unsolicited repeat; user deletion instruction received",
+    "proof": "reddit-trial-invite-published.png",
+    "context": "Original concept-level problem feedback, not an app-use report. Our prior empathy reply remains unanswered. One optional trial invitation added; no further nudge planned absent response.",
+    "new_trial_consent": false,
+    "followup_contact_consent": false,
+    "install_confirmed": false,
+    "deleted_at_utc": "2026-10-27T11:14:57.362Z",
+    "deletion_proof": "reddit-duplicate-deleted.png",
+    "original_empathy_reply_preserved": true,
+    "correction": "No new response had arrived; the additional invitation should not have been sent. Do not recontact this participant absent a new reply or explicit follow-up consent."
+  },
+  "weekly_direction": {
+    "through": "2026-11-02 review",
+    "focus": "Reading tracking gap; keep Oct30 opening-only reel experiment",
+    "posting_working_assumption": "About three main pieces this week across content roles; not algorithm guidance or a proven optimum",
+    "roles": [
+      "Oct26 developer origin, already published",
+      "Oct27 past-behavior question, published on X",
+      "Oct30 product demonstration opening variant, prepared; publication decision pending"
+    ],
+    "success_goal": "Three voluntary trial participants, not forecast or achieved count"
+  },
+  "new_main_posts": 1,
+  "new_public_replies": 0,
+  "new_trial_participants_confirmed": 0,
+  "paid_spend_krw": 0,
+  "automatic_schedules_created": false,
+  "next_steps": [
+    "Respond to concrete behavior examples in context",
+    "Offer one free habit to people expressing product interest",
+    "Ask permission before one-week follow-up and count only explicit consent",
+    "Review distribution, problem relevance and trial friction separately on Nov2"
+  ],
+  "replies_published_then_deleted": 1
+}

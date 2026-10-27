@@ -1,0 +1,36 @@
+{
+  "date_kst": "2026-10-27",
+  "disquiet": {
+    "url": "https://disquiet.io/posts/XdCLka",
+    "status": "published_and_verified",
+    "post_id": 7070,
+    "text": "disquiet-first-test-post.txt",
+    "proof": "disquiet-first-test-published.png",
+    "audience": "People who skip habit records after missing the full goal",
+    "request": "Create one free habit, make the first record, describe confusing setup steps",
+    "recruitment_target": 3,
+    "participants_confirmed": 0,
+    "note": "First product post; separate from still-pending product description amendment. Not another reply to an existing contact."
+  },
+  "zerolaunch": {
+    "url": "https://zerolaunch.studio4any.com/ko/tool/product-10-2",
+    "status": "updated_and_verified_publicly",
+    "description": "zerolaunch-first-test-description.txt",
+    "proof": "zerolaunch-first-test-updated.png",
+    "primary_url_before": "https://apps.apple.com/app/id6762334017",
+    "primary_url_after": "https://ssak-habit-tracker.pages.dev/landing/ko/",
+    "public_outbound_url": "https://ssak-habit-tracker.pages.dev/landing/ko/?ref=zerolaunch",
+    "landing_verified": "iOS and Android buttons resolve to official store URLs",
+    "additional_links_submitted": ["https://apps.apple.com/app/id6762334017", "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker"],
+    "additional_links_note": "Submitted in edit form; public page exposes primary visit link, not separate store buttons.",
+    "first_record_test_request_added": true,
+    "relaunch_used": false,
+    "launch_date_preserved": "2026-10-18",
+    "gallery_images_preserved": 5,
+    "credits": 4,
+    "feedback": 0
+  },
+  "new_main_posts_today": 2,
+  "public_replies_today": 6,
+  "paid_spend_krw": 0
+}

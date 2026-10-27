@@ -1,0 +1,31 @@
+{
+  "prepared_date_kst": "2026-10-27",
+  "status": "VibeCrew applied and public page verified; Disquiet change submitted, pending administrator approval",
+  "verified_source": "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker",
+  "verification": "Official Korean Google Play page displayed app title, developer KimDaniel, install control and availability; update date Oct 24, 2026. No installation performed.",
+  "proof": "android-store-verified.png",
+  "vibecrew": {
+    "url": "https://vibecrew.kr/ship/10986",
+    "before": "현재 iOS에서 사용할 수 있고 Android는 출시 준비 중입니다.",
+    "after": "현재 iOS와 Android에서 사용할 수 있습니다. (2026년 10월 27일 업데이트)",
+    "add_after_app_store_link": "Google Play\nhttps://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker",
+    "historical_note": "Preserve original Oct18 release greeting and existing comments; update current availability paragraph and add install link.",
+    "status": "published; Android availability sentence and clickable Google Play href verified on original public URL",
+    "proof": "vibecrew-android-updated.png",
+    "existing_images_preserved": 2,
+    "existing_comments_preserved": 2
+  },
+  "disquiet": {
+    "url": "https://disquiet.io/products/ssak",
+    "short_description_before": "습관을 실천할 상황과 바쁜 날의 작은 대안을 함께 정하는 iOS 습관 앱",
+    "short_description_after": "습관을 실천할 상황과 바쁜 날의 작은 대안을 함께 정하는 iOS·Android 습관 앱",
+    "introduction_before": "싹은 작은 습관을 내 일상에 맞게 이어가도록 돕는 iOS 앱입니다.",
+    "introduction_after": "싹은 작은 습관을 내 일상에 맞게 이어가도록 돕는 iOS·Android 앱입니다.",
+    "append": "Google Play: https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker",
+    "status": "submitted for review; current public content remains old until administrator approval",
+    "submission_notice": "Changes submitted for review. Your current product stays live until approved.",
+    "proof": "disquiet-change-pending.png"
+  },
+  "user_authorization": "User said next/go after exact domestic correction draft was prepared; applied that announced scope.",
+  "executed_at_utc": "2026-10-27T10:55:28.822Z"
+}

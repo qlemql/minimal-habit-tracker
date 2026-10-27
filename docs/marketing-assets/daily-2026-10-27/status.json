@@ -1,0 +1,168 @@
+{
+  "date_kst": "2026-10-27",
+  "observed_at_utc": "2026-10-27T10:45:30.901Z",
+  "authorization": "User requested today marketing and explicitly agreed to X/Instagram reply/comment publication; maximum five, no quota.",
+  "x_replies": [
+    {
+      "parent": "https://x.com/HanneloreDelor5/status/2114739670810562870",
+      "url": "https://x.com/Ssakhabit/status/2115030944667386181",
+      "text": "A year and three attempts, then an all-night finish — that book really waited for its moment. Glad you gave it another go.",
+      "context": "Follow-up to our yesterday book question. Entire parent chain and bio read. Original participant kitten_beloved included in recipients.",
+      "proof": "x-followup-published.png"
+    },
+    {
+      "parent": "https://x.com/cyresiae/status/2114831112023515532",
+      "url": "https://x.com/Ssakhabit/status/2115031735654379577",
+      "text": "That little pen-in-hand picture is a very good “we’re back” announcement 💜",
+      "context": "Writer resumes after weeks of block; actual pen-in-hand cartoon, profile, recent posts and thread read.",
+      "proof": "x-writing-reply.png"
+    },
+    {
+      "parent": "https://x.com/ginnobaraaa/status/2114934048854548902",
+      "url": "https://x.com/Ssakhabit/status/2115033376524841074",
+      "text": "The writing comeback came with an approval workflow 😂",
+      "context": "English original jokes that writing again means SOPs and work instructions. No attachment or replies before ours. Bio and recent posts read. Reply follows the work-document joke; no app offer.",
+      "proof": "x-sop-reply.png"
+    },
+    {
+      "parent": "https://x.com/DevAfter5/status/2112970499936678106",
+      "url": "https://x.com/Ssakhabit/status/2115040810492481923",
+      "text": "I’m a habit-tracker developer, so this is a useful warning. If you’ve tried one, was the extra chore remembering to open it or filling it in?",
+      "context": "First contact; adjacent tracker upkeep burden; developer disclosed; no app link or recruitment. Full context in new-target-outreach.json.",
+      "proof": "x-new-target-reply.png"
+    }
+  ],
+  "instagram_comments": [
+    {
+      "parent": "https://www.instagram.com/loubereading/reel/DerWzK4CnDi/",
+      "url": "https://www.instagram.com/p/DerWzK4CnDi/c/17892160230458594/",
+      "text": "The library deadline and the reread urge are running two very different schedules 😂",
+      "context": "Profile/recent posts/full caption read; actual Libby deadline video scene viewed. No comments before ours. Existing reading plan versus desire to reread.",
+      "proof": "instagram-mood-comment-direct.png"
+    },
+    {
+      "parent": "https://www.instagram.com/loubereading/p/De-I5n5kdYW/",
+      "url": "https://www.instagram.com/p/De-I5n5kdYW/c/17926521546205194/",
+      "text": "The four-page reviews sound perfect for the books you have STRONG opinions about 😂 A quick entry for your most recent read could be a gentle first page, without catching up on all 90 first.",
+      "context": "Author asks how to begin a beautiful reading journal after 90 books. Entire caption, surrounding comments and both carousel images read; account bio/recent posts read earlier in same session. Suggestions, not fabricated personal experience. Same author as earlier mood-reading comment, different current post.",
+      "proof": "instagram-journal-comment-direct.png"
+    }
+  ],
+  "incoming_human_responses_confirmed": 1,
+  "incoming_response": {
+    "url": "https://x.com/HanneloreDelor5/status/2114739670810562870",
+    "summary": "Book was Kristin Lavransdatter; third attempt over about a year.",
+    "product_feedback": false,
+    "trial_intent": false
+  },
+  "founder_note_interim": {
+    "measurement": "before 24h; not a 24h checkpoint",
+    "x": {
+      "views": 1,
+      "replies": 0,
+      "likes": 0,
+      "reposts": 0,
+      "bookmarks": 0,
+      "due_24h_kst": "2026-10-27T23:50:16+09:00"
+    },
+    "instagram": {
+      "views": 2,
+      "viewers": 1,
+      "follower_view_percentage": 100,
+      "likes": 0,
+      "comments": 0,
+      "saves": 0,
+      "shares": 0,
+      "profile_visits": 0,
+      "external_link_taps": 0,
+      "follows": 0,
+      "due_24h_kst": "2026-10-27T23:51:59+09:00",
+      "proof": "instagram-founder-insights.png"
+    }
+  },
+  "oct25_reel": {
+    "views": 7,
+    "viewers": 7,
+    "non_follower_percentage": 100,
+    "likes": 0,
+    "comments": 0,
+    "saves": 0,
+    "shares": 0,
+    "profile_activity": 0,
+    "follows": 0,
+    "average_watch_seconds": null,
+    "retention": null,
+    "proof": "instagram-reel-insights.png"
+  },
+  "vibecrew": {
+    "url": "https://vibecrew.kr/ship/10986",
+    "views": 57,
+    "comments": 2,
+    "unread_notifications": 0,
+    "new_feedback": 0,
+    "android_copy_stale": false,
+    "domestic_edit": "published and verified"
+  },
+  "zerolaunch": {
+    "tests": 0,
+    "accepted": 0,
+    "pending": 0,
+    "credits": 4,
+    "feedback_inbox": "No pending or accepted feedback"
+  },
+  "disquiet": {
+    "recommendations": 0,
+    "followers": 0,
+    "comments": 0,
+    "notifications": "None",
+    "ios_only_copy_stale": true,
+    "approval_status": "Not independently confirmed",
+    "android_change": "submitted; pending administrator approval"
+  },
+  "reddit_sideproject": {
+    "views": 209,
+    "visible_comments": "Existing external feedback plus our yesterday reply; no additional reply visible",
+    "other_counted_comment_contents": null
+  },
+  "reddit_iosapps": {
+    "existing_recruitment_comment_present": true,
+    "new_human_response_in_notifications": false,
+    "latest_known_reply": "app-store-review bot",
+    "promotion_repeated": false
+  },
+  "new_main_posts": 2,
+  "active_acquisition": "active-acquisition.json",
+  "new_public_replies": 6,
+  "new_trial_participants_confirmed": 0,
+  "attributed_installs": null,
+  "paid_spend_krw": 0,
+  "automatic_schedules_created": false,
+  "oct30_reel": "../paper-reading-opening-b-2026-10-27/manifest.json",
+  "limitations": "Own visits may affect counts. Android and iOS store metrics checked; different reporting periods and definitions kept separate. Overseas listings checked in other-channels.json. DMs not rechecked; Naver email excluded by user. No install attribution.",
+  "closeout": {
+    "experiment_day": 2,
+    "experiment_period_kst": "2026-10-26..2026-11-01",
+    "review_date_kst": "2026-11-02",
+    "ads": "deferred_by_user",
+    "naver_mail": "excluded_by_user",
+    "remaining_observations": ["Disquiet product description amendment approval", "Oct26 founder posts 24h metrics after Oct27 23:50–23:52 KST"],
+    "automatic_follow_up": false
+  },
+  "other_channels": "other-channels.json",
+  "continuation_at_utc": "2026-10-27T10:50:59.369Z",
+  "domestic_copy_update": "domestic-copy-update.json",
+  "android_store_verified_today": true,
+  "reply_limit_reached": true,
+  "domestic_update_at_utc": "2026-10-27T10:55:28.823Z",
+  "store_metrics": "store-metrics.json",
+  "ios_store_metrics": {
+    "period": "2026-10-18..2026-10-25 UTC",
+    "first_downloads": 2,
+    "product_page_views": 10,
+    "impressions": 89
+  },
+  "problem_first_execution": "problem-first-execution.json",
+  "reply_limit_note": "Original five social replies; later Reddit repeat invitation deleted; user subsequently explicitly authorized 1–2 new conversations and one new X conversation was published.",
+  "deleted_duplicate_replies": 1,
+  "new_target_outreach": "new-target-outreach.json"
+}

@@ -1,0 +1,87 @@
+{
+  "observed_at_utc": "2026-10-27T10:59:16.309Z",
+  "app": "Ssak",
+  "package": "com.qlemql.minimalhabittracker",
+  "android": {
+    "dashboard": {
+      "release_rollout_percent": 100,
+      "unpublished_changes": false,
+      "installs": null,
+      "installed_users": null,
+      "message": "아직 데이터를 사용할 수 없습니다. 곧 준비됩니다."
+    },
+    "statistics": {
+      "period_start": "2026-09-29",
+      "period_end": "2026-10-26",
+      "installed_users": null,
+      "new_user_acquisitions": null,
+      "state": "데이터 없음",
+      "proofs": [
+        "play-installed-users-no-data.png",
+        "play-new-acquisition-no-data.png"
+      ]
+    },
+    "growth_overview": {
+      "period_label": "지난 28일",
+      "device_type": "휴대기기",
+      "device_impressions": 6,
+      "device_acquisitions": null,
+      "first_open_devices": null,
+      "monthly_active_devices": null,
+      "seven_day_device_retention": null,
+      "proof": "play-growth-overview.png"
+    },
+    "store_listing": {
+      "period_start": "2026-09-26",
+      "period_end": "2026-10-23",
+      "visitors": 1,
+      "unique_user_install_clicks": 0,
+      "click_through_rate_displayed": "0%",
+      "latest_selectable_day_observed": "2026-10-23",
+      "proof": "play-store-listing-lagged.png",
+      "limitation": "Period ends before Android public availability was verified Oct24. Not a measurement of Oct24–27 marketing or actual installs."
+    }
+  },
+  "ios": {
+    "state": "refreshed after user login; metric details and sources verified",
+    "metrics_today": "refreshed Oct27; reporting period ends Oct25 UTC and excludes Oct26–27",
+    "login_tab_id": "1539718192",
+    "prior_baseline": {
+      "period": "2026-10-18 to 2026-10-22 UTC; verified Oct23, not refreshed today",
+      "first_time_downloads": 2,
+      "product_page_views": 7
+    },
+    "observed_at_utc": "2026-10-27T11:04:20.536Z",
+    "period_start": "2026-10-18",
+    "period_end": "2026-10-25",
+    "timezone": "UTC",
+    "first_time_downloads": 2,
+    "product_page_views_total": 10,
+    "impressions_total": 89,
+    "download_sources": {
+      "app_store_search": 1,
+      "web_referrer": 1,
+      "app_store_browse": "-",
+      "institutional_purchase": "-",
+      "unavailable": "-",
+      "app_referrer": "-"
+    },
+    "raw_tables": {
+      "pageviews": "날짜 \n􀆈\n\t\n제품 페이지 조회 수\n\n합계\t10\n2026년 Oct 25일\t-\n2026년 Oct 24일\t1\n2026년 Oct 23일\t2\n2026년 Oct 22일\t-\n2026년 Oct 21일\t-\n2026년 Oct 20일\t3\n2026년 Oct 19일\t1\n2026년 Oct 18일\t3",
+      "first_downloads": "날짜 \n􀆈\n\t\n최초 다운로드 수\n\n합계\t2\n2026년 Oct 25일\t-\n2026년 Oct 24일\t-\n2026년 Oct 23일\t-\n2026년 Oct 22일\t-\n2026년 Oct 21일\t-\n2026년 Oct 20일\t-\n2026년 Oct 19일\t1\n2026년 Oct 18일\t1",
+      "download_sources": "소스 유형\t\n최초 다운로드 수\n \n􀆈\n\nApp Store 검색\t1\n웹 추천 방문\t1\nApp Store 탐색\t-\n기관 구입\t-\n사용할 수 없음\t-\n앱 추천 방문\t-",
+      "impressions": "날짜 \n􀆈\n\t\n노출 수\n\n합계\t89\n2026년 Oct 25일\t5\n2026년 Oct 24일\t16\n2026년 Oct 23일\t19\n2026년 Oct 22일\t4\n2026년 Oct 21일\t7\n2026년 Oct 20일\t19\n2026년 Oct 19일\t14\n2026년 Oct 18일\t5"
+    },
+    "proofs": [
+      "ios-pageviews-oct18-25.png",
+      "ios-downloads-oct18-25.png",
+      "ios-download-sources-oct18-25.png",
+      "ios-impressions-oct18-25.png"
+    ],
+    "limitations": "Dashes preserved as displayed. Total page views/impressions are not unique users. Two first downloads occurred Oct18 and Oct19. No evidence assigning web-referrer download to X, Instagram or a directory; developer downloads cannot be separated."
+  },
+  "interpretation": "Google shows limited exposure. No basis to attribute installs to X/Instagram or confirm zero actual installs. Do not combine different periods and metric definitions into a conversion funnel.",
+  "new_public_posts": 0,
+  "new_public_replies": 0,
+  "paid_spend_krw": 0
+}

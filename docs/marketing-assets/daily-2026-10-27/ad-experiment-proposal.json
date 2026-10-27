@@ -1,0 +1,18 @@
+{
+  "status": "deferred_by_user_continue_existing_week_first",
+  "user_decision": "Continue the existing Oct26–Nov1 operating experiment for one week; Oct27 is day2. Review Nov2. Paid ads remain on hold and have no spending authorization.",
+  "purpose": "Test paid discovery and store acquisition while organic distribution continues",
+  "channel": "Instagram via Meta Ads Manager, subject to account and measurement readiness",
+  "duration_days": 5,
+  "total_budget_cap_krw": 100000,
+  "budget_note": "Proposed lifetime cap, not a guaranteed daily charge or acquisition forecast. No campaign created or spend authorized.",
+  "initial_market": "United States, English, Android only",
+  "audience_note": "Reading problem shown in creative; actual targeting options must be verified in Ads Manager. Do not fragment this budget across countries and operating systems.",
+  "creative": "One short actual-app demo explaining a normal reading goal and smaller busy-day alternative",
+  "measures": ["ad cost", "store visitors", "attributed first acquisitions where available", "voluntary first-record feedback"],
+  "limitations": ["No advertising attribution SDK identified in inspected package dependencies", "First-record activation is not currently available as verified automatic analytics", "Small sample is diagnostic, not proof of profitable acquisition or retention"],
+  "before_launch": ["Verify account readiness and available install measurement", "Prepare campaign-specific destination and verify it on mobile", "Review final ad, dates and lifetime spending cap with user"],
+  "decision_rule": "Diagnose ad-to-store and store-to-install separately; stop at cap without automatic extension; investigate broken links or missing measurement before further spend",
+  "sources": ["https://support.google.com/googleplay/android-developer/answer/9859173?hl=en-en", "https://developer.apple.com/help/app-store-connect-analytics/acquisition/campaign-links/"],
+  "actual_spend_krw": 0
+}
