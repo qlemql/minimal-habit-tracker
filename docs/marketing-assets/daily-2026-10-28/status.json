@@ -1,0 +1,99 @@
+﻿{
+    "date_kst":  "2026-10-28",
+    "observed_at_kst":  "2026-10-28T19:44:00+09:00",
+    "experiment_day":  3,
+    "review_date_kst":  "2026-11-02",
+    "status":  "Requested tasks 2 and 3 completed: two social replies published and Oct30 reel kit prepared",
+    "x_problem_question":  {
+                               "url":  "https://x.com/Ssakhabit/status/2115038810233012529",
+                               "views":  2,
+                               "replies":  0,
+                               "likes":  0,
+                               "reposts":  0,
+                               "bookmarks":  0,
+                               "checkpoint":  "Before 24 hours; not a 24-hour measurement"
+                           },
+    "x_notifications":  {
+                            "new_visible_activity":  "micky⁷ @dionyjinsus liked an earlier reading-choice reply, displayed 1h ago",
+                            "new_human_replies_visible":  0,
+                            "trial_intent_confirmed":  false
+                        },
+    "founder_note_followup":  {
+                                  "checkpoint":  "Late observation around 44 hours after publication; exact 24-hour metrics unavailable",
+                                  "x":  {
+                                            "url":  "https://x.com/Ssakhabit/status/2114731342265266243",
+                                            "views":  4,
+                                            "replies":  0,
+                                            "likes":  0,
+                                            "reposts":  0,
+                                            "bookmarks":  0
+                                        },
+                                  "instagram":  {
+                                                    "url":  "https://www.instagram.com/ssak.app/p/De9iiXJjw5e/",
+                                                    "insights_url":  "https://www.instagram.com/insights/media/4016518337584369246/",
+                                                    "views":  2,
+                                                    "viewers":  1,
+                                                    "follower_view_percentage":  100,
+                                                    "likes":  0,
+                                                    "comments":  0,
+                                                    "saves":  0,
+                                                    "shares":  0,
+                                                    "profile_visits":  0,
+                                                    "external_link_taps":  0,
+                                                    "follows":  0
+                                                }
+                              },
+    "disquiet":  {
+                     "post_url":  "https://disquiet.io/posts/XdCLka",
+                     "external_comments_visible":  1,
+                     "comment_id":  "disquiet_comment_65106",
+                     "author_display_name":  "오피셜메일",
+                     "comment_text":  "평소 목표와 작은 대안을 나눠 기록하고, 첫 설정만으로 지속 효과를 판단하지 않겠다는 범위가 명확하네요. 두 선택 중 실제로 한 일을 고르는 화면에서 예시를 한 번 보여주면, 작은 대안을 미달 표시로 오해하지 않는지 확인하는 데 도움이 될 것 같습니다.",
+                     "classification":  "Concept and explanation suggestion; installation and actual usage unconfirmed",
+                     "feedback_log_id":  "FB-007",
+                     "reply_status":  "deferred by user; no reply or post modification",
+                     "product_amendment":  "Administrator approval still pending; public product copy remains iOS-only"
+                 },
+    "vibecrew":  {
+                     "url":  "https://vibecrew.kr/ship/10986",
+                     "views":  60,
+                     "comments":  2,
+                     "unread_notifications":  0,
+                     "new_feedback":  0,
+                     "android_copy_current":  true
+                 },
+    "zerolaunch":  {
+                       "pending_feedback":  0,
+                       "accepted_feedback":  0,
+                       "credits":  4,
+                       "public_listing_current":  true,
+                       "notification_badge":  1,
+                       "notification_content_checked":  true,
+                       "new_notification":  "yubin hong upvoted Ssak, displayed 56 minutes ago; not a test, usage report or trial consent"
+                   },
+    "vibecrew_november_promotion":  {
+                                        "url":  "https://vibecrew.kr/notice/11148",
+                                        "terms_observed":  "Free main-page banner from early November; introduce own app and give genuine comments/feedback on other apps",
+                                        "ssak_application_visible":  false,
+                                        "status":  "application draft prepared; peer feedback participation not verified; not submitted"
+                                    },
+    "new_posts":  0,
+    "new_replies":  2,
+    "new_trial_participants_confirmed":  0,
+    "installs_attributed":  null,
+    "paid_spend_krw":  0,
+    "automatic_schedules_created":  false,
+    "excluded":  [
+                     "Naver mail",
+                     "paid advertising"
+                 ],
+    "not_checked_this_pass":  [
+                                  "Reddit",
+                                  "store consoles",
+                                  "overseas directories",
+                                  "DMs"
+                              ],
+    "limitations":  "Own visits may affect counts. Views are not installs. Suggestions and likes are not trial consent. Exact 24-hour founder-note metrics were not captured. This is an initial session checkpoint, not daily closeout.",
+    "social_execution":  "social-execution.json",
+    "oct30_reel_kit":  "../paper-reading-opening-b-2026-10-27/ready-to-post-2026-10-30.zip"
+}

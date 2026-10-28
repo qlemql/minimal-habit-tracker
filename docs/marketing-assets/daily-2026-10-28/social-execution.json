@@ -1,0 +1,28 @@
+{
+  "date_kst": "2026-10-28",
+  "authorization": "User explicitly selected tasks 2 and 3: new X/Instagram conversations and October 30 reel preparation. VibeCrew excluded; Disquiet deferred.",
+  "x": {
+    "parent": "https://x.com/latteashed/status/2115345972113154078",
+    "url": "https://x.com/Ssakhabit/status/2115401251643121809",
+    "text": "Have you put your current book aside, or are you still trying to get through it?",
+    "published_time_displayed_kst": "2026-10-28 20:12",
+    "context": "Today's reading-slump post; bio identifies slow reader. Full post, movie GIF and recent profile posts checked; no replies before ours. Prior contact search found no match.",
+    "status": "published; direct permalink author, body and time verified",
+    "proof": "x-reading-reply.png"
+  },
+  "instagram": {
+    "parent": "https://www.instagram.com/p/DeE3O2IiNtm/",
+    "url": "https://www.instagram.com/p/DeE3O2IiNtm/c/18105179012023156/",
+    "text": "“You don’t need to catch up” would make a good bookmark.",
+    "context": "Alex's October 4 reading-slump advice. Entire caption, nine carousel slides, visible comments, profile and recent posts read. Responds specifically to slide 7. Prior contact search found no match. This is a new contact on an older post, not a same-day experience report.",
+    "status": "published; author, exact text and unique comment permalink verified",
+    "proof": "instagram-reading-comment.png"
+  },
+  "skipped": [{"account": "pastelbookshop", "reason": "Bio explicitly says NO AI and introduction emphasizes opposition to AI tools. Chose a different outreach candidate; no contact made."}],
+  "new_public_replies": 2,
+  "new_main_posts": 0,
+  "new_trial_participants_confirmed": 0,
+  "attributed_installs": null,
+  "paid_spend_krw": 0,
+  "note": "No app offer or link in these first contacts. No unsolicited repeat absent response. No DM, Disquiet reply, VibeCrew application or automated scheduling. Replies sent are not replies received."
+}
