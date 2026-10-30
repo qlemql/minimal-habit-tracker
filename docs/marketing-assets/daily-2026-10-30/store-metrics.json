@@ -1,0 +1,27 @@
+{
+  "checked_date_kst": "2026-10-30",
+  "method": "Logged-in browser UI, read-only analytics",
+  "ios": {
+    "url": "https://appstoreconnect.apple.com/apps/6762334017/analytics",
+    "period_utc": ["2026-10-18", "2026-10-28"],
+    "first_downloads": 2,
+    "first_downloads_by_day": {"2026-10-18":1,"2026-10-19":1,"2026-10-20":"-","2026-10-21":"-","2026-10-22":"-","2026-10-23":"-","2026-10-24":"-","2026-10-25":"-","2026-10-26":"-","2026-10-27":"-","2026-10-28":"-"},
+    "product_page_views":18,
+    "product_page_views_by_day":{"2026-10-18":3,"2026-10-19":1,"2026-10-20":3,"2026-10-21":"-","2026-10-22":"-","2026-10-23":2,"2026-10-24":1,"2026-10-25":"-","2026-10-26":1,"2026-10-27":3,"2026-10-28":4},
+    "impressions":126,
+    "impressions_by_day":{"2026-10-18":5,"2026-10-19":14,"2026-10-20":19,"2026-10-21":7,"2026-10-22":4,"2026-10-23":19,"2026-10-24":17,"2026-10-25":5,"2026-10-26":8,"2026-10-27":14,"2026-10-28":14},
+    "first_download_sources":{"app_store_search":1,"web_referral":1,"browse":"-","institutional":"-","unavailable":"-","app_referral":"-"},
+    "prior_snapshot":{"checked":"2026-10-27","period_utc":["2026-10-18","2026-10-25"],"first_downloads":2,"product_page_views":10,"impressions":89},
+    "comparison_note":"New days Oct26-28 add 8 page views and 36 impressions; Oct24 impressions revised from 16 to 17, so snapshot total increases by 37. First-download total unchanged.",
+    "overview_warning":"Overview showed default 90-day values even after navigating from the selected range. Do not use its 8 downloads / 512 impressions / 53 page views as campaign-period values.",
+    "default_90day_overview":{"period":["2026-07-31","2026-10-28"],"first_downloads":8,"impressions":512,"product_page_views":53,"revenue":"insufficient data","paying_users":"insufficient data","iap":"insufficient data","retention":"insufficient data"}
+  },
+  "android": {
+    "url":"https://play.google.com/console/u/0/developers/5547191706499171325/app/4974765361846378674/app-dashboard",
+    "growth_overview":{"displayed_period":"last 28 days","device_class":"mobile devices","device_impressions":24,"prior_oct27_snapshot_impressions":6,"device_acquisitions":"no data","first_opens":"no data","monthly_active_devices":"no data","day7_retention":"no data"},
+    "store_listing_performance":{"period":["2026-09-29","2026-10-26"],"visitors":3,"unique_user_install_clicks":0,"click_through_rate_percent":0,"prior_snapshot":{"period":["2026-09-26","2026-10-23"],"visitors":1,"unique_user_install_clicks":0},"note":"Rolling periods differ. Basic-listing row separately displays 1 visitor; not substituted for the overall chart's 3 visitors."},
+    "installed_users_statistics":{"period":["2026-10-02","2026-10-29"],"measure":"installed users, unique users, per interval, daily","result":"no data"},
+    "release_status":"Oct24 production release at 100%; no unpublished changes"
+  },
+  "interpretation":{"additional_confirmed_installs_since_previous_snapshot":false,"specific_marketing_channel_attribution":null,"today_marketing_included":false,"note":"Missing or insufficient data is not zero. Page views, device impressions, store visitors and install clicks are distinct metrics; do not combine mismatched periods into a conversion funnel."}
+}

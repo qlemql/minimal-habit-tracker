@@ -1,5 +1,88 @@
 # 싹 글로벌 홍보 운영 계획
 
+## 2026-10-30 · 일일 작업 마무리
+
+오늘 마케팅 작업을 마무리하고 기록을 저장한다. 릴스 B·ProductivityHQ 모집글·X 설명글 총3건 게시, X Lasse 신규 대화1건, Instagram 받은 답변 좋아요1건을 실행했다. 채널 반응 및 양대 스토어 지표 수집, 글로벌 실행안 작성·당일 시작, 크리에이터3곳 조사·제안 초안, Apple 캠페인 링크4개 생성까지 완료했다. 아래 개별 기록의 실제 링크·기간·관찰값을 기준으로 한다.
+
+첫 사용 확인0명·7일 후속 연락 동의0명이며 다운로드를 모집 성과로 바꾸어 집계하지 않는다. 크리에이터 DM·No-Subscription 수정메일 미발송, Sam/bilt.me 미답장. 랜딩 추적 코드 배포·유료 광고·자동 예약 없음. 내일10/31 20:29:40 이후 릴스B24시간 측정과 새 답변 확인부터 재개한다. Reddit·X 측정은 각각20:38:48·20:42:27 이후,11/2 회고 유지.
+
+저장 검증: `npm run build` 통과. 운영 기록에서 참조하는10/29 공개 점검 자료도 누락 없이 함께 보관한다.
+
+## 2026-10-30 · 글로벌 실행 오늘 시작 / 후보 조사와 캠페인 링크 준비
+
+사용자가 시작을 오늘로 앞당겼다. [실행안](marketing-global-execution.ko.md)의 시작일을10/30으로 변경했다. [오늘 상세 기록·후보별 맞춤 초안](marketing-assets/daily-2026-10-30/global-start.ko.md), [채널별 링크](marketing-assets/daily-2026-10-30/global-channel-links.json)을 저장했다. 기록21:27 KST.
+
+Instagram loubereading의 `lol always 😂😂` 답변에 좋아요로 응답하고 ‘좋아요 취소’ 상태를 검증했다. X Lasse 답글은 조회3·답글0·좋아요0, Reddit ProductivityHQ 새 댓글 없음. 추가 댓글·모집 재게시·DM 없음. 첫 사용 확인0명·후속 연락 동의0명. 후보 sip.and.scribble/loubereading/amatterofimagination 3곳을 검토하고 각각 초안을 준비했다. 업무 연락 수신 의향은 미확인이고 Alex는 목표 없는 독서를 선호해 발송 우선순위를 낮췄다.
+
+Apple 채널별 캠페인 링크4개를 App Store Connect에서 실제 생성했다. Android·랜딩 URL은 준비 상태. 현재 랜딩에 분석 스크립트·UTM 전달 기능이 없어 코드 적용안을 기록했으며 공개 배포하지 않았다. 캠페인 데이터 부족은 설치0으로 해석하지 않는다. [Instagram 실행 증빙](marketing-assets/daily-2026-10-30/ssak-global-start-ig-2026-10-30.png) · [Apple 링크 생성 증빙](marketing-assets/daily-2026-10-30/ssak-apple-campaign-2026-10-30.png).
+
+다음은10/31 20:29:40 이후 릴스B24시간 측정. Reddit20:38:48·X20:42:27 시계와11/2 회고 유지. Sam 메일 미답장, 기존 보류 유지. 아래 ‘내일부터’ 기록은 이번 변경 전 이력이다.
+
+## 2026-10-30 · 다음 실행 기준 / 10월31일부터 글로벌 첫 사용 모집 준비
+
+사용자가 제안한 글로벌 홍보 방향을 내일부터 실행할 수 있게 정리하도록 요청했다. **현재 다음 작업의 시작점은 [글로벌 마케팅 실행안](marketing-global-execution.ko.md)**이다. 10/31~11/1은 릴스B 측정·새 응답·채널별 링크 준비, 11/2 기존 주간 회고, 11/3~16 영어권 첫 설정·첫 기록 모집을 진행하는 실행안이다. 첫 사용5명·약7일 후 피드백3명은 작업 목표이고 확보된 인원이 아니다. 늦게 시작한 사람은 동의와 시작일에 따라11/23까지 관찰할 수 있다.
+
+10/31 릴스B24시간 기준20:29:40 KST, Reddit20:38:48, X20:42:27. 릴스B7일은11/6 20:29:40이다. 실제 관찰 경과 시간을 기록하며11/2에 아직 경과하지 않은7일 지표를 요구하지 않는다. 기존 릴스B 캡션·본문을 바꾸지 않고 다음 실제 기록 데모는 별도 콘텐츠로 준비한다. 주150~180분 기준, 영상주2편 이내·필요하면1편, 댓글 의무량 없음.
+
+[전 채널 반응 수집](marketing-assets/daily-2026-10-30/channel-reactions.json)과 [스토어 최신 지표](marketing-assets/daily-2026-10-30/store-metrics.json)를 저장했다. Instagram 최근30일 조회236·도달187·반응2·프로필방문3, 외부 댓글 좋아요3·새 답변1은 별도 집계. Reddit SideProject 조회218·외부 공감1, ProductivityHQ 조회19·댓글0은 게시약24분 관찰. iOS UTC10/18~28 최초다운로드2·페이지조회18·노출126, 검색1·웹추천1. Android 등록정보9/29~10/26 방문자3·설치클릭0, 성장개요 최근28일 기기노출24·획득/실행 데이터없음. 채널별 설치 귀속·첫 사용 참가자는 미확인/확인0명으로 구분한다.
+
+이전에 파일 저장이 막혔던 [10/30 X 새 대화](https://x.com/Ssakhabit/status/2116134896464990237)도 인계한다. Lasse에게 매일 한페이지가 미리 정한 최소계획인지 질문했고20:47 KST 게시를 검증했다. 이번 반응 수집에서 조회2·새 답변 없음 확인. Instagram [loubereading](https://www.instagram.com/p/DerWzK4CnDi/c/17892160230458594/)은 우리 도서관 반납기한 댓글에 좋아요와 `lol always 😂😂` 답변을 남겼다. 다음 실행에서 맥락을 확인하되 앱 관심으로 간주하지 않는다.
+
+Sam/bilt.me 메일은 사용자 결정으로 답장하지 않는다. No-Subscription 수정메일 미발송·네이버메일 제외·GetIndieApps 복구 보류·디스콰이엇 기존 답글 보류·VibeCrew 배너 제외를 유지한다. 크리에이터는 구체적 후보와 초안부터 준비하며 이번 정리 요청으로 메시지를 발송하지 않았다. 링크 추적은 명명안·설정절차 준비 상태이며 실제 발급/개발/배포 완료가 아니다. 새 외부게시·자동예약·광고 없음.
+
+## 2026-10-30 · X 운영 재개 / 작은 계획의 기록 방식 설명 게시
+
+[오늘 X 글](https://x.com/Ssakhabit/status/2116133626794721519)을20:42:27 KST 게시했다. 한 페이지를10분으로 기록하는 것이 아니라 미리 정한 작은 계획을 실제 한 만큼 기록한다는 차이를 설명하고 릴스B 링크로 연결했다. 영어 텍스트·웹 데모/예시 데이터 고지, 링크 카드 확인. 새 영상 업로드는 아니다. 성공 안내와 고유URL의 작성자·전체 본문·시각을 검증했다.
+
+최근 게시와 알림을 확인했다. 최신 표시 알림은10/28 좋아요,10/27 독서 답변은 이미 응답한 건으로 새 답글이 없어 재접촉하지 않았다. 게시 전10/27 질문글 조회4·10/26 시작 이유글5·10/25 데모7, 각 답글/좋아요/리포스트0. 누적 관찰이며24시간 값이나 설치 성과로 쓰지 않는다. 팔로워0.
+
+[본문·지표·상태](marketing-assets/daily-2026-10-30/x-execution.json) · [증빙](marketing-assets/daily-2026-10-30/x-reading-published.png).24시간 기준10/31 20:42:27,7일 기준11/6 20:42:27 KST. 자동 예약 없음. 오늘 확인된 메인 게시3건(Instagram 릴스B·Reddit 모집·X 설명), 새 체험 동의·설치 귀속 미확인. No-Subscription 이메일 발송 승인 대기는 별도 유지.
+
+## 2026-10-30 · 신규 독서 테스트 모집 게시 / 외부 Android 경로 점검
+
+사용자가 추가 마케팅2·3번(새 배포처·기존 Android 경로 보완)을 선택했다. [ProductivityHQ 모집글](https://www.reddit.com/r/ProductivityHQ/comments/1xjczsg/i_made_ssak_to_record_a_smaller_reading_plan_on/)을20:38:48 KST 게시했다. 독서 전용이 아닌 인접 습관·생산성 커뮤니티이며, 개발자임을 밝히고 Dev - Self Promo 플레어를 적용했다. 주1회 홍보 규칙 확인·기존 기록상 접촉 없음·공개 본문과 설치 랜딩 확인. 목표3명은 실제 참가자가 아니다. 동일 커뮤니티 재홍보는11/6 20:38:48 이전 하지 않는다.
+
+Booktokreddit은 독서앱 홍보 스레드를 제공하지만 AI 작성 댓글 금지로 미게시. getdisciplined는 링크·AI 콘텐츠 금지로 제외. 허용되지 않는 곳에 일반 이용자 후기처럼 게시하지 않았다.
+
+Android 점검: SideProject 기존 글에는 이미 정확한 Google Play 링크가 있다. Indie Apps는 Apple 전용 디렉터리로 수정하지 않았다. No-Subscription은 iPhone 소개·App Store로 향하는 Visit Website가 남고 직접 편집·Android 제출 항목은 없다. 기존 등재 수정 요청문을 준비했고 공식 연락처 info@kindler-webservices.de로 Gmail 발송 여부를 사용자에게 질문했다. **아직 미발송·공개 미반영**이다. 영문·독문은 동일 운영자에게 한 번 요청할 대상이며 중복 등록하지 않는다. GetIndieApps 별도 보류·네이버 메일 제외 유지.
+
+[전체 기록](marketing-assets/daily-2026-10-30/distribution-and-android.json) · [모집글 증빙](marketing-assets/daily-2026-10-30/productivityhq-published.png) · [수정 요청문](marketing-assets/daily-2026-10-30/no-subscription-update-email.txt). 오늘 확인된 새 메인 게시 총2건(릴스B·Reddit 모집). 체험 동의·설치 귀속 미확인, 유료 집행·자동 예약 없음.
+
+## 2026-10-30 · 릴스 B 게시 완료 / 20:29:40 KST
+
+[릴스 B](https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/)를 @ssak.app에 게시했다. 브라우저 연결로 계정과 중복 부재를 확인했고, 확장 프로그램 파일 접근 제한 뒤 사용자가 준비된 reel.mp4를 직접 선택했다. 9:16·무음·전체 길이·첫 프레임 표지와 기존 동일 캡션을 적용했다. 공유 완료 안내, 게시물13→14개, 공개 본문과 Instagram time 요소의 게시 시각을 확인했다. 앞선 접근 실패 기록은 과거 시도이며 이번 게시로 해소됐다.
+
+- 첫2.5초 외 본문·마지막 질문·캡션 유지. 실제 웹 데모·예시 데이터 고지 포함.
+- 24시간 확인 기준: 10/31 20:29:40 KST. 7일 확인 기준: 11/6 20:29:40 KST. 11/2 회고 유지, 자동 예약 없음.
+- [게시 기록](marketing-assets/daily-2026-10-30/reel-b-publication.json) · [증빙](marketing-assets/daily-2026-10-30/reel-b-published.png).
+- 이번 실행: 메인 게시1·댓글0. 체험 동의·설치 귀속 미확인. 다른 채널 최신 응답·스토어 지표는 이번 게시 작업에서 미확인으로 남긴다. 일일 마감 기록이 아니다.
+
+## 2026-10-30 - Computer Use retry: Reel B blocked
+
+User requested continuing marketing with prepared Reel B. Chrome appeared in sky.list_apps, but actual window access was rejected: Computer Use was not approved to use Chrome. Policy, latest operations, checklist, caption and manifest reviewed. Account duplicate check, upload, publication and comments were not performed. Next: once Chrome access is allowed, verify @ssak.app recent posts and publish prepared Reel B. No scheduling.
+
+## 2026-10-30 · 운영 재개 / 공개 반응 점검·릴스B 파일 확인 / Chrome 접근 차단
+
+사용자가 오늘 마케팅 시작을 요청했다. 브라우저 인벤토리는 `The browser access host is unavailable`, 실행 중인 Chrome 창 선택은 `Computer Use was not approved to use Chrome`을 반환했다. 로그인된 SNS 확인·릴스 게시·새 대화는 실행하지 못했다. 자동 승인 검토 차단을 우회하지 않았다. 일일 마감이나 게시 완료 기록이 아니다.
+
+- [Reddit 기존 소개글](https://www.reddit.com/r/SideProject/comments/1xf481p/i_built_a_habit_tracker_with_two_plans_for_one/)의 당일 수집 공개 문서에는 기존 외부 피드백1건과 운영자 답글1건이 보였다. 새 답변은 가져온 본문에 없으며 로그인 알림·전체 댓글 확인으로 확대 해석하지 않는다.
+- [디스콰이엇 모집글](https://disquiet.io/posts/XdCLka)의 공개 문서에는 기존 FB-007만 보인다. 도구가 전날 수집본으로 표시했으므로 오늘 최신 반응은 미확인이다. 기존 답글 보류를 유지했다.
+- VibeCrew·제로 런치 공개 페이지는 웹 도구 접근 오류로 최신 반응 미확인. X·Instagram 로그인 알림·스토어 콘솔은 확인하지 못했다. 네이버 메일 제외·광고 보류 유지.
+- 릴스B의 실제 파일 SHA256 `4a826d2583e9d55f1337a751916aa5c22ffc99e2f6f3e0e55b6dd79407d8c373`이 기존 검수본과 일치함을 확인했다. 캡션·표지·게시 체크리스트·ZIP이 준비돼 있다. 로컬 기록상 미게시·미예약이며 실제 계정 중복 게시 여부는 아직 재확인하지 못했다.
+
+오늘 실행한 외부 게시·댓글0건. 새 체험 동의·설치 성과 미확인. 다음 작업은 Chrome 접근 복구 후 SNS 최신 상태·중복 여부 확인, 릴스B 게시, 맥락에 맞는 새 대화다. 실제 게시 후24시간/7일 측정과11/2 회고를 유지한다.
+
+## 2026-10-29 · 실험4일차 공개 점검 / 디스콰이엇 Android 소개 반영 확인
+
+12:07 KST 기준 공개 웹을 읽기 전용으로 점검했다. [확인 범위·제한·채널별 상태](marketing-assets/daily-2026-10-29/status.json). 일일 마감이 아니며 새 게시·답글은 없다.
+
+- [디스콰이엇 제품 소개](https://disquiet.io/products/ssak)에 iOS·Android 한 줄 소개와 본문, Google Play 링크가 공개 반영됐다. 기존 승인 대기 항목은 **공개 반영 확인**으로 갱신한다. 관리자 승인 시각은 미확인이다. [모집글](https://disquiet.io/posts/XdCLka)에는 기존 오피셜메일 의견1건(FB-007)이 보이며 새 댓글은 보이지 않는다. 설치·체험 동의로 세지 않고 답글 보류를 유지했다.
+- [한국어 랜딩](https://ssak-habit-tracker.pages.dev/landing/ko/)의 App Store·Google Play 링크를 각각 열어 해당 앱의 공개 스토어 페이지 연결을 확인했다. 다운로드·설치 귀속 확인은 아니다.
+- [Tsukutta](https://tsukutta.app/en/apps/dc121a13-a7d7-41a2-819d-1c3f8470b3d8)는 Android·iOS 소개 유지. 표시 조회13(10/27 기록12), 이용2·편리해요1이다. 자체 점검 포함 가능하며 이용을 설치로 해석하지 않는다. 가져온 본문에 새 댓글 텍스트는 없다. [No-Subscription](https://www.no-subscription.com/apps/ssak-habit-tracker/) 소개는 조회된 문서상 iOS·App Store 중심으로 유지돼 Android 정보 보완 후보로 남긴다. 도구가 전날 수집본으로 표시했으며 수정하지 않았다.
+- 브라우저 호스트 연결 불가 및 컴퓨터 제어의 `Computer Use was not approved to use Chrome` 차단으로 로그인된 채널을 읽지 못했다. 공개 요청도 X403·Instagram 제한·VibeCrew/제로 런치 오류여서 최신 알림·댓글·분석 수치는 **미확인**이다. 이전 수치를 오늘 값으로 이월하지 않는다. 스토어 콘솔 미접속·네이버 메일 제외·광고 보류 유지.
+
+10/30 릴스B는 로컬 기록상 준비 완료·미게시·미예약이며 이번에는 실제 계정 게시 상태를 재검증하지 못했다. 실제 게시 후24시간/7일을 계산하고11/2 회고를 유지한다. 오늘 새 체험 동의 확인0명·설치 귀속 미확인이다. 남은 점검은 SNS 최신 응답과 기간을 맞춘 스토어 지표이며 자동 예약은 없다.
+
 ## 2026-10-28 · 사용자 선택2·3 실행 / X1·Instagram1 게시·10/30 릴스 묶음 준비
 
 사용자가 X·Instagram 새 대상 대화와10/30 릴스 준비만 선택했다. 디스콰이엇 답글·글 수정은 보류하고 VibeCrew 신청은 이번 범위에서 제외한다. [게시 본문·맥락·증빙](marketing-assets/daily-2026-10-28/social-execution.json).

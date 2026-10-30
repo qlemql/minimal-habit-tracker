@@ -1,0 +1,58 @@
+{
+  "date_kst": "2026-10-30",
+  "new_distribution": {
+    "channel": "r/ProductivityHQ",
+    "audience": "Adjacent productivity/habit audience, not a dedicated reading community",
+    "status": "posted; permalink author, body and Dev - Self Promo flair verified in logged-in browser",
+    "url": "https://www.reddit.com/r/ProductivityHQ/comments/1xjczsg/i_made_ssak_to_record_a_smaller_reading_plan_on/",
+    "published_at_kst": "2026-10-30T20:38:48.322+09:00",
+    "purpose": "Recruit 3 readers for first setup and first record feedback; target is not actual participants",
+    "rule": "Developer promotion flair required; self promotion at most once a week",
+    "next_promotion_not_before_kst": "2026-11-06T20:38:48.322+09:00",
+    "new_trial_consents": null,
+    "attributed_installs": null
+  },
+  "excluded_candidates": [
+    {
+      "channel": "r/Booktokreddit",
+      "url": "https://www.reddit.com/r/Booktokreddit/comments/1xcex1m/self_promotion_weekly_thread/",
+      "reason": "Book-related apps permitted in dedicated thread, but AI written comments/posts and unauthorized bots prohibited; did not post."
+    },
+    {
+      "channel": "r/getdisciplined",
+      "reason": "No links, no AI generated content; did not post."
+    },
+    {
+      "channel": "r/digitaljournaling",
+      "reason": "Search surfaced moderator ban on promotional posts/comments; recent poll does not establish changed rules; not selected."
+    }
+  ],
+  "android_listing_audit": {
+    "no_subscription": {
+      "status": "correction email prepared; sending approval pending; no public update",
+      "recipient": "info@kindler-webservices.de",
+      "contact_source": "https://www.no-subscription.com/impressum",
+      "finding": "iPhone-only description; Visit Website points to App Store; no Android submission choice; one submission per app requested. Do not duplicate-submit or misuse subscription-change report.",
+      "request": "Change Visit Website to official dual-store landing; ask editor whether Android mention/link fits scope; same operator can update German edition."
+    },
+    "indie_apps": {
+      "status": "no change",
+      "reason": "Directory explicitly for iPhone, iPad and Mac; App Store-derived listing, not an Android omission to fix."
+    },
+    "reddit_sideproject": {
+      "status": "no change needed",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xf481p/i_built_a_habit_tracker_with_two_plans_for_one/",
+      "reason": "Existing public body already includes correct direct Google Play and App Store links."
+    },
+    "get_indie_apps": {
+      "status": "previous specific pause retained; not resumed"
+    },
+    "landing": {
+      "url": "https://ssak-habit-tracker.pages.dev/landing/",
+      "both_download_links_verified": true
+    }
+  },
+  "messages_sent": 0,
+  "paid_spend": 0,
+  "automatic_schedules_created": false
+}

@@ -1,0 +1,36 @@
+{
+  "published_at_kst": "2026-10-30T20:42:27+09:00",
+  "url": "https://x.com/Ssakhabit/status/2116133626794721519",
+  "text": "One page isn't ten minutes. It can still be the plan you chose for a busy day.\n\nIn Ssak, set both options ahead of time and record the one you actually did.\n\nHere's how it looks (web demo, example data):\nhttps://www.instagram.com/ssak.app/reel/DfHeif9tbhx/",
+  "status": "published; success toast and permalink author/body verified",
+  "format": "English text with Reel B link card; no new uploaded video",
+  "notifications": "Latest visible notification Oct28 like; Oct27 Hannelore reply already answered Oct27; no new reply visible",
+  "new_replies_sent": 0,
+  "prepublication_metrics": {
+    "oct27_question": {
+      "views": 4,
+      "replies": 0,
+      "likes": 0,
+      "reposts": 0
+    },
+    "oct26_origin": {
+      "views": 5,
+      "replies": 0,
+      "likes": 0,
+      "reposts": 0
+    },
+    "oct25_demo": {
+      "views": 7,
+      "replies": 0,
+      "likes": 0,
+      "reposts": 0
+    },
+    "followers": 0
+  },
+  "metrics_caveat": "Cumulative observations, not exact 24h checkpoints. Own views may be included.",
+  "24h_due_at_kst": "2026-10-31T20:42:27+09:00",
+  "7d_due_at_kst": "2026-11-06T20:42:27+09:00",
+  "trial_consents": null,
+  "attributed_installs": null,
+  "automatic_schedule": false
+}

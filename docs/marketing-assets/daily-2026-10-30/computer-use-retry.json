@@ -1,0 +1,11 @@
+{
+  "recorded_at": "2026-10-30T20:25:02.953846+09:00",
+  "status": "blocked_before_account_inspection",
+  "error": "Computer Use was not approved to use Chrome",
+  "app_inventory_succeeded": true,
+  "account_inspected": false,
+  "uploaded": false,
+  "published": false,
+  "new_comments": 0,
+  "note": "User requested continuing marketing with prepared Reel B. Chrome appeared in sky.list_apps, but actual window access was rejected: Computer Use was not approved to use Chrome. Policy, latest operations, checklist, caption and manifest reviewed. Account duplicate check, upload, publication and comments were not performed. Next: once Chrome access is allowed, verify @ssak.app recent posts and publish prepared Reel B. No scheduling."
+}

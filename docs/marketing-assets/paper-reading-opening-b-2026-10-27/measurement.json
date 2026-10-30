@@ -1,13 +1,43 @@
 {
   "planned_date_kst": "2026-10-30",
-  "status": "prepared; unpublished; not scheduled",
-  "published_at_kst": null,
-  "published_url": null,
+  "status": "published; checkpoints pending; not scheduled",
+  "published_at_kst": "2026-10-30T20:29:40+09:00",
+  "published_url": "https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/",
   "baseline_url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
   "changed_variable": "First 2.5 seconds only",
   "checkpoints": {
-    "24h": {"due_at_kst": null, "observed_at_kst": null, "elapsed_hours": null, "views": null, "accounts_reached": null, "average_watch_seconds": null, "retention": null, "likes": null, "comments": null, "saves": null, "shares": null, "profile_activity": null, "external_link_taps": null, "voluntary_trial_consents": null},
-    "7d": {"due_at_kst": null, "observed_at_kst": null, "elapsed_hours": null, "views": null, "accounts_reached": null, "average_watch_seconds": null, "retention": null, "likes": null, "comments": null, "saves": null, "shares": null, "profile_activity": null, "external_link_taps": null, "voluntary_trial_consents": null}
+    "24h": {
+      "due_at_kst": "2026-10-31T20:29:40+09:00",
+      "observed_at_kst": null,
+      "elapsed_hours": null,
+      "views": null,
+      "accounts_reached": null,
+      "average_watch_seconds": null,
+      "retention": null,
+      "likes": null,
+      "comments": null,
+      "saves": null,
+      "shares": null,
+      "profile_activity": null,
+      "external_link_taps": null,
+      "voluntary_trial_consents": null
+    },
+    "7d": {
+      "due_at_kst": "2026-11-06T20:29:40+09:00",
+      "observed_at_kst": null,
+      "elapsed_hours": null,
+      "views": null,
+      "accounts_reached": null,
+      "average_watch_seconds": null,
+      "retention": null,
+      "likes": null,
+      "comments": null,
+      "saves": null,
+      "shares": null,
+      "profile_activity": null,
+      "external_link_taps": null,
+      "voluntary_trial_consents": null
+    }
   },
   "attributed_installs": null,
   "notes": "Null means unmeasured or unavailable, not zero. Set due times after actual publication. No automatic reminders. Nov2 review precedes the seven-day checkpoint."

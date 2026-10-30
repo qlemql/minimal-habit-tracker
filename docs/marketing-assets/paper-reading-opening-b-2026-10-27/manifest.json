@@ -1,8 +1,8 @@
 {
   "created_at_kst": "2026-10-27",
-  "status": "ready; visual QA passed; unpublished",
+  "status": "published; public URL and caption verified",
   "candidate_publish_date_kst": "2026-10-30",
-  "published_url": null,
+  "published_url": "https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/",
   "format": "Original digital paper diagram, archived actual web recording, one closing question",
   "duration_seconds": 14.5,
   "width": 1080,
@@ -23,7 +23,7 @@
     "Caption bytes identical to baseline"
   ],
   "measurement": {
-    "published_at": null,
+    "published_at": "2026-10-30T20:29:40+09:00",
     "24h": null,
     "7d": null
   },

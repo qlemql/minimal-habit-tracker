@@ -1,0 +1,30 @@
+To: info@kindler-webservices.de
+Subject: Update to existing Ssak listing: Android availability and official website
+
+Hi Bjorn,
+
+Thank you for listing Ssak: Habit Tracker on No-Subscription and Kein-Abo. I'm the developer, Taehyun Kim.
+
+Could you update the existing listing rather than create a duplicate?
+https://www.no-subscription.com/apps/ssak-habit-tracker/
+https://www.kein-abo.de/apps/ssak-habit-tracker/
+
+Ssak is now available on Android as well as iOS. The official website has both download links:
+https://ssak-habit-tracker.pages.dev/landing/
+
+Google Play:
+https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker
+
+The existing App Store link remains correct:
+https://apps.apple.com/app/id6762334017
+
+Suggested changes:
+- Replace the Visit Website destination with the official website above, while keeping the App Store button.
+- Where your editorial scope permits, mention Android availability and add the Google Play link. I noticed Android is not an option in the submission form, so I have not resubmitted the app.
+- Describe Ssak as a habit tracker for iOS and Android rather than only for iPhone if you include the Android version. Please keep iOS-specific features and Apple purchase restoration explicitly scoped to iOS.
+
+One habit remains free with no time limit. Optional Plus is a one-time purchase for up to three habits and backup/restore. No ads or subscriptions. Records stay on the device, with no automatic cross-device sync. Local prices are shown in each store; I am not requesting that the listed iOS price be applied to Android.
+
+Thank you,
+Taehyun Kim
+Ssak developer

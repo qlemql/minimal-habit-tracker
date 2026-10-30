@@ -1,0 +1,58 @@
+{
+  "date_kst": "2026-10-29",
+  "observed_at_kst": "2026-10-29T12:07:47+09:00",
+  "experiment_day": 4,
+  "scope": "Read-only public web check; not daily closeout",
+  "disquiet": {
+    "product_url": "https://disquiet.io/products/ssak",
+    "android_copy_public": true,
+    "google_play_url_public": "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker",
+    "amendment_status": "Public reflection verified; administrative approval time unknown",
+    "post_url": "https://disquiet.io/posts/XdCLka",
+    "external_comments_visible": 1,
+    "new_comments_since_last_check_visible": 0,
+    "feedback": "Existing FB-007 suggestion remains visible; usage and trial consent unconfirmed",
+    "reply_status": "Previous user deferral retained"
+  },
+  "landing": {
+    "url": "https://ssak-habit-tracker.pages.dev/landing/ko/",
+    "app_store_destination_opened": true,
+    "google_play_destination_opened": true,
+    "note": "Public listing availability checked; no download or attribution measurement"
+  },
+  "tsukutta": {
+    "url": "https://tsukutta.app/en/apps/dc121a13-a7d7-41a2-819d-1c3f8470b3d8",
+    "listing_public": true,
+    "platforms": ["Android", "iOS"],
+    "displayed_views": 13,
+    "displayed_uses": 2,
+    "useful_reactions": 1,
+    "note": "Previous recorded views 12 on Oct27; own checks may affect views. Uses are not confirmed installs. No new comment text in fetched page."
+  },
+  "no_subscription": {
+    "url": "https://www.no-subscription.com/apps/ssak-habit-tracker/",
+    "listing_visible": true,
+    "fetch_freshness": "Tool reported crawl yesterday",
+    "note": "iOS-only introduction and App Store destination remain in retrieved content; Android update candidate, not edited"
+  },
+  "unverified": {
+    "browser_access": "Browser host unavailable; Windows Computer Use rejected Chrome access: Computer Use was not approved to use Chrome",
+    "x": "Public fetch returned 403; latest replies and metrics unknown",
+    "instagram": "Public fetch throttled; latest replies, publication state and insights unknown",
+    "vibecrew": "Public fetch failed; latest counts and notifications unknown",
+    "zerolaunch": "Public fetch failed; latest feedback and notifications unknown",
+    "store_consoles": "Not accessed; previous metrics remain historical"
+  },
+  "oct30_reel": {
+    "kit": "../paper-reading-opening-b-2026-10-27/ready-to-post-2026-10-30.zip",
+    "local_record_status": "Prepared; unpublished and unscheduled according to local records; live publication state not reverified",
+    "review_date_kst": "2026-11-02",
+    "note": "Use actual publication time for 24-hour and seven-day checkpoints"
+  },
+  "new_posts": 0,
+  "new_replies": 0,
+  "new_trial_participants_confirmed_this_check": 0,
+  "installs_attributed": null,
+  "excluded": ["Naver mail", "paid advertising"],
+  "automatic_schedules_created": false
+}

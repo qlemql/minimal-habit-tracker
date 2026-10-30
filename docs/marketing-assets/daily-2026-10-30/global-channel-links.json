@@ -1,0 +1,35 @@
+{
+  "prepared_at": "2026-10-30T21:27:42+09:00",
+  "publicly_deployed": false,
+  "landing_utm_forwarding_implemented": false,
+  "channels": {
+    "instagram": {
+      "ios": "https://apps.apple.com/app/apple-store/id6762334017?pt=128775291&ct=first_record_202611_instagram&mt=8",
+      "ios_status": "generated_in_app_store_connect",
+      "android": "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker&utm_source=instagram&utm_medium=organic_social&utm_campaign=first_record_202611&utm_content=first_setup",
+      "android_status": "prepared_not_end_to_end_verified",
+      "landing": "https://ssak-habit-tracker.pages.dev/landing/?utm_source=instagram&utm_medium=organic_social&utm_campaign=first_record_202611&utm_content=first_setup"
+    },
+    "x": {
+      "ios": "https://apps.apple.com/app/apple-store/id6762334017?pt=128775291&ct=first_record_202611_x&mt=8",
+      "ios_status": "generated_in_app_store_connect",
+      "android": "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker&utm_source=x&utm_medium=organic_social&utm_campaign=first_record_202611&utm_content=first_setup",
+      "android_status": "prepared_not_end_to_end_verified",
+      "landing": "https://ssak-habit-tracker.pages.dev/landing/?utm_source=x&utm_medium=organic_social&utm_campaign=first_record_202611&utm_content=first_setup"
+    },
+    "reddit": {
+      "ios": "https://apps.apple.com/app/apple-store/id6762334017?pt=128775291&ct=first_record_202611_reddit&mt=8",
+      "ios_status": "generated_in_app_store_connect",
+      "android": "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker&utm_source=reddit&utm_medium=community&utm_campaign=first_record_202611&utm_content=first_setup",
+      "android_status": "prepared_not_end_to_end_verified",
+      "landing": "https://ssak-habit-tracker.pages.dev/landing/?utm_source=reddit&utm_medium=community&utm_campaign=first_record_202611&utm_content=first_setup"
+    },
+    "creator": {
+      "ios": "https://apps.apple.com/app/apple-store/id6762334017?pt=128775291&ct=first_record_202611_creator&mt=8",
+      "ios_status": "generated_in_app_store_connect",
+      "android": "https://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker&utm_source=creator&utm_medium=referral&utm_campaign=first_record_202611&utm_content=first_setup",
+      "android_status": "prepared_not_end_to_end_verified",
+      "landing": "https://ssak-habit-tracker.pages.dev/landing/?utm_source=creator&utm_medium=referral&utm_campaign=first_record_202611&utm_content=first_setup"
+    }
+  }
+}
