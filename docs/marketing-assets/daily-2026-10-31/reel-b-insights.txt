@@ -1,0 +1,74 @@
+- button "닫기":
+  - img "닫기"
+- button "좋아요":
+  - img "좋아요"
+- button
+- button "댓글 0":
+  - img "댓글"
+  - generic: "0"
+- button "공유하기":
+  - img "공유하기"
+- button "저장":
+  - button "저장":
+    - img "저장"
+- button "더 보기":
+  - img "더 보기"
+- group "Video player":
+  - slider "Change Position"
+  - generic: 0:13
+  - button "재생하려면 누르세요":
+    - img "재생 버튼 아이콘"
+  - button "오디오 소리 꺼짐":
+    - img "오디오 소리 꺼짐"
+- heading "조회수" [level=3]
+- button "정보":
+  - img "정보"
+- generic: 조회수
+- generic: "27"
+- generic: 팔로워
+- generic: 0%
+- generic: 팔로워가 아닌 사람
+- generic: 100%
+- separator
+- generic: 조회한 사람
+- generic: "24"
+- separator
+- heading "반응" [level=3]
+- button "정보":
+  - img "정보"
+- generic: 반응
+- generic: "1"
+- separator
+- generic: 릴스 반응
+- generic: "1"
+- img "좋아요 아이콘"
+- generic: 좋아요
+- generic: "0"
+- img "댓글 아이콘"
+- generic: 댓글
+- generic: "0"
+- img "저장 아이콘"
+- generic: 저장
+- generic: "1"
+- img "공유하기 아이콘"
+- generic: 공유
+- generic: "0"
+- separator
+- generic: 참여한 계정
+- generic: "1"
+- separator
+- heading "프로필" [level=3]
+- button "정보":
+  - img "정보"
+- generic: 프로필 활동
+- generic: "0"
+- generic: 팔로우
+- generic: "0"
+- separator
+- heading "광고" [level=3]
+- link "이 릴스 홍보하기 V자형 아이콘":
+  - /url: "#"
+  - generic: 이 릴스 홍보하기
+  - img "V자형 아이콘"
+- button "메시지":
+  - img "메시지"

@@ -1,0 +1,45 @@
+{
+  "date_kst": "2026-10-31",
+  "verified_at_kst": "2026-10-31T23:58:00+09:00",
+  "x": {
+    "account": "da_sh1xiong",
+    "parent": "https://x.com/da_sh1xiong/status/2116542971302859197",
+    "reply": "https://x.com/Ssakhabit/status/2116545053279887395",
+    "text": "The books are read, but the reviews have formed their own TBR 😂 Do you keep quick notes, or come back to them from memory?",
+    "published_time_ui": "11:57 PM · Oct 31, 2026",
+    "context": "Busy October reading recap and author follow-up about delayed reviews; entire visible author thread read"
+  },
+  "instagram": {
+    "account": "mandyjournals",
+    "parent": "https://www.instagram.com/p/De7Fm8qmwmX/",
+    "comment": "https://www.instagram.com/p/De7Fm8qmwmX/c/18099645689552569/",
+    "text": "I’d be interested in the what-worked-and-what-didn’t reel! Especially which spreads you still enjoyed keeping up with when life got busy.",
+    "context": "Author invites interest in a future reel reviewing which reading-journal spreads worked; caption and visible comments read"
+  },
+  "domestic": {
+    "vibecrew": {
+      "url": "https://vibecrew.kr/ship/10986",
+      "views": 67,
+      "likes": 4,
+      "comments": 2,
+      "external_comments": 1,
+      "new_comments": 0,
+      "unread_notifications": 0,
+      "note": "previous observed views64; own checks may contribute"
+    },
+    "disquiet": {
+      "url": "https://disquiet.io/posts/XdCLka",
+      "recommendations": 0,
+      "comments": 1,
+      "new_comments": 0,
+      "reply_deferral_preserved": true
+    }
+  },
+  "checks": {
+    "local_contact_history_search": "no matching account or post found",
+    "visible_threads": "no prior Ssak comment before publishing",
+    "app_links_in_new_comments": false,
+    "new_trial_consents": 0,
+    "no_repeat_outreach": true
+  }
+}

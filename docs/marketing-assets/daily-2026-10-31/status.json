@@ -1,0 +1,96 @@
+{
+  "date_kst": "2026-10-31",
+  "observation_window_kst": "23:26–23:28",
+  "status": "measurement and notifications checked; Lou reply published and verified",
+  "reel_b": {
+    "url": "https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/",
+    "observed_at_kst": "2026-10-31T23:27:31+09:00",
+    "timestamp_basis": "saved insight screenshot timestamp",
+    "elapsed_hours": 26.964,
+    "checkpoint": "24h follow-up observed late, not exact 24h",
+    "views": 27,
+    "viewers": 24,
+    "viewers_ui_label": "조회한 사람",
+    "nonfollower_view_percent": 100,
+    "interactions": 1,
+    "engaged_accounts": 1,
+    "likes": 0,
+    "comments": 0,
+    "saves": 1,
+    "shares": 0,
+    "profile_activity": 0,
+    "follows": 0,
+    "average_watch_seconds": null,
+    "retention": null,
+    "external_link_taps": null,
+    "attributed_installs": null
+  },
+  "x_main": {
+    "url": "https://x.com/Ssakhabit/status/2116133626794721519",
+    "observed_at_kst_approx": "2026-10-31T23:27:00+09:00",
+    "views": 2,
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0,
+    "note": "approximately 26h45m after publication"
+  },
+  "x_lasse_reply": {
+    "url": "https://x.com/Ssakhabit/status/2116134896464990237",
+    "views": 4,
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "followup_sent": false
+  },
+  "x_notifications": {
+    "new_human_replies": 0,
+    "latest_visible_notification_date": "2026-10-28"
+  },
+  "reddit": {
+    "url": "https://www.reddit.com/r/ProductivityHQ/comments/1xjczsg/i_made_ssak_to_record_a_smaller_reading_plan_on/",
+    "observed_at_kst_approx": "2026-10-31T23:27:00+09:00",
+    "views": 234,
+    "comments": 0,
+    "score": 1,
+    "own_upvote_visible": true,
+    "note": "approximately 26h48m after publication; score is not external likes",
+    "new_notification": "ProductivityGuide crosspost suggestion from platform, not human feedback",
+    "new_human_replies": 0
+  },
+  "instagram_inbound": {
+    "account": "loubereading",
+    "parent_comment_url": "https://www.instagram.com/p/De-I5n5kdYW/c/17926521546205194/",
+    "notification_target_url": "https://www.instagram.com/p/De-I5n5kdYW/c/17912615139480255/",
+    "reply_text": "@ssak.app thank you, good shout!!!!",
+    "displayed_age": "5 hours",
+    "new_comment_likes": 1,
+    "new_human_replies": 1,
+    "our_response": "@loubereading You’re welcome! The other 89 can wait their turn 😂",
+    "trial_consent": false,
+    "our_reply_url": "https://www.instagram.com/p/De-I5n5kdYW/c/17926521546205194/r/18187923190420489/",
+    "reply_verified_at_kst": "2026-10-31T23:50:12+09:00"
+  },
+  "execution": {
+    "new_posts": 0,
+    "new_comments": 3,
+    "new_outbound_messages": 0,
+    "new_likes": 0,
+    "confirmed_first_users": 0,
+    "seven_day_followup_consents": 0,
+    "automatic_schedule_created": false
+  },
+  "next": [
+    "Nov1 compile week-end review inputs; Lou acknowledged, wait for any new reply",
+    "Nov2 review; no exact-time A/B winner claim",
+    "Nov6 20:29:40 KST Reel B seven-day check"
+  ],
+  "deferred_unchanged": [
+    "Sam/bilt.me reply",
+    "creator outreach",
+    "No-Subscription correction email",
+    "paid ads",
+    "landing tracking deployment"
+  ],
+  "additional_outreach_file": "additional-outreach.json"
+}

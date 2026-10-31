@@ -1,6 +1,6 @@
 {
   "planned_date_kst": "2026-10-30",
-  "status": "published; checkpoints pending; not scheduled",
+  "status": "published; 24h follow-up recorded late; 7d pending; not scheduled",
   "published_at_kst": "2026-10-30T20:29:40+09:00",
   "published_url": "https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/",
   "baseline_url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
@@ -8,19 +8,25 @@
   "checkpoints": {
     "24h": {
       "due_at_kst": "2026-10-31T20:29:40+09:00",
-      "observed_at_kst": null,
-      "elapsed_hours": null,
-      "views": null,
+      "observed_at_kst": "2026-10-31T23:27:31+09:00",
+      "elapsed_hours": 26.964,
+      "views": 27,
       "accounts_reached": null,
       "average_watch_seconds": null,
       "retention": null,
-      "likes": null,
-      "comments": null,
-      "saves": null,
-      "shares": null,
-      "profile_activity": null,
+      "likes": 0,
+      "comments": 0,
+      "saves": 1,
+      "shares": 0,
+      "profile_activity": 0,
       "external_link_taps": null,
-      "voluntary_trial_consents": null
+      "voluntary_trial_consents": 0,
+      "viewers": 24,
+      "viewers_ui_label": "조회한 사람",
+      "nonfollower_view_percent": 100,
+      "engaged_accounts": 1,
+      "follows": 0,
+      "note": "Late 24h follow-up; screenshot timestamp. UI shows viewers, not a separately labeled accounts-reached field. Watch time/retention/link taps unavailable."
     },
     "7d": {
       "due_at_kst": "2026-11-06T20:29:40+09:00",
@@ -40,5 +46,5 @@
     }
   },
   "attributed_installs": null,
-  "notes": "Null means unmeasured or unavailable, not zero. Set due times after actual publication. No automatic reminders. Nov2 review precedes the seven-day checkpoint."
+  "notes": "Null means unmeasured/unavailable, not zero. 24h follow-up observed at about 27 hours; do not treat as exact 24h or compare as controlled A/B. Nov2 review precedes seven-day check. No automatic reminders."
 }
