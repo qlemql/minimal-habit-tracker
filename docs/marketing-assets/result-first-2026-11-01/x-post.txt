@@ -1,0 +1,7 @@
+Read one page instead of ten minutes. Leave the tracker blank?
+
+I'm building Ssak so you can plan both options ahead of time and record the one you did.
+
+Does this look like a completed small plan or a missed goal?
+
+Web demo, example data. iOS & Android in bio.

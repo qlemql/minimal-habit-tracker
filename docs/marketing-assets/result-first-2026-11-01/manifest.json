@@ -1,0 +1,56 @@
+{
+  "status": "PUBLISHED_VERIFIED",
+  "created_date_kst": "2026-11-01",
+  "duration_seconds": 14,
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 30,
+  "audio": "silent",
+  "source": "Actual Ssak English web captures, example data, October 17; mobile appearance may differ",
+  "experiment": "Result/action before explanation; separate from Reel B; not randomized A/B",
+  "source_sha256": {
+    "recording.webm": "c62363bc11532a889b0173797c0a5c0adc5541ea837cd6f7827a4f1af26a3566",
+    "02-counts.png": "286834886b9b3a760fde6ac393a9d80c33a125679bc1cb1f884fa2e593b652da"
+  },
+  "published_urls": {
+    "instagram": "https://www.instagram.com/ssak.app/reel/DfM6HEatUUU/",
+    "x": "https://x.com/Ssakhabit/status/2116894907327803401"
+  },
+  "verification": [
+    "full video decode passed",
+    "encoded QA frames visually reviewed",
+    "uploaded 14-second video verified",
+    "both public author/text/permalink verified"
+  ],
+  "published_at_kst": {
+    "instagram": "2026-11-01T23:06:50+09:00",
+    "x": "2026-11-01T23:07:30+09:00"
+  },
+  "instagram_timestamp_note": "Caption time element 23:06:47; post permalink time element 23:06:50. Measurement uses post permalink time.",
+  "cover": "Instagram selected result frame approximately 45.6% into video",
+  "video_sha256": "cde01cad99d135c6f129e52ad5a81dd387edbba0c5943f3c51d807c9e58d76a9",
+  "measurement": {
+    "instagram": {
+      "24h_due": "2026-11-02T23:06:50+09:00",
+      "7d_due": "2026-11-08T23:06:50+09:00",
+      "24h": null,
+      "7d": null
+    },
+    "x": {
+      "24h_due": "2026-11-02T23:07:30+09:00",
+      "7d_due": "2026-11-08T23:07:30+09:00",
+      "24h": null,
+      "7d": null
+    }
+  },
+  "outreach": {
+    "new_comments": 0,
+    "searches": [
+      "\"habit tracker\" (guilt OR miss OR quit) lang:en",
+      "\"habit tracker\" (\"I stopped\" OR \"I forget\" OR \"gave up\" OR \"stress\") lang:en -filter:links"
+    ],
+    "result": "Visible results mainly developer promotions, generic advice and unrelated topics. No suitable first-person current use case selected; no promotional replies posted."
+  }
+}

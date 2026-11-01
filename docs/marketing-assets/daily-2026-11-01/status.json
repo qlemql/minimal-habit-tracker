@@ -1,0 +1,122 @@
+{
+  "date_kst": "2026-11-01",
+  "observed_window_kst": "22:48–22:54",
+  "purpose": "주간 실험 마감 자료와 크리에이터 후보 보강; 11/2 회고 준비",
+  "instagram": {
+    "reel_a": {
+      "url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
+      "published_at": "2026-10-25T23:21:20+09:00",
+      "checkpoint": "7일 전 누적 관찰; 7일 지표 아님",
+      "views": 7,
+      "viewers_label": "조회한 사람",
+      "viewers": 7,
+      "nonfollower_view_percent": 100,
+      "likes": 0,
+      "comments": 0,
+      "saves": 0,
+      "shares": 0,
+      "profile_activity": 0,
+      "follows": 0,
+      "interactions_display": "--",
+      "engaged_accounts": null
+    },
+    "reel_b": {
+      "url": "https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/",
+      "checkpoint": "게시 약50시간 후 누적 관찰; 기존 24시간 관찰을 덮어쓰지 않음",
+      "views": 28,
+      "viewers": 24,
+      "viewers_label": "조회한 사람",
+      "nonfollower_view_percent": 100,
+      "interactions": 1,
+      "engaged_accounts": 1,
+      "saves": 1,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "profile_activity": 0,
+      "follows": 0
+    },
+    "country_distribution": null,
+    "retention": null,
+    "lou_new_reply": {
+      "notification_url": "https://www.instagram.com/p/De-I5n5kdYW/c/18121178080932093/",
+      "text": "@ssak.app 😂",
+      "relative_time": "22시간 전",
+      "liked_our_oct31_reply": true,
+      "action": "가벼운 마무리 반응으로 기록; 추가 댓글·앱 제안 없음",
+      "trial_consent": false
+    },
+    "mandy_existing_comment": {
+      "url": "https://www.instagram.com/p/De7Fm8qmwmX/c/18099645689552569/",
+      "own_text_verified": true,
+      "new_reply_visible": false,
+      "like_count_displayed": false,
+      "action": "추가 접촉 없음"
+    }
+  },
+  "x": {
+    "new_notifications": false,
+    "latest_notification_date": "2026-10-28",
+    "oct31_reply": {
+      "url": "https://x.com/Ssakhabit/status/2116545053279887395",
+      "views": 8,
+      "replies": 0,
+      "likes": 0,
+      "reposts": 0,
+      "bookmarks": 0
+    }
+  },
+  "reddit": {
+    "url": "https://www.reddit.com/r/ProductivityHQ/comments/1xjczsg/i_made_ssak_to_record_a_smaller_reading_plan_on/",
+    "views": 251,
+    "comments": 0,
+    "score": 1,
+    "own_upvote": true,
+    "new_notification": "250 views platform milestone; not human feedback",
+    "new_human_reply_in_notifications": false
+  },
+  "domestic": {
+    "vibecrew": {
+      "url": "https://vibecrew.kr/ship/10986",
+      "views": 69,
+      "likes": 4,
+      "comments": 2,
+      "external_comments": 1,
+      "unread_notifications": 0,
+      "new_reply": false
+    },
+    "disquiet": {
+      "url": "https://disquiet.io/posts/XdCLka",
+      "recommendations": 0,
+      "existing_comments": 1,
+      "new_reply": false
+    }
+  },
+  "execution": {
+    "new_posts": 0,
+    "new_comments": 0,
+    "new_likes": 0,
+    "direct_messages": 0,
+    "creator_proposals_sent": 0,
+    "confirmed_first_use_participants": 0,
+    "followup_consents": 0
+  },
+  "limitations": [
+    "자체 열람이 조회수에 포함될 수 있음",
+    "미확인 국가 분포로 해외 도달을 단정하지 않음",
+    "스토어 콘솔은 오늘 재측정하지 않음",
+    "A/B 경과 시간이 달라 승자를 정하지 않음"
+  ],
+  "next": [
+    "11/2 회고에서 기록 결과 화면을 더 오래 보여주는 변경 한 가지 검토",
+    "A의 7일 기준은 11/1 23:21:20 KST 이후; 이번 관찰은 그 이전",
+    "B의 7일 기준 11/6 20:29:40 KST 유지",
+    "Mandy는 조사 후보만 추가; 기존 무응답 대화에 제안 재접촉하지 않음"
+  ],
+  "later_execution": {
+    "new_posts": 2,
+    "new_comments": 0,
+    "publication_manifest": "../result-first-2026-11-01/manifest.json",
+    "note": "앞선22:48~22:54 관찰 이후 사용자가 추가실행 요청. 초기 관찰값 보존."
+  }
+}
