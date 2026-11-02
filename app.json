@@ -2,10 +2,12 @@
   "expo": {
     "name": "Ssak: Habit Tracker",
     "slug": "minimal-habit-tracker",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "web": { "favicon": "./assets/favicon.png" },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "scheme": "minimal-habit-tracker",
@@ -23,7 +25,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.qlemql.minimalhabittracker",
-      "buildNumber": "17",
+      "buildNumber": "18",
       "appleTeamId": "5R27CJ6382",
       "entitlements": {
         "com.apple.security.application-groups": [
@@ -49,7 +51,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.qlemql.minimalhabittracker",
-      "versionCode": 15,
+      "versionCode": 16,
       "permissions": [
         "android.permission.POST_NOTIFICATIONS",
         "android.permission.SCHEDULE_EXACT_ALARM"
@@ -71,12 +73,15 @@
       "./plugins/withAppNameI18n",
       "./plugins/withWindowsCmakePaths",
       "expo-localization",
-      ["expo-splash-screen", {
-        "image": "./assets/splash-icon.png",
-        "imageWidth": 220,
-        "resizeMode": "contain",
-        "backgroundColor": "#FFF9EF"
-      }]
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#FFF9EF"
+        }
+      ]
     ],
     "extra": {
       "eas": {

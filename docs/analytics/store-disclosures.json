@@ -1,0 +1,112 @@
+{
+  "version": "2.1.1",
+  "status": "prepared-not-submitted",
+  "projectId": 703001,
+  "collection": {
+    "purpose": "analytics/product improvement",
+    "default": "enabled in supported production builds; user can disable in Settings",
+    "identifier": "random installation UUID; no account, advertising ID, or RevenueCat link",
+    "data": [
+      "event type",
+      "event timestamp",
+      "installation UUID",
+      "session identifier",
+      "app version/build",
+      "platform",
+      "new/existing/unknown cohort",
+      "environment",
+      "action source"
+    ],
+    "excluded": [
+      "habit names",
+      "plans",
+      "notes",
+      "review text",
+      "backup contents",
+      "ad identifiers",
+      "payment data"
+    ],
+    "transport": "HTTPS to https://us.i.posthog.com; receiving server sees source IP; GeoIP enrichment disabled"
+  },
+  "apple": {
+    "proposedAdditionalTypes": [
+      {
+        "type": "Identifiers / User ID",
+        "purpose": "Analytics",
+        "linked": "conservatively disclose as linked to an installation/device until the complete SDK data flow is reviewed"
+      },
+      {
+        "type": "Usage Data / Product Interaction",
+        "purpose": "Analytics",
+        "linked": "same installation UUID"
+      }
+    ],
+    "tracking": "No cross-company advertising measurement, data broker sharing, or advertising ID use is implemented by this change. Review the complete app and any provider integrations before submitting the Tracking answer.",
+    "preserve": "Keep existing RevenueCat purchase disclosures; this adds analytics disclosures.",
+    "currentStoreObserved": {
+      "version": "2.1.0",
+      "build": "17",
+      "privacyLabel": "Data Not Collected",
+      "checkedAt": "2026-11-02",
+      "changed": false
+    },
+    "plannedAnswers": [
+      {
+        "type": "User ID",
+        "purposes": [
+          "Analytics"
+        ],
+        "linked": true,
+        "tracking": false,
+        "reason": "Conservative installation/device-linked disclosure for persistent PostHog installation UUID; not a claim that real names or accounts are collected."
+      },
+      {
+        "type": "Product Interaction",
+        "purposes": [
+          "Analytics"
+        ],
+        "linked": true,
+        "tracking": false
+      },
+      {
+        "type": "Purchase History",
+        "purposes": [
+          "Analytics",
+          "App Functionality"
+        ],
+        "linked": false,
+        "tracking": false,
+        "reason": "RevenueCat anonymous IDs without a custom account identifier or a link to PostHog; follows the RevenueCat Apple privacy guide."
+      }
+    ],
+    "publicationTiming": "Apple says the questionnaire must reflect versions currently available on the store. PostHog fields were examined but not published in advance of the new version; incomplete inputs were canceled and the original live state was verified after reload."
+  },
+  "google": {
+    "proposedAdditionalTypes": [
+      "App activity / App interactions",
+      "Device or other IDs"
+    ],
+    "purpose": [
+      "Analytics"
+    ],
+    "collection": "Data leaves the device; declare collection even though identifiers are random.",
+    "optional": "An in-app setting can disable analytics without blocking features.",
+    "sharing": "Evaluate the service-provider exception against the actual PostHog configuration/DPA; do not automatically label all processor transfers as sharing.",
+    "deletion": "User copies Analytics ID from Settings and contacts support; operator must locate/delete matching PostHog events using that distinct_id. Turning analytics off alone does not delete remote history."
+  },
+  "beforeRelease": [
+    "Review the runtime payload on both native platforms, including SDK-added identifiers and receiving-server IP processing.",
+    "Update live privacy-policy pages with the four generated translations.",
+    "Update Apple App Privacy and Google Play Data safety for all active versions/SDKs.",
+    "Review the existing Play target-audience/Families declarations and analytics treatment before shipping to children.",
+    "Do not mark policyStatus reviewed solely because local tests passed.",
+    "These are proposed answers for the implemented data flow, not a claim of completed legal review."
+  ],
+  "sources": [
+    "https://developer.apple.com/app-store/app-privacy-details/",
+    "https://support.google.com/googleplay/android-developer/answer/10787469",
+    "https://posthog.com/docs/privacy",
+    "https://posthog.com/docs/libraries/react-native",
+    "https://www.revenuecat.com/docs/platform-resources/apple-platform-resources/apple-app-privacy"
+  ]
+}

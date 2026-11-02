@@ -32,6 +32,9 @@ export const Legal = ({ kind }: { kind: 'privacy' | 'terms' | 'support' }) => {
     {kind === 'privacy' && <Button secondary onPress={() => { void open('https://www.revenuecat.com/privacy/'); }}>
       RevenueCat · {c.privacy}
     </Button>}
+    {kind === 'privacy' && <Button secondary onPress={() => { void open('https://posthog.com/privacy'); }}>
+      PostHog · {c.privacy}
+    </Button>}
     {email ? <Button secondary onPress={() => { void open(`mailto:${email}?subject=Ssak%20support`); }}>
       {c.contact} · {email}
     </Button> : <Notice>{c.contactMissing}</Notice>}

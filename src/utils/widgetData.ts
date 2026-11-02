@@ -1,5 +1,5 @@
 import { ackWidgetEvents } from '../../modules/shared-defaults';
-import { flushHabitStorage } from '@/renewal/storage';
+import { flushHabitStorage, withHabitWriteSource } from '@/renewal/storage';
 import { useHabitStore } from '@/store/habitStore';
 import { formatDate } from './date';
 import { Platform } from 'react-native';
@@ -89,10 +89,11 @@ async function importPendingEvents(): Promise<void> {
     if (!('habitId' in event) || !('date' in event) || !('completed' in event) ||
         typeof event.habitId !== 'string' || typeof event.date !== 'string' ||
         typeof event.completed !== 'boolean') continue;
-    useHabitStore.getState().applyWidgetEvent(event.habitId, event.date, event.completed, event.eventId);
+    withHabitWriteSource('widget', () =>
+      useHabitStore.getState().applyWidgetEvent(event.habitId as string, event.date as string, event.completed as boolean, event.eventId as string));
   }
   // Also retry persisting already-applied events after a previous storage failure.
-  useHabitStore.setState({});
+  withHabitWriteSource('widget', () => useHabitStore.setState({}));
   await flushHabitStorage();
   await ackWidgetEvents(ids);
   await syncWidgetData();

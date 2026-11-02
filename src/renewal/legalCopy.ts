@@ -4,11 +4,13 @@ type LegalContent = { privacy: string[]; terms: string[]; support: string[] };
 export const legalCopy: Record<Language, LegalContent> = {
   en: {
     privacy: [
-      'This notice describes Ssak 2.0. The operator and privacy contact are listed below. Updated: 17 October 2026.',
+      'This notice describes Ssak 2.1.1. The operator and privacy contact are listed below. Updated: 2 November 2026.',
       'Ssak stores your habit names, plans, check-ins, reviews and preferences on your device. We do not run a server for these records. Home-screen widgets read the habit information shared by the app on the same device.',
       'You can use Ssak without creating an account. There are no ads or advertising tracking. Local reminders use your device’s notification permission; we do not register you for remote push notifications.',
       'The App Store or Google Play handles payments. RevenueCat verifies purchases and manages Plus access using purchase history and an anonymous app identifier. It also provides purchase reporting. Habit names and notes are not sent to RevenueCat. We do not receive your card details.',
       'RevenueCat can connect when the app starts, before you make a purchase. Its SDK uses an anonymous identifier, purchase information when present, and app/platform information needed for purchase services. This is not a promise that no data leaves your device. RevenueCat states that customer data is hosted in the United States.',
+      'When usage analytics is enabled, PostHog receives a randomly generated installation identifier, event times, app opens and habit creation, completion and review events, app version/build, platform, collection environment, action source and whether this is a new or existing installation. We use these events to measure onboarding and return use. Habit names, plans, notes, review text, backup contents, advertising identifiers and payment information are not included in these analytics events. We do not link the analytics identifier to RevenueCat or an account. Reinstallation or a different device may be counted separately.',
+      'Usage analytics is enabled by default in supported production builds and can be turned off in Settings without losing app features. Turning it off stops new analytics collection and clears pending local analytics events; a request already in progress may finish. PostHog processes this analytics data in the United States; its servers also receive network information such as your IP address when connecting, even though our analytics disables IP-based location enrichment. The current free analytics plan guarantees one year of event retention; actual retention and deletion follow the service settings and policies. Turning analytics off or uninstalling does not erase events already sent. For an access or deletion request, copy the Analytics ID in Settings and contact us. Do not send habit notes.',
       'Exporting a backup saves or shares your records to the location or app you choose. Backup files are not encrypted by Ssak. Copying a text backup puts your records on the clipboard. Keep that copy private and clear it after use. Device or system backups may also contain app data, depending on your settings. Ssak does not sync habit records between devices.',
       'Delete a habit to remove its records from the app. Removing the app can remove local records; it does not delete copies you saved elsewhere or store transaction records. Purchase records are held by the store and RevenueCat under their own retention policies. Contact support for a purchase-data or privacy request. If you email us, we receive the address and details you choose to send and use them to answer your request.',
       'You can contact us to request access, correction or deletion of information we hold, or ask about processing and applicable privacy rights. We may need limited information to locate a purchase and verify the request. Do not send passwords, card numbers or habit notes. Local habit records are not accessible to us; delete or export them in the app. Deleting purchase-service data does not automatically cancel a store transaction or issue a refund.',
@@ -28,11 +30,13 @@ export const legalCopy: Record<Language, LegalContent> = {
   },
   ko: {
     privacy: [
-      '이 방침은 싹 2.0의 처리를 설명합니다. 운영자와 개인정보 문의처는 아래에 표시합니다. 갱신일: 2026년 10월 17일.',
+      '이 방침은 싹 2.1.1의 처리를 설명합니다. 운영자와 개인정보 문의처는 아래에 표시합니다. 갱신일: 2026년 11월 2일.',
       '습관 이름, 계획, 완료 기록, 돌아보기 내용과 설정은 기기에 저장됩니다. 이 기록을 저장하는 별도 서버는 운영하지 않습니다. 홈 화면 위젯은 같은 기기에서 앱이 공유한 습관 정보를 읽습니다.',
       '계정 없이 사용할 수 있고 광고나 광고 추적은 없습니다. 알림은 기기의 알림 권한을 이용하는 로컬 알림입니다. 원격 푸시 알림을 위한 등록은 하지 않습니다.',
       '결제는 App Store 또는 Google Play에서 처리합니다. RevenueCat은 구매 내역과 익명 앱 식별자로 구매를 확인하고 Plus 권한을 관리하며 구매 통계를 제공합니다. 습관 이름이나 메모는 RevenueCat에 보내지 않습니다. 카드 정보는 전달받지 않습니다.',
       'RevenueCat 연결은 구매 전에도 앱 시작 시 이루어질 수 있습니다. SDK는 익명 식별자, 존재하는 구매 정보, 구매 서비스에 필요한 앱·플랫폼 정보를 처리합니다. 기기 밖으로 정보가 전혀 전송되지 않는다는 뜻은 아닙니다. RevenueCat은 고객 데이터를 미국에 호스팅한다고 안내합니다.',
+      '사용 분석이 켜져 있으면 PostHog에 임의로 생성한 설치별 식별자, 이벤트 시각, 앱 실행과 습관 생성·완료·돌아보기 이벤트, 앱 버전과 빌드, 플랫폼, 수집 환경, 행동 경로와 신규·기존 설치 구분을 보냅니다. 시작 과정과 재사용을 파악하는 데 사용합니다. 습관 이름·계획·메모·돌아보기 본문·백업 내용·광고 식별자·결제 정보는 이 분석 이벤트에 포함하지 않습니다. 분석 식별자는 RevenueCat이나 계정과 연결하지 않습니다. 재설치나 다른 기기 사용은 별도로 집계될 수 있습니다.',
+      '지원되는 운영 빌드에서는 사용 분석이 기본으로 켜지며, 설정에서 꺼도 앱 기능을 그대로 이용할 수 있습니다. 끄면 새 분석 수집을 중단하고 기기에 대기 중인 분석 이벤트를 지웁니다. 이미 전송 중인 요청은 완료될 수 있습니다. 분석 데이터는 PostHog의 미국 서버에서 처리합니다. IP 기반 위치 정보 보강은 끄지만, 접속 과정에서 서버가 IP 주소 같은 네트워크 정보를 받습니다. 현재 무료 분석 플랜은 1년 보관을 안내하며, 실제 보관·삭제는 서비스 설정과 정책에 따릅니다. 분석 끄기나 앱 삭제로 이미 전송한 이벤트가 삭제되지는 않습니다. 열람·삭제 요청은 설정에서 분석 ID를 복사해 문의처로 보내주세요. 습관 메모는 보내지 마세요.',
       '백업 파일은 사용자가 선택한 위치나 앱에 저장·공유됩니다. 싹은 백업 파일을 암호화하지 않습니다. 텍스트 백업을 복사하면 기록이 클립보드에 들어갑니다. 복사한 내용은 안전한 곳에 보관하고 사용 후 클립보드에서 지워주세요. 기기 설정에 따라 운영체제 백업에 앱 데이터가 포함될 수 있습니다. 싹은 기기 간 습관 기록을 자동으로 동기화하지 않습니다.',
       '습관을 삭제하면 해당 습관의 기록이 앱에서 삭제됩니다. 앱 삭제로 기기의 기록이 사라질 수 있지만, 별도로 보관한 백업이나 스토어 구매 내역까지 삭제되지는 않습니다. 구매 관련 정보는 스토어와 RevenueCat의 보관 정책에 따릅니다. 구매 정보나 개인정보 관련 요청은 문의처로 보내주세요. 이메일로 문의하면 보내주신 주소와 내용을 답변에 사용합니다.',
       '운영자가 보유한 정보의 열람·정정·삭제, 처리와 적용되는 개인정보 권리에 관한 문의를 할 수 있습니다. 구매 기록 조회와 요청자 확인에 필요한 최소한의 정보를 요청할 수 있습니다. 비밀번호·카드번호·습관 메모는 보내지 마세요. 기기 안의 습관 기록에는 운영자가 접근할 수 없으므로 앱에서 삭제하거나 내보내야 합니다. 구매 서비스의 정보 삭제가 스토어 거래 취소나 환불을 자동으로 처리하지는 않습니다.',
@@ -52,11 +56,13 @@ export const legalCopy: Record<Language, LegalContent> = {
   },
   ja: {
     privacy: [
-      'この案内はSsak 2.0の情報の取り扱いを説明します。運営者と問い合わせ先は下記をご覧ください。更新日：2026年10月17日。',
+      'この案内はSsak 2.1.1の情報の取り扱いを説明します。運営者と問い合わせ先は下記をご覧ください。更新日：2026年11月2日。',
       '習慣の名前、計画、達成記録、振り返り、設定は端末に保存されます。これらの記録を保存する専用サーバーは運営していません。ホーム画面のウィジェットは、同じ端末でアプリが共有した習慣の情報を読み取ります。',
       'アカウント登録は不要です。広告や広告目的の追跡はありません。通知は端末の許可を使うローカル通知です。リモートプッシュ通知への登録は行いません。',
       '支払いはApp StoreまたはGoogle Playが処理します。RevenueCatは購入履歴と匿名のアプリ識別子を使い、購入の確認、Plusの利用権限の管理、購入状況の集計を行います。習慣の名前やメモはRevenueCatに送信しません。カード情報は受け取りません。',
       'RevenueCatへの接続は購入前でもアプリの起動時に行われる場合があります。SDKは匿名の識別子、存在する購入情報、購入サービスに必要なアプリ・プラットフォーム情報を処理します。端末外へのデータ送信がないという意味ではありません。RevenueCatは顧客データを米国でホスティングすると説明しています。',
+      '利用状況の分析がオンの場合、PostHogにランダムなインストール識別子、イベント時刻、アプリ起動と習慣の作成・達成・振り返りのイベント、アプリのバージョンとビルド、プラットフォーム、収集環境、操作経路、新規・既存インストールの区分を送信します。利用開始と再利用の把握に使います。習慣の名前・計画・メモ・振り返り本文・バックアップ内容・広告識別子・決済情報は含めません。分析識別子をRevenueCatやアカウントに結び付けません。再インストールや別の端末は別々に数えられる場合があります。',
+      '対応する製品版では利用状況の分析が初期状態でオンです。設定からオフにしても機能は変わりません。オフにすると新しい分析収集を停止し、端末内の未送信イベントを削除します。送信中のリクエストは完了する場合があります。分析データはPostHogの米国サーバーで処理します。IPからの位置情報の付加は無効ですが、接続時にサーバーはIPアドレスなどの通信情報を受け取ります。現在の無料分析プランは1年間の保存を案内しており、実際の保存・削除はサービスの設定と方針に従います。オフにすることやアプリ削除では送信済みイベントは消えません。開示・削除のご依頼には、設定から分析IDをコピーしてお問い合わせください。習慣のメモは送らないでください。',
       'バックアップファイルは選択した保存先やアプリに保存・共有されます。Ssakはバックアップファイルを暗号化しません。テキストをコピーすると、記録がクリップボードに入ります。安全な場所に保管し、使用後はクリップボードから消してください。端末の設定によっては、OSのバックアップにもアプリのデータが含まれます。習慣の記録は端末間で自動同期されません。',
       '習慣を削除すると、その習慣の記録がアプリから削除されます。アプリの削除で端末内の記録が失われる場合がありますが、別に保存したコピーやストアの購入履歴は削除されません。購入情報の保存期間はストアとRevenueCatの方針に従います。購入情報や個人情報に関するご依頼はお問い合わせください。メールでいただいたアドレスと内容は、回答のために使用します。',
       '運営者が保有する情報の開示・訂正・削除や、処理と適用されるプライバシー上の権利についてお問い合わせいただけます。購入情報の確認と本人確認に必要な最小限の情報をお願いする場合があります。パスワード、カード番号、習慣のメモは送らないでください。端末内の記録には運営者はアクセスできないため、アプリで削除・書き出しを行ってください。購入サービスの情報削除は、ストアの取引取消や返金を自動で行うものではありません。',
@@ -76,11 +82,13 @@ export const legalCopy: Record<Language, LegalContent> = {
   },
   'zh-TW': {
     privacy: [
-      '本說明介紹 Ssak 2.0 的資料處理方式。營運者與隱私聯絡方式列於下方。更新日期：2026 年 10 月 17 日。',
+      '本說明介紹 Ssak 2.1.1 的資料處理方式。營運者與隱私聯絡方式列於下方。更新日期：2026 年 11 月 2 日。',
       '習慣名稱、計畫、完成紀錄、回顧和設定都儲存在你的裝置。我們沒有用來儲存這些紀錄的獨立伺服器。主畫面小工具會讀取 App 在同一台裝置分享的習慣資料。',
       '不需要註冊帳號，也沒有廣告或廣告追蹤。提醒使用裝置的通知權限，屬於本機通知，不會註冊遠端推播服務。',
       '付款由 App Store 或 Google Play 處理。RevenueCat 使用購買紀錄和匿名 App 識別碼來確認購買、管理 Plus 權限及提供購買統計。我們不會將習慣名稱或筆記傳送給 RevenueCat，也不會收到你的信用卡資料。',
       'App 啟動時，即使尚未購買，也可能連線至 RevenueCat。SDK 會處理匿名識別碼、已有的購買資料，以及購買服務所需的 App 與平台資訊。這不代表資料完全不會傳出裝置。RevenueCat 說明其客戶資料託管於美國。',
+      '開啟使用分析時，PostHog會收到隨機產生的安裝識別碼、事件時間、App開啟與習慣建立、完成及回顧事件、App版本與組建、平台、收集環境、操作來源及新舊安裝區分，用於了解開始使用與回訪情況。分析事件不包含習慣名稱、計畫、筆記、回顧內文、備份內容、廣告識別碼或付款資訊。我們不會將分析識別碼與RevenueCat或帳號連結。重新安裝或不同裝置可能分開計算。',
+      '支援的正式版本預設開啟使用分析，可在設定中關閉而不影響功能。關閉後停止新的分析收集並清除裝置內待傳事件，已在傳送的請求可能完成。分析資料由PostHog的美國伺服器處理。雖然停用以IP補充位置資訊，伺服器在連線時仍會收到IP位址等網路資訊。目前免費分析方案保證一年事件保存，實際保存與刪除依服務設定及政策辦理。關閉分析或刪除App不會刪除已傳送事件。如需查閱或刪除，請在設定複製分析ID並聯絡我們，請勿寄送習慣筆記。',
       '備份檔案會儲存或分享到您選擇的位置或應用程式。Ssak不會加密備份檔案。複製文字備份會將紀錄放到剪貼簿，請妥善保管，使用後清除剪貼簿。視裝置設定而定，系統備份也可能包含 App 資料。Ssak 不會自動同步不同裝置的習慣紀錄。',
       '刪除習慣會移除 App 內該習慣的紀錄。移除 App 可能會刪除裝置上的紀錄，但不會刪除另外保存的備份或商店購買紀錄。購買資料的保存依商店與 RevenueCat 的政策辦理。如需處理購買資料或隱私權相關請求，請聯絡我們。來信的電子郵件地址和內容會用於回覆你的問題。',
       '你可以聯絡我們，申請查閱、更正或刪除營運者持有的資料，或詢問資料處理與適用的隱私權利。我們可能需要最少量的資料來查找購買紀錄及確認申請人。請勿寄送密碼、信用卡號或習慣筆記。我們無法存取裝置內的習慣紀錄，請在 App 內刪除或匯出。刪除購買服務的資料不會自動取消商店交易或退款。',

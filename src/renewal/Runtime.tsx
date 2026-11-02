@@ -13,9 +13,11 @@ import { useProStore } from '@/store/proStore';
 import { isTodaysReminder } from './notificationAction';
 import { usePreferences } from './preferences';
 import { completeReminder } from './completeReminder';
+import { startAnalytics } from '@/analytics/runtime';
 
 export const Runtime = () => {
   const language = usePreferences((state) => state.language);
+  useEffect(() => startAnalytics(), []);
   useEffect(() => {
     let disposed = false;
     let stopPurchases = () => {};

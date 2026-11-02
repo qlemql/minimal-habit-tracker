@@ -25,13 +25,13 @@ for (const { code, label } of languages) {
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, 'index.html'), `<!doctype html><html lang="${code}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(c[kind])} | Ssak</title>
 <style>body{margin:auto;max-width:740px;padding:28px 22px 64px;background:#FFF9EF;color:#443127;font:16px/1.9 system-ui,sans-serif;overflow-wrap:anywhere}h1{font-size:32px;line-height:1.3;letter-spacing:-1px}a{color:#9C6842;text-underline-offset:4px}nav{display:flex;gap:16px;flex-wrap:wrap;border-block:1px solid #e5d7c5;padding:16px 0;font-size:13px}aside{padding:16px;background:#F4E8DA}main{padding:20px 0}main p{margin:22px 0}</style>
-${publishable ? '' : '<aside>DRAFT — Ssak 2.0 policy. Final policy review and publication are pending.</aside>'}
+${publishable ? '' : '<aside>DRAFT — Ssak 2.1.1 policy. Final policy review and publication are pending.</aside>'}
 <nav>${languages.map((lang) => `<a href="../../${lang.code}/${kind}/">${lang.label}</a>`).join('')}</nav>
 <main><p>SSAK · ${label}</p><h1>${esc(c[kind])}</h1>${operator ? `<p>${esc(operator)}</p>` : ''}
 ${legalCopy[code][kind].map((p) => `<p>${esc(p)}</p>`).join('')}
 ${kind === 'privacy' ? `<p>${esc(website[code])}</p><p><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy policy</a></p>` : ''}
 ${kind === 'support' ? `<p><a href="https://reportaproblem.apple.com/">App Store · ${esc(c.refund)}</a></p><p><a href="https://support.google.com/googleplay/answer/2479637?hl=${code}">Google Play · ${esc(c.refund)}</a></p>` : ''}
-${kind === 'privacy' ? '<p><a href="https://www.revenuecat.com/privacy/">RevenueCat privacy policy</a> · <a href="https://www.revenuecat.com/docs/platform-resources/google-platform-resources/google-plays-data-safety">RevenueCat data processing</a></p>' : ''}
+${kind === 'privacy' ? '<p><a href="https://www.revenuecat.com/privacy/">RevenueCat privacy policy</a> · <a href="https://posthog.com/privacy">PostHog privacy policy</a> · <a href="https://www.revenuecat.com/docs/platform-resources/google-platform-resources/google-plays-data-safety">RevenueCat data processing</a></p>' : ''}
 <p>${email ? `<a href="mailto:${esc(email)}">${esc(c.contact)} · ${esc(email)}</a>` : esc(c.contactMissing)}</p></main>
 <nav>${['privacy', 'terms', 'support'].map((item) => `<a href="../${item}/">${esc(c[item])}</a>`).join('')}<a href="../../landing/${code === 'en' ? '' : code + '/'}">Ssak</a></nav></html>`);
   }

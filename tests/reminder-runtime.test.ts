@@ -8,6 +8,7 @@ vi.mock('react',()=>({useEffect:(effect:()=>()=>void)=>{callbacks.cleanup=effect
 vi.mock('react-native',()=>({AppState:{addEventListener:()=>({remove(){}})}}));
 vi.mock('@/renewal/preferences',()=>({usePreferences:(select:(state:{language:string})=>unknown)=>select({language:'en'})}));
 vi.mock('@/renewal/billing',()=>({syncPurchase:async()=>{},listenToPurchaseUpdates:async()=>()=>{}}));
+vi.mock('@/analytics/runtime',()=>({startAnalytics:()=>()=>{}}));
 vi.mock('@/utils/widgetData',()=>({syncWidgetData:vi.fn(async()=>{}),processPendingWidgetToggles:async()=>{}}));
 vi.mock('@/utils/notifications',()=>({cancelTodayReminder:async()=>{},setupNotificationCategories:async()=>{},refreshHabitReminders:async()=>{},HABIT_TOGGLE_ACTION:'toggle'}));
 vi.mock('expo-notifications',()=>({

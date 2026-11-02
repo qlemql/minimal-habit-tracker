@@ -6,7 +6,11 @@
     "development": {
       "node": "22.14.0",
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_ANALYTICS_ENABLED": "false",
+        "EXPO_PUBLIC_ANALYTICS_ENV": "test"
+      }
     },
     "preview": {
       "node": "22.14.0",
@@ -16,6 +20,10 @@
       },
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_ANALYTICS_ENABLED": "false",
+        "EXPO_PUBLIC_ANALYTICS_ENV": "test"
       }
     },
     "preview-device": {
@@ -26,6 +34,10 @@
       },
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_ANALYTICS_ENABLED": "false",
+        "EXPO_PUBLIC_ANALYTICS_ENV": "test"
       }
     },
     "production": {
@@ -36,6 +48,18 @@
       },
       "android": {
         "buildType": "app-bundle"
+      },
+      "env": {
+        "EXPO_PUBLIC_ANALYTICS_ENABLED": "true",
+        "EXPO_PUBLIC_ANALYTICS_ENV": "production"
+      }
+    },
+    "analytics-qa": {
+      "extends": "preview-device",
+      "environment": "production",
+      "env": {
+        "EXPO_PUBLIC_ANALYTICS_ENABLED": "true",
+        "EXPO_PUBLIC_ANALYTICS_ENV": "test"
       }
     }
   },

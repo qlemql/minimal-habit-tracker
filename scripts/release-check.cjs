@@ -14,12 +14,14 @@ check('Public support email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(env.EXPO_PUBLIC_
 check('Operator display name', (env.EXPO_PUBLIC_OPERATOR_NAME || publicInfo.operatorName)?.trim());
 check('Public HTTPS website configured', /^https:\/\/(?!localhost\b|127\.0\.0\.1\b|example\.)[^/]+/.test(env.EXPO_PUBLIC_SITE_URL || publicInfo.siteUrl));
 check('Renewal policy reviewed', publicInfo.policyStatus === 'reviewed');
-check('Release version 2.1.0 configured', expo.version === '2.1.0');
+check('Release version 2.1.1 configured', expo.version === '2.1.1');
+check('PostHog public project token', /^phc_/.test(env.EXPO_PUBLIC_POSTHOG_TOKEN || ''));
 check('Four iOS system languages', ['en', 'ko', 'ja', 'zh-TW'].every((lang) => expo.ios.infoPlist.CFBundleLocalizations.includes(lang)));
 const evidencePath = path.join(root, 'artifacts/release-evidence.json');
 const evidence = fs.existsSync(evidencePath) ? JSON.parse(fs.readFileSync(evidencePath, 'utf8')) : {};
 for (const name of [
-  'store-build-numbers-confirmed', 'ios-xcode26-build', 'android-api36-build',
+  'posthog-production-device-events', 'posthog-opt-out-verified', 'posthog-retention-dashboard',
+  'posthog-store-disclosures', 'store-build-numbers-confirmed', 'ios-xcode26-build', 'android-api36-build',
   'ios-device-flow', 'android-device-flow', 'upgrade-preserves-records',
   'widget-midnight-reboot-queue', 'notifications-permission-timezone-reboot',
   'purchase-cancel-pending-restore-both-stores', 'refund-revocation-both-stores',

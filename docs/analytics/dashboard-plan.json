@@ -1,0 +1,90 @@
+{
+  "projectId": 703001,
+  "projectUrl": "https://us.posthog.com/project/703001",
+  "dashboardName": "Ssak · 유입과 기록 리텐션",
+  "status": "prepared-not-created-remotely",
+  "timezone": "Asia/Seoul",
+  "globalEventFilter": {
+    "environment": "production",
+    "schema_version": 1
+  },
+  "identity": "distinct_id is an installation UUID, not a verified person; reinstalls/devices may count separately",
+  "insights": [
+    {
+      "name": "신규 실행자",
+      "type": "Trends",
+      "event": "first_open",
+      "aggregation": "unique users",
+      "interval": "day",
+      "filter": {
+        "cohort": "new"
+      }
+    },
+    {
+      "name": "첫 기록 전환",
+      "type": "Funnel",
+      "events": [
+        "first_open",
+        "habit_created",
+        "habit_completed"
+      ],
+      "conversionWindowDays": 7,
+      "filter": {
+        "cohort": "new"
+      },
+      "note": "Habit_created is an explanatory intermediate step; headline conversion is first_open to habit_completed, including flows that restore an existing habit."
+    },
+    {
+      "name": "D1 앱 재방문",
+      "type": "Retention",
+      "startEvent": "first_open",
+      "returnEvent": "app_open",
+      "startMode": "first time",
+      "interval": "day",
+      "returnCriterion": "exact period",
+      "filter": {
+        "cohort": "new"
+      },
+      "note": "Use the SQL report for full, mature calendar-day denominators."
+    },
+    {
+      "name": "다음 주 기록",
+      "type": "SQL",
+      "file": "new-user-retention.sql",
+      "window": "D7-D13 inclusive; only D14+ cohorts enter denominator"
+    },
+    {
+      "name": "첫 기록자 다음 주 재사용",
+      "type": "SQL",
+      "file": "recording-retention.sql",
+      "window": "D7-D13 after first observed completion; only D14+ enter denominator"
+    },
+    {
+      "name": "기존 사용자 재방문",
+      "type": "Retention",
+      "startEvent": "analytics_started",
+      "returnEvent": "app_open",
+      "startMode": "first time",
+      "interval": "week",
+      "filter": {
+        "cohort": "existing"
+      },
+      "note": "Measured since analytics rollout, not since original install."
+    },
+    {
+      "name": "플랫폼별 활성 설치",
+      "type": "Trends",
+      "event": "app_open",
+      "aggregation": "unique users",
+      "interval": "day",
+      "breakdown": "platform"
+    }
+  ],
+  "caveats": [
+    "The remote dashboard and SQL queries have not been created or executed because browser access to us.posthog.com is blocked.",
+    "Do not sum daily unique counts to estimate weekly/monthly unique users.",
+    "The opt-out setting and older versions mean this measures observed installations, not all users.",
+    "Do not attribute changes to a marketing channel without attribution data.",
+    "Exclude test data via the environment filter, including synthetic ingestion checks."
+  ]
+}

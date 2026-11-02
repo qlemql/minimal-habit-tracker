@@ -1,4 +1,9 @@
-import { View, Pressable, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { View, Pressable, StyleSheet, Switch } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Clipboard from 'expo-clipboard';
+import { analyticsCopy } from '@/analytics/copy';
+import { ANALYTICS_STORAGE_KEY } from '@/analytics/engine';
 import { LocalizedText as Text } from './LocalizedText';
 import { useRouter } from 'expo-router';
 import { useHabitStore } from '@/store/habitStore';
@@ -24,7 +29,18 @@ import {
 export const Settings = () => {
   const c = useCopy();
   const router = useRouter();
-  const { language, setLanguage, example } = usePreferences();
+  const { language, setLanguage, example, analyticsEnabled, setAnalyticsEnabled } = usePreferences();
+  const a = analyticsCopy[language];
+  const [analyticsMessage, setAnalyticsMessage] = useState('');
+  const copyAnalyticsId = async () => {
+    try {
+      const raw = await AsyncStorage.getItem(ANALYTICS_STORAGE_KEY);
+      const id: unknown = raw ? JSON.parse(raw).id : undefined;
+      if (typeof id !== 'string') { setAnalyticsMessage(a.missing); return; }
+      await Clipboard.setStringAsync(id);
+      setAnalyticsMessage(a.copied);
+    } catch { setAnalyticsMessage(a.missing); }
+  };
   const release = releaseCopy[language];
   const { habits } = useHabitStore();
   const pro = useProStore((state) => state.isPro);
@@ -73,6 +89,13 @@ export const Settings = () => {
           <Icon name="shield" size={28} />
           <Text style={s.fieldLabel}>{c.privacy}</Text>
           <Body>{c.privacySub}</Body>
+          <View style={s.between}>
+            <Text style={[s.fieldLabel, { flex: 1 }]}>{a.title}</Text>
+            <Switch accessibilityLabel={a.title} value={analyticsEnabled} onValueChange={setAnalyticsEnabled} />
+          </View>
+          <Body>{a.detail}</Body>
+          <TextButton onPress={() => { void copyAnalyticsId(); }}>{a.copy}</TextButton>
+          {analyticsMessage ? <Text accessibilityLiveRegion="polite" style={s.small}>{analyticsMessage}</Text> : null}
           <TextButton onPress={() => router.push('/privacy')}>{release.privacy}</TextButton>
           <TextButton onPress={() => router.push('/support')}>{release.support}</TextButton>
           <TextButton onPress={() => router.push('/terms')}>{release.terms}</TextButton>
@@ -98,7 +121,7 @@ export const Settings = () => {
             </TextButton>
           )
         )}
-        <Text style={st.footer}>ssak · 2.0</Text>
+        <Text style={st.footer}>ssak · 2.1.1</Text>
       </View>
     </Screen>
   );

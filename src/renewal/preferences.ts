@@ -11,6 +11,8 @@ interface Preferences {
   language: Language;
   welcomed: boolean;
   example: boolean;
+  analyticsEnabled: boolean;
+  setAnalyticsEnabled: (value: boolean) => void;
   setLanguage: (language: Language) => void;
   welcome: () => void;
   setExample: (value: boolean) => void;
@@ -21,6 +23,8 @@ export const usePreferences = create<Preferences>()(
       language: initial,
       welcomed: false,
       example: false,
+      analyticsEnabled: true,
+      setAnalyticsEnabled: (analyticsEnabled) => set({ analyticsEnabled }),
       setLanguage: (language) => set({ language }),
       welcome: () => set({ welcomed: true }),
       setExample: (example) => set({ example }),
