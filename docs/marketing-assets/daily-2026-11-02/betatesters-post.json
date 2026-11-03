@@ -1,0 +1,14 @@
+{
+  "title": "[iOS + Android, unpaid] Ssak: is a smaller busy-day habit plan clear at the first check-in?",
+  "body": "I'm the developer of Ssak, a released habit tracker on iOS and Android. I'm looking for a few readers to try the free setup and first check-in. This is usability feedback on the store version, not a closed beta or TestFlight invitation.\n\nThe situation I'm designing for: you planned to read for ten minutes, read one page instead, and then leave your tracker blank. In Ssak, you plan both options in advance and record the one you actually did. One page isn't recorded as ten minutes.\n\nIf that sounds familiar, try setting up one reading habit with a usual plan and a smaller busy-day option. After doing one of them, record it. Which step, if any, was confusing? In particular, did the smaller option look like a valid plan or a missed goal? If setup blocks you, telling me where you stopped is useful too.\n\nA 14-second demo: https://www.instagram.com/ssak.app/reel/DfM6HEatUUU/\nThe demo uses actual web footage with example data captured October 17; mobile appearance may differ.\n\nDetails and store links: https://ssak-habit-tracker.pages.dev/landing/\n\nOne habit is free with no time limit. No ads, subscription or account required. Optional Plus is a one-time purchase for up to three habits and file backup/restore. Records stay on your device; there is no automatic cross-device sync. Availability varies by country or region.\n\nThis is unpaid and voluntary. No purchase, rating, reciprocal testing or personal reading history requested. A comment about the setup is enough. If you'd also be happy for me to ask here after about a week how it went, please say so; otherwise I won't follow up.",
+  "url": "https://www.reddit.com/r/betatesters/comments/1xlwdcv/ios_android_unpaid_ssak_is_a_smaller_busyday/",
+  "status": "published_verified",
+  "author": "ssak_habit_tracker",
+  "flair": "Applications",
+  "published_at_kst": "2026-11-02T21:53:02.753+09:00",
+  "proof": "betatesters-published.png",
+  "initial_views": 1,
+  "initial_comments": 0,
+  "initial_score": 1,
+  "own_upvote_included": true
+}

@@ -1,0 +1,180 @@
+{
+  "date_kst": "2026-11-02",
+  "observation_window_kst": "21:48–21:56 (SNS / community / store checks)",
+  "instagram": {
+    "result_first": {
+      "url": "https://www.instagram.com/ssak.app/reel/DfM6HEatUUU/",
+      "published_at_kst": "2026-11-01T23:06:50+09:00",
+      "observed_at_kst": "2026-11-02T21:49:51+09:00",
+      "timestamp_basis": "screenshot saved immediately after UI observation",
+      "elapsed_hours": 22.717,
+      "observation_kind": "pre_24h_interim",
+      "views": 27,
+      "viewers": 24,
+      "viewers_ui_label": "조회한 사람",
+      "nonfollower_view_percent": 100,
+      "likes": 0,
+      "comments": 0,
+      "saves": 0,
+      "shares": 0,
+      "profile_activity": 0,
+      "follows": 0,
+      "interactions": null,
+      "interactions_display": "--",
+      "engaged_accounts": null,
+      "average_watch_seconds": null,
+      "retention": null,
+      "country_distribution": null,
+      "attributed_installs": null
+    },
+    "reel_a": {
+      "url": "https://www.instagram.com/ssak.app/reel/De66MVQNLQr/",
+      "published_at_kst": "2026-10-25T23:21:20+09:00",
+      "observed_at_kst": "2026-11-02T21:50:26+09:00",
+      "timestamp_basis": "screenshot saved immediately after UI observation",
+      "elapsed_hours": 190.485,
+      "observation_kind": "late_7d_followup",
+      "views": 7,
+      "viewers": 7,
+      "viewers_ui_label": "조회한 사람",
+      "nonfollower_view_percent": 100,
+      "likes": 0,
+      "comments": 0,
+      "saves": 0,
+      "shares": 0,
+      "profile_activity": 0,
+      "follows": 0,
+      "interactions": null,
+      "interactions_display": "--",
+      "engaged_accounts": null,
+      "average_watch_seconds": null,
+      "retention": null,
+      "country_distribution": null,
+      "attributed_installs": null
+    },
+    "reel_b": {
+      "url": "https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/",
+      "published_at_kst": "2026-10-30T20:29:40+09:00",
+      "observed_at_kst": "2026-11-02T21:51:30+09:00",
+      "timestamp_basis": "screenshot saved immediately after UI observation",
+      "elapsed_hours": 73.364,
+      "observation_kind": "interim_before_7d",
+      "views": 28,
+      "viewers": 24,
+      "viewers_ui_label": "조회한 사람",
+      "nonfollower_view_percent": 100,
+      "likes": 0,
+      "comments": 0,
+      "saves": 1,
+      "shares": 0,
+      "profile_activity": 0,
+      "follows": 0,
+      "interactions": 1,
+      "interactions_display": "1",
+      "engaged_accounts": 1,
+      "average_watch_seconds": null,
+      "retention": null,
+      "country_distribution": null,
+      "attributed_installs": null
+    },
+    "notifications": "No new human response since Nov1; latest Lou laugh response already recorded; no recontact."
+  },
+  "x": {
+    "result_first_url": "https://x.com/Ssakhabit/status/2116894907327803401",
+    "views": 1,
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0,
+    "observation_kind": "pre_24h_interim",
+    "notifications": "Latest Oct28; no new notifications"
+  },
+  "reddit": {
+    "productivityhq": {
+      "url": "https://www.reddit.com/r/ProductivityHQ/comments/1xjczsg/i_made_ssak_to_record_a_smaller_reading_plan_on/",
+      "views": 270,
+      "comments": 0,
+      "score": 1,
+      "own_upvote_included": true
+    },
+    "notifications": "No new human response; existing 250-view platform notification only",
+    "new_post": "betatesters-post.json"
+  },
+  "domestic": {
+    "vibecrew": {
+      "url": "https://vibecrew.kr/ship/10986",
+      "views": 70,
+      "likes": 4,
+      "comments": 2,
+      "external_comments": 1,
+      "own_comments": 1,
+      "unread_notifications": 0
+    },
+    "disquiet": {
+      "url": "https://disquiet.io/posts/XdCLka",
+      "recommendations": 0,
+      "comments": 1,
+      "new_comments": 0,
+      "existing_reply_hold_preserved": true
+    }
+  },
+  "stores": {
+    "google_play": {
+      "growth": {
+        "period_display": "지난 28일",
+        "device_impressions": 40,
+        "device_acquisitions": null,
+        "first_opens": null,
+        "monthly_active_devices": null,
+        "retention_7d": null,
+        "missing_display": "데이터 없음 / —"
+      },
+      "listing": {
+        "period_start": "2026-10-03",
+        "period_end": "2026-10-30",
+        "date_basis": "date picker selected endpoints",
+        "visitors": 4,
+        "unique_install_clicks": 0,
+        "click_rate_percent": 0,
+        "default_listing_row_visitors": 2,
+        "note": "Overall card and individual listing row differ; do not sum or substitute."
+      },
+      "pending_unpublished_changes": false
+    },
+    "apple": {
+      "status": "unavailable_loading",
+      "note": "Analytics URL remained on Apple loading/auth iframe shell after one reload; no analytics data visible. Prior Oct30 values not relabeled as current."
+    }
+  },
+  "execution": {
+    "main_posts": 1,
+    "new_social_comments": 0,
+    "dm_sent": 0,
+    "email_sent": 0,
+    "confirmed_first_use": 0,
+    "followup_consents": 0,
+    "store_metadata_changed": false,
+    "automatic_schedule_created": false,
+    "commit_push": false
+  },
+  "channel_review": {
+    "ProductivityApps": {
+      "status": "excluded",
+      "reasons": [
+        "No tester requests",
+        "Self promotion monthly and requires 10 community karma",
+        "No vibe-coded apps rule also present"
+      ]
+    },
+    "betatesters": {
+      "status": "published",
+      "welcome_url": "https://www.reddit.com/r/betatesters/comments/1raomsj/welcome_to_rbetatesters/",
+      "checks": [
+        "Sidebar and welcome post reviewed",
+        "Community guide only welcome notice",
+        "No prior local record; author search returned no posts",
+        "Released store build and unpaid voluntary scope explicitly disclosed"
+      ]
+    }
+  }
+}

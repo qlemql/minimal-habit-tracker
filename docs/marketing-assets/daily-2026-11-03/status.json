@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "observation_window": "21:35–21:44 KST (approximate; no exact 24h measurement)",
+  "instagram_result_first": {
+    "views": 27,
+    "viewers_label": "조회한 사람",
+    "viewers": 24,
+    "nonfollowers_percent": 100,
+    "likes": 0,
+    "comments": 0,
+    "saves": 0,
+    "shares": 0,
+    "interactions_display": null,
+    "engaged_accounts_display": null,
+    "profile_activity": 0,
+    "follows": 0,
+    "elapsed_hours_approx": 46.5
+  },
+  "x_result_first": {
+    "detail_views": 2,
+    "later_profile_views": 3,
+    "note": "Own visits may affect views; do not claim external growth",
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0
+  },
+  "reddit_betatesters": {
+    "views_before_reply": 60,
+    "score_before_reply": 1,
+    "includes_own_vote": true,
+    "external_comments": 1,
+    "first_use_confirmed": 0,
+    "elapsed_hours_approx": 23.7,
+    "measurement_type": "before_24h",
+    "external_comment_type": "copy/UX suggestion mixed with paid service promotion; no installation or use confirmed"
+  },
+  "new_notifications": {
+    "instagram": 0,
+    "x": 0,
+    "reddit_human": 1,
+    "reddit_platform_recommendation": "ShowMeYourApps; not posting permission"
+  },
+  "publications": [
+    {
+      "channel": "Reddit",
+      "url": "https://www.reddit.com/r/betatesters/comments/1xlwdcv/comment/19s2ugm5j2n9e/",
+      "published_at": "2026-11-03T21:42:03.157+09:00",
+      "body": "The usual plan is the first, more prominent button; the busy-day option is a secondary button beneath it. Neither is recorded until you tap one. So they aren't visually equal, even though both let you record the action you did. That's a useful distinction to check. I'll ask what people expect to see in their history before they tap, without suggesting 'completed' or 'missed' in the question. Thanks for pointing that out."
+    },
+    {
+      "channel": "X",
+      "url": "https://x.com/Ssakhabit/status/2117598481707843768",
+      "published_at": "2026-11-03T21:43:15+09:00",
+      "body": "A question from building Ssak:\n\nYou plan two reading options in advance: ten minutes on a usual day, one page on a busy day.\n\nYou read one page and tap that option. Before seeing the result, what would you expect your habit history to show?",
+      "initial_views": null,
+      "initial_replies": 0,
+      "initial_likes": 0,
+      "initial_reposts": 0,
+      "initial_bookmarks": 0
+    }
+  ],
+  "first_use_confirmed_total": 0,
+  "followup_consents": 0,
+  "not_checked_today": [
+    "stores",
+    "RevenueCat",
+    "domestic communities"
+  ],
+  "commit_push": false,
+  "parallel_followup": {
+    "japanese_story_url": "https://tsukutta.app/stories/user-2cf681d0/ssak-reading-busy-days",
+    "status": "published-verified",
+    "daily_total_main_posts": 2,
+    "daily_total_replies": 1,
+    "taiwan": "on_hold_commercial_promotion_rules",
+    "details": "parallel-marketing.ko.md"
+  },
+  "late_followup": {
+    "japanese_reddit_url": "https://www.reddit.com/r/dokusyo_syoseki_r/comments/1xmsz9u/%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA%E3%82%A2%E3%83%97%E3%83%AA%E7%B4%B9%E4%BB%8B1%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%A0%E3%81%91%E8%AA%AD%E3%82%93%E3%81%A0%E6%97%A5%E3%82%82%E8%A8%98%E9%8C%B2%E3%81%99%E3%82%8Bssak/",
+    "published_at_kst": "2026-11-03T22:30:52.394+09:00",
+    "new_english_video": "../one-page-2026-11-03/reel.mp4",
+    "instagram_video_status": "published",
+    "x_video_status": "published",
+    "daily_total_main_posts": 5,
+    "daily_total_replies": 1,
+    "instagram_video_url": "https://www.instagram.com/ssak.app/reel/DfR_77SNapR/",
+    "instagram_published_at_kst": "2026-11-03T22:33:53+09:00",
+    "x_video_url": "https://x.com/Ssakhabit/status/2117614407912153440",
+    "x_published_at_kst": "2026-11-03T22:46:32+09:00"
+  }
+}

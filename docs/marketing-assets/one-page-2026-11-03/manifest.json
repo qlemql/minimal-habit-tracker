@@ -1,0 +1,29 @@
+{
+  "status": "published_instagram_and_x",
+  "created_date_kst": "2026-11-03",
+  "duration_seconds": 15,
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 30,
+  "audio": "silent",
+  "source": "Actual Ssak English web captures, example data, October 17; mobile appearance may differ",
+  "experiment": "Scenario first, then actual demo; separate from Reel B; not randomized A/B",
+  "source_sha256": {
+    "recording.webm": "c62363bc11532a889b0173797c0a5c0adc5541ea837cd6f7827a4f1af26a3566",
+    "02-counts.png": "286834886b9b3a760fde6ac393a9d80c33a125679bc1cb1f884fa2e593b652da"
+  },
+  "published_urls": {
+    "instagram": "https://www.instagram.com/ssak.app/reel/DfR_77SNapR/",
+    "x": "https://x.com/Ssakhabit/status/2117614407912153440"
+  },
+  "verification": [
+    "full video decode passed",
+    "five-frame visual review passed; readable text and actual small-option result"
+  ],
+  "video_sha256": "bd593c109751ef6aed5f858cea7c9eebd52565fee32b228a1ea0465862c25474",
+  "upload_blocker": null,
+  "instagram_published_at_kst": "2026-11-03T22:33:53+09:00",
+  "x_published_at_kst": "2026-11-03T22:46:32+09:00"
+}

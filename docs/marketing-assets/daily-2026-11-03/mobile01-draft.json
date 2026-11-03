@@ -1,0 +1,19 @@
+{
+  "status": "on_hold_commercial_promotion_rules",
+  "channel": "Mobile01 Android軟體分享",
+  "board_url": "https://www.mobile01.com/topiclist.php?f=423",
+  "title": "【自製 App 分享】Ssak：忙碌時只讀一頁，也能留下習慣紀錄",
+  "body": "大家好，我是 Ssak 的獨立開發者，想分享這款習慣記錄 App 的閱讀用法。\n\n如果原本打算讀 10 分鐘，忙了一天卻只讀了一頁，這一天要怎麼記？Ssak 的做法是先設定兩種行動：平常讀 10 分鐘，忙碌時讀一頁。之後選擇今天實際做到的那一項，留下紀錄。讀一頁不會被當成讀了 10 分鐘。\n\n它著重的是日常行動的紀錄，不是書庫管理或讀完幾本書的排行榜。也能設定每週目標，回顧平常的行動與小小替代行動。\n\n免費版可以同時追蹤一個習慣，沒有使用期限，不需註冊帳號，也沒有廣告。App 內另有一次買斷的 Ssak Plus，可同時追蹤最多三個習慣，並用檔案備份、還原紀錄；試用一個閱讀習慣不需要購買。\n\n紀錄儲存在裝置上，沒有跨裝置自動同步。Android 與 iOS 的購買項目分開計算。\n\nGoogle Play：\nhttps://play.google.com/store/apps/details?id=com.qlemql.minimalhabittracker&hl=zh_TW&gl=TW\n\n如果你試用後，覺得兩種行動的設定或記錄方式不清楚，歡迎告訴我卡在哪一步。也歡迎指出繁體中文用語不自然的地方。謝謝！",
+  "verification": [
+    "Taiwan zh_TW Google Play public listing and full description viewed in Chrome",
+    "free 1 habit, optional one-time Plus, 3 habits, local records, no auto-sync matched store description",
+    "2026-11-03: qlemql login confirmed; authenticated new-topic composer opened from personal dashboard",
+    "Composer links official forum rules https://www.mobile01.com/sitemanage.php?mode=detail&t=906102; clauses 8 and 9 prohibit commercial advertising"
+  ],
+  "unresolved": [
+    "Developer app promotion exception not confirmed; do not infer permission from existing self-made app posts",
+    "SMS completion and final submission eligibility not verified",
+    "No post submitted; seek moderator clarification before promotion"
+  ],
+  "published_url": null
+}
