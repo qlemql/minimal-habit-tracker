@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-05",
+  "timezone": "Asia/Seoul",
+  "observation_window": "approximately 20:55–21:10 KST; cumulative, not exact 24-hour measurements",
+  "previous_day": "User reports no marketing on November 4",
+  "instagram_nov3": {
+    "views": 2,
+    "viewers": 2,
+    "nonfollowers_percent": 100,
+    "likes": 0,
+    "comments": 0,
+    "saves": 0,
+    "shares": 0,
+    "profile_activity": 0,
+    "follows": 0,
+    "interactions_display": null,
+    "engaged_accounts_display": null
+  },
+  "x_nov3_video": {
+    "views": 3,
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0
+  },
+  "japan_reddit": {
+    "views": 212,
+    "score": 2,
+    "includes_own_vote": true,
+    "comments": 0,
+    "notification_milestone_upvotes": 3,
+    "note": "Historical milestone notification differs from current displayed score; do not sum"
+  },
+  "tsukutta": {
+    "story_views": 2,
+    "app_views": 15,
+    "use_button_count": 2,
+    "useful_reactions": 1,
+    "comments": 0,
+    "note": "Views and button counts are not installs; own checks may contribute"
+  },
+  "reddit_betatesters": {
+    "views": 71,
+    "new_external_replies": 0,
+    "existing_external_comment_count": 1,
+    "existing_own_reply_count": 1
+  },
+  "new_human_notifications": {
+    "instagram": 0,
+    "x": 0,
+    "reddit": 0
+  },
+  "first_use_confirmed_total": 0,
+  "publications": [
+    {
+      "channel": "X",
+      "url": "https://x.com/Ssakhabit/status/2118314064497799442",
+      "published_at_display": "2026-11-05 21:06 KST",
+      "body": "Missed a day of reading? Your bookmark is still exactly where you left it. Very patient little employee.\n\nOpen there. Read a paragraph. You don’t have to catch up before you can come back.",
+      "status": "published_verified"
+    },
+    {
+      "channel": "Instagram",
+      "url": "https://www.instagram.com/ssak.app/p/DfXAO0gFF42/",
+      "published_at_kst": "2026-11-05T21:12:28+09:00",
+      "status": "published_verified",
+      "caption": "Your bookmark has been holding your place this whole time. Very patient little employee.\n\nIf you feel like reading again, open there. A paragraph is a place to begin.\n\nSave this for the evening when restarting feels like catching up.\n\n#readinghabit #backtoreading #smallhabits",
+      "alt_text": "Cream-colored card with a coral bookmark ribbon. Large brown text says: Your bookmark is still holding your place. Below: No catch-up required. Small ssak.app text at the bottom."
+    }
+  ],
+  "instagram_card": {
+    "asset": "../bookmark-2026-11-05/bookmark.png",
+    "status": "published_verified",
+    "blocker": null,
+    "published_url": "https://www.instagram.com/ssak.app/p/DfXAO0gFF42/"
+  },
+  "outreach": {
+    "new_replies_sent": 0,
+    "note": "Read English conversation candidates; no sufficiently relevant app-use conversation selected. No follow-up without new response."
+  },
+  "holds": [
+    "Mobile01: commercial promotion exception unconfirmed",
+    "ProductivityHQ: no repeat promotion before Nov 6 20:38:48 KST",
+    "Reel B: seven-day measurement Nov 6 after 20:29:40 KST"
+  ],
+  "not_checked_today": [
+    "App Store Connect fresh analytics: authentication widget blocked",
+    "Private mailbox and pending editorial replies"
+  ],
+  "commit_push": false,
+  "channel_audit": "channel-audit.json"
+}

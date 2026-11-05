@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-05",
+  "timezone": "Asia/Seoul",
+  "scope": "Managed marketing channels, pending submissions, landing pages, stores and live revenue. Read-only external audit. Social metrics from earlier the same evening are reused from status.json.",
+  "measurement_limits": ["Cumulative snapshots, not exact 24-hour windows", "Views, votes, crawler activity, customer IDs and installs are different metrics", "No newly confirmed first-use testers; this does not mean the app has no users", "No external posts, replies, messages or listing edits during this audit"],
+  "social": {
+    "instagram": {"source": "status.json", "nov3_reel_views": 2, "nov3_reel_reactions": 0, "new_human_notifications": 0, "nov5_card": "published_verified; too early for outcome assessment"},
+    "x": {"source": "status.json", "nov3_video_views": 3, "nov3_video_reactions": 0, "new_human_notifications": 0, "nov5_text": "published_verified; too early for outcome assessment"},
+    "reddit_sideproject": {"url": "https://www.reddit.com/r/SideProject/comments/1xf481p/i_built_a_habit_tracker_with_two_plans_for_one/", "views": 222, "score_including_own": 1, "displayed_comment_count": 4, "visible_conversation": "Existing external feedback and own reply; count discrepancy not treated as four human responses"},
+    "reddit_productivityhq": {"url": "https://www.reddit.com/r/ProductivityHQ/comments/1xjczsg/i_made_ssak_to_record_a_smaller_reading_plan_on/", "views": 282, "score_including_own": 1, "comments": 0},
+    "reddit_iosapps": {"url": "https://www.reddit.com/r/iosapps/comments/1wvvq6p/comment/19rj80bj0lgw4/", "comment_insight_count": 11, "score_including_own": 1, "reply": "Existing app-store-review automated summary, not human feedback"},
+    "reddit_betatesters": {"source": "status.json", "views": 71, "new_external_replies": 0, "existing_external_comment": "Includes paid ThreadFox solicitation; not confirmed app use"},
+    "reddit_japanese_reading": {"source": "status.json", "views": 212, "score_including_own": 2, "comments": 0},
+    "tsukutta": {"source": "status.json", "app_views": 15, "use_button_count": 2, "useful_reactions": 1, "comments": 0, "story_views": 2, "platform_links": "iOS and Android"}
+  },
+  "domestic": {
+    "vibecrew": {"url": "https://vibecrew.kr/ship/10986", "views": 74, "comments": 2, "new_comments": 0, "conversation": "Kai feedback plus own reply", "platform_links": "iOS and Android"},
+    "disquiet": {"post_url": "https://disquiet.io/posts/XdCLka", "recommendations": 0, "comments": 1, "new_comments": 0, "product_url": "https://disquiet.io/products/ssak", "product_followers": 0, "product_comments": 0, "platform_links": "Updated iOS and Android introduction visibly published"},
+    "zerolaunch": {"url": "https://zerolaunch.studio4any.com/ko/tool/product-10-2", "recommendations": 1, "feedback": 0, "accepted_feedback": 0, "comments": 0, "introduction": "iOS and Android; one free habit, three with Plus, no automatic sync"}
+  },
+  "directories": {
+    "getindieapps": {"url": "https://getindieapps.com/app/ssak-habit-tracker", "status": "live_browser_verified", "issue": "iOS only; Android listing/link missing", "attributed_human_traffic": null},
+    "indie_apps": {"url": "https://indie-apps.com/apps/ssak-habit-tracker-334017", "status": "live_browser_verified", "crawler_active_days_last30": 12, "note": "Crawler activity is not human visits. Site explicitly focuses on Apple apps; App Store-only link is expected."},
+    "no_subscription": {"url": "https://www.no-subscription.com/apps/ssak-habit-tracker/", "status": "live_browser_verified", "issue": "iOS only, Android missing; displays one-time USD 2.99, current regional price not independently checked"},
+    "kein_abo": {"url": "https://www.kein-abo.de/apps/ssak-habit-tracker/", "status": "live_browser_verified", "issue": "Same operator and iOS-only description as No-Subscription"},
+    "trymyapp": {"url": "https://trymy.app/", "status": "No Ssak in rendered directory; submission remains pending in operating record", "directory_apps": 183, "free_queue_notice": "9 months or more", "note": "No paid upgrade or repeat submission"},
+    "appllio": {"status": "Editorial submission pending per record; focused public site search returned no result", "limit": "Not proof of rejection. Mailbox not checked."}
+  },
+  "inactive_or_candidate_only": {
+    "mobile01": "Account created/logged in previously, no published marketing post. Commercial-promotion rule exception unresolved; hold maintained.",
+    "threads": "Not launched; login hold per record",
+    "appinn": "Candidate only; price, distribution and local rules unresolved",
+    "maclien_damoang": "Candidates only; permission/conditions unresolved",
+    "dcard": "Excluded from promotional posting",
+    "bilt_sam": "User replied Nov 5 per bilt-inbound.json; awaiting response. Mail not inspected. Business solicitation, not user feedback."
+  },
+  "landing": {
+    "url": "https://ssak-habit-tracker.pages.dev/landing/",
+    "languages_browser_verified": ["en", "ko", "ja", "zh-TW"],
+    "platform_download_buttons": "Both iOS and Android displayed in all four languages",
+    "issue": "English when available; Japanese 提供開始後; Traditional Chinese 推出後 in Plus price sentence imply a future release. Korean already points to available in-app purchase screen.",
+    "action_taken": "Recorded for correction; no code change or deployment in this audit"
+  },
+  "stores_and_revenue": {
+    "google_play": {"store_listing_period": "2026-10-05 through 2026-11-01, confirmed in date picker", "visitors": 6, "unique_user_install_clicks": 0, "click_rate_percent": 0, "default_listing_table_visitors": 3, "growth_overview_device_impressions_last28_label": 44, "growth_overview_exact_dates": null, "acquired_devices_first_launch_and_retention": null, "note": "Unavailable metrics are not zero. Separate views/windows must not be combined as one conversion funnel. Store-listing header and default row differ in scope.", "publication": "Published; no unpublished changes shown"},
+    "app_store_connect": {"status": "blocked", "reason": "Analytics redirected to login with authResult=FAILED; auth widget remains a spinner after reload", "fresh_metrics": null},
+    "revenuecat": {"environment": "production; sandbox switch off", "period": "2026-10-08 through 2026-11-05", "revenue_usd": 0, "new_customers": 28, "active_customers": 31, "recent_live_transactions": 0, "note": "Customer IDs can include developer/test/reinstall activity; not attributed marketing installs or independently recruited testers. Zero revenue does not diagnose payment failure."}
+  },
+  "priorities": [
+    "Restore App Store Connect login to complete fresh iOS measurement",
+    "Correct future-release wording on en/ja/zh-TW landing pages after confirming Plus availability by platform",
+    "Add Android to GetIndieApps and No-Subscription/Kein-Abo when edit/contact access permits",
+    "Nov 6 after 20:29:40 KST: Reel B seven-day observation; new X after 21:06 and Instagram after 21:12:28 for 24-hour observation",
+    "Prioritize first-use conversations over directory count; preserve community repost restrictions"
+  ],
+  "commit_push": false
+}

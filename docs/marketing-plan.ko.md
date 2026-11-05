@@ -1262,3 +1262,59 @@ Apple은 App Store Connect의 캠페인 링크를 활용하고, Google Play는 �
 - 작성 화면에 연결된 공식 규칙 https://www.mobile01.com/sitemanage.php?mode=detail&t=906102 의 8·9항은 상업 광고를 금지한다. 개발자 앱 소개 예외를 확인하지 못해 미게시로 보류. 기존 자작 앱 글은 허용 근거로 취급하지 않는다.
 - 번체 초안은 mobile01-draft.json에 보관. 운영진의 허용 여부 확인 전 게시하지 않는다. 운영진 문의·메일 발송 없음.
 - 다음: 11/4 각 게시물의 24시간 이후 반응 확인, 새 답변 우선 대응. 릴스 B 7일 측정은 11/6 유지. 자동예약 없음.
+
+## 2026-11-05 · 하루 쉬고 운영 재개
+
+- 사용자 보고: 11/4 마케팅 미실행. 오늘 관찰은 24시간 정시 측정이 아닌 누적값이다.
+- 11/3 Instagram 영상 조회2·조회한사람2·비팔로워100%·반응0, X 영상 조회3·반응0. 본인 확인 영향 가능. 작은 표본으로 포맷 실패나 지역 제한을 확정하지 않는다.
+- 일본 Reddit 조회212·점수2(본인 포함)·댓글0, Tsukutta 스토리조회2·제품조회15·이용버튼2·便利1·댓글0. 영어 betatesters 조회71, 새 외부답변0. 첫 사용 확인0명 유지.
+- Instagram·X·Reddit 새 사람 답변 없음. 과거 Lou 답변과 자동 추천·업적·투표 알림은 신규 체험 응답으로 집계하지 않음.
+- X 재시작 주제 글 게시: https://x.com/Ssakhabit/status/2118314064497799442 (21:06 KST 표시). 앱 링크 없이 책갈피를 소재로 짧은 생활 관찰. 성공 알림·상세 본문·시각 확인.
+- Instagram 같은 주제의 4:5 타이포그래피 카드 제작·시각 검수. bookmark-2026-11-05/bookmark.png 및 manifest.json. Chrome 로컬 파일 접근 제한으로 사용자 수동 파일 선택 대기, 아직 미게시.
+- 영어 대화 후보 원문 검토 후 적합한 새 답글은 발송하지 않음. 일본 커뮤니티 중복 소개·Mobile01 홍보는 하지 않음.
+- 다음: Instagram 파일 선택 후 4:5·캡션·대체텍스트 확인 및 게시. 11/6 릴스B 20:29:40 이후 7일 측정, X 오늘 글은 21:06 이후 24시간 측정. 자동예약 없음.
+- 상세: marketing-assets/daily-2026-11-05/status.json. 스토어·RevenueCat·국내 커뮤니티는 오늘 재측정하지 않음. 커밋·푸시 미실행.
+
+### 11/5 21:12 Instagram 카드 게시 완료
+
+사용자가 파일 선택 후 4:5 원본 비율, 무필터, 영어 캡션과 대체텍스트를 확인하여 게시했다. https://www.instagram.com/ssak.app/p/DfXAO0gFF42/ . 게시물 시간 DOM 21:12:28 KST(캡션 시간21:12:29). 공유 성공 안내·프로필 목록·상세 본문 확인. 수동 업로드 대기 해소. 오늘 새 메인 게시물은 X와 Instagram 총2건, 새 답글0건. Instagram 24시간 확인 기준은11/6 21:12:28 이후이며 자동예약 없음. 운영 기록만 갱신, 커밋·푸시 미실행.
+
+### 11/5 전체 마케팅 채널 점검
+
+- 상세 수치와 관찰 범위: marketing-assets/daily-2026-11-05/channel-audit.json. 앞선 오늘 기록의 스토어·RevenueCat·국내 커뮤니티 미점검 상태는 이번 점검으로 갱신됨. App Store Connect는 인증 실패 후 로딩 상태라 최신 iOS 수치만 미확인.
+- VibeCrew 조회74·기존댓글2, Disquiet 모집댓글1·제품댓글0/팔로워0, ZeroLaunch 추천1·피드백0·댓글0. Disquiet iOS·Android 소개 반영 확인.
+- Reddit ProductivityHQ 조회282·댓글0, SideProject 조회222·표시댓글4이나 확인된 대화는 기존 외부피드백+자체답변. iosapps 댓글 인사이트11, 답글은 기존 자동봇이며 사용후기가 아님. 일본·betatesters·Tsukutta·X·Instagram은 오늘 앞선 실측값을 함께 참조.
+- GetIndieApps·Indie Apps·No-Subscription·Kein-Abo 공개 페이지 유지. Indie Apps 크롤러 활동12/30일은 사람 유입이 아님. GetIndieApps와 No-Subscription/Kein-Abo Android 안내 누락. Indie Apps는 Apple 앱 디렉터리라 iOS 링크만 있는 것을 오류로 보지 않음.
+- TryMy.App 렌더된 디렉터리에서 Ssak 미확인, 무료 대기9개월 이상 안내. Appllio 공개 검색 미확인; 비공개 심사·메일 상태는 미확인. Mobile01·Threads 미게시, Appinn·Maclien·Damoang 후보 보류 유지.
+- 영·한·일·번체 랜딩 로딩 및 양 스토어 버튼 확인. en/ja/zh-TW Plus 가격 문장에 출시 전을 암시하는 표현이 남아 정정 후보로 기록. 이번 점검에서 배포하지 않음.
+- Google Play 등록정보 10/5~11/1 방문자6·설치클릭0. 성장 개요의 최근28일 기기노출44는 별도 화면 수치로 동일 퍼널로 합치지 않음. 데이터없음은0이 아님.
+- RevenueCat 운영환경 10/8~11/5 매출$0·신규고객28·활성고객31·최근 운영 거래 없음. 고객 ID는 마케팅 유입·실사용 테스터 수와 다름. 매출0만으로 결제 오류를 결론내리지 않음.
+- 첫 사용 확인 테스터0명 유지. Sam/bilt.me는 사용자가11/5답장한 상태 유지, 서비스 제안이지 체험 후기 아님. 추가 메시지 발송 없음.
+- 다음 우선순위: Apple 인증 복구 → Plus 안내 문구 점검/정정 → Android 디렉터리 정보 보완 → 11/6 릴스B 7일/오늘 게시물24시간 측정. 커밋·푸시 미실행.
+
+### 11/5 채널 점검 후 개선 실행 · 배포 대기
+
+- scripts/lib/landing-copy.json의 영어·일본어·번체 Plus 가격 문장에서 출시 예정 표현을 제거하고 해당 지역 가격은 앱 내 구매 화면에서 확인하도록 정정. 생성된 docs/landing의3개 언어 파일에 반영.
+- node scripts/public-site.cjs 및 npm run build 성공. Chrome 로컬 미리보기에서 세 언어 정정문 확인. ZIP 경로·무결성·앱 ID·Android 패키지 링크 검증 성공.
+- 배포 파일: artifacts/ssak-public-site-2026-11-05-plus-copy.zip (공개 파일28개). Cloudflare 로그인 화면으로 이동되어 사용자 로그인 대기. 공개 반영은 아직 미완료.
+- GetIndieApps Dashboard는 등록 이메일로 일회성 로그인 링크가 필요. 로그인·Android 수정 미완료. 계정 복구·새 등록은 실행하지 않음.
+- No-Subscription/Kein-Abo는 직접 편집 불가로 기존 daily-2026-10-30/no-subscription-update-email.txt 수정 요청문 유지. 메일 미발송. 커밋·푸시 미실행.
+
+### 11/5 Plus 안내 문구 공개 배포 완료
+
+- 사용자 Cloudflare 로그인 및 ZIP 직접 선택 후 Production 28/28 files uploaded 확인, Save and deploy 실행하여 Success 확인.
+- 공개 https://ssak-habit-tracker.pages.dev/landing/ 및 언어 선택으로 일본어·번체 페이지에서 수정된 지역별 Plus 가격 안내 문구 직접 검증. 세 언어 모두 출시 예정 표현 제거 반영 완료.
+- 증빙: marketing-assets/daily-2026-11-05/cloudflare-plus-deployed.png. 앞선 배포 대기 상태 해소.
+- GetIndieApps 로그인·Android 수정, No-Subscription/Kein-Abo 수정 요청은 여전히 미완료. 이번 배포로 디렉터리 정보가 자동 변경되지는 않음. 커밋·푸시 미실행.
+
+### 11/5 독서 첫 사용 실험 준비
+
+- 기존 일반 랜딩과 별도로 /landing/reading/ 및 /landing/reading/ja/ 생성. 독서10분/1페이지 예시, 첫 기록3단계, 기존 영문 웹 빌드 실제 캡처를 촬영일·샘플데이터·모바일 차이 고지와 함께 추가.
+- 생성기 원본 scripts/lib/reading-copy.json, 공통 템플릿과 공개 패키징 갱신. 모바일390px 영어·일본어 가로 넘침 해소 및 이미지 로딩 확인, 내부 링크 전체 검사와 npm run build 통과. 캐시된 CSS로 캡처가 넘치는 문제를 스타일 URL 버전으로 수정.
+- 체험 요청·동의 후 후속 질문 영어/일본어, 11/6~11/19 운영 목표와 체크포인트는 daily-2026-11-05/reading-experiment.json. 목표 첫사용3명·구체적의견3건은 예측/실적 아님. 새 게시·메시지·자동예약 없음.
+- 분석 점검: 앱 PostHog 코드 존재하나 web에서는 실행하지 않음. 출시버전/운영 수신 미확인, 랜딩 방문·클릭 수집/UTM 전달 미구현. 기존 Apple 캠페인 발급 기록과 현재 실제 귀속을 구분. 실사용 피드백을 수치로 과장하지 않음.
+- 배포 ZIP artifacts/ssak-public-site-2026-11-05-reading.zip 공개파일31개 검증. 앞선 자동 업로드 권한 거부로 사용자 직접 파일 선택 대기. 아직 독서 전용 페이지 공개 미완료. 커밋·푸시 미실행.
+
+### 11/5 독서 전용 랜딩 공개 완료
+
+사용자 ZIP 선택 후 Production 31/31 업로드 확인, Save and deploy 실행 및 Success 확인. 배포 전파 직후 영어 URL에 일시404가 있었으나 재로드 후 정상 페이지 확인. https://ssak-habit-tracker.pages.dev/landing/reading/ 및 일본어 /landing/reading/ja/ 공개 확인. 이미지 로딩·스타일시트·첫 기록 안내·일본어 양대 스토어 링크의 정확한 앱ID/패키지 검증. reading-experiment.json을 공개 검증 완료로 갱신. 증빙 reading-deployed.png. 신규 SNS 게시·체험 요청 발송·측정기 설치·커밋·푸시는 실행하지 않음.

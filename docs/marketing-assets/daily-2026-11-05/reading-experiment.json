@@ -1,0 +1,84 @@
+{
+  "prepared_date": "2026-11-05",
+  "experiment_window_kst": "2026-11-06 through 2026-11-19",
+  "status": "landing_published_verified_outreach_drafts_ready",
+  "goal_not_forecast": {
+    "first_use_confirmations": 3,
+    "specific_feedback_items": 3
+  },
+  "audience": "Readers returning after a break who find their usual daily reading target too large on busy days",
+  "landing": {
+    "english_after_deployment": "https://ssak-habit-tracker.pages.dev/landing/reading/",
+    "japanese_after_deployment": "https://ssak-habit-tracker.pages.dev/landing/reading/ja/",
+    "public_verified": true,
+    "content": "Reading-specific promise, 10-minute/one-page plan, three-step first-record guide and a clearly labelled English web-build capture with sample data",
+    "screenshot_source": "../reading-experiment-2026-10-23/sources/reading/01-today.png",
+    "screenshot_limit": "Web build, not a newly recorded native app demo. Japanese page labels the English capture explicitly."
+  },
+  "outreach": {
+    "status": "drafts_not_sent",
+    "use_when": "Only in relevant conversations where developer participation is permitted and someone expresses interest. Disclose developer role. Do not send unsolicited bulk DMs or duplicate community promotions.",
+    "en": "I’m the developer of Ssak. Would you be open to trying one free reading habit and telling me whether the usual goal and busy-day option make sense? One confusing step is useful feedback. No purchase, store review or reading history needed.",
+    "ja": "Ssakの開発者です。もしよければ、無料の読書習慣をひとつ作って、普段の目標と忙しい日の代案がわかりやすいか教えていただけませんか？ 迷った点ひとつだけでも助かります。購入・ストア評価・読書履歴の共有は不要です。",
+    "followup_after_voluntary_response_en": "Thanks for trying it. Were you able to make your first record? If not, which step got in the way?",
+    "followup_after_voluntary_response_ja": "試してくださってありがとうございます。最初の記録はできましたか？ できなかった場合は、どの操作で迷ったか教えていただけると助かります。",
+    "contact_rule": "One contextual follow-up after a response; ask permission before a seven-day check-in; no repeated nudges without a reply."
+  },
+  "content_pair": {
+    "A": "Existing Nov 5 bookmark card: returning to reading, no app interface",
+    "B": "Existing one-page-2026-11-03/reel.mp4: actual action/result footage; inspect caption and provenance before reuse. Do not call it a new native recording.",
+    "next_demo_script_en": [
+      "Busy day? Make the smaller plan in advance.",
+      "Your usual plan: read for 10 minutes. Your busy-day option: read one page.",
+      "Read first. Then tap the option you actually completed.",
+      "Try one reading habit free. What felt confusing?"
+    ],
+    "comparison_rule": "Observe at 24 hours and seven days; keep language, topic and observation windows comparable. Tiny reach or different dates cannot establish a causal format winner."
+  },
+  "measurement_audit": {
+    "web": "Static landing has no visitor/click collector. UTM forwarding not implemented. A query string alone does not create analytics.",
+    "app": "src/analytics/runtime.ts contains PostHog event sending but exits on web. Native execution depends on config, device, environment and user preference. Source presence is not proof of store rollout or received production events.",
+    "existing_events": [
+      "first_open",
+      "app_open",
+      "habit_created",
+      "habit_completed",
+      "review_completed"
+    ],
+    "apple_campaign_links": "Four links recorded as generated in daily-2026-10-30/global-channel-links.json. No fresh App Store Connect campaign attribution verified.",
+    "android_links": "Previously prepared UTM links are not end-to-end verified attribution.",
+    "next_verification": "Check actual production app version and received production events in PostHog before building conversion/retention claims; separately configure and verify web visit/store-click collection with appropriate disclosure.",
+    "manual_first_use_definition": "Person explicitly confirms completing their first record. Do not substitute views, store clicks, customer IDs or expressions of interest.",
+    "avoid_collecting": [
+      "reading history",
+      "habit content",
+      "private screenshots",
+      "unnecessary contact details"
+    ]
+  },
+  "checkpoints": [
+    {
+      "at_kst": "2026-11-06T20:29:40+09:00",
+      "task": "Reel B seven-day observation"
+    },
+    {
+      "at_kst": "2026-11-06T21:06:00+09:00",
+      "task": "Nov 5 X post: at least 24-hour observation"
+    },
+    {
+      "at_kst": "2026-11-06T21:12:28+09:00",
+      "task": "Nov 5 Instagram card: at least 24-hour observation"
+    },
+    {
+      "date": "2026-11-12",
+      "task": "Review reach, real conversations, first-use confirmations and blockers separately"
+    },
+    {
+      "date": "2026-11-19",
+      "task": "Decide which audience/message to continue based on observed feedback; insufficient reach means inconclusive"
+    }
+  ],
+  "automation_created": false,
+  "new_posts_or_messages_sent": 0,
+  "feedback_records": []
+}
