@@ -53,7 +53,7 @@
       "Backup and restore your records",
       "No recurring subscription"
     ],
-    "device": "Records stay on your device and do not sync automatically. Plus pricing will be shown in the app when available.",
+    "device": "Records stay on your device and do not sync automatically. Check the in-app purchase screen for the Plus price in your region.",
     "questions": "A few things to know.",
     "faq": [
       [
@@ -231,7 +231,7 @@
       "記録のバックアップと復元",
       "月額のサブスクリプションなし"
     ],
-    "device": "記録は端末に保存され、自動では同期されません。Plusの価格は提供開始後のアプリ内購入画面で確認できます。",
+    "device": "記録は端末に保存され、自動では同期されません。お住まいの地域のPlus価格は、アプリ内の購入画面で確認できます。",
     "questions": "よくある質問。",
     "faq": [
       [
@@ -320,7 +320,7 @@
       "紀錄備份與還原",
       "沒有每月訂閱費"
     ],
-    "device": "紀錄儲存在裝置上，不會自動同步。Plus 價格可在推出後的 App 購買畫面確認。",
+    "device": "紀錄儲存在裝置上，不會自動同步。你所在地區的 Plus 價格可在 App 內的購買畫面確認。",
     "questions": "你可能想知道。",
     "faq": [
       [

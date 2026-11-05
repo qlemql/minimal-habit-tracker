@@ -6,6 +6,7 @@ const output = path.join(root, 'docs/landing');
 const brand = require('../assets/brand/design.json');
 const info = require('../release-public.json');
 const copy = require('./lib/landing-copy.json');
+const readingCopy = require('./lib/reading-copy.json');
 const escape = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const logo = `<svg viewBox="0 0 512 512" aria-hidden="true"><path fill="${brand.brown}" d="${brand.contour}"/><path fill="${brand.coral}" d="${brand.tip}"/></svg>`;
 const check = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -15,28 +16,35 @@ fs.mkdirSync(output, {recursive:true});
 fs.writeFileSync(path.join(output,'mark.svg'),logo.replace('aria-hidden="true"','xmlns="http://www.w3.org/2000/svg"'));
 const languages = {en:'English',ko:'한국어',ja:'日本語','zh-TW':'繁體中文'};
 const policyLabels = {en:['Privacy','Purchase terms'],ko:['개인정보처리방침','구매 안내'],ja:['プライバシー','購入について'],'zh-TW':['隱私權政策','購買說明']};
-for (const [lang,c] of Object.entries(copy)) {
+for (const variant of ['', 'reading']) {
+const entries = variant ? Object.entries(readingCopy).map(([lang, overrides]) => [lang, {...copy[lang], ...overrides}]) : Object.entries(copy);
+const variantLanguages = variant ? Object.fromEntries(entries.map(([lang]) => [lang, languages[lang]])) : languages;
+for (const [lang,c] of entries) {
   const prefix = lang === 'en' ? './' : '../';
+  const assetPrefix = variant ? prefix + '../' : prefix;
   const urlFor = code => prefix + (code === 'en' ? 'index.html' : code+'/index.html');
-  const absolute = code => info.siteUrl+'/landing/'+(code==='en'?'':code+'/');
+  const absolute = code => info.siteUrl+'/landing/'+(variant ? 'reading/' : '')+(code==='en'?'':code+'/');
   const html = `<!doctype html>
 <html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escape(c.title)}</title><meta name="description" content="${escape(c.description)}">
 <link rel="canonical" href="${absolute(lang)}">
-${Object.keys(copy).map(code=>`<link rel="alternate" hreflang="${code}" href="${absolute(code)}">`).join('\n')}
+${Object.keys(variantLanguages).map(code=>`<link rel="alternate" hreflang="${code}" href="${absolute(code)}">`).join('\n')}
 <link rel="alternate" hreflang="x-default" href="${absolute('en')}">
 <meta property="og:type" content="website"><meta property="og:title" content="${escape(c.title)}"><meta property="og:description" content="${escape(c.description)}"><meta property="og:url" content="${absolute(lang)}">
 <meta property="og:image" content="${info.siteUrl}/landing/social-card.png"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="${prefix}mark.svg" type="image/svg+xml"><link rel="stylesheet" href="${prefix}style.css"></head>
-<body><a class="skip" href="#main">${c.skip}</a><div class="wrap"><header><a class="brand" href="${urlFor(lang)}" aria-label="Ssak">${logo}<span>ssak</span></a><nav aria-label="${c.language}">${Object.entries(languages).map(([code,label])=>`<a href="${urlFor(code)}" lang="${code}" ${code===lang?'aria-current="page"':''}>${label}</a>`).join('')}</nav></header>
+<link rel="icon" href="${assetPrefix}mark.svg" type="image/svg+xml"><link rel="stylesheet" href="${assetPrefix}style.css?v=20261105-reading"></head>
+<body><a class="skip" href="#main">${c.skip}</a><div class="wrap"><header><a class="brand" href="${urlFor(lang)}" aria-label="Ssak">${logo}<span>ssak</span></a><nav aria-label="${c.language}">${Object.entries(variantLanguages).map(([code,label])=>`<a href="${urlFor(code)}" lang="${code}" ${code===lang?'aria-current="page"':''}>${label}</a>`).join('')}</nav></header>
 <main id="main"><section class="hero"><div class="hero-copy"><p class="eyebrow">${c.eyebrow}</p><h1>${c.heading.split("<br>").map((line,i)=>`<span class="headline-line${i===1?" accent":""}">${escape(line)}</span>`).join("")}</h1><p class="lead">${c.description}</p><div class="hero-actions"><a class="button" href="${escape(info.iosStoreUrl)}" target="_blank" rel="noopener"><span class="button-label">${c.cta}</span>${externalArrow}</a><a class="button" href="${escape(info.androidStoreUrl)}" target="_blank" rel="noopener"><span class="button-label">${c.androidCta}</span>${externalArrow}</a><a class="how-link" href="#how"><span class="how-link-content"><span>${c.howLink}</span>${downArrow}</span></a></div><p class="micro">${c.noaccount}</p></div><div class="illustration"><div class="habit-card"><div class="card-top"><span>${c.example}</span>${logo}</div><p class="habit-name">${c.read}</p><p class="timing">${c.after}</p><div class="goal-pair"><div class="goal"><span>${c.usual}</span><strong>${c.usualAmount}</strong><span class="goal-action">${c.goalAction}</span></div><div class="goal small-goal"><span>${c.busy}</span><strong>${c.busyAmount}</strong><span class="goal-action">${c.goalAction}</span></div></div><div class="record-example"><span>${c.recordLabel}</span><strong>${check}<span>${c.recordValue}</span></strong></div></div><p class="caption">${c.caption}</p></div><p class="habit-examples">${c.otherExamples}</p></section>
 <div class="ribbon"><span>${c.ribbon[0]}</span><span>${c.ribbon[1]}</span><span>${c.ribbon[2]}</span></div>
 <section class="how" id="how"><div class="section-heading"><p class="eyebrow">ROOM FOR REAL LIFE</p><h2>${c.how}</h2></div><div class="steps">${c.steps.map(([title,text],i)=>`<article><span class="number">0${i+1}</span><h3>${title}</h3><p>${text}</p></article>`).join('')}</div></section>
+${variant ? `<section class="how"><div class="section-heading"><h2>${c.demoTitle}</h2><p>${c.demoIntro}</p></div><figure class="reading-demo"><img src="${assetPrefix}reading-demo.png" width="430" height="860" loading="lazy" alt="${escape(c.demoAlt)}"><figcaption>${c.demoCaption}</figcaption></figure><p class="fine">${c.feedback}</p></section>` : ''}
 <section class="plans"><div class="section-heading"><p class="eyebrow">START WITH ONE</p><h2>${c.plansTitle}</h2><p>${c.plansIntro}</p></div><div class="plan-grid"><article class="plan"><span class="tag">${c.free}</span><h3>${c.freeTitle}</h3><p>${c.freeText}</p><ul>${c.freeItems.map(t=>`<li>${t}</li>`).join('')}</ul></article><article class="plan plus"><span class="tag">SSAK PLUS</span><h3>${c.plusTitle}</h3><p>${c.plusText}</p><ul>${c.plusItems.map(t=>`<li>${t}</li>`).join('')}</ul></article></div><p class="fine">${c.device}</p></section>
 <section class="faq"><div class="section-heading"><p class="eyebrow">GOOD TO KNOW</p><h2>${c.questions}</h2></div><div>${c.faq.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></section>
 <section class="start" id="start"><div>${logo}<p class="eyebrow">MEET SSAK</p><h2>${c.startTitle}</h2><p>${c.availability}</p><div class="platforms"><span>${c.available}</span><span>${c.androidAvailable}</span></div><div class="store-actions"><a class="button" href="${escape(info.iosStoreUrl)}" target="_blank" rel="noopener"><span class="button-label">${c.download}</span>${externalArrow}</a><a class="button" href="${escape(info.androidStoreUrl)}" target="_blank" rel="noopener"><span class="button-label">${c.androidDownload}</span>${externalArrow}</a></div></div></section></main>
-<footer><a class="brand" href="${urlFor(lang)}">${logo}<span>ssak</span></a><p>${c.footer}</p><div><a href="${prefix}../${lang}/privacy/">${policyLabels[lang][0]}</a><a href="${prefix}../${lang}/terms/">${policyLabels[lang][1]}</a><a href="${prefix}../${lang}/support/">${c.contact}</a><a href="https://www.instagram.com/ssak.app/" target="_blank" rel="noopener">Instagram ↗</a></div></footer></div></body></html>`;
-  const target = lang==='en'?output:path.join(output,lang);
+<footer><a class="brand" href="${urlFor(lang)}">${logo}<span>ssak</span></a><p>${c.footer}</p><div><a href="${assetPrefix}../${lang}/privacy/">${policyLabels[lang][0]}</a><a href="${assetPrefix}../${lang}/terms/">${policyLabels[lang][1]}</a><a href="${assetPrefix}../${lang}/support/">${c.contact}</a><a href="https://www.instagram.com/ssak.app/" target="_blank" rel="noopener">Instagram ↗</a></div></footer></div></body></html>`;
+  const variantOutput = variant ? path.join(output, variant) : output;
+  const target = lang==='en'?variantOutput:path.join(variantOutput,lang);
   fs.mkdirSync(target,{recursive:true}); fs.writeFileSync(path.join(target,'index.html'),html);
 }
-console.log('Generated four Ssak landing pages with App Store and Google Play links.');
+}
+console.log('Generated reading campaign pages and four Ssak landing pages with App Store and Google Play links.');

@@ -171,3 +171,7 @@ footer > div a { display: inline-flex; align-items: center; min-height: 44px; }
   html { scroll-behavior: auto; }
   a { transition: none; }
 }
+
+.reading-demo { margin: 28px auto; max-width: 430px; }
+.reading-demo img { display: block; width: 100%; height: auto; border: 1px solid #e7d9c9; border-radius: 20px; }
+.reading-demo figcaption { margin-top: 12px; font-size: 13px; line-height: 1.6; color: #756655; }

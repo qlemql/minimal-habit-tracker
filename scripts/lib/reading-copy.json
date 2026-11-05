@@ -1,0 +1,56 @@
+{
+  "en": {
+    "title": "Start reading again, one page at a time — Ssak",
+    "heading": "Back to your book.<br>One page is a start.",
+    "eyebrow": "A SMALLER READING PLAN",
+    "description": "Set a usual reading goal and a smaller option for busy days. Ten minutes or one page: record what you actually read in Ssak.",
+    "example": "AN EXAMPLE READING PLAN",
+    "read": "Read a little",
+    "after": "After my morning coffee",
+    "usualAmount": "10 min",
+    "busyAmount": "1 page",
+    "goalAction": "Reading",
+    "recordValue": "Recorded: one page read",
+    "otherExamples": "Start with one free reading habit. No purchase or rating needed.",
+    "howLink": "Make your first record",
+    "how": "From a reading plan<br>to your first record.",
+    "steps": [
+      ["Create one reading habit.", "Choose a moment that fits your day, such as after morning coffee. One habit is free with no time limit."],
+      ["Give yourself two options.", "For example: read for ten minutes on a usual day, or read one page on a busy day. Choose amounts that work for you."],
+      ["Read, then record it.", "On Today, tap the option you actually completed. If you did neither, leave it unrecorded and come back another day."]
+    ],
+    "demoTitle": "Two options, on the same screen.",
+    "demoIntro": "The smaller option is ready before a busy day arrives.",
+    "demoAlt": "Ssak English Today screen with Read for 10 minutes and Read one page options, followed by the weekly plan.",
+    "demoCaption": "English web-build capture with sample data, October 23, 2026. The mobile layout may differ.",
+    "feedback": "Trying it after a conversation with the developer? Tell them which setup step felt confusing. No reading history, purchase or store review is needed.",
+    "startTitle": "Try one reading habit for free."
+  },
+  "ja": {
+    "title": "読書を再開する、小さな一歩 — Ssak",
+    "heading": "また、本を開こう。<br>まずは1ページから。",
+    "eyebrow": "忙しい日にも、読書の小さな代案",
+    "description": "普段の読書目標と、忙しい日の小さな代案を一緒に設定。10分でも1ページでも、実際に読んだ分をSsakに記録できます。",
+    "example": "読書プランの例",
+    "read": "少し本を読む",
+    "after": "朝のコーヒーのあと",
+    "usualAmount": "10分",
+    "busyAmount": "1ページ",
+    "goalAction": "読書",
+    "recordValue": "1ページ読んだことを記録",
+    "otherExamples": "まずは無料の読書習慣をひとつ。購入やストア評価は必要ありません。",
+    "howLink": "最初の記録まで",
+    "how": "読書の計画から、<br>最初の記録まで。",
+    "steps": [
+      ["読書の習慣をひとつ作る。", "朝のコーヒーのあとなど、自分に合うタイミングを決めます。習慣ひとつは期限なく無料です。"],
+      ["2つの選択肢を決める。", "例えば、普段は10分、忙しい日は1ページ。無理なくできる量を自分で選びましょう。"],
+      ["読んでから記録する。", "今日の画面で、実際にできたほうをタップします。どちらもできなかった日は記録せず、また別の日に再開できます。"]
+    ],
+    "demoTitle": "同じ画面に、2つの選択肢。",
+    "demoIntro": "忙しくなる前に、小さな代案を用意できます。",
+    "demoAlt": "Ssak英語版の今日の画面。10分読む・1ページ読むという選択肢と週間プランが表示されています。",
+    "demoCaption": "2026年10月23日撮影の英語Web版・サンプルデータです。モバイル版とは表示が異なる場合があります。",
+    "feedback": "開発者との会話から試している方は、設定でわかりにくかった点をひとつ教えてください。読書履歴の共有、購入、ストア評価は不要です。",
+    "startTitle": "無料の読書習慣を、ひとつ試す。"
+  }
+}

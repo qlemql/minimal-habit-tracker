@@ -11,7 +11,7 @@ for(const lang of ['en','ko','ja','zh-TW']) {
   fs.cpSync(path.join(root,'artifacts/legal-site',lang),path.join(root,'docs',lang),{recursive:true});
 }
 const landing = path.join(output,'landing'); fs.mkdirSync(landing,{recursive:true});
-for(const name of ['index.html','style.css','mark.svg','social-card.png','ko','ja','zh-TW']) fs.cpSync(path.join(root,'docs/landing',name),path.join(landing,name),{recursive:true});
+for(const name of ['index.html','style.css','mark.svg','social-card.png','reading-demo.png','reading','ko','ja','zh-TW']) fs.cpSync(path.join(root,'docs/landing',name),path.join(landing,name),{recursive:true});
 const redirects = {'index.html':'landing/','privacy-policy.html':'ko/privacy/','privacy-policy.en.html':'en/privacy/','terms-of-service.html':'ko/terms/','terms-of-service.en.html':'en/terms/'};
 for(const [file,url] of Object.entries(redirects)) fs.writeFileSync(path.join(output,file),`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=./${url}"><title>Ssak</title><a href="./${url}">Continue to Ssak</a></html>`);
 for(const file of Object.keys(redirects).filter(file=>file!=='index.html')) fs.copyFileSync(path.join(output,file),path.join(root,'docs',file));
