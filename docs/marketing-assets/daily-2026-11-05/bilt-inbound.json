@@ -1,0 +1,52 @@
+{
+  "recorded_date_kst": "2026-11-05",
+  "type": "inbound_distribution_pilot_solicitation",
+  "sender_label": "Sam / bilt.me",
+  "source": "User-pasted inbound email thread and user confirmation of sending a reply; mailbox not accessed.",
+  "inbound": {
+    "initial_email_date_as_quoted": "2026-10-30 10:42 AM",
+    "initial_email_timezone": null,
+    "followup_date": null,
+    "quoted_message_count": 2,
+    "claimed_discovery_source": "GetIndieApps",
+    "offer": "Early pilot of self-driving app distribution; sender says paid distribution has been explored and organic distribution is now being tested.",
+    "sender_claims_not_independently_verified": [
+      "10,000 Bilt users",
+      "paid distribution results",
+      "organic acquisition results"
+    ]
+  },
+  "reply": {
+    "status": "sent_by_user",
+    "evidence": "User said 답장 보내봄 in this conversation.",
+    "reported_date_kst": "2026-11-05",
+    "exact_sent_at": null,
+    "exact_body": null,
+    "note": "A suggested reply was drafted in chat, but the user did not provide the exact sent body. Do not treat that draft as the sent message."
+  },
+  "supersedes": {
+    "previous_decision": "No reply to Sam/bilt.me, recorded on 2026-10-30 and carried forward in marketing hold lists.",
+    "current_status": "User has replied; wait for a response. Historical daily records remain as observations at their respective dates."
+  },
+  "assessment": {
+    "stage": "demo and pilot terms to review; no agreement recorded",
+    "items_to_check_when_response_arrives": [
+      "Exact organic distribution channels and deliverables",
+      "Support for an existing app built outside Bilt",
+      "Results for comparable apps, distinguishing views, installs, first use and retention",
+      "Pilot pricing, duration and required account permissions"
+    ],
+    "public_references_reviewed": [
+      "https://bilt.me/",
+      "https://luma.com/850wzld0"
+    ],
+    "verification_limit": "Public product and event pages do not authenticate the email sender or establish distribution results."
+  },
+  "next_action": "Review a new response when provided by the user; no additional outreach is authorized by this documentation-and-Git request.",
+  "measurement": "Business/service solicitation, not recruited tester, app-use feedback, attributed install or proof of marketing ROI.",
+  "agent_actions_in_this_update": [
+    "Update repository marketing records",
+    "Commit and push the record"
+  ],
+  "new_messages_sent_by_agent": 0
+}
