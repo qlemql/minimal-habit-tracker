@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-06",
+  "timezone": "Asia/Seoul",
+  "observation_window": "23:43–23:48 KST approximately; cumulative, not exact 24h/7d snapshots",
+  "instagram_nov5_card": {"url":"https://www.instagram.com/ssak.app/p/DfXAO0gFF42/","views":1,"viewers":1,"followers_percent":100,"nonfollowers_percent":0,"home_views":1,"likes":0,"comments":0,"saves":0,"shares":0,"interactions_display":null,"engaged_accounts_display":null,"profile_activity":0,"profile_visits":0,"external_link_clicks":0,"address_clicks":0,"follows":0},
+  "instagram_reel_b_7day_checkpoint": {"url":"https://www.instagram.com/ssak.app/reel/DfHeif9tbhx/","published_at_kst":"2026-10-30T20:29:40+09:00","views":30,"viewers":24,"followers_percent":0,"nonfollowers_percent":100,"interactions":1,"engaged_accounts":1,"likes":0,"comments":0,"saves":1,"shares":0,"profile_activity":0,"follows":0,"note":"Observed about 7 days 3 hours after publication. Nonfollowers does not establish audience country."},
+  "x_nov5": {"url":"https://x.com/Ssakhabit/status/2118314064497799442","views_initial":3,"views_later_profile":4,"replies":0,"reposts":0,"likes":0,"bookmarks":0,"note":"Own inspection may contribute; tiny sample cannot establish format performance."},
+  "japan_reddit": {"url":"https://www.reddit.com/r/dokusyo_syoseki_r/comments/1xmsz9u/","views":270,"previous_nov5_views":212,"score":2,"includes_own_vote":true,"comments":0},
+  "new_human_notifications_at_initial_check": {"instagram":0,"x":0,"reddit":0},
+  "first_use_confirmed_total":0,
+  "actions": [
+    {"channel":"X","kind":"contextual_reply","status":"published_verified","url":"https://x.com/Ssakhabit/status/2118716290131268053","parent":"https://x.com/sabstappen/status/2118653980515455461","body":"Reading before a pre-5am start is quite a comeback! Was it finding the right book, or making a little space for reading again?","note":"No app link or pitch. Earlier attempted wording was not found after reload; final visible reply verified once."},
+    {"channel":"Reddit Japanese","kind":"existing_post_edit","status":"saved_verified","url":"https://www.reddit.com/r/dokusyo_syoseki_r/comments/1xmsz9u/","change":"Replaced generic Japanese landing with reading-specific Japanese landing and changed label to 読書の設定手順・ストアリンク：. Remaining body preserved.","destination":"https://ssak-habit-tracker.pages.dev/landing/reading/ja/"},
+    {"channel":"X","kind":"first_use_recruitment","status":"published_verified","url":"https://x.com/Ssakhabit/status/2118716981348360452","published_at_display":"2026-11-06 23:47 KST","body":"I built Ssak for busy reading days. Could you try one free habit and tell me whether the usual goal and busy-day option make sense? One confusing step is useful feedback. No purchase or review needed.\n\nhttps://ssak-habit-tracker.pages.dev/landing/reading/","initial_replies":0,"initial_reposts":0,"initial_likes":0,"initial_bookmarks":0,"initial_views":null}
+  ],
+  "scope": "Today: Instagram/X checkpoints, notifications, one X conversation, own X recruitment and existing Japanese Reddit link improvement. Other channels/stores/RevenueCat not remeasured; use Nov5 audit with its original dates.",
+  "holds": ["Mobile01 commercial-promotion rules unresolved; no post","GetIndieApps email login pending; Android update not completed","No-Subscription/Kein-Abo correction email unsent","No additional Instagram upload today","No paid ads or subscriptions, bulk DMs or automated follow-ups"],
+  "next": ["Check voluntary replies and first-record confirmations on next session; no unsolicited nudges","New X post 24h checkpoint after Nov7 23:47 KST; otherwise label interim","Nov5 Instagram/X seven-day checkpoint after Nov12 respective publication times","Prepare actual-action demo for next content iteration; label existing web footage accurately","First-use experiment target remains 3 confirmations and 3 specific feedback items by Nov19, not achieved results"],
+  "automations_created":false,
+  "commit_push_performed":false,
+  "evidence": ["instagram-card-insights.png","reel-b-seven-day.png","x-reading-reply.png","reddit-reading-link.png","x-first-use-recruitment.png"]
+}
