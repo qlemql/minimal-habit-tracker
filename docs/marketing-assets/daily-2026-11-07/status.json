@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-07",
+  "day": 1,
+  "timezone": "Asia/Seoul",
+  "period": [
+    "2026-11-07",
+    "2026-12-04"
+  ],
+  "x_followers": 0,
+  "instagram_followers": 1,
+  "instagram_posts": 17,
+  "recruitment_snapshot": {
+    "post": "https://x.com/Ssakhabit/status/2118716981348360452",
+    "window": "23:35 KST approximately, before 24h",
+    "views": 1,
+    "replies": 0,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0
+  },
+  "new_human_notifications": {
+    "x": 0,
+    "instagram": 0
+  },
+  "first_use_confirmed_total": 0,
+  "profiles": {
+    "bio": "I make Ssak. Here I share ways to pick up a book again, even on a busy day. Track one reading habit free on iOS & Android.",
+    "x": "Saved and verified. Website changed to English reading landing.",
+    "instagram": "Bio saved and verified. Website edit control is mobile-only; current link goes to site root."
+  },
+  "landing": "https://ssak-habit-tracker.pages.dev/landing/reading/",
+  "stores_verified_on_landing": [
+    "id6762334017",
+    "com.qlemql.minimalhabittracker"
+  ],
+  "pinned_x_draft": "I make Ssak for days when the original plan feels too big. Set two reading options in advance: ten minutes on a usual day, one page on a busy one. Record what you read. One habit is free on iOS and Android. https://ssak-habit-tracker.pages.dev/landing/reading/",
+  "nov8_reel_draft": {
+    "shots": [
+      "0–3s: A bookmark in a closed book. Too tired for ten minutes?",
+      "3–7s: Open the book and turn one page. Tonight: one page.",
+      "7–12s: Show the smaller option on Today, then its recorded result.",
+      "12–15s: Read one page. Record one page."
+    ],
+    "materials": "Book, bookmark, hands; capture original footage or use labelled sample screen from docs/marketing-assets/one-page-2026-11-03. No live footage captured today.",
+    "caption": "Choose the small version while you still have energy. Ten minutes on an ordinary night, one page on a busy one. After reading, log the option you finished. What's your one-page equivalent?"
+  },
+  "nov10_carousel": [
+    "What counts on a busy reading day?",
+    "Usual plan: ten minutes.",
+    "Busy-day option: a page.",
+    "Record what you read."
+  ],
+  "nov12_reel_hook": "Three days away? Your bookmark still knows where to start.",
+  "next": "Nov 8: produce Reel A and publish the accompanying X post; review the Nov 6 recruitment post after 24 hours.",
+  "other_channels": {
+    "vibecrew": {
+      "comments": 2,
+      "views": 78,
+      "new_comments": 0
+    },
+    "disquiet_post": {
+      "visible_comments": 1,
+      "recommendations": 0,
+      "latest": "Oct 28"
+    },
+    "zerolaunch": {
+      "feedback": 0,
+      "recommendations": 1,
+      "comments": 0
+    },
+    "japanese_reddit": {
+      "views": 296,
+      "comments": 0
+    },
+    "tsukutta": {
+      "useful": 1,
+      "comments": 0,
+      "app_views": 16,
+      "use_count": 2,
+      "story_views": 3
+    },
+    "reddit_sideproject": {
+      "views": 223,
+      "displayed_comments": 4
+    },
+    "google_play_dashboard": {
+      "publication": "published",
+      "install_count": null,
+      "first_launch": null
+    },
+    "app_store_connect": "Sign-in form; analytics unavailable",
+    "vibecrew_opportunity": "November banner recipients announced; December application notice planned per https://vibecrew.kr/notice/11787",
+    "external_changes": 0
+  }
+}
