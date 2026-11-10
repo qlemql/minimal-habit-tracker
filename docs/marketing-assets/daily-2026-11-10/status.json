@@ -1,0 +1,38 @@
+{
+  "day": 4,
+  "instagram": {
+    "caption": "Both versions end on page 43. Here's what Saturday looks like in each. The notebook has one box for ten minutes. In Ssak, tapping 'Read one page' leaves a check on Saturday and keeps the page you read in the record. Dramatized example using the English web demo with sample data.",
+    "files": [
+      "01-bookmark.png",
+      "02-choice.png",
+      "03-saturday.png"
+    ],
+    "asset_dir": "../page-43-2026-11-10",
+    "status": "published_verified",
+    "url": "https://www.instagram.com/ssak.app/p/Dfjx9AdlLAV/",
+    "published_at": "2026-11-10T20:17:50+09:00"
+  },
+  "date": "2026-11-10",
+  "x_reply": {
+    "url": "https://x.com/Ssakhabit/status/2120114561647001964",
+    "published_at": "2026-11-10T20:21:15+09:00",
+    "status": "published_verified",
+    "proof": "x-reply.png",
+    "parent": "https://x.com/ak_chaturvedi/status/2120064632266408155",
+    "topic": "Holes by Louis Sachar"
+  },
+  "additional_x_replies": [
+    {
+      "topic": "fiction writing",
+      "published_at": "2026-11-10T20:25:37+09:00",
+      "parent": "https://x.com/I_Am_Yasmin_/status/2119501688876781794",
+      "url": "https://x.com/Ssakhabit/status/2120115657060880819"
+    },
+    {
+      "topic": "decluttering collectibles",
+      "published_at": "2026-11-10T20:25:43+09:00",
+      "parent": "https://x.com/tinizucchinix/status/2119299318226223411",
+      "url": "https://x.com/Ssakhabit/status/2120115683895943497"
+    }
+  ]
+}
