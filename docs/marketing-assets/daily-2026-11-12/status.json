@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-12",
+  "followup": "Read the response to the writing reply when signed-in access is restored.",
+  "x_11_10": [
+    {
+      "topic": "reading",
+      "likes": 1,
+      "views": 5,
+      "replies": 0
+    },
+    {
+      "topic": "writing",
+      "likes": 1,
+      "views": 9,
+      "replies": 1
+    },
+    {
+      "topic": "decluttering",
+      "likes": 0,
+      "views": 2,
+      "replies": 0
+    }
+  ],
+  "instagram_11_10": {
+    "shares": null,
+    "saves": null,
+    "reach": null,
+    "likes": 0,
+    "countries": null
+  },
+  "instagram_source": "public Instagram embed",
+  "x_source": "FxTwitter public post counts",
+  "instagram_observed_kst": "20:57",
+  "timezone": "Asia/Seoul",
+  "pre_7d_11_05": {
+    "x_views": 5,
+    "x_likes": 0,
+    "x_replies": 0,
+    "instagram_likes": 0
+  },
+  "x_observed_kst": "20:53 approx",
+  "walking": "Three draft cards, actual web demo with sample data."
+}
