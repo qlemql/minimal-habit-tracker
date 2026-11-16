@@ -1,0 +1,5 @@
+Monday was a ten-minute walk around the block. Tuesday, the shoes stayed by the door. On Wednesday, the walk was one minute: to the corner and back.
+
+In this Ssak demo, Monday and Wednesday both have a check. Tuesday stays blank. Wednesday’s entry reads “Walk for 1 minute.”
+
+What’s the shortest walk you’d actually put your shoes on for?
